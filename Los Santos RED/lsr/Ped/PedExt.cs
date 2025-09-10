@@ -1855,7 +1855,7 @@ ENDENUM
             }
             GameFiber.StartNew(() =>
             {
-                GameFiber.Wait(1500);
+                GameFiber.Wait(500);
                 if (Pedestrian.Exists() && player.Character.Exists())
                 {
                     bool hasCallTask = CurrentTask?.Name == "CalmCallIn";
