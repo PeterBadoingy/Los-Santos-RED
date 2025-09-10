@@ -74,7 +74,10 @@ public class TheftViolations
         {
             Violations.AddViolating(StaticStrings.BankRobberyCrimeID);//.IsCurrentlyViolating = true;
         }
-
+        if (Player.ActivityManager.IsPickPocketing)
+        {
+            Violations.AddViolating(StaticStrings.PickPocketingCrimeID);
+        }
         CheckStolenVehicles();
     }
     private void CheckStolenVehicles()

@@ -1824,4 +1824,63 @@ ENDENUM
         Pedestrian.Health = Pedestrian.Health - healthToRemove;
         EntryPoint.WriteToConsole($"PED EVENT: REMOVING HEALTH IN CRASH DamageAmount:{amount} isCollision{isCollision} healthToRemoved:{healthToRemove} CurrentHealth{Pedestrian.Health}");
     }
+    public virtual void OnPlayerFailedPickpocketing(IInteractionable player)
+    {
+        if (!Pedestrian.Exists() || player?.Character == null)
+        {
+            EntryPoint.WriteToConsole($"Pickpocket: {Pedestrian?.Handle:X8 ?? 0} failed to react, invalid state");
+            return;
+        }
+
+        if (IsCop)
+        {
+            HatesPlayer = true;
+            CanBeTasked = true;
+            CanBeAmbientTasked = true;
+            EntryPoint.WriteToConsole($"Pickpocket: Cop {Pedestrian.Handle:X8} flagged for violation response, HatesPlayer={HatesPlayer}");
+        }
+        else if (!IsGangMember)
+        {
+            if ((WillCallPolice || WillCallPoliceIntense) && HasCellPhone)
+            {
+                CanBeTasked = true;
+                CanBeAmbientTasked = true;
+                EntryPoint.WriteToConsole($"Pickpocket: {Pedestrian.Handle:X8} will call police (WillCallPolice={WillCallPolice}, WillCallPoliceIntense={WillCallPoliceIntense}, HasCellPhone={HasCellPhone})");
+            }
+            HatesPlayer = true;
+            bool willFight = RandomItems.RandomPercent(25f);
+            if (willFight)
+            {
+                WillFight = true;
+            }
+            GameFiber.StartNew(() =>
+            {
+                GameFiber.Wait(1500);
+                if (Pedestrian.Exists() && player.Character.Exists())
+                {
+                    bool hasCallTask = CurrentTask?.Name == "CalmCallIn";
+                    if (!hasCallTask)
+                    {
+                        if (willFight)
+                        {
+                            NativeFunction.Natives.CLEAR_PED_TASKS(Pedestrian);
+                            NativeFunction.Natives.TASK_COMBAT_PED(Pedestrian, player.Character, 0, 16);
+                            EntryPoint.WriteToConsole($"Pickpocket: {Pedestrian.Handle:X8} assigned combat task (delayed)");
+                        }
+                        else
+                        {
+                            NativeFunction.Natives.CLEAR_PED_TASKS(Pedestrian);
+                            NativeFunction.Natives.TASK_SMART_FLEE_PED(Pedestrian, player.Character, 100f, -1, 0, 2.0f);
+                            EntryPoint.WriteToConsole($"Pickpocket: {Pedestrian.Handle:X8} assigned flee task (delayed)");
+                        }
+                    }
+                    else
+                    {
+                        EntryPoint.WriteToConsole($"Pickpocket: {Pedestrian.Handle:X8} retained CalmCallIn task");
+                    }
+                }
+            });
+        }
+        EntryPoint.WriteToConsole($"Pickpocket: {Pedestrian.Handle:X8} reacted to pickpocket, IsCop={IsCop}, IsGangMember={IsGangMember}, WillFight={WillFight}, HatesPlayer={HatesPlayer}, WillCallPolice={WillCallPolice}, WillCallPoliceIntense={WillCallPoliceIntense}, HasCellPhone={HasCellPhone}");
+    }
 }
