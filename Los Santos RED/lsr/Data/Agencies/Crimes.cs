@@ -68,6 +68,7 @@ public class Crimes : ICrimes
     private Crime BreakingEnteringAudible;
     private Crime Shoplifting;
     private Crime BankRobbery;
+    private Crime PickPocketing;
     public Crimes()
     {
     }
@@ -157,6 +158,7 @@ public class Crimes : ICrimes
 
         Theft = new Crime(StaticStrings.TheftCrimeID, "Theft", 2, false, 22, true, true, true);
         Shoplifting = new Crime(StaticStrings.ShopliftingCrimeID, "Shoplifting", 2, false, 22, true, true, true);
+        PickPocketing = new Crime(StaticStrings.PickPocketingCrimeID, "PickPocketing", 1, false, 12, true, true, true) { MaxReportingDistance = 20f, CanReleaseOnCite = true, ShowsWarning = true, WarningMessage = "You are ~r~pickpocketing~s~~n~Avoid pickpocketing in public", CanReportBySound = false, MaxObservingDistance = 999f, CanViolateMultipleTimes = true };
 
         DealingDrugs = new Crime(StaticStrings.DealingDrugsCrimeID, "Dealing Drugs", 2, false, 23, true, false, false) { MaxReportingDistance = 20f, ShowsWarning = true, WarningMessage = "You are ~r~dealing illegal drugs~s~~n~Avoid dealing in public" };
         DealingGuns = new Crime(StaticStrings.DealingGunsCrimeID, "Illegal Weapons Dealing", 2, false, 24, true, false, false) { MaxReportingDistance = 20f, ShowsWarning = true, WarningMessage = "You are ~r~dealing illegal guns~s~~n~Avoid dealing in public" };
@@ -261,6 +263,7 @@ public class Crimes : ICrimes
              BreakingEntering,
              BreakingEnteringAudible,
              Shoplifting,
+             PickPocketing
         };
         Serialization.SerializeParams(CrimeList, ConfigFileName);
     }
@@ -335,6 +338,7 @@ public class Crimes : ICrimes
              BreakingEntering,
              BreakingEnteringAudible,
              Shoplifting,
+             PickPocketing
             });
 
         HitCarWithCar.CanBeReactedToByCivilians = false;

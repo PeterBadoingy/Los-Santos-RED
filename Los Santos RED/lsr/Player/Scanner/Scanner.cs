@@ -1704,7 +1704,7 @@ namespace LosSantosRED.lsr
             new CrimeDispatch(StaticStrings.DrugPossessionCrimeID,SDI.DrugPossession),
             new CrimeDispatch(StaticStrings.StandingOnVehicleCrimeID,SDI.StandingOnVehicle),
             new CrimeDispatch(StaticStrings.BuryingABody,SDI.UnlawfulBodyDisposal),
-
+            new CrimeDispatch("PickPocketing", SDI.PickPocketing),
             new CrimeDispatch(StaticStrings.TheftCrimeID,SDI.TheftDispatch),
             new CrimeDispatch(StaticStrings.ShopliftingCrimeID,SDI.Shoplifting),
         };
@@ -1728,6 +1728,7 @@ namespace LosSantosRED.lsr
             ,SDI.SuspiciousActivity
             ,SDI.CriminalActivity
             ,SDI.Mugging
+            ,SDI.PickPocketing
             ,SDI.TerroristActivity
             ,SDI.SuspiciousVehicle
             ,SDI.DrivingAtStolenVehicle

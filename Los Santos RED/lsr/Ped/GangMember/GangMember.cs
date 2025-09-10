@@ -396,6 +396,25 @@ public class GangMember : PedExt, IWeaponIssuable
         //Player.RelationshipManager.GangRelationships.AddAttacked(Gang);
         base.OnCarjackedByPlayer(Player, Zones, GangTerritories);
     }
+    public override void OnPlayerFailedPickpocketing(IInteractionable player)
+    {
+        if (!Pedestrian.Exists() || player?.Character == null)
+        {
+            EntryPoint.WriteToConsole($"Pickpocket: GangMember {Pedestrian?.Handle:X8 ?? 0} failed to react, invalid state");
+            return;
+        }
+
+        base.OnPlayerFailedPickpocketing(player);
+        if (Gang != null && player != null && player.RelationshipManager != null)
+        {
+            WillFight = true;
+            HatesPlayer = true;
+            NativeFunction.Natives.CLEAR_PED_TASKS(Pedestrian);
+            NativeFunction.Natives.TASK_COMBAT_PED(Pedestrian, player.Character, 0, 16);
+            player.RelationshipManager.GangRelationships.ChangeReputation(Gang, -350, true);
+            EntryPoint.WriteToConsole($"PED EVENT: GangMember {Pedestrian.Handle:X8} decreased gang reputation for {Gang.ID}, Amount=-350, assigned combat task", 3);
+        }
+    }
     protected override string GetPedInfoForDisplay()
     {
         string ExtraItems = base.GetPedInfoForDisplay();

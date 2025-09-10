@@ -46,6 +46,9 @@ public class KeySettings : ISettingsDefaultable
     public Keys AltActionPopUpDisplayKey { get; set; }
     public Keys AltActionPopUpDisplayKeyModifier { get; set; }
 
+    public Keys PickpocketKey { get; set; }
+    public Keys PickpocketKeyModifier { get; set; }
+    public int PickPocketPedGameControl { get; set; }
 
     public Keys VehicleInteract { get; set; }
     public Keys VehicleInteractModifier { get; set; }
@@ -146,5 +149,9 @@ public class KeySettings : ISettingsDefaultable
         VehicleInteractModifier = Keys.LShiftKey;
         HoldUpPedGameControl = 46;
         GrabPedGameControl = 46;
+
+        PickPocketPedGameControl = 46;
+        PickpocketKey = Keys.T;
+        PickpocketKeyModifier = Keys.None;
     }
 }

@@ -25,6 +25,14 @@ public class ActivitySettings : ISettingsDefaultable
     public bool PlayDraggingPedAnimation { get; set; }
     [Description("Allow the player to hold a ped hostage at gunpoint.")]
     public bool AllowGrabbingPeds { get; set; }
+    [Description("Allow the player to pickpocket peds.")]
+    public bool AllowPedPickPockets { get; set; }
+    [Description("Success rate for pickpocketing a ped (0.0 to 1.0).")]
+    public float PickPocketSuccessRate { get; set; }
+    [Description("Base chance of being detected when pickpocketing (0.0 to 1.0).")]
+    public float PickPocketBaseDetectionChance { get; set; }
+    [Description("Maximum distance (in meters) to pickpocket a ped.")]
+    public float PickPocketDistance { get; set; }
     [Description("Allow the player to start random scenarios around the world.")]
     public bool AllowStartingScenarios { get; set; }
     [Description("Allow the player to go into crouch mode.")]
@@ -146,10 +154,14 @@ public class ActivitySettings : ISettingsDefaultable
         BodyArmorDefaultDrawableID = 11;
         BodyArmorDefaultTextureID = 1;
 
-//#if DEBUG
-//        DisplayBodyArmor = true;
-//#endif  
+        //#if DEBUG
+        //        DisplayBodyArmor = true;
+        //#endif  
 
+        AllowPedPickPockets = true;
+        PickPocketSuccessRate = 0.7f;
+        PickPocketBaseDetectionChance = 0.3f;
+        PickPocketDistance = 4.0f;
 
         GrabAttachX = -0.31f;
         GrabAttachY = 0.35f;
