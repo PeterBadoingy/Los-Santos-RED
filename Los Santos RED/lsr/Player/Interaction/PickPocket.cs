@@ -44,10 +44,10 @@ public class PickPocket : Interaction
         canPickpocket = true;
         isCleanedUp = false;
         isStarting = false;
-        EntryPoint.WriteToConsole($"Pickpocket: Initialized for ped {Target.Pedestrian?.Handle:X8 ?? 0}, MaxDistance={MaxDistance}, AllowPedPickPockets={Settings.SettingsManager.ActivitySettings.AllowPedPickPockets}, SuccessRate={SuccessRate:F2}, DetectionChance={DetectionChance:F2}, IsGangMember={Target.IsGangMember}, IsCop={Target.IsCop}, PedType={Target.GetType().Name}");
+        EntryPoint.WriteToConsole($"Pickpocket: Initialized for ped {Target.Pedestrian.Handle:X8}, MaxDistance={MaxDistance}, AllowPedPickPockets={Settings.SettingsManager.ActivitySettings.AllowPedPickPockets}, SuccessRate={SuccessRate:F2}, DetectionChance={DetectionChance:F2}, IsGangMember={Target.IsGangMember}, IsCop={Target.IsCop}, PedType={Target.GetType().Name}");
     }
 
-    public override string DebugString => $"Pickpocketing {Target.Pedestrian?.Handle:X8 ?? 0} Success={isSuccess} Detected={isDetected}";
+    public override string DebugString => $"Pickpocketing {Target.Pedestrian.Handle:X8} Success={isSuccess} Detected={isDetected}";
     public override bool CanPerformActivities { get; set; } = true;
     public bool isDetected { get; set; }
 
@@ -63,7 +63,7 @@ public class PickPocket : Interaction
     {
         if (isStarting)
         {
-            EntryPoint.WriteToConsole($"Pickpocket: Blocked, already starting for ped {Target.Pedestrian?.Handle:X8 ?? 0}");
+            EntryPoint.WriteToConsole($"Pickpocket: Blocked, already starting for ped {Target.Pedestrian.Handle:X8}");
             CleanUp();
             return;
         }
@@ -86,7 +86,7 @@ public class PickPocket : Interaction
                 EntryPoint.WriteToConsole($"Pickpocket: Error in Start - {ex.Message} {ex.StackTrace}");
                 CleanUp();
             }
-        }, $"PickpocketStart_{Target.Pedestrian?.Handle:X8 ?? 0}");
+        }, $"PickpocketStart_{Target.Pedestrian.Handle:X8}");
     }
 
     private bool CanStartPickpocketing()
@@ -94,7 +94,7 @@ public class PickPocket : Interaction
         bool isPlayerInVehicle = TargetPlayer.Character.IsInAnyVehicle(false);
         bool isPlayerPerformingActivity = Player.ActivityManager?.IsPerformingActivity ?? false;
         bool canPickpocketLookedAtPed = Player.ActivityManager?.CanPickpocketLookedAtPed ?? false;
-        bool isPedValid = Target.Pedestrian?.Exists() ?? false;
+        bool isPedValid = Target.Pedestrian.Exists();
         float distanceToPed = isPedValid ? Target.DistanceToPlayer : float.MaxValue;
         bool isPedInVehicle = Target.IsInVehicle;
         bool isPedUnconscious = Target.IsUnconscious;
@@ -119,7 +119,7 @@ public class PickPocket : Interaction
     {
         if (!Target.Pedestrian.Exists())
         {
-            EntryPoint.WriteToConsole($"Pickpocket: Setup failed, ped {Target.Pedestrian?.Handle:X8 ?? 0} does not exist");
+            EntryPoint.WriteToConsole($"Pickpocket: Setup failed, ped {Target.Pedestrian.Handle:X8} does not exist");
             CleanUp();
             return;
         }
@@ -142,24 +142,7 @@ public class PickPocket : Interaction
             if (!IsValidState())
             {
                 Game.DisplayHelp("Pickpocket failed: Invalid state");
-                EntryPoint.WriteToConsole($"Pickpocket: Failed, PlayerExists={TargetPlayer.Character.Exists()}, PedExists={Target.Pedestrian.Exists()}, Distance={Target.DistanceToPlayer:F2}, MaxDistance={MaxDistance}, IsAliveAndFree={TargetPlayer.IsAliveAndFree}, PedType={Target.GetType().Name}");
-                CleanUp();
-                return;
-            }
-
-            PlayAnimation();
-            if (!WaitForAnimation())
-            {
-                Game.DisplayHelp("Pickpocket failed: Animation not loaded!");
-                EntryPoint.WriteToConsole($"Pickpocket: Animation {AnimDict}/{AnimName} failed to play for ped {Target.Pedestrian.Handle:X8}");
-                CleanUp();
-                return;
-            }
-
-            if (!IsValidState())
-            {
-                Game.DisplayHelp("Pickpocket failed: Invalid state");
-                EntryPoint.WriteToConsole($"Pickpocket: Failed post-animation, PlayerExists={TargetPlayer.Character.Exists()}, PedExists={Target.Pedestrian.Exists()}, Distance={Target.DistanceToPlayer:F2}, MaxDistance={MaxDistance}, PedType={Target.GetType().Name}");
+                EntryPoint.WriteToConsole($"Pickpocket: Failed, Distance={Target.DistanceToPlayer:F2}, MaxDistance={MaxDistance}, IsAliveAndFree={TargetPlayer.IsAliveAndFree}, PedType={Target.GetType().Name}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
                 CleanUp();
                 return;
             }
@@ -167,51 +150,75 @@ public class PickPocket : Interaction
             Crime pickpocketCrime = Crimes.GetCrime(StaticStrings.PickPocketingCrimeID);
             if (pickpocketCrime == null)
             {
-                EntryPoint.WriteToConsole($"Pickpocket: Crime {StaticStrings.PickPocketingCrimeID} not found");
+                Game.DisplayHelp("Pickpocket failed: Crime not found");
+                EntryPoint.WriteToConsole($"Pickpocket: Crime {StaticStrings.PickPocketingCrimeID} not found, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
                 CleanUp();
                 return;
             }
 
+            Player.Violations.SetContinuouslyViolating(pickpocketCrime.ID);
+
+            PlayAnimation();
+            if (!WaitForAnimation())
+            {
+                Game.DisplayHelp("Pickpocket failed: Animation not loaded!");
+                EntryPoint.WriteToConsole($"Pickpocket: Animation {AnimDict}/{AnimName} failed to play for ped {Target.Pedestrian.Handle:X8}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
+                CleanUp();
+                return;
+            }
+
+            if (!IsValidState())
+            {
+                Game.DisplayHelp("Pickpocket failed: Invalid state");
+                EntryPoint.WriteToConsole($"Pickpocket: Failed post-animation, Distance={Target.DistanceToPlayer:F2}, MaxDistance={MaxDistance}, PedType={Target.GetType().Name}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
+                CleanUp();
+                return;
+            }
+
+
+            float detectionMultiplier = Target.IsCop ? 2.0f : (Target.IsGangMember || Target.IsMerchant ? 1.2f : 1.0f);
+            float adjustedDetectionChance = DetectionChance * detectionMultiplier;
             double randomValue = Random.NextDouble();
             isSuccess = randomValue < SuccessRate;
             double detectionRandomValue = isSuccess ? 0.0 : Random.NextDouble();
-            isDetected = !isSuccess && detectionRandomValue < DetectionChance;
-            EntryPoint.WriteToConsole($"Pickpocket: Outcome check, ped {Target.Pedestrian.Handle:X8}, SuccessRate={SuccessRate:F2}, RandomValue={randomValue:F4}, isSuccess={isSuccess}, DetectionChance={DetectionChance:F2}, DetectionRandomValue={detectionRandomValue:F4}, isDetected={isDetected}, IsViolatingAnyCrimes={Player.Violations.IsViolatingAnyCrimes}, CrimesWitnessed={Target.PlayerCrimesWitnessed.Count}, PedType={Target.GetType().Name}");
+            isDetected = !isSuccess && detectionRandomValue < adjustedDetectionChance;
+
+            EntryPoint.WriteToConsole($"Pickpocket: Outcome check, ped {Target.Pedestrian.Handle:X8}, SuccessRate={SuccessRate:F2}, RandomValue={randomValue:F4}, isSuccess={isSuccess}, DetectionChance={adjustedDetectionChance:F2}, DetectionRandomValue={detectionRandomValue:F4}, isDetected={isDetected}, IsViolatingAnyCrimes={Player.Violations.IsViolatingAnyCrimes}, CrimesWitnessed={Target.PlayerCrimesWitnessed.Count}, PedType={Target.GetType().Name}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
 
             if (isSuccess)
             {
-                Target.WillCallPolice = false;
-                Target.WillCallPoliceIntense = false;
                 CreateMoneyDrop();
-                EntryPoint.WriteToConsole($"Pickpocket: Successful pickpocket of {(Target.IsGangMember ? $"gang member {(Target as GangMember)?.Gang?.ShortName ?? "Unknown"}" : $"non-gang member, IsCop={Target.IsCop}")}, ped {Target.Pedestrian.Handle:X8}, FlagsSuppressed=True, PedType={Target.GetType().Name}");
+                EntryPoint.WriteToConsole($"Pickpocket: Successful pickpocket of {(Target.IsGangMember ? $"gang member {(Target as GangMember)?.Gang?.ShortName ?? "Unknown"}" : $"non-gang member, IsCop={Target.IsCop}")}, ped {Target.Pedestrian.Handle:X8}, PedType={Target.GetType().Name}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
             }
             else if (isDetected)
             {
                 Game.DisplayHelp("Pickpocketing failed! Detected!");
                 Player.PlaySpeech("GENERIC_CURSE_MED", false);
                 Target.PlaySpeech("GENERIC_INSULT_MED", false);
-                Target.HatesPlayer = true; // Trigger reaction
+                Player.Violations.AddViolating(pickpocketCrime.ID);
+                Target.WillCallPolice = true;
                 Target.OnPlayerFailedPickpocketing(Player);
-                EntryPoint.WriteToConsole($"Pickpocket: Failed and detected pickpocket of {(Target.IsGangMember ? $"gang member {(Target as GangMember)?.Gang?.ShortName ?? "Unknown"}" : $"non-gang member, IsCop={Target.IsCop}")}, ped {Target.Pedestrian.Handle:X8}, CrimesWitnessed={Target.PlayerCrimesWitnessed.Count}, HasSeenMundaneCrime={Target.PedReactions.HasSeenMundaneCrime}, CurrentTask={Target.CurrentTask?.Name}, PedType={Target.GetType().Name}");
+
+                EntryPoint.WriteToConsole($"Pickpocket: Failed and detected pickpocket of {(Target.IsGangMember ? $"gang member {(Target as GangMember)?.Gang?.ShortName ?? "Unknown"}" : $"non-gang member, IsCop={Target.IsCop}")}, ped {Target.Pedestrian.Handle:X8}, CrimesWitnessed={Target.PlayerCrimesWitnessed.Count}, HasSeenMundaneCrime={Target.PedReactions.HasSeenMundaneCrime}, CurrentTask={Target.CurrentTask?.Name}, PedType={Target.GetType().Name}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
             }
             else
             {
                 Game.DisplayHelp("Pickpocketing failed! Not detected.");
                 Player.PlaySpeech("GENERIC_CURSE_MED", false);
-                EntryPoint.WriteToConsole($"Pickpocket: Failed but not detected pickpocket of {(Target.IsGangMember ? $"gang member {(Target as GangMember)?.Gang?.ShortName ?? "Unknown"}" : $"non-gang member, IsCop={Target.IsCop}")}, ped {Target.Pedestrian.Handle:X8}, PedType={Target.GetType().Name}");
+                EntryPoint.WriteToConsole($"Pickpocket: Failed but not detected pickpocket of {(Target.IsGangMember ? $"gang member {(Target as GangMember)?.Gang?.ShortName ?? "Unknown"}" : $"non-gang member, IsCop={Target.IsCop}")}, ped {Target.Pedestrian.Handle:X8}, PedType={Target.GetType().Name}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
             }
+
             CleanUp();
         }
         catch (Exception ex)
         {
-            EntryPoint.WriteToConsole($"Pickpocket: Error in PerformPickpocket - {ex.Message} {ex.StackTrace}");
+            EntryPoint.WriteToConsole($"Pickpocket: Error in PerformPickpocket - {ex.Message} {ex.StackTrace}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
             CleanUp();
         }
     }
-
     private bool IsValidState()
     {
-        return TargetPlayer.Character.Exists() && Target.Pedestrian.Exists() && Target.DistanceToPlayer <= MaxDistance && TargetPlayer.IsAliveAndFree;
+        return Target.Pedestrian.Exists() && Target.DistanceToPlayer <= MaxDistance && TargetPlayer.IsAliveAndFree;
     }
 
     private void PlayAnimation()
@@ -255,7 +262,7 @@ public class PickPocket : Interaction
             if (!IsValidState())
             {
                 Game.DisplayHelp("Pickpocket failed: Invalid state!");
-                EntryPoint.WriteToConsole($"Pickpocket: Pickup creation skipped, PedExists={Target.Pedestrian.Exists()}, PlayerExists={TargetPlayer.Character.Exists()}");
+                EntryPoint.WriteToConsole($"Pickpocket: Pickup creation skipped, PedExists={Target.Pedestrian.Exists()}, PlayerExists={true}");
                 return;
             }
 
@@ -312,10 +319,8 @@ public class PickPocket : Interaction
         }
         isCleanedUp = true;
 
-        if (Target?.Pedestrian != null && Target.Pedestrian.Exists())
+        if (Target.Pedestrian.Exists())
         {
-            Target.WillCallPolice = _targetWillCallPolice;
-            Target.WillCallPoliceIntense = _targetWillCallPoliceIntense;
             Target.CanBeTasked = true;
             Target.CanBeAmbientTasked = true;
             if (isSuccess || !isDetected)
@@ -334,16 +339,15 @@ public class PickPocket : Interaction
             }
         }
 
-        if (Player?.ActivityManager != null)
+        if (Player.ActivityManager != null)
         {
             Player.ActivityManager.IsPerformingActivity = false;
             Player.ActivityManager.IsPickPocketing = false;
             Player.ButtonPrompts.RemovePrompts("Pickpocket");
-            NativeFunction.Natives.CLEAR_ALL_HELP_MESSAGES();
         }
-
+        Player.Violations.StopContinuouslyViolating(StaticStrings.PickPocketingCrimeID);
         canPickpocket = true;
         isStarting = false;
-        EntryPoint.WriteToConsole($"Pickpocket: Cleaned up for ped {Target.Pedestrian?.Handle:X8 ?? 0}");
+        EntryPoint.WriteToConsole($"Pickpocket: Cleaned up for ped {Target.Pedestrian.Handle:X8}, CrimesViolating={string.Join(",", Player.Violations.CrimesViolating)}");
     }
 }
