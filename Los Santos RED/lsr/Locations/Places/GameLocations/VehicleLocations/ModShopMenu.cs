@@ -82,7 +82,7 @@ public class ModShopMenu
         AddExtraCategories();
         AddLicensePlateCategories();
         AddModCategories();
-        AddWindowTintCategories();
+        ThisIsANewName();
     }
 
     private void AddLicensePlateCategories()
@@ -119,7 +119,7 @@ public class ModShopMenu
             new PerformanceVehicleModKitType("Suspension",15, this, InteractionMenu,MenuPool,Player),
 
 
-            new VehicleModKitType("Horns",14,"", this, InteractionMenu,MenuPool,Player),
+            new VehicleModKitType("Horns",14,"", this, InteractionMenu,MenuPool,Player),   
             new VehicleModKitType("Armor",16, this, InteractionMenu,MenuPool,Player),
             new VehicleModKitType("Nitrous",17, this, InteractionMenu,MenuPool,Player),
             new VehicleModKitType("Turbo",18, this, InteractionMenu,MenuPool,Player),
@@ -169,12 +169,12 @@ public class ModShopMenu
             new VehicleModKitType("Livery", 48, this, InteractionMenu,MenuPool,Player),
             new VehicleModKitType("Lightbar", 49, this, InteractionMenu,MenuPool,Player),
         };
-        foreach (VehicleModKitType vmkt in VehicleModKitTypes)
+        foreach(VehicleModKitType vmkt in VehicleModKitTypes)
         {
             vmkt.AddToMenu();
         }
     }
-    private void AddWindowTintCategories()
+    private void ThisIsANewName()
     {
         EntryPoint.WriteToConsole("AddWindowTintCategories");
         VehicleWindowTintMenu windowTintMenu = new VehicleWindowTintMenu(MenuPool, InteractionMenu, Player, ModdingVehicle, this, CurrentVariation, GameLocation);
