@@ -63,7 +63,7 @@ public class ActivityManager
 
     private bool canSeePoliceBlips = false;
 
-    public bool IsPickPocketing { get; set; }
+
 
     private MenuPool MenuPool;
     private UIMenu continueActivityMenu;
@@ -115,18 +115,21 @@ public class ActivityManager
 
 
     public bool CanPickpocketLookedAtPed =>
-        Player.CurrentLookedAtPed != null &&
-        CanPerformActivitiesOnFoot &&
-        !IsPerformingActivity &&
-        !IsPickPocketing &&
-        !Player.CurrentLookedAtPed.IsInVehicle &&
-        Player.CurrentLookedAtPed.DistanceToPlayer <= Settings.SettingsManager.ActivitySettings.PickPocketDistance &&
-        Player.CurrentLookedAtPed.Pedestrian != null &&
-        Player.CurrentLookedAtPed.Pedestrian.Exists() &&
-        !Player.CurrentLookedAtPed.Pedestrian.IsRagdoll &&
-        !Player.IsVisiblyArmed &&
-        Settings.SettingsManager.ActivitySettings.AllowPedPickPockets &&
-        !Player.CurrentLookedAtPed.HasBeenMugged;
+
+    Player.CurrentLookedAtPed != null &&
+    CanPerformActivitiesOnFoot &&
+    !IsPerformingActivity &&
+    !IsPickPocketing &&
+    !Player.CurrentLookedAtPed.IsInVehicle &&
+    Player.CurrentLookedAtPed.DistanceToPlayer <= Settings.SettingsManager.ActivitySettings.PickPocketDistance &&
+    Player.CurrentLookedAtPed.Pedestrian != null &&
+    Player.CurrentLookedAtPed.Pedestrian.Exists() &&
+    !Player.CurrentLookedAtPed.Pedestrian.IsRagdoll &&
+    !Player.IsVisiblyArmed &&
+    Settings.SettingsManager.ActivitySettings.AllowPedPickPockets &&
+    !Player.CurrentLookedAtPed.HasBeenMugged &&
+        Player.CurrentLookedAtPed.Pedestrian.IsThisPedInFrontOf(Player.Character) && 
+        !Player.Character.IsThisPedInFrontOf(Player.CurrentLookedAtPed.Pedestrian);
 
 
 
@@ -209,7 +212,8 @@ public class ActivityManager
 
     public bool IsResting => IsSitting || IsLayingDown;
     public bool IsPerformingActivity { get; set; }
-    public bool isStartingPickpocket { get; set; }
+
+
     public bool IsSitting { get; set; }
     public bool IsLayingDown { get; set; } = false;
     public bool IsCommitingSuicide { get; set; }
@@ -247,6 +251,9 @@ public class ActivityManager
     public bool IsUrinatingDefectingOnToilet { get; set; }
     public bool IsUsingIllegalItem { get; set; }
     public bool IsHidingInObject { get; set; }
+    public bool IsPickPocketing { get; set; }
+
+    private bool isStartingPickpocket;
 
     public ActivityManager(IActivityManageable player, ISettingsProvideable settings, IActionable actionable, IIntoxicatable intoxicatable, IInteractionable interactionable, ICameraControllable cameraControllable, 
         ILocationInteractable locationInteractable,ITimeControllable time, IRadioStations radioStations, ICrimes crimes, IModItems modItems, IDances dances, IEntityProvideable world, IIntoxicants intoxicants, 
@@ -1013,48 +1020,6 @@ public class ActivityManager
             }
         }
     }
-    public void StartPickpocket()
-    {
-        try
-        {
-            if (isStartingPickpocket || IsConversing)
-            {
-                Game.DisplayHelp("Cannot pickpocket: Already in progress or conversing");
-                EntryPoint.WriteToConsole($"StartPickpocket: Blocked, isStartingPickpocket={isStartingPickpocket}, IsConversing={IsConversing}");
-                return;
-            }
-            isStartingPickpocket = true;
-            if (!CanPickpocketLookedAtPed)
-            {
-                Game.DisplayHelp("Cannot pickpocket this target!");
-                isStartingPickpocket = false;
-                EntryPoint.WriteToConsole($"StartPickpocket: Blocked, CanPickpocketLookedAtPed={CanPickpocketLookedAtPed}");
-                return;
-            }
-            GameFiber.StartNew(() =>
-            {
-                try
-                {
-                    Interaction = new PickPocket(Interactionable, Targetable, Player.CurrentLookedAtPed, Settings, Crimes, World);
-                    Interaction.Start();
-                }
-                catch (Exception ex)
-                {
-                    EntryPoint.WriteToConsole($"StartPickpocket Error: {ex.Message} {ex.StackTrace}");
-                }
-                finally
-                {
-                    isStartingPickpocket = false;
-                }
-            }, $"StartPickpocket_{Player.CurrentLookedAtPed?.Handle:X8 ?? 0}");
-        }
-        catch (Exception ex)
-        {
-            EntryPoint.WriteToConsole($"StartPickpocket Error: {ex.Message} {ex.StackTrace}");
-            isStartingPickpocket = false;
-        }
-    }
-
     //Other
     public void EnterVehicleAsPassenger(bool withBlocking, bool onlyBack, bool stopDriver)
     {
@@ -2145,47 +2110,6 @@ public class ActivityManager
         //    EntryPoint.WriteToConsole($"SET CLOSEST DOOR ISNULL:{CurrentClosestDoor == null}");
         //}
     }
-    public void CheckPickpocketButtonPrompts(ButtonPrompts buttonPrompts, PedExt currentLookedAtPed)
-    {
-        try
-        {
-            if (currentLookedAtPed == null || !currentLookedAtPed.Pedestrian.Exists() || Player.CurrentTargetedPed != null)
-            {
-                if (buttonPrompts.Prompts.Any(p => p.Text.StartsWith("Pickpocket")))
-                {
-                    buttonPrompts.RemovePrompts("Pickpocket");
-                }
-                return;
-            }
-
-            IsPickPocketing = false;
-            isStartingPickpocket = false;
-            if (!CanPickpocketLookedAtPed || IsInteractingWithLocation || IsConversing)
-            {
-                if (buttonPrompts.Prompts.Any(p => p.Text.StartsWith("Pickpocket")))
-                {
-                    buttonPrompts.RemovePrompts("Pickpocket");
-                }
-                return;
-            }
-            if (!buttonPrompts.HasPrompt($"Pickpocket {currentLookedAtPed.Handle:X8}"))
-            {
-                buttonPrompts.RemovePrompts("Pickpocket");
-                buttonPrompts.AttemptAddPrompt("Pickpocket", $"Pickpocket {currentLookedAtPed.FormattedName}",
-                    $"Pickpocket {currentLookedAtPed.Handle:X8}",
-                    Settings.SettingsManager.KeySettings.PickpocketKeyModifier,
-                    Settings.SettingsManager.KeySettings.PickpocketKey, 3, () => StartPickpocket());
-                EntryPoint.WriteToConsole($"CheckPickpocketButtonPrompts: Added prompt for ped {currentLookedAtPed.Handle:X8}");
-            }
-        }
-        catch (Exception ex)
-        {
-            EntryPoint.WriteToConsole($"CheckPickpocketButtonPrompts: Error - {ex.Message} {ex.StackTrace}");
-            buttonPrompts.RemovePrompts("Pickpocket");
-            IsPickPocketing = false;
-            isStartingPickpocket = false;
-        }
-    }
 
     public void CheckHidingButtonPrompts(ButtonPrompts buttonPrompts, Rage.Object currentLookedAtObject)
     {
@@ -2250,5 +2174,90 @@ public class ActivityManager
         }
         CancelCurrentActivity();
     }
+    public void StartPickpocket()
+    {
+        try
+        {
+            if (isStartingPickpocket || IsConversing)
+            {
+                Game.DisplayHelp("Cannot pickpocket: Already in progress or conversing");
+                EntryPoint.WriteToConsole($"StartPickpocket: Blocked, isStartingPickpocket={isStartingPickpocket}, IsConversing={IsConversing}");
+                return;
+            }
+            isStartingPickpocket = true;
+            if (!CanPickpocketLookedAtPed)
+            {
+                Game.DisplayHelp("Cannot pickpocket this target!");
+                isStartingPickpocket = false;
+                EntryPoint.WriteToConsole($"StartPickpocket: Blocked, CanPickpocketLookedAtPed={CanPickpocketLookedAtPed}");
+                return;
+            }
+            GameFiber.StartNew(() =>
+            {
+                try
+                {
+                    Interaction = new PickPocket(Interactionable, Targetable, Player.CurrentLookedAtPed, Settings, Crimes, World);
+                    Interaction.Start();
+                }
+                catch (Exception ex)
+                {
+                    EntryPoint.WriteToConsole($"StartPickpocket Error: {ex.Message} {ex.StackTrace}");
+                }
+                finally
+                {
+                    isStartingPickpocket = false;
+                }
+            }, $"StartPickpocket_{Player.CurrentLookedAtPed?.Handle:X8 ?? 0}");
+        }
+        catch (Exception ex)
+        {
+            EntryPoint.WriteToConsole($"StartPickpocket Error: {ex.Message} {ex.StackTrace}");
+            isStartingPickpocket = false;
+        }
+    }
+    public void CheckPickpocketButtonPrompts(ButtonPrompts buttonPrompts, PedExt currentLookedAtPed)
+    {
+        try
+        {
+            if (currentLookedAtPed == null || !currentLookedAtPed.Pedestrian.Exists() || Player.CurrentTargetedPed != null)
+            {
+                if (buttonPrompts.Prompts.Any(p => p.Text.StartsWith("Pickpocket")))
+                {
+                    buttonPrompts.RemovePrompts("Pickpocket");
+                }
+                return;
+            }
+
+            IsPickPocketing = false;
+            isStartingPickpocket = false;
+            if (!CanPickpocketLookedAtPed || IsInteractingWithLocation || IsConversing)
+            {
+                if (buttonPrompts.Prompts.Any(p => p.Text.StartsWith("Pickpocket")))
+                {
+                    buttonPrompts.RemovePrompts("Pickpocket");
+                }
+                return;
+            }
+            if (!buttonPrompts.HasPrompt($"Pickpocket {currentLookedAtPed.Handle:X8}"))
+            {
+                buttonPrompts.RemovePrompts("Pickpocket");
+                buttonPrompts.AttemptAddPrompt("Pickpocket", $"Pickpocket {currentLookedAtPed.FormattedName}",
+                    $"Pickpocket {currentLookedAtPed.Handle:X8}",
+                    (GameControl)Settings.SettingsManager.KeySettings.GrabPedGameControl, 3, () => StartPickpocket());
+                EntryPoint.WriteToConsole($"CheckPickpocketButtonPrompts: Added prompt for ped {currentLookedAtPed.Handle:X8}");
+            }
+        }
+        catch (Exception ex)
+        {
+            EntryPoint.WriteToConsole($"CheckPickpocketButtonPrompts: Error - {ex.Message} {ex.StackTrace}");
+            buttonPrompts.RemovePrompts("Pickpocket");
+            IsPickPocketing = false;
+            isStartingPickpocket = false;
+        }
+    }
+
+
+
 }
+
 

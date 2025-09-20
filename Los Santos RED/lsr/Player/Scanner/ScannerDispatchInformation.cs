@@ -105,6 +105,7 @@ public class ScannerDispatchInformation
     public Dispatch Shoplifting { get; private set; }
     public Dispatch BreakingAndEntering { get; private set; }
     public Dispatch PickPocketing { get; private set; }
+
     public Dispatch FicticiousPlates { get; private set; }
     public void Setup()
     {
@@ -299,6 +300,15 @@ public class ScannerDispatchInformation
             IncludeCarryingWeapon = true,
             CanBeReportedMultipleTimes = false,
         };
+        PickPocketing = new Dispatch()
+        {
+            Name = "Petty Theft",
+            LocationDescription = LocationSpecificity.Street,
+            MainAudioSet = new List<AudioSet>()
+            {
+                new AudioSet(new List<string>() { crime_4_84.Apettytheft.FileName },"a petty theft"),
+            },
+        };
         CivilianDown = new Dispatch()
         {
             Name = "Civilian Down",
@@ -392,15 +402,6 @@ public class ScannerDispatchInformation
             MainAudioSet = new List<AudioSet>()
             {
                 new AudioSet(new List<string>() { crime_mugging.Apossiblemugging.FileName },"a possible mugging"),
-            },
-        };
-        PickPocketing = new Dispatch()
-        {
-            Name = "PickPocketing",
-            LocationDescription = LocationSpecificity.Street,
-            MainAudioSet = new List<AudioSet>()
-            {
-                new AudioSet(new List<string>() { crime_4_84.Apettytheft.FileName },"a possible theft"),
             },
         };
         TerroristActivity = new Dispatch()

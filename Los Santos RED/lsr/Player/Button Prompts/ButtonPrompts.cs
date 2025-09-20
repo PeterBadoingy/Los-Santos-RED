@@ -52,7 +52,10 @@ public class ButtonPrompts
         AttemptAddLocationPrompts();
         AttemptAddActivityPrompts();
         AttemptRemoveMenuPrompts();
+
     }
+
+
 
     private void AttemptAddHotwireInteractPrompts()
     {
@@ -96,6 +99,7 @@ public class ButtonPrompts
     public void Dispose()
     {
         Prompts.Clear();
+       
     }
     public void Clear()
     {
