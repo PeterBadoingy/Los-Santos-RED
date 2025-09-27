@@ -2,6 +2,7 @@
 using Rage;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class DispatchableVehicles_Gangs
@@ -27,12 +28,19 @@ public class DispatchableVehicles_Gangs
     public List<DispatchableVehicle> YardiesVehicles { get; private set; }
 
 
-
     public List<DispatchableVehicle> NorthHollandVehicles { get; private set; }
     public List<DispatchableVehicle> PetrovicVehicles { get; private set; }
     public List<DispatchableVehicle> SpanishLordsVehicles { get; private set; }
     public List<DispatchableVehicle> AngelsOfDeathVehicles { get; private set; }
     public List<DispatchableVehicle> UptownRidersVehicles { get; private set; }
+
+    //Metallic paints only
+    public List<int> DefaultOptionalColors { get; private set; } = new List<int>() { 0, 3, 4, 5, 11, 27, 28, 37, 38, 49, 52, 54, 61, 64, 73, 88, 91, 93, 97, 112, 145 };
+
+    //Create a Vehicle
+    public string GangSentinel5 = "Sentinel5";
+
+
     public void DefaultConfig()
     {
         SetBallasVehicles();
@@ -2909,8 +2917,7 @@ public class DispatchableVehicles_Gangs
                     WheelType = 8,
                     WindowTint = 0,
                     VehicleExtras = new List<VehicleExtra>() {
-                        new VehicleExtra() { ID = 1, IsTurnedOn = true },
-                        new VehicleExtra() { ID = 4, IsTurnedOn = false },
+                        new VehicleExtra() { ID = 2, IsTurnedOn = false },
                     },
                     VehicleToggles = new List<VehicleToggle>() {
                         new VehicleToggle() { ID = 18, IsTurnedOn = true },
@@ -3924,7 +3931,7 @@ public class DispatchableVehicles_Gangs
                 ModelName = "SENTINEL",
                 AmbientSpawnChance = 75,
                 WantedSpawnChance = 75,
-                MaxOccupants = 2,   
+                MaxOccupants = 2,
                 RequiredPrimaryColorID = 96,
                 RequiredSecondaryColorID = 96,
                 RequiredVariation = new VehicleVariation() {
@@ -4235,8 +4242,14 @@ public class DispatchableVehicles_Gangs
     }
     private void SetGambettiVehicles()
     {
+        
         GambettiVehicles = new List<DispatchableVehicle>()
         {
+            //test
+            Create_GangSentinel5(75, 75, GangVehicleType.Gang1, -1, -1, 1, 4, "", "", false, 2, 4, -1, 15, -1, 0, 3, true),
+            Create_GangSentinel5(75, 75, GangVehicleType.Gang2, -1, -1, 1, 4, "", "", false, 2, 4, -1, 56, 27, 11, 2, true),
+            Create_GangSentinel5(75, 75, GangVehicleType.Gang3, -1, -1, 1, 4, "", "", false, 2, 4, -1, 27, 42, 11, 1, true),
+            Create_GangSentinel5(75, 75, GangVehicleType.Gang4, -1, -1, 1, 4, "", "", false, 2, 4, -1, 42, 56, 12, 1, true),
             //Base
             new DispatchableVehicle("sentinel", 20, 20) { RequiredPrimaryColorID = 0,RequiredSecondaryColorID = 0 },//black
             new DispatchableVehicle("sentinel2", 20, 20) { RequiredPrimaryColorID = 0,RequiredSecondaryColorID = 0 },//black
@@ -4364,44 +4377,44 @@ public class DispatchableVehicles_Gangs
                 },
                 RequiresDLC = true,
             },
-            new DispatchableVehicle() {
-                DebugName = "sentinel5_Gambetti_PB",
-                ModelName = "sentinel5",
-                AmbientSpawnChance = 75,
-                WantedSpawnChance = 75,
-                MaxOccupants = 4,
-                RequiredPrimaryColorID = 2,
-                RequiredSecondaryColorID = 0,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 2,
-                    SecondaryColor = 0,
-                    PearlescentColor = 4,
-                    InteriorColor = 15,
-                    DashboardColor = 134,
-                    WheelColor = 147,
-                    WheelType = 0,
-                    WindowTint = 3,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
-                    },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 0, Output = 2 },
-                        new VehicleMod() { ID = 1, Output = 0 },
-                        new VehicleMod() { ID = 2, Output = 0 },
-                        new VehicleMod() { ID = 4, Output = 3 },
-                        new VehicleMod() { ID = 7, Output = 0 },
-                        new VehicleMod() { ID = 8, Output = 0 },
-                        new VehicleMod() { ID = 9, Output = 2 },
-                        new VehicleMod() { ID = 10, Output = 0 },
-                        new VehicleMod() { ID = 11, Output = 3 },
-                        new VehicleMod() { ID = 12, Output = 2 },
-                        new VehicleMod() { ID = 13, Output = 2 },
-                        new VehicleMod() { ID = 15, Output = 1 },
-                        new VehicleMod() { ID = 23, Output = 31 },
-                    },
-                },
-                RequiresDLC = true,
-            },
+            //new DispatchableVehicle() {
+            //    DebugName = "sentinel5_Gambetti_PB",
+            //    ModelName = "sentinel5",
+            //    AmbientSpawnChance = 75,
+            //    WantedSpawnChance = 75,
+            //    MaxOccupants = 4,
+            //    RequiredPrimaryColorID = 2,
+            //    RequiredSecondaryColorID = 0,
+            //    RequiredVariation = new VehicleVariation() {
+            //        PrimaryColor = 2,
+            //        SecondaryColor = 0,
+            //        PearlescentColor = 4,
+            //        InteriorColor = 15,
+            //        DashboardColor = 134,
+            //        WheelColor = 147,
+            //        WheelType = 0,
+            //        WindowTint = 3,
+            //        VehicleToggles = new List<VehicleToggle>() {
+            //            new VehicleToggle() { ID = 18, IsTurnedOn = true },
+            //        },
+            //        VehicleMods = new List<VehicleMod>() {
+            //            new VehicleMod() { ID = 0, Output = 2 },
+            //            new VehicleMod() { ID = 1, Output = 0 },
+            //            new VehicleMod() { ID = 2, Output = 0 },
+            //            new VehicleMod() { ID = 4, Output = 3 },
+            //            new VehicleMod() { ID = 7, Output = 0 },
+            //            new VehicleMod() { ID = 8, Output = 0 },
+            //            new VehicleMod() { ID = 9, Output = 2 },
+            //            new VehicleMod() { ID = 10, Output = 0 },
+            //            new VehicleMod() { ID = 11, Output = 3 },
+            //            new VehicleMod() { ID = 12, Output = 2 },
+            //            new VehicleMod() { ID = 13, Output = 2 },
+            //            new VehicleMod() { ID = 15, Output = 1 },
+            //            new VehicleMod() { ID = 23, Output = 31 },
+            //        },
+            //    },
+            //    RequiresDLC = true,
+            //},
             new DispatchableVehicle() {
                 DebugName = "deity_Gambetti_PB",
                 ModelName = "deity",
@@ -4440,8 +4453,8 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "paragon_Gambetti_PB",
                 ModelName = "paragon",
-                AmbientSpawnChance = 65,
-                WantedSpawnChance = 65,
+                AmbientSpawnChance = 75,
+                WantedSpawnChance = 75,
                 MaxOccupants = 2,
                 RequiredPrimaryColorID = 2,
                 RequiredSecondaryColorID = 0,
@@ -4473,8 +4486,8 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "SCHWARZER_Gambetti_PB",
                 ModelName = "SCHWARZER",
-                AmbientSpawnChance = 65,
-                WantedSpawnChance = 65,
+                AmbientSpawnChance = 75,
+                WantedSpawnChance = 75,
                 MaxOccupants = 2,
                 RequiredPrimaryColorID = 2,
                 RequiredSecondaryColorID = 0,
@@ -4540,8 +4553,8 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "vectre_Gambetti_PB",
                 ModelName = "vectre",
-                AmbientSpawnChance = 65,
-                WantedSpawnChance = 65,
+                AmbientSpawnChance = 55,
+                WantedSpawnChance = 55,
                 MaxOccupants = 2,
                 RequiredPrimaryColorID = 2,
                 RequiredSecondaryColorID = 2,
@@ -5172,41 +5185,256 @@ public class DispatchableVehicles_Gangs
         {
             //Base
             new DispatchableVehicle("sandking2",10,10),
-            new DispatchableVehicle("rebel", 20, 20),
-            new DispatchableVehicle("bison", 20, 20),
-            new DispatchableVehicle("sanchez2",20,20) {MaxOccupants = 1 },
+            new DispatchableVehicle("rebel", 10, 10),
+            new DispatchableVehicle("bison", 10, 10),
+            new DispatchableVehicle("sanchez2",10,10) {MaxOccupants = 1 },
             //Custom
             // Vans
             new DispatchableVehicle() {
                 DebugName = "youga3_Redneck_PB",
                 ModelName = "youga3",
-                AmbientSpawnChance = 45,
-                WantedSpawnChance = 45,
+                AmbientSpawnChance = 65,
+                WantedSpawnChance = 65,
                 MaxOccupants = 4,
-                RequiredPrimaryColorID = 121,
-                RequiredSecondaryColorID = 87,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 121,
-                    SecondaryColor = 87,
-                    PearlescentColor = 0,
-                    InteriorColor = 21,
-                    DashboardColor = 43,
-                    WheelColor = 16,
-                    WheelType = 4,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 1, Output = 1 },
-                        new VehicleMod() { ID = 2, Output = 1 },
-                        new VehicleMod() { ID = 3, Output = 0 },
-                        new VehicleMod() { ID = 4, Output = 4 },
-                        new VehicleMod() { ID = 5, Output = 0 },
-                        new VehicleMod() { ID = 6, Output = 6 },
-                        new VehicleMod() { ID = 7, Output = 0 },
-                        new VehicleMod() { ID = 9, Output = 2 },
-                        new VehicleMod() { ID = 10, Output = 2 },
-                        new VehicleMod() { ID = 23, Output = 12 },
-                        new VehicleMod() { ID = 48, Output = 1 },
+                RequiredInteriorColorID = 16,
+                RequiredWheelColorID = 12,
+                WheelType = 4,
+                MaxRandomDirtLevel = 10,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,65) // spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,18),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,18),
+                            new DispatchableVehicleModValue(5,16),
+                            new DispatchableVehicleModValue(6,16),
+                            new DispatchableVehicleModValue(7,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,20),
+                            new DispatchableVehicleModValue(1,40),
+                            new DispatchableVehicleModValue(2,20),
+                            new DispatchableVehicleModValue(3,20),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,65) // rear bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(2,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,16),
+                            new DispatchableVehicleModValue(5,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(3,65) // side skirt
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(3,30),
+                            new DispatchableVehicleModValue(4,30),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(2,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,20),
+                            new DispatchableVehicleModValue(5,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(5,50) // side ladders
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,16),
+                            new DispatchableVehicleModValue(5,16),
+                            new DispatchableVehicleModValue(6,20),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,12),
+                            new DispatchableVehicleModValue(3,12),
+                            new DispatchableVehicleModValue(4,12),
+                            new DispatchableVehicleModValue(5,12),
+                            new DispatchableVehicleModValue(6,12),
+                            new DispatchableVehicleModValue(7,12),
+                            new DispatchableVehicleModValue(8,12),
+                        },
+                    },
+                    new DispatchableVehicleMod(9,65) // roof visor
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,22),
+                            new DispatchableVehicleModValue(1,22),
+                            new DispatchableVehicleModValue(2,34),
+                            new DispatchableVehicleModValue(3,22),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,65) // roof 
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,35),
+                            new DispatchableVehicleModValue(1,35),
+                            new DispatchableVehicleModValue(2,40),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(27,65) // interior design
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(6,16),
+                            new DispatchableVehicleModValue(9,16),
+                            new DispatchableVehicleModValue(10,18),
+                            new DispatchableVehicleModValue(12,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(39,65) // splitters
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,18),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(2,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,18),
+                            new DispatchableVehicleModValue(5,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(42,65) // bull bars
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,20),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(2,20),
+                            new DispatchableVehicleModValue(3,20),
+                            new DispatchableVehicleModValue(4,20),
+                        },
+                    },
+                    new DispatchableVehicleMod(43,100) // light cover
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(44,65) // roof attachments
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,20),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(2,20),
+                            new DispatchableVehicleModValue(3,20),
+                            new DispatchableVehicleModValue(4,20),
+                        },
+                    },
+                    new DispatchableVehicleMod(45,65)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,10),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(2,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,16),
+                            new DispatchableVehicleModValue(5,18)
+                        },
+                    },
+                    new DispatchableVehicleMod(46,65)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,20),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(2,20),
+                            new DispatchableVehicleModValue(3,20),
+                        },
+                    },
+                    new DispatchableVehicleMod(47,65)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,35),
+                            new DispatchableVehicleModValue(2,30),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,8),
+                            new DispatchableVehicleModValue(1,12),
+                            new DispatchableVehicleModValue(2,8),
+                            new DispatchableVehicleModValue(3,8),
+                            new DispatchableVehicleModValue(5,8),
+                            new DispatchableVehicleModValue(6,8),
+                            new DispatchableVehicleModValue(7,8),
+                            new DispatchableVehicleModValue(8,8),
+                            new DispatchableVehicleModValue(9,8),
+                            new DispatchableVehicleModValue(10,8),
+                            new DispatchableVehicleModValue(11,8),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5214,74 +5442,261 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "YOUGA2_Redneck_PB",
                 ModelName = "YOUGA2",
-                AmbientSpawnChance = 55,
-                WantedSpawnChance = 55,
+                AmbientSpawnChance = 75,
+                WantedSpawnChance = 75,
                 MaxOccupants = 4,
-                RequiredPrimaryColorID = 107,
-                RequiredSecondaryColorID = 68,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 107,
-                    SecondaryColor = 68,
-                    PearlescentColor = 4,
-                    InteriorColor = 156,
-                    DashboardColor = 0,
-                    WheelColor = 3,
-                    WheelType = 1,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 3, Output = 0 },
-                        new VehicleMod() { ID = 4, Output = 0 },
-                        new VehicleMod() { ID = 5, Output = 0 },
-                        new VehicleMod() { ID = 10, Output = 0 },
-                        new VehicleMod() { ID = 11, Output = 3 },
-                        new VehicleMod() { ID = 12, Output = 2 },
-                        new VehicleMod() { ID = 13, Output = 2 },
-                        new VehicleMod() { ID = 23, Output = 29 },
-                        new VehicleMod() { ID = 48, Output = 10 },
+                RequiredInteriorColorID = 156,
+                RequiredWheelColorID = 12,
+                WheelType = 1,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(3,65) // side skirt
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(5,65) // sidesteps
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(10,65) // roof 
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(5,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(7,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(10,5),
+                            new DispatchableVehicleModValue(11,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(15,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(25,5),
+                            new DispatchableVehicleModValue(26,5),
+                            new DispatchableVehicleModValue(28,5),
+                            new DispatchableVehicleModValue(29,5),
+                            new DispatchableVehicleModValue(33,5),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,5),
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(8,20),
+                            new DispatchableVehicleModValue(9,15),
+                            new DispatchableVehicleModValue(10,20),
+                            new DispatchableVehicleModValue(11,20),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
             },
-            // Pickup Trucks /SUV
+            // Pickup Trucks SUV
             new DispatchableVehicle() {
                 DebugName = "yosemite3_Redneck_PB",
                 ModelName = "yosemite3",
                 AmbientSpawnChance = 75,
                 WantedSpawnChance = 75,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 132,
-                RequiredSecondaryColorID = 12,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 132,
-                    SecondaryColor = 12,
-                    PearlescentColor = 0,
-                    InteriorColor = 13,
-                    DashboardColor = 111,
-                    WheelColor = 120,
-                    WheelType = 4,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 17, IsTurnedOn = true },
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                RequiredInteriorColorID = 16,
+                RequiredWheelColorID = 12,
+                WheelType = 4,
+                MaxRandomDirtLevel = 10,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,65) // spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                            new DispatchableVehicleModValue(1,50),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 1, Output = 0 },
-                        new VehicleMod() { ID = 2, Output = 0 },
-                        new VehicleMod() { ID = 3, Output = 0 },
-                        new VehicleMod() { ID = 4, Output = 2 },
-                        new VehicleMod() { ID = 6, Output = 0 },
-                        new VehicleMod() { ID = 7, Output = 0 },
-                        new VehicleMod() { ID = 9, Output = 10 },
-                        new VehicleMod() { ID = 23, Output = 20 },
-                        new VehicleMod() { ID = 30, Output = 1 },
-                        new VehicleMod() { ID = 34, Output = 0 },
-                        new VehicleMod() { ID = 39, Output = 3 },
-                        new VehicleMod() { ID = 40, Output = 4 },
-                        new VehicleMod() { ID = 42, Output = 6 },
-                        new VehicleMod() { ID = 44, Output = 1 },
-                        new VehicleMod() { ID = 48, Output = 14 },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,10),
+                            new DispatchableVehicleModValue(1,10),
+                            new DispatchableVehicleModValue(2,10),
+                            new DispatchableVehicleModValue(3,10),
+                            new DispatchableVehicleModValue(4,10),
+                            new DispatchableVehicleModValue(5,10),
+                            new DispatchableVehicleModValue(6,10),
+                            new DispatchableVehicleModValue(7,10),
+                            new DispatchableVehicleModValue(8,10),
+                            new DispatchableVehicleModValue(9,10),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,65) // rear bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,20),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(2,20),
+                            new DispatchableVehicleModValue(3,20),
+                            new DispatchableVehicleModValue(4,20),
+                        },
+                    },
+                    new DispatchableVehicleMod(3,65) // side skirt
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(4,25),
+                            new DispatchableVehicleModValue(5,25),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,33),
+                            new DispatchableVehicleModValue(1,33),
+                            new DispatchableVehicleModValue(2,34),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,17),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,17),
+                            new DispatchableVehicleModValue(5,16),
+                            new DispatchableVehicleModValue(6,17),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,13),
+                            new DispatchableVehicleModValue(1,9),
+                            new DispatchableVehicleModValue(3,10),
+                            new DispatchableVehicleModValue(4,10),
+                            new DispatchableVehicleModValue(5,10),
+                            new DispatchableVehicleModValue(6,10),
+                            new DispatchableVehicleModValue(7,18),
+                            new DispatchableVehicleModValue(8,10),
+                            new DispatchableVehicleModValue(9,10),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,65)  // Fendor - Arches
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,33),
+                            new DispatchableVehicleModValue(1,33),
+                            new DispatchableVehicleModValue(2,34),
+                        },
+                    },
+                    new DispatchableVehicleMod(9,65) // Right Fender - Side Steps
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,19),
+                            new DispatchableVehicleModValue(4,19),
+                            new DispatchableVehicleModValue(7,19),
+                            new DispatchableVehicleModValue(10,24),
+                            new DispatchableVehicleModValue(13,19),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(42,65) // rear roll cage
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(5,24),
+                            new DispatchableVehicleModValue(6,28),
+                        },
+                    },
+                    new DispatchableVehicleMod(44,65)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                            new DispatchableVehicleModValue(1,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,10),
+                            new DispatchableVehicleModValue(1,10),
+                            new DispatchableVehicleModValue(2,10),
+                            new DispatchableVehicleModValue(12,10),
+                            new DispatchableVehicleModValue(13,20),
+                            new DispatchableVehicleModValue(14,20),
+                            new DispatchableVehicleModValue(15,20),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5289,32 +5704,128 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "yosemite_Redneck_PB",
                 ModelName = "yosemite",
-                AmbientSpawnChance = 55,
-                WantedSpawnChance = 55,
+                AmbientSpawnChance = 65,
+                WantedSpawnChance = 65,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 132,
-                RequiredSecondaryColorID = 21,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 132,
-                    SecondaryColor = 21,
-                    PearlescentColor = 0,
-                    InteriorColor = 13,
-                    DashboardColor = 111,
-                    WheelColor = 0,
-                    WheelType = 4,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                RequiredInteriorColorID = 16,
+                RequiredWheelColorID = 12,
+                WheelType = 4,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,65) // spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,35),
+                            new DispatchableVehicleModValue(5,35),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 0, Output = 5 },
-                        new VehicleMod() { ID = 1, Output = 0 },
-                        new VehicleMod() { ID = 2, Output = 0 },
-                        new VehicleMod() { ID = 3, Output = 0 },
-                        new VehicleMod() { ID = 6, Output = 2 },
-                        new VehicleMod() { ID = 23, Output = 23 },
-                        new VehicleMod() { ID = 48, Output = 7 },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,10),
+                            new DispatchableVehicleModValue(1,10),
+                            new DispatchableVehicleModValue(2,10),
+                            new DispatchableVehicleModValue(4,10),
+                            new DispatchableVehicleModValue(5,10),
+                            new DispatchableVehicleModValue(7,10),
+                            new DispatchableVehicleModValue(8,10),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,65) // rear bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(3,65) // side skirt
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(3,14),
+                            new DispatchableVehicleModValue(4,14),
+                            new DispatchableVehicleModValue(6,14),
+                            new DispatchableVehicleModValue(7,14),
+                            new DispatchableVehicleModValue(9,14),
+                            new DispatchableVehicleModValue(10,14),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(2,25),
+                            new DispatchableVehicleModValue(3,25),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,10),
+                            new DispatchableVehicleModValue(1,10),
+                            new DispatchableVehicleModValue(3,12),
+                            new DispatchableVehicleModValue(4,12),
+                            new DispatchableVehicleModValue(5,10),
+                            new DispatchableVehicleModValue(6,10),
+                            new DispatchableVehicleModValue(7,10),
+                            new DispatchableVehicleModValue(8,10),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,65) // roof - pickup bed cover
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                            new DispatchableVehicleModValue(3,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,20),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(5,10),
+                            new DispatchableVehicleModValue(6,10),
+                            new DispatchableVehicleModValue(7,10),
+                            new DispatchableVehicleModValue(8,10),
+                            new DispatchableVehicleModValue(9,20),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5322,31 +5833,66 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "slamvan4_Redneck_PB",
                 ModelName = "slamvan4",
-                AmbientSpawnChance = 45,
-                WantedSpawnChance = 45,
+                AmbientSpawnChance = 55,
+                WantedSpawnChance = 55,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 12,
-                RequiredSecondaryColorID = 118,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 12,
-                    SecondaryColor = 118,
-                    PearlescentColor = 0,
-                    InteriorColor = 2,
-                    DashboardColor = 156,
-                    WheelColor = 2,
-                    WheelType = 1,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 17, IsTurnedOn = true },
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(2,65) // wheel guards
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,30),
+                            new DispatchableVehicleModValue(2,40),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 2, Output = 2 },
-                        new VehicleMod() { ID = 6, Output = 0 },
-                        new VehicleMod() { ID = 7, Output = 2 },
-                        new VehicleMod() { ID = 42, Output = 2 },
-                        new VehicleMod() { ID = 48, Output = 2 },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,28),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(3,24),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood horns
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,30),
+                            new DispatchableVehicleModValue(2,40),
+                        },
+                    },
+                    new DispatchableVehicleMod(36,5) // wheelie bars
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(42,65) // ram bars
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(2,60),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(2,35),
+                            new DispatchableVehicleModValue(3,15),
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5354,34 +5900,128 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "SLAMVAN3_Redneck_PB",
                 ModelName = "SLAMVAN3",
-                AmbientSpawnChance = 65,
-                WantedSpawnChance = 65,
+                AmbientSpawnChance = 75,
+                WantedSpawnChance = 75,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 12,
-                RequiredSecondaryColorID = 12,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 12,
-                    SecondaryColor = 12,
-                    PearlescentColor = 0,
-                    InteriorColor = 1,
-                    DashboardColor = 131,
-                    WheelColor = 2,
-                    WheelType = 4,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 17, IsTurnedOn = true },
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                RequiredInteriorColorID = 16,
+                RequiredWheelColorID = 12,
+                WheelType = 4,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,50) // bed spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 1, Output = 0 },
-                        new VehicleMod() { ID = 4, Output = 4 },
-                        new VehicleMod() { ID = 6, Output = 0 },
-                        new VehicleMod() { ID = 10, Output = 0 },
-                        new VehicleMod() { ID = 23, Output = 23 },
-                        new VehicleMod() { ID = 39, Output = 3 },
-                        new VehicleMod() { ID = 40, Output = 4 },
-                        new VehicleMod() { ID = 48, Output = 7 },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,15),
+                            new DispatchableVehicleModValue(1,15),
+                            new DispatchableVehicleModValue(2,15),
+                            new DispatchableVehicleModValue(3,25),
+                            new DispatchableVehicleModValue(4,30),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,15),
+                            new DispatchableVehicleModValue(2,15),
+                            new DispatchableVehicleModValue(3,20),
+                            new DispatchableVehicleModValue(4,20),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,30),
+                            new DispatchableVehicleModValue(2,30),
+                            new DispatchableVehicleModValue(3,40),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(10,65) // windscreen visor
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(32,65) // seats
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,18),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(2,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(5,18),
+                            new DispatchableVehicleModValue(6,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(45,65) // rear roll cage
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                            new DispatchableVehicleModValue(1,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,15),
+                            new DispatchableVehicleModValue(3,15),
+                            new DispatchableVehicleModValue(4,15),
+                            new DispatchableVehicleModValue(5,5),
+                            new DispatchableVehicleModValue(6,15),
+                            new DispatchableVehicleModValue(7,30),
+                            new DispatchableVehicleModValue(8,5),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5389,36 +6029,158 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "seminole2_Redneck_PB",
                 ModelName = "seminole2",
-                AmbientSpawnChance = 75,
-                WantedSpawnChance = 75,
+                AmbientSpawnChance = 65,
+                WantedSpawnChance = 65,
                 MaxOccupants = 4,
-                RequiredPrimaryColorID = 132,
-                RequiredSecondaryColorID = 87,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 132,
-                    SecondaryColor = 87,
-                    PearlescentColor = 0,
-                    InteriorColor = 13,
-                    DashboardColor = 111,
-                    WheelColor = 13,
-                    WheelType = 4,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                RequiredWheelColorID = 12,
+                WheelType = 4,
+                MaxRandomDirtLevel = 10,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,65) // deflectors - spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,30),
+                            new DispatchableVehicleModValue(2,40),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 0, Output = 2 },
-                        new VehicleMod() { ID = 1, Output = 4 },
-                        new VehicleMod() { ID = 2, Output = 0 },
-                        new VehicleMod() { ID = 3, Output = 1 },
-                        new VehicleMod() { ID = 4, Output = 4 },
-                        new VehicleMod() { ID = 6, Output = 2 },
-                        new VehicleMod() { ID = 7, Output = 4 },
-                        new VehicleMod() { ID = 8, Output = 4 },
-                        new VehicleMod() { ID = 9, Output = 0 },
-                        new VehicleMod() { ID = 10, Output = 3 },
-                        new VehicleMod() { ID = 48, Output = 5 },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,14),
+                            new DispatchableVehicleModValue(1,14),
+                            new DispatchableVehicleModValue(2,13),
+                            new DispatchableVehicleModValue(3,13),
+                            new DispatchableVehicleModValue(4,20),
+                            new DispatchableVehicleModValue(5,13),
+                            new DispatchableVehicleModValue(6,13),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,65) // antenna - rear bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(3,65) // side skirt
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(1,60),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(3,24),
+                            new DispatchableVehicleModValue(4,28),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(2,28),
+                            new DispatchableVehicleModValue(3,24),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(2,25),
+                            new DispatchableVehicleModValue(4,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,65)  // Fendor - Arches
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,18),
+                            new DispatchableVehicleModValue(1,18),
+                            new DispatchableVehicleModValue(2,18),
+                            new DispatchableVehicleModValue(3,18),
+                            new DispatchableVehicleModValue(4,28),
+                        },
+                    },
+                    new DispatchableVehicleMod(9,65) // Mud Flaps
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(10,65)  // roof rack
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,13),
+                            new DispatchableVehicleModValue(1,13),
+                            new DispatchableVehicleModValue(2,13),
+                            new DispatchableVehicleModValue(3,20),
+                            new DispatchableVehicleModValue(4,13),
+                            new DispatchableVehicleModValue(5,13),
+                            new DispatchableVehicleModValue(6,13),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(42,50) // mirrors
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,14),
+                            new DispatchableVehicleModValue(1,14),
+                            new DispatchableVehicleModValue(2,13),
+                            new DispatchableVehicleModValue(5,20),
+                            new DispatchableVehicleModValue(6,13),
+                            new DispatchableVehicleModValue(7,13),
+                            new DispatchableVehicleModValue(9,13),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5426,32 +6188,95 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "RATLOADER_Redneck_PB",
                 ModelName = "RATLOADER",
-                AmbientSpawnChance = 55,
-                WantedSpawnChance = 55,
+                AmbientSpawnChance = 75,
+                WantedSpawnChance = 75,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 27,
-                RequiredSecondaryColorID = 0,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 27,
-                    SecondaryColor = 0,
-                    PearlescentColor = 0,
-                    InteriorColor = 27,
-                    DashboardColor = 27,
-                    WheelColor = 27,
-                    WheelType = 1,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                RequiredWheelColorID = 12,
+                WheelType = 1,
+                MaxRandomDirtLevel = 10,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,28),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(3,24),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 4, Output = 0 },
-                        new VehicleMod() { ID = 5, Output = 0 },
-                        new VehicleMod() { ID = 10, Output = 1 },
-                        new VehicleMod() { ID = 11, Output = 3 },
-                        new VehicleMod() { ID = 12, Output = 2 },
-                        new VehicleMod() { ID = 13, Output = 2 },
-                        new VehicleMod() { ID = 15, Output = 1 },
+                    new DispatchableVehicleMod(5,65) // engine cover
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(2,25),
+                            new DispatchableVehicleModValue(3,25),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(2,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,18),
+                            new DispatchableVehicleModValue(5,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,65)  // Fendor - Arches
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                            new DispatchableVehicleModValue(1,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,65)  // rear bed
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,23),
+                            new DispatchableVehicleModValue(1,27),
+                            new DispatchableVehicleModValue(2,27),
+                            new DispatchableVehicleModValue(3,23),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
                     },
                 },
                 RequiresDLC = false,
@@ -5463,71 +6288,265 @@ public class DispatchableVehicles_Gangs
                 AmbientSpawnChance = 75,
                 WantedSpawnChance = 75,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 12,
-                RequiredSecondaryColorID = 12,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 12,
-                    SecondaryColor = 12,
-                    PearlescentColor = 0,
-                    InteriorColor = 0,
-                    DashboardColor = 0,
-                    WheelColor = 2,
-                    WheelType = 11,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 17, IsTurnedOn = true },
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                RequiredWheelColorID = 12,
+                WheelType = 1,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,65) // spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(2,15),
+                            new DispatchableVehicleModValue(4,20),
+                            new DispatchableVehicleModValue(5,15),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 0, Output = 0 },
-                        new VehicleMod() { ID = 1, Output = 0 },
-                        new VehicleMod() { ID = 3, Output = 0 },
-                        new VehicleMod() { ID = 4, Output = 4 },
-                        new VehicleMod() { ID = 6, Output = 3 },
-                        new VehicleMod() { ID = 7, Output = 1 },
-                        new VehicleMod() { ID = 10, Output = 0 },
-                        new VehicleMod() { ID = 23, Output = 8 },
-                        new VehicleMod() { ID = 48, Output = 2 },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,28),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(7,24),
+                        },
+                    },
+                    new DispatchableVehicleMod(3,65) // Louvers
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,60),
+                            new DispatchableVehicleModValue(1,40),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(4,20),
+                            new DispatchableVehicleModValue(5,16),
+                            new DispatchableVehicleModValue(6,16),
+                            new DispatchableVehicleModValue(8,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(3,28),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,14),
+                            new DispatchableVehicleModValue(1,20),
+                            new DispatchableVehicleModValue(3,14),
+                            new DispatchableVehicleModValue(8,13),
+                            new DispatchableVehicleModValue(9,13),
+                            new DispatchableVehicleModValue(10,13),
+                            new DispatchableVehicleModValue(11,13),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,65)  // Mirrors
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(2,25),
+                            new DispatchableVehicleModValue(3,25),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(9,65) // Right Wing
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                            new DispatchableVehicleModValue(1,50)
+
+                        },
+                    },
+                    new DispatchableVehicleMod(10,65)  // roof rack
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,94),
+                            new DispatchableVehicleModValue(1,5), // USA! USA! USA!
+                            new DispatchableVehicleModValue(20,1), // FREEDOM!
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,19),
+                            new DispatchableVehicleModValue(1,19),
+                            new DispatchableVehicleModValue(2,19),
+                            new DispatchableVehicleModValue(4,19),
+                            new DispatchableVehicleModValue(5,4),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(7,5),
+                            new DispatchableVehicleModValue(9,5),
+                            new DispatchableVehicleModValue(10,5),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
             },
             new DispatchableVehicle() {
-                DebugName = "broadway_Redneck_PB",
+                DebugName = "broadway_Redneck_PB",// Default Pearlescent Paint Still Applies.
                 ModelName = "broadway",
-                AmbientSpawnChance = 55,
-                WantedSpawnChance = 55,
+                AmbientSpawnChance = 65,
+                WantedSpawnChance = 65,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 12,
-                RequiredSecondaryColorID = 12,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 12,
-                    SecondaryColor = 12,
-                    PearlescentColor = 0,
-                    InteriorColor = 13,
-                    DashboardColor = 111,
-                    WheelColor = 120,
-                    WheelType = 11,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleExtras = new List<VehicleExtra>() {
-                        new VehicleExtra() { ID = 1, IsTurnedOn = true },
-                        new VehicleExtra() { ID = 2, IsTurnedOn = true },
+                RequiredWheelColorID = 12,
+                WheelType = 1,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,18),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(2,18),
+                            new DispatchableVehicleModValue(3,10),
+                            new DispatchableVehicleModValue(4,15),
+                            new DispatchableVehicleModValue(5,15),
+                        },
                     },
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 17, IsTurnedOn = true },
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                    new DispatchableVehicleMod(2,65) // rear bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,28),
+                            new DispatchableVehicleModValue(1,18),
+                            new DispatchableVehicleModValue(2,18),
+                            new DispatchableVehicleModValue(3,18),
+                            new DispatchableVehicleModValue(4,18),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 1, Output = 1 },
-                        new VehicleMod() { ID = 2, Output = 0 },
-                        new VehicleMod() { ID = 3, Output = 3 },
-                        new VehicleMod() { ID = 4, Output = 1 },
-                        new VehicleMod() { ID = 5, Output = 3 },
-                        new VehicleMod() { ID = 8, Output = 0 },
-                        new VehicleMod() { ID = 23, Output = 7 },
-                        new VehicleMod() { ID = 48, Output = 9 },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,60),
+                            new DispatchableVehicleModValue(2,40),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(5,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(3,28),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,30),
+                            new DispatchableVehicleModValue(1,30),
+                            new DispatchableVehicleModValue(2,10),
+                            new DispatchableVehicleModValue(3,10),
+                            new DispatchableVehicleModValue(4,10),
+                            new DispatchableVehicleModValue(5,10),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,65)  // Body mod
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(1,15),
+                            new DispatchableVehicleModValue(2,15),
+                            new DispatchableVehicleModValue(3,15),
+                            new DispatchableVehicleModValue(4,15),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,10),
+                            new DispatchableVehicleModValue(1,10),
+                            new DispatchableVehicleModValue(2,10),
+                            new DispatchableVehicleModValue(7,30),
+                            new DispatchableVehicleModValue(8,30),
+                            new DispatchableVehicleModValue(9,10),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5538,34 +6557,145 @@ public class DispatchableVehicles_Gangs
                 AmbientSpawnChance = 75,
                 WantedSpawnChance = 75,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 12,
-                RequiredSecondaryColorID = 44,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 12,
-                    SecondaryColor = 44,
-                    PearlescentColor = 0,
-                    InteriorColor = 3,
-                    DashboardColor = 156,
-                    WheelColor = 0,
-                    WheelType = 1,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                RequiredInteriorColorID = 16,
+                RequiredWheelColorID = 12,
+                WheelType = 1,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,65) // spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(1,24),
+                            new DispatchableVehicleModValue(4,24),
+                            new DispatchableVehicleModValue(5,28),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 0, Output = 5 },
-                        new VehicleMod() { ID = 1, Output = 2 },
-                        new VehicleMod() { ID = 2, Output = 0 },
-                        new VehicleMod() { ID = 3, Output = 8 },
-                        new VehicleMod() { ID = 4, Output = 5 },
-                        new VehicleMod() { ID = 6, Output = 5 },
-                        new VehicleMod() { ID = 7, Output = 1 },
-                        new VehicleMod() { ID = 9, Output = 0 },
-                        new VehicleMod() { ID = 10, Output = 1 },
-                        new VehicleMod() { ID = 15, Output = 1 },
-                        new VehicleMod() { ID = 23, Output = 2 },
-                        new VehicleMod() { ID = 48, Output = 9 },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,18),
+                            new DispatchableVehicleModValue(1,28),
+                            new DispatchableVehicleModValue(2,18),
+                            new DispatchableVehicleModValue(3,18),
+                            new DispatchableVehicleModValue(4,18),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,65) // rear bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,60),
+                            new DispatchableVehicleModValue(1,40),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(3,65) // Skirts
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,14),
+                            new DispatchableVehicleModValue(1,14),
+                            new DispatchableVehicleModValue(3,14),
+                            new DispatchableVehicleModValue(4,14),
+                            new DispatchableVehicleModValue(6,14),
+                            new DispatchableVehicleModValue(7,14),
+                            new DispatchableVehicleModValue(8,16),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(3,24),
+                            new DispatchableVehicleModValue(5,28),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,14),
+                            new DispatchableVehicleModValue(1,14),
+                            new DispatchableVehicleModValue(2,14),
+                            new DispatchableVehicleModValue(3,14),
+                            new DispatchableVehicleModValue(4,14),
+                            new DispatchableVehicleModValue(5,16),
+                            new DispatchableVehicleModValue(6,14),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,24),
+                            new DispatchableVehicleModValue(1,28),
+                            new DispatchableVehicleModValue(2,24),
+                            new DispatchableVehicleModValue(4,24),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(9,65) // Arch Covers
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(1,30),
+                            new DispatchableVehicleModValue(2,30),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(10,75)  // sunstrip
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(1,30),
+                            new DispatchableVehicleModValue(2,30),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100) // liveries
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,15),
+                            new DispatchableVehicleModValue(1,15),
+                            new DispatchableVehicleModValue(3,15),
+                            new DispatchableVehicleModValue(5,15),
+                            new DispatchableVehicleModValue(9,30),
+                            new DispatchableVehicleModValue(12,10),
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5573,35 +6703,124 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "HUSTLER_Redneck_PB",
                 ModelName = "HUSTLER",
-                AmbientSpawnChance = 65,
-                WantedSpawnChance = 65,
+                AmbientSpawnChance = 75,
+                WantedSpawnChance = 75,
                 MaxOccupants = 2,
-                RequiredPrimaryColorID = 122,
-                RequiredSecondaryColorID = 44,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 122,
-                    SecondaryColor = 44,
-                    PearlescentColor = 0,
-                    InteriorColor = 13,
-                    DashboardColor = 111,
-                    WheelColor = 22,
-                    WheelType = 1,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleExtras = new List<VehicleExtra>() {
-                        new VehicleExtra() { ID = 1, IsTurnedOn = true },
+                RequiredWheelColorID = 156,
+                WheelType = 4,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(1,60),
+                        },
                     },
-                    VehicleToggles = new List<VehicleToggle>() {
-                        new VehicleToggle() { ID = 18, IsTurnedOn = true },
+                    new DispatchableVehicleMod(2,65) // rear bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,40),
+                            new DispatchableVehicleModValue(1,60),
+                        },
                     },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 1, Output = 1 },
-                        new VehicleMod() { ID = 2, Output = 1 },
-                        new VehicleMod() { ID = 6, Output = 0 },
-                        new VehicleMod() { ID = 10, Output = 0 },
-                        new VehicleMod() { ID = 15, Output = 1 },
-                        new VehicleMod() { ID = 23, Output = 9 },
-                        new VehicleMod() { ID = 48, Output = 6 },
+                    new DispatchableVehicleMod(3,65) // side skirt
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,60),
+                            new DispatchableVehicleModValue(1,40),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(2,25),
+                            new DispatchableVehicleModValue(3,25),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,65) // grille
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,28),
+                            new DispatchableVehicleModValue(1,18),
+                            new DispatchableVehicleModValue(3,18),
+                            new DispatchableVehicleModValue(4,18),
+                            new DispatchableVehicleModValue(5,18),
+
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(2,25),
+                            new DispatchableVehicleModValue(3,25),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,65)  // Fendor - Arches
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,33),
+                            new DispatchableVehicleModValue(1,33),
+                            new DispatchableVehicleModValue(2,34),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,75) // visor
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,10),
+                            new DispatchableVehicleModValue(1,10),
+                            new DispatchableVehicleModValue(5,20),
+                            new DispatchableVehicleModValue(6,20),
+                            new DispatchableVehicleModValue(8,20),
+                            new DispatchableVehicleModValue(9,20),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
@@ -5610,64 +6829,140 @@ public class DispatchableVehicles_Gangs
             new DispatchableVehicle() {
                 DebugName = "EMPEROR2_Redneck_PB",
                 ModelName = "EMPEROR2",
-                AmbientSpawnChance = 75,
-                WantedSpawnChance = 75,
+                AmbientSpawnChance = 55,
+                WantedSpawnChance = 55,
                 MaxOccupants = 4,
-                RequiredPrimaryColorID = 121,
-                RequiredSecondaryColorID = 21,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 121,
-                    SecondaryColor = 21,
-                    PearlescentColor = 0,
-                    InteriorColor = 0,
-                    DashboardColor = 0,
-                    WheelColor = 156,
-                    WheelType = 2,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleExtras = new List<VehicleExtra>() {
-                        new VehicleExtra() { ID = 10, IsTurnedOn = true },
-                        new VehicleExtra() { ID = 12, IsTurnedOn = true },
-                    },
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 11, Output = 3 },
-                        new VehicleMod() { ID = 12, Output = 2 },
-                        new VehicleMod() { ID = 13, Output = 2 },
-                        new VehicleMod() { ID = 15, Output = 1 },
-                        new VehicleMod() { ID = 23, Output = 20 },
+                RequiredWheelColorID = 12,
+                WheelType = 2,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleExtras = new List<DispatchableVehicleExtra>()
+                {
+                    new DispatchableVehicleExtra(10,true,50),
+                    new DispatchableVehicleExtra(12,true,50),
+                },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
                     },
                 },
-                RequiresDLC = false,
+                RequiresDLC =false,
             },
             new DispatchableVehicle() {
                 DebugName = "tulip_Redneck_PB",
                 ModelName = "tulip",
-                AmbientSpawnChance = 65,
-                WantedSpawnChance = 65,
+                AmbientSpawnChance = 75,
+                WantedSpawnChance = 75,
                 MaxOccupants = 4,
-                RequiredPrimaryColorID = 45,
-                RequiredSecondaryColorID = 118,
-                RequiredVariation = new VehicleVariation() {
-                    PrimaryColor = 45,
-                    SecondaryColor = 118,
-                    PearlescentColor = 0,
-                    InteriorColor = 2,
-                    DashboardColor = 156,
-                    WheelColor = 0,
-                    WheelType = 1,
-                    WindowTint = 3,
-                    DirtLevel = 10,
-                    VehicleMods = new List<VehicleMod>() {
-                        new VehicleMod() { ID = 1, Output = 1 },
-                        new VehicleMod() { ID = 4, Output = 3 },
-                        new VehicleMod() { ID = 7, Output = 9 },
-                        new VehicleMod() { ID = 15, Output = 1 },
-                        new VehicleMod() { ID = 23, Output = 33 },
-                        new VehicleMod() { ID = 48, Output = 0 },
+                RequiredWheelColorID = 12,
+                WheelType = 1,
+                MaxRandomDirtLevel = 10,
+                RequiredPearlescentColorID = 12,
+                OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
+                VehicleMods = new List<DispatchableVehicleMod>()
+                {
+                    new DispatchableVehicleMod(0,65) // spoiler
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,50),
+                            new DispatchableVehicleModValue(2,50),
+                        },
+                    },
+                    new DispatchableVehicleMod(1,65) // front bumper
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,50),
+                            new DispatchableVehicleModValue(3,25),
+                            new DispatchableVehicleModValue(5,25),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,65) // exhaust
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,25),
+                            new DispatchableVehicleModValue(1,25),
+                            new DispatchableVehicleModValue(2,25),
+                            new DispatchableVehicleModValue(3,25),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,65) // hood - bonnet
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,20),
+                            new DispatchableVehicleModValue(3,15),
+                            new DispatchableVehicleModValue(4,20),
+                            new DispatchableVehicleModValue(8,15),
+                            new DispatchableVehicleModValue(9,15),
+                            new DispatchableVehicleModValue(10,15),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100) // wheels
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,5),
+                            new DispatchableVehicleModValue(2,5),
+                            new DispatchableVehicleModValue(3,5),
+                            new DispatchableVehicleModValue(4,5),
+                            new DispatchableVehicleModValue(6,5),
+                            new DispatchableVehicleModValue(8,5),
+                            new DispatchableVehicleModValue(12,5),
+                            new DispatchableVehicleModValue(13,5),
+                            new DispatchableVehicleModValue(14,5),
+                            new DispatchableVehicleModValue(16,5),
+                            new DispatchableVehicleModValue(17,5),
+                            new DispatchableVehicleModValue(18,5),
+                            new DispatchableVehicleModValue(19,5),
+                            new DispatchableVehicleModValue(20,5),
+                            new DispatchableVehicleModValue(21,5),
+                            new DispatchableVehicleModValue(22,5),
+                            new DispatchableVehicleModValue(23,5),
+                            new DispatchableVehicleModValue(24,5),
+                        },
+                    },
+                    new DispatchableVehicleMod(48,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,16),
+                            new DispatchableVehicleModValue(1,16),
+                            new DispatchableVehicleModValue(3,16),
+                            new DispatchableVehicleModValue(4,16),
+                            new DispatchableVehicleModValue(5,20),
+                            new DispatchableVehicleModValue(6,16),
+
+                        },
                     },
                 },
                 RequiresDLC = true,
-            }
+            },         
         };
     }
     private void SetTriadVehicles()
@@ -5867,7 +7162,7 @@ public class DispatchableVehicles_Gangs
                     WheelColor = 0,
                     WheelType = 11,
                     WindowTint = 3,
-                    VehicleExtras = new List<VehicleExtra>() 
+                    VehicleExtras = new List<VehicleExtra>()
                     {
                         new VehicleExtra() { ID = 2, IsTurnedOn = false}
                     },
@@ -6662,7 +7957,7 @@ public class DispatchableVehicles_Gangs
             },
             // High end Sports Vehicles
             new DispatchableVehicle() {
-                DebugName = "COMET6_PB",
+                DebugName = "COMET6_PB_Korean",
                 ModelName = "COMET6",
                 AmbientSpawnChance = 70,
                 WantedSpawnChance = 70,
@@ -6697,7 +7992,7 @@ public class DispatchableVehicles_Gangs
                 RequiresDLC = true,
             },
             new DispatchableVehicle() {
-                DebugName = "GROWLER_PB",
+                DebugName = "GROWLER_PB_Korean",
                 ModelName = "GROWLER",
                 AmbientSpawnChance = 70,
                 WantedSpawnChance = 70,
@@ -6727,7 +8022,7 @@ public class DispatchableVehicles_Gangs
                 RequiresDLC = true,
             },
             new DispatchableVehicle() {
-                DebugName = "COMET7_PB",
+                DebugName = "COMET7_PB_Korean",
                 ModelName = "COMET7",
                 AmbientSpawnChance = 70,
                 WantedSpawnChance = 70,
@@ -6759,7 +8054,7 @@ public class DispatchableVehicles_Gangs
             },
             //Extra Vehicles
             new DispatchableVehicle() {
-                DebugName = "CAVALCADE3_PB",
+                DebugName = "CAVALCADE3_PB_Korean",
                 ModelName = "CAVALCADE3",
                 AmbientSpawnChance = 60,
                 WantedSpawnChance = 60,
@@ -6793,7 +8088,7 @@ public class DispatchableVehicles_Gangs
                 RequiresDLC = true,
             },
             new DispatchableVehicle() {
-                DebugName = "PREVION_PB",
+                DebugName = "PREVION_PB_Korean",
                 ModelName = "PREVION",
                 AmbientSpawnChance = 55,
                 WantedSpawnChance = 55,
@@ -6834,7 +8129,7 @@ public class DispatchableVehicles_Gangs
                 RequiresDLC = true,
             },
             new DispatchableVehicle() {
-                DebugName = "Sugoi_PB",
+                DebugName = "Sugoi_PB_Korean",
                 ModelName = "Sugoi",
                 AmbientSpawnChance = 55,
                 WantedSpawnChance = 55,
@@ -7738,7 +9033,7 @@ public class DispatchableVehicles_Gangs
                 ModelName = "PHOENIX",
                 AmbientSpawnChance = 75,
                 WantedSpawnChance = 75,
-                MaxOccupants = 2,   
+                MaxOccupants = 2,
                 RequiredPrimaryColorID = 63,
                 RequiredSecondaryColorID = 12,
                 RequiredVariation = new VehicleVariation() {
@@ -7769,7 +9064,7 @@ public class DispatchableVehicles_Gangs
                 ModelName = "TAMPA",
                 AmbientSpawnChance = 75,
                 WantedSpawnChance = 75,
-                MaxOccupants = 2,   
+                MaxOccupants = 2,
                 RequiredPrimaryColorID = 63,
                 RequiredSecondaryColorID = 12,
                 RequiredVariation = new VehicleVariation() {
@@ -8435,6 +9730,703 @@ public class DispatchableVehicles_Gangs
                 RequiresDLC = true,
             }
         };
+
     }
+
+
+    public DispatchableVehicle Create_GangSentinel5(int ambientPercent, int wantedPercent, GangVehicleType gangVehicleType, int minWantedLevel, int maxWantedLevel, int minOccupants, int maxOccupants,
+    string requiredPedGroup, string groupName, bool useOptionalColors, int requiredColor, int requiredPearlescent, int requiredDashColor, int requiredInteriorColor, int requiredWheelColor, int wheelType, int windowTint, bool requiresDLC)
+    {
+        DispatchableVehicle toReturn = new DispatchableVehicle(GangSentinel5, ambientPercent, wantedPercent);
+        if (gangVehicleType == GangVehicleType.Gang1) // Clean
+        {
+
+            toReturn.VehicleMods = new List<DispatchableVehicleMod>() {
+
+                    new DispatchableVehicleMod(0,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(1,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(9,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(4,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(31,100),
+                        },
+                    },
+            };
+        }
+        else if (gangVehicleType == GangVehicleType.Gang2) // STD Setup
+        {
+            toReturn.VehicleMods = new List<DispatchableVehicleMod>() {
+
+                    new DispatchableVehicleMod(0,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(5,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(3,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(9,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(26,100),
+                        },
+                    },
+            };
+        }
+        else if (gangVehicleType == GangVehicleType.Gang3) //Sports
+        {
+            toReturn.VehicleMods = new List<DispatchableVehicleMod>() {
+
+                    new DispatchableVehicleMod(0,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(7,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(1,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(3,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(9,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(5,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(16,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(42,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,100),
+                        },
+                    },
+            };
+        }
+        else if (gangVehicleType == GangVehicleType.Gang4) // Racer
+        {
+            toReturn.VehicleMods = new List<DispatchableVehicleMod>() {
+
+                    new DispatchableVehicleMod(0,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(8,32),
+                            new DispatchableVehicleModValue(10,33),
+                            new DispatchableVehicleModValue(11,35),
+                        },
+                    },
+                    new DispatchableVehicleMod(1,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(2,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(6,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(3,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(4,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(5,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(2,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(6,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(7,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(3,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(8,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(0,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(9,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(10,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(7,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(23,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(20,100),
+                        },
+                    },
+                    new DispatchableVehicleMod(42,100)
+                    {
+                        DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+                        {
+                            new DispatchableVehicleModValue(1,100),
+                        },
+                    },
+            };
+        }
+
+        SetDefault(toReturn, minWantedLevel, maxWantedLevel, -1, -1, requiredPedGroup, groupName, useOptionalColors, requiredColor, requiredPearlescent, requiredDashColor, requiredInteriorColor, requiredWheelColor, wheelType, windowTint, requiresDLC);
+        return toReturn;
+         }
+
+    private void SetDefault(DispatchableVehicle toSetup, int minWantedLevel, int maxWantedLevel, int minOccupants, int maxOccupants,
+    string requiredPedGroup, string groupName ,bool useOptionalColors, int requiredColor, int requiredPearlescent, int requiredDashColor, int requiredInteriorColor, int requiredWheelColor, int wheelType ,int windowTint, bool requiresDLC)
+    {
+        if (toSetup == null)
+        {
+            return;
+        }
+        if (minWantedLevel != -1)
+        {
+            toSetup.MinWantedLevelSpawn = minWantedLevel;
+        }
+        if (maxWantedLevel != -1)
+        {
+            toSetup.MaxWantedLevelSpawn = maxWantedLevel;
+        }
+        if (minOccupants != -1)
+        {
+            toSetup.MinOccupants = minOccupants;
+        }
+        if (maxOccupants != -1)
+        {
+            toSetup.MaxOccupants = maxOccupants;
+        }
+        if (requiredPedGroup != "")
+        {
+            toSetup.RequiredPedGroup = requiredPedGroup;
+        }
+        if (groupName != "")
+        {
+            toSetup.GroupName = groupName;
+        }
+        if (useOptionalColors)
+        {
+            toSetup.OptionalColors = DefaultOptionalColors.ToList();
+        }
+        if (requiredColor != -1)
+        {
+            toSetup.RequiredPrimaryColorID = requiredColor;
+            toSetup.RequiredSecondaryColorID = requiredColor; // might split these to allow for different color variations later
+        }
+        if (requiredPearlescent != -1)
+        {
+            toSetup.RequiredPearlescentColorID = requiredPearlescent;
+        }
+        if (requiredDashColor != -1)
+        {
+            toSetup.RequiredDashColorID = requiredDashColor;
+        }
+        if (requiredInteriorColor != -1)
+        {
+            toSetup.RequiredInteriorColorID = requiredInteriorColor;
+        }
+        if (requiredWheelColor != -1)
+        {
+            toSetup.RequiredWheelColorID = requiredWheelColor;
+        }
+        if (wheelType != -1)
+        {
+            toSetup.WheelType = wheelType;
+        }
+        if (windowTint != -1)
+        {
+            toSetup.RequiredWindowTintID = windowTint;
+        }
+        if (requiresDLC != false)
+        { 
+            toSetup.RequiresDLC = requiresDLC;
+        }
+    }
+
+    //
+    //
+    // The following are newer versions of the Lost MC bikes.
+    // They are kept here for now in case the need to revert to this method.
+    // They also sucked.
+    //
+    //new DispatchableVehicle()
+    //{
+    //    DebugName = "DAEMON2_Lost_PB",
+    //            ModelName = "DAEMON2",
+    //            AmbientSpawnChance = 75,
+    //            WantedSpawnChance = 75,
+    //            MaxOccupants = 1,
+    //            RequiredPrimaryColorID = 21,
+    //            RequiredSecondaryColorID = 118,
+    //            RequiredPearlescentColorID = 0,
+    //            WheelType = 6,
+    //            SetRandomCustomization = true,
+    //            RandomCustomizationPercentage = 100f,
+    //            VehicleMods = new List<DispatchableVehicleMod>()
+    //            {
+    //                new DispatchableVehicleMod(50,100) // front wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(21,100),
+
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(50,100) // rear wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(21,100),
+
+    //                    },
+    //                },
+    //            },
+    //            RequiresDLC = true,
+    //        },
+    //        new DispatchableVehicle()
+    //{
+    //    DebugName = "WOLFSBANE_Lost_PB",
+    //            ModelName = "WOLFSBANE",
+    //            AmbientSpawnChance = 75,
+    //            WantedSpawnChance = 75,
+    //            MaxOccupants = 1,
+    //            RequiredPrimaryColorID = 12,
+    //            RequiredSecondaryColorID = 12,
+    //            RequiredPearlescentColorID = 0,
+    //            WheelType = 6,
+    //            SetRandomCustomization = true,
+    //            RandomCustomizationPercentage = 100f,
+    //            VehicleMods = new List<DispatchableVehicleMod>()
+    //            {
+    //                new DispatchableVehicleMod(23,100) // front wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(21,100),
+
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(24,100) // rear wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(21,100),
+
+    //                    },
+    //                },
+    //            },
+    //            RequiresDLC = true,
+    //        },
+    //        new DispatchableVehicle()
+    //{
+    //    DebugName = "SANCTUS_Lost_PB", 
+    //            ModelName = "SANCTUS",
+    //            AmbientSpawnChance = 55,
+    //            WantedSpawnChance = 55,
+    //            MaxOccupants = 1,
+    //            RequiredPrimaryColorID = 13,
+    //            RequiredSecondaryColorID = 5,
+    //            RequiredPearlescentColorID = 0,
+    //            WheelType = 6,
+    //            RequiredWheelColorID = 147,
+    //            SetRandomCustomization = true,
+    //            RandomCustomizationPercentage = 100f,
+    //            VehicleMods = new List<DispatchableVehicleMod>()
+    //            {
+    //                new DispatchableVehicleMod(10,100) //spawns ugly rib cage
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+    //                        new DispatchableVehicleModValue(0,95),
+    //                        new DispatchableVehicleModValue(1,95),
+    //                        new DispatchableVehicleModValue(2,95),
+    //                        new DispatchableVehicleModValue(3,95),
+    //                        new DispatchableVehicleModValue(4,95),
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(23,100) // front wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(68,100),
+
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(24,100) // rear wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(68,100),
+
+    //                    },
+    //                },
+    //            },
+    //            RequiresDLC = true,
+    //        },
+    //        new DispatchableVehicle()
+    //{
+    //    DebugName = "ZOMBIEB_Lost_PB",
+    //            ModelName = "ZOMBIEB",
+    //            AmbientSpawnChance = 75,
+    //            WantedSpawnChance = 75,
+    //            MaxOccupants = 1,
+    //            RequiredPrimaryColorID = 12,
+    //            RequiredSecondaryColorID = 118,
+    //            RequiredPearlescentColorID = 0,
+    //            WheelType = 6,
+    //            RequiredWheelColorID = 147,
+    //            SetRandomCustomization = true,
+    //            RandomCustomizationPercentage = 100f,
+    //            VehicleMods = new List<DispatchableVehicleMod>()
+    //            {
+    //                new DispatchableVehicleMod(23,100) // front wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(22,100),
+
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(24,100) // rear wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(22,100),
+
+    //                    },
+    //                },
+    //            },  
+    //            RequiresDLC = true,
+    //        },
+    //        new DispatchableVehicle()
+    //{
+    //    DebugName = "ZOMBIEA_Lost_PB",
+    //            ModelName = "ZOMBIEA",
+    //            AmbientSpawnChance = 75,
+    //            WantedSpawnChance = 75,
+    //            MaxOccupants = 1,
+    //            RequiredPrimaryColorID = 12,
+    //            RequiredSecondaryColorID = 118,
+    //            RequiredPearlescentColorID = 0,
+    //            WheelType = 6,
+    //            RequiredWheelColorID = 147,
+    //            SetRandomCustomization = true,
+    //            RandomCustomizationPercentage = 100f,
+    //            VehicleMods = new List<DispatchableVehicleMod>()
+    //            {
+    //                new DispatchableVehicleMod(23,100) // front wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(9,100),
+
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(24,100) // rear wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(9,100),
+
+    //                    },
+    //                },
+    //            },
+    //            RequiresDLC = true,
+    //        },
+    //        new DispatchableVehicle()
+    //{
+    //    DebugName = "AVARUS_Lost_PB",
+    //            ModelName = "AVARUS",
+    //            AmbientSpawnChance = 75,
+    //            WantedSpawnChance = 75,
+    //            MaxOccupants = 1,
+    //            RequiredPrimaryColorID = 12,
+    //            RequiredSecondaryColorID = 12,
+    //            RequiredPearlescentColorID = 0,
+    //            WheelType = 6,
+    //            SetRandomCustomization = true,
+    //            RandomCustomizationPercentage = 100f,
+    //            VehicleMods = new List<DispatchableVehicleMod>()
+    //            {
+    //                new DispatchableVehicleMod(23,100) // front wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(21,100),
+
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(24,100) // rear wheels
+    //                {
+    //                    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+
+    //                        new DispatchableVehicleModValue(21,100),
+
+    //                    },
+    //                },
+    //            },
+    //            RequiresDLC = true,
+    //        },
+
+    // 
+    //
+    // Performance Upgrades
+    //
+    //                 new DispatchableVehicleMod(11,100) // Engine
+    //{
+    //    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+    //                        new DispatchableVehicleModValue(0,25),
+    //                        new DispatchableVehicleModValue(1,25),
+    //                        new DispatchableVehicleModValue(2,25),
+    //                        new DispatchableVehicleModValue(3,25),
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(12,100) //Brakes
+    //{
+    //    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+    //                        new DispatchableVehicleModValue(0,33),
+    //                        new DispatchableVehicleModValue(1,33),
+    //                        new DispatchableVehicleModValue(2,34),
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(13,100) // Transmission
+    //{
+    //    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+    //                        new DispatchableVehicleModValue(0,33),
+    //                        new DispatchableVehicleModValue(1,33),
+    //                        new DispatchableVehicleModValue(2,34),
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(15,100) // suspension
+    //{
+    //    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+    //                        new DispatchableVehicleModValue(0,25),
+    //                        new DispatchableVehicleModValue(1,25),
+    //                        new DispatchableVehicleModValue(2,25),
+    //                        new DispatchableVehicleModValue(3,25),
+    //                    },
+    //                },
+    //                new DispatchableVehicleMod(16,100) // armor
+    //{
+    //    DispatchableVehicleModValues = new List<DispatchableVehicleModValue>()
+    //                    {
+    //                        new DispatchableVehicleModValue(0,20),
+    //                        new DispatchableVehicleModValue(1,20),
+    //                        new DispatchableVehicleModValue(2,20),
+    //                        new DispatchableVehicleModValue(3,20),
+    //                        new DispatchableVehicleModValue(4,20),
+    //                    },
+    //                },
+    //
+    //  Redneck Worn Colors
+    //OptionalColors = new List<int>() { 21, 22, 23, 24, 25, 26, 46, 47, 48, 58, 59, 60, 85, 86, 87, 113, 114, 115, 116, 121, 123, 124, 126, 130, 132, 133 },
+    //OptionalColors = new List<int>() { 21, 22, 24, 26, 46, 47, 59, 60, 86, 87, 113, 114, 116, 121, 123, 126, 132 },
 }
 
