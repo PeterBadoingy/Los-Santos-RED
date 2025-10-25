@@ -98,7 +98,7 @@ public class VehicleSettings : ISettingsDefaultable
     public bool FuelUsesAnimationsAndProps { get; set; }
     public int PlayerEnteredPersistantVehicleLimit { get; set; }
 
-
+    public bool AllowAnchorToggle { get; set; }
 
     public float DebugLastX { get; set; }
     public float DebugLastY { get; set; }
@@ -134,7 +134,7 @@ public class VehicleSettings : ISettingsDefaultable
 
         ScaleEngineDamage = true;
 
-
+        AllowAnchorToggle = true;
 
         ScaleEngineDamageMultiplier = 3.0f;
         AllowSetIndicatorState = true;

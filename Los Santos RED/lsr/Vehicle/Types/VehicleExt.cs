@@ -71,6 +71,7 @@ namespace LSR.Vehicles
         public FuelTank FuelTank { get; set; }
         public Windows Windows { get; set; }
         public Doors Doors { get; set; }
+        public Anchor Anchor { get; set; }
         public VehicleBodyManager VehicleBodyManager { get; private set; }
         public WeaponStorage WeaponStorage { get; private set; }
         public Color DescriptionColor { get; set; }
@@ -381,6 +382,7 @@ namespace LSR.Vehicles
             Engine = new Engine(this, Settings);
             Windows = new Windows(this, settings);
             Doors = new Doors(this, settings);
+            Anchor = new Anchor(this);
             VehicleBodyManager = new VehicleBodyManager(this, Settings);
             VehicleInteractionMenu = new VehicleInteractionMenu(this);
             WeaponStorage = new WeaponStorage(Settings);
@@ -702,7 +704,10 @@ namespace LSR.Vehicles
                     Radio.Update(Settings.SettingsManager.VehicleSettings.AutoTuneRadioStation);
                     //GameFiber.Yield();//TR Removed 5
                 }
-
+                if (IsBoat)
+                {
+                    Anchor.Update();
+                }
                 VehicleBodyManager.UpdateData();
                 GameFiber.Yield();//TR Added 5
             }
@@ -1327,6 +1332,43 @@ namespace LSR.Vehicles
         public void CreateDoorMenu(MenuPool menuPool, UIMenu vehicleInteractMenu)
         {
 
+        }
+        public void CreateAnchorInteractionMenu(IInteractionable player, MenuPool menuPool, UIMenu vehicleInteractMenu)
+        {
+            if (!Vehicle.Exists() || !IsBoat)
+            {
+                return;
+            }
+            UIMenu anchorMenu = menuPool.AddSubMenu(vehicleInteractMenu, "Anchor");
+            anchorMenu.SubtitleText = "Toggle Anchor State";
+            UIMenuListScrollerItem<string> anchorToggleItem = new UIMenuListScrollerItem<string>("Anchor", "Deploy or retract the anchor", new List<string> { "Deploy", "Retract" });
+            anchorToggleItem.Activated += (sender, e) =>
+            {
+                Anchor.SetState(anchorToggleItem.SelectedItem == "Deploy", (IActivityManageable)player);
+            };
+            anchorMenu.AddItem(anchorToggleItem);
+        }
+
+        public void UpdateAnchorPrompt(IButtonPromptable player)
+        {
+            if (!Vehicle.Exists() || !IsBoat || !player.IsInVehicle || Vehicle.Speed >= 2f || VehicleInteractionMenu.IsShowingMenu)
+            {
+                player.ButtonPrompts.RemovePrompts("VehicleAnchor");
+                EntryPoint.WriteToConsole("UpdateAnchorPrompt BASE REMOVE");
+                return;
+            }
+            if (player.ActivityManager.IsPerformingActivity)
+            {
+                player.ButtonPrompts.RemovePrompts("VehicleAnchor");
+                EntryPoint.WriteToConsole("UpdateAnchorPrompt BASE REMOVE ACTIVITY");
+                return;
+            }
+            if (!player.ButtonPrompts.HasPrompt("VehicleAnchor"))
+            {
+                Action action = () => { Anchor.Toggle((IActivityManageable)player); };
+                player.ButtonPrompts.AttemptAddPrompt("VehicleAnchor", "Toggle Anchor", "VehicleAnchor", GameControl.VehicleHorn, 800, action);
+                EntryPoint.WriteToConsole("UpdateAnchorPrompt BASE ADD PROMPT");
+            }
         }
         public void ResetItems()
         {

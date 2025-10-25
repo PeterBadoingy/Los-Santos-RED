@@ -2806,6 +2806,10 @@ namespace Mod
         {
             ManuallyClosedDoor = true;
         }
+        public void OnManuallyToggledAnchor(bool isDeployed)
+        {
+            EntryPoint.WriteToConsole($"PLAYER TOGGLED ANCHOR: {(isDeployed ? "Deployed" : "Retracted")}");
+        }
         private void UpdateSleeping()
         {
             if(prevIsSleeping != IsSleeping)

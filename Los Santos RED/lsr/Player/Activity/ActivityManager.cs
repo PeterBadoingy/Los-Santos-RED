@@ -343,7 +343,12 @@ public class ActivityManager
             EntryPoint.WriteToConsole($"CanSeePoliceBlips changed to {CanSeePoliceBlips}");
             canSeePoliceBlips = CanSeePoliceBlips;
         }
-
+        CheckAnchorButtonPrompts(Player.ButtonPrompts);
+        if (Player.CurrentVehicle != null && Player.CurrentVehicle.Vehicle.Exists() && Player.CurrentVehicle.IsBoat && Player.IsDriver && !IsPerformingActivity && Settings.SettingsManager.VehicleSettings.AllowAnchorToggle && Game.IsKeyDown(Settings.SettingsManager.KeySettings.VehicleAnchorKey))
+        {
+            ToggleAnchor();
+            EntryPoint.WriteToConsole("ANCHOR: Z key pressed, toggling anchor");
+        }
     }
     public void Reset()
     {
@@ -656,7 +661,55 @@ public class ActivityManager
             UpperBodyActivity.Start();
         }
     }
+    public void ToggleAnchor()
+    {
+        if (Game.GameTime - GameTimeLastClosedDoor < 1500)
+        {
+            return;
+        }
+        if (Player.CurrentVehicle == null || !Player.CurrentVehicle.Vehicle.Exists())
+        {
+            return;
+        }
+        if (!Player.CurrentVehicle.IsBoat)
+        {
+            Game.DisplayHelp("Anchor can only be used on boats");
+            return;
+        }
+        if (!Player.IsDriver)
+        {
+            Game.DisplayHelp("Cannot toggle anchor from current seat");
+            return;
+        }
+        if (!Settings.SettingsManager.VehicleSettings.AllowAnchorToggle)
+        {
+            Game.DisplayHelp("Anchor functionality is disabled");
+            return;
+        }
+        if (IsPerformingActivity || !Settings.SettingsManager.VehicleSettings.PlayControlAnimations)
+        {
+            Player.CurrentVehicle?.Anchor.Toggle(Player);
+        }
+        else
+        {
+            DoSimpleVehicleAnimation(new Action(() => Player.CurrentVehicle?.Anchor.Toggle(Player)), "veh@boat@speed@fds@base", "change_station", 750);
+        }
+        GameTimeLastClosedDoor = Game.GameTime;
+    }
 
+    public void CheckAnchorButtonPrompts(ButtonPrompts buttonPrompts)
+    {
+        if (Player.CurrentVehicle == null || !Player.CurrentVehicle.Vehicle.Exists() || !Player.CurrentVehicle.IsBoat || !Player.IsDriver || IsPerformingActivity || !Settings.SettingsManager.VehicleSettings.AllowAnchorToggle)
+        {
+            buttonPrompts.RemovePrompts("VehicleAnchor");
+            return;
+        }
+        if (!buttonPrompts.HasPrompt("VehicleAnchor"))
+        {
+            buttonPrompts.AttemptAddPrompt("VehicleAnchor", "Toggle Anchor", "VehicleAnchor", Settings.SettingsManager.KeySettings.VehicleAnchorKey, 800, () => ToggleAnchor());
+            EntryPoint.WriteToConsole("CheckAnchorButtonPrompts: Added anchor toggle prompt");
+        }
+    }
     public void Dance(DanceData danceData)
     {
         if (IsPerformingActivity)

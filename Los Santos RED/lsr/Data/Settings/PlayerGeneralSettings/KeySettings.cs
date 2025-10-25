@@ -46,7 +46,7 @@ public class KeySettings : ISettingsDefaultable
     public Keys AltActionPopUpDisplayKey { get; set; }
     public Keys AltActionPopUpDisplayKeyModifier { get; set; }
 
-
+    public Keys VehicleAnchorKey { get; set; }
     public Keys VehicleInteract { get; set; }
     public Keys VehicleInteractModifier { get; set; }
 
@@ -141,7 +141,7 @@ public class KeySettings : ISettingsDefaultable
 
         GameControlToDisable = 0;//Next Cam
 
-
+        VehicleAnchorKey = Keys.Z;
         VehicleInteract = Keys.L;
         VehicleInteractModifier = Keys.LShiftKey;
         HoldUpPedGameControl = 46;
