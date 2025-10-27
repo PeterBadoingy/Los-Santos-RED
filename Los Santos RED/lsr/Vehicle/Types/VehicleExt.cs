@@ -2,7 +2,6 @@
 using LosSantosRED.lsr;
 using LosSantosRED.lsr.Helper;
 using LosSantosRED.lsr.Interface;
-using Mod;
 using Rage;
 using Rage.Native;
 using RAGENativeUI;
@@ -1860,10 +1859,8 @@ namespace LSR.Vehicles
         }
         public void CreateAnchorInteractionMenu(MenuPool menuPool, UIMenu vehicleInteractMenu, IInteractionable player)
         {
-            EntryPoint.WriteToConsole($"ANCHOR MENU CHECK: Vehicle.Exists={Vehicle.Exists()}, IsBoat={IsBoat}, Speed={Vehicle.Speed}, IsInAnyVehicle={Game.LocalPlayer.Character.IsInAnyVehicle(false)}, IsDriver={Game.LocalPlayer.Character.IsInVehicle(Vehicle, true)}, AllowAnchorToggle={Settings.SettingsManager.VehicleSettings.AllowAnchorToggle}, LSRedColor=R={EntryPoint.LSRedColor.R},G={EntryPoint.LSRedColor.G},B={EntryPoint.LSRedColor.B}");
             if (!Vehicle.Exists() || !IsBoat || Vehicle.Speed >= 3.0f || !Game.LocalPlayer.Character.IsInAnyVehicle(false) || !Game.LocalPlayer.Character.IsInVehicle(Vehicle, true) || !Settings.SettingsManager.VehicleSettings.AllowAnchorToggle)
             {
-                EntryPoint.WriteToConsole("ANCHOR MENU CHECK: Conditions failed");
                 return;
             }
             UIMenu anchorMenu = menuPool.AddSubMenu(vehicleInteractMenu, "Anchor");
@@ -1871,18 +1868,16 @@ namespace LSR.Vehicles
             anchorMenu.SetBannerType(EntryPoint.LSRedColor);
             UIMenuListScrollerItem<string> anchorToggleItem = new UIMenuListScrollerItem<string>("Anchor", "Toggle the boat's anchor", new List<string> { "Deploy", "Retract" })
             {
-                SelectedItem = Anchor.IsDeployed ? "Retract" : "Deploy" // Set initial state
+                SelectedItem = Anchor.IsDeployed ? "Retract" : "Deploy" 
             };
             anchorToggleItem.Activated += (sender, e) =>
             {
                 bool newState = anchorToggleItem.SelectedItem == "Deploy";
-                Anchor.SetState(newState); // Removed player parameter if unused
+                Anchor.SetState(newState); 
                 anchorToggleItem.SelectedItem = newState ? "Retract" : "Deploy";
                 player.OnManuallyToggledAnchor(newState);
-                EntryPoint.WriteToConsole($"ANCHOR MENU TOGGLED: NewState={newState}");
             };
             anchorMenu.AddItem(anchorToggleItem);
-            EntryPoint.WriteToConsole("ANCHOR MENU CREATED");
         }
     }
 }

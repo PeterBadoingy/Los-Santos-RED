@@ -63,7 +63,7 @@ namespace LSR.Vehicles
             if (deploy && !canAnchor)
             {
                 Game.DisplaySubtitle("Cannot anchor the boat at this location");
-                EntryPoint.WriteToConsole($"ANCHOR FAILED: Unsafe to anchor Vehicle {VehicleToMonitor.Vehicle.Handle}");
+                //EntryPoint.WriteToConsole($"ANCHOR FAILED: Unsafe to anchor Vehicle {VehicleToMonitor.Vehicle.Handle}");
                 return;
             }
 
@@ -75,7 +75,7 @@ namespace LSR.Vehicles
                 NativeFunction.Natives.SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER(VehicleToMonitor.Vehicle, true);
                 NativeFunction.Natives.SET_BOAT_LOW_LOD_ANCHOR_DISTANCE(VehicleToMonitor.Vehicle, lodDistance);
                 Game.DisplaySubtitle("Anchor Deployed");
-                EntryPoint.WriteToConsole($"ANCHOR DEPLOYED for Vehicle {VehicleToMonitor.Vehicle.Handle} with LOD distance {lodDistance}");
+                //EntryPoint.WriteToConsole($"ANCHOR DEPLOYED for Vehicle {VehicleToMonitor.Vehicle.Handle} with LOD distance {lodDistance}");
             }
             else
             {
@@ -83,7 +83,7 @@ namespace LSR.Vehicles
                 NativeFunction.Natives.SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER(VehicleToMonitor.Vehicle, false);
                 NativeFunction.Natives.SET_BOAT_LOW_LOD_ANCHOR_DISTANCE(VehicleToMonitor.Vehicle, -1.0f); // Reset to default
                 Game.DisplaySubtitle("Anchor Retracted");
-                EntryPoint.WriteToConsole($"ANCHOR RETRACTED for Vehicle {VehicleToMonitor.Vehicle.Handle}");
+                //EntryPoint.WriteToConsole($"ANCHOR RETRACTED for Vehicle {VehicleToMonitor.Vehicle.Handle}");
             }
             lastAnchorState = IsDeployed;
         }
@@ -112,7 +112,7 @@ namespace LSR.Vehicles
                     NativeFunction.Natives.SET_BOAT_ANCHOR(VehicleToMonitor.Vehicle, true);
                     NativeFunction.Natives.SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER(VehicleToMonitor.Vehicle, true);
                     NativeFunction.Natives.SET_BOAT_LOW_LOD_ANCHOR_DISTANCE(VehicleToMonitor.Vehicle, lodDistance);
-                    EntryPoint.WriteToConsole($"ANCHOR UPDATE: Maintaining Deployed state for Vehicle {VehicleToMonitor.Vehicle.Handle} with LOD distance {lodDistance}");
+                    //EntryPoint.WriteToConsole($"ANCHOR UPDATE: Maintaining Deployed state for Vehicle {VehicleToMonitor.Vehicle.Handle} with LOD distance {lodDistance}");
                 }
                 lastAnchorState = isAnchored;
             }
