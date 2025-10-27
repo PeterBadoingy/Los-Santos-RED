@@ -51,6 +51,7 @@ namespace LosSantosRED.lsr.Interface
         bool CharacterModelIsPrimaryCharacter { get; }
 
         void HasSetOffAlarm(GameLocation gameLocation);
+        void OnManuallyToggledAnchor(bool newState);
         void OnStartedBreakingIntoGangCar(Gang associatedGang, GangVehicleExt gangVehicleExt);
 
         // void OnDamagedVehicle();

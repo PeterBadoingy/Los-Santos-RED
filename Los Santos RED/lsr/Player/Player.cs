@@ -2357,6 +2357,11 @@ namespace Mod
                 IsDuckingInVehicle = isDuckingInVehicle;
             }
         }
+
+        public void OnManuallyToggledAnchor(bool isDeployed)
+        {
+            EntryPoint.WriteToConsole($"PLAYER TOGGLED ANCHOR: IsDeployed={isDeployed}");
+        }
         private void CheckAutoEngineDisableToggled()
         {
             if (Settings.SettingsManager.VehicleSettings.DisableAutoEngineStart != disableAutoEngineStart)

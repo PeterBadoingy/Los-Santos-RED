@@ -54,7 +54,7 @@ namespace LosSantosRED.lsr.Interface
         int CurrentSeat { get; }
         string Gender { get; }
         CuffManager CuffManager { get; }
-
+        void OnManuallyToggledAnchor(bool isDeployed);
         void OnManuallyClosedDoor();
         void OnManuallyOpenedDoor();
         void PlaySpeech(string v1, bool v2);

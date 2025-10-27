@@ -2,6 +2,7 @@
 using LosSantosRED.lsr;
 using LosSantosRED.lsr.Helper;
 using LosSantosRED.lsr.Interface;
+using Mod;
 using Rage;
 using Rage.Native;
 using RAGENativeUI;
@@ -71,6 +72,7 @@ namespace LSR.Vehicles
         public FuelTank FuelTank { get; set; }
         public Windows Windows { get; set; }
         public Doors Doors { get; set; }
+        public Anchor Anchor { get; private set; }
         public VehicleBodyManager VehicleBodyManager { get; private set; }
         public WeaponStorage WeaponStorage { get; private set; }
         public Color DescriptionColor { get; set; }
@@ -381,6 +383,7 @@ namespace LSR.Vehicles
             Engine = new Engine(this, Settings);
             Windows = new Windows(this, settings);
             Doors = new Doors(this, settings);
+            Anchor = new Anchor(this);
             VehicleBodyManager = new VehicleBodyManager(this, Settings);
             VehicleInteractionMenu = new VehicleInteractionMenu(this);
             WeaponStorage = new WeaponStorage(Settings);
@@ -702,7 +705,10 @@ namespace LSR.Vehicles
                     Radio.Update(Settings.SettingsManager.VehicleSettings.AutoTuneRadioStation);
                     //GameFiber.Yield();//TR Removed 5
                 }
-
+                if (IsBoat)
+                {
+                    Anchor.Update();
+                }
                 VehicleBodyManager.UpdateData();
                 GameFiber.Yield();//TR Added 5
             }
@@ -826,6 +832,7 @@ namespace LSR.Vehicles
         public virtual bool CanNeverUpdatePlate => false;
 
         public bool HasBeenSeenByPoliceDuringWanted { get; set; }
+        public bool IsAnchored { get; private set; }
 
         private int ClosestColor(List<Color> colors, Color target)
         {
@@ -1685,10 +1692,10 @@ namespace LSR.Vehicles
         }
         public virtual void UpdateInteractPrompts(IButtonPromptable player)
         {
-            if (!Vehicle.Exists() || (!HasBeenEnteredByPlayer && !IsOwnedByPlayer) || VehicleInteractionMenu.IsShowingMenu || Vehicle.Speed >= 0.5f)
+            if (!Vehicle.Exists() || (!HasBeenEnteredByPlayer && !IsOwnedByPlayer) || VehicleInteractionMenu.IsShowingMenu || Vehicle.Speed >= (IsBoat ? 3.0f : 0.5f))
             {
                 player.ButtonPrompts.RemovePrompts("VehicleInteract");
-               // EntryPoint.WriteToConsole("UpdateInteractPrompts BASE REMOVE 1");
+                EntryPoint.WriteToConsole("UpdateInteractPrompts BASE REMOVE 1");
                 return;
             }
             if ((!Settings.SettingsManager.UIGeneralSettings.ShowVehicleInteractionPromptInVehicle && player.IsInVehicle) || player.ActivityManager.IsPerformingActivity)
@@ -1850,6 +1857,32 @@ namespace LSR.Vehicles
                 return true;
             }
             return false;
+        }
+        public void CreateAnchorInteractionMenu(MenuPool menuPool, UIMenu vehicleInteractMenu, IInteractionable player)
+        {
+            EntryPoint.WriteToConsole($"ANCHOR MENU CHECK: Vehicle.Exists={Vehicle.Exists()}, IsBoat={IsBoat}, Speed={Vehicle.Speed}, IsInAnyVehicle={Game.LocalPlayer.Character.IsInAnyVehicle(false)}, IsDriver={Game.LocalPlayer.Character.IsInVehicle(Vehicle, true)}, AllowAnchorToggle={Settings.SettingsManager.VehicleSettings.AllowAnchorToggle}, LSRedColor=R={EntryPoint.LSRedColor.R},G={EntryPoint.LSRedColor.G},B={EntryPoint.LSRedColor.B}");
+            if (!Vehicle.Exists() || !IsBoat || Vehicle.Speed >= 3.0f || !Game.LocalPlayer.Character.IsInAnyVehicle(false) || !Game.LocalPlayer.Character.IsInVehicle(Vehicle, true) || !Settings.SettingsManager.VehicleSettings.AllowAnchorToggle)
+            {
+                EntryPoint.WriteToConsole("ANCHOR MENU CHECK: Conditions failed");
+                return;
+            }
+            UIMenu anchorMenu = menuPool.AddSubMenu(vehicleInteractMenu, "Anchor");
+            anchorMenu.SubtitleText = "Toggle Anchor State";
+            anchorMenu.SetBannerType(EntryPoint.LSRedColor);
+            UIMenuListScrollerItem<string> anchorToggleItem = new UIMenuListScrollerItem<string>("Anchor", "Toggle the boat's anchor", new List<string> { "Deploy", "Retract" })
+            {
+                SelectedItem = Anchor.IsDeployed ? "Retract" : "Deploy" // Set initial state
+            };
+            anchorToggleItem.Activated += (sender, e) =>
+            {
+                bool newState = anchorToggleItem.SelectedItem == "Deploy";
+                Anchor.SetState(newState); // Removed player parameter if unused
+                anchorToggleItem.SelectedItem = newState ? "Retract" : "Deploy";
+                player.OnManuallyToggledAnchor(newState);
+                EntryPoint.WriteToConsole($"ANCHOR MENU TOGGLED: NewState={newState}");
+            };
+            anchorMenu.AddItem(anchorToggleItem);
+            EntryPoint.WriteToConsole("ANCHOR MENU CREATED");
         }
     }
 }
