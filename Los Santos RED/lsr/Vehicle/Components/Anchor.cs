@@ -40,10 +40,10 @@ namespace LSR.Vehicles
             { "dinghy5", new BoatAnchorConfig { Offset = new Vector3(0f, -2.5f, 0f), BoneName = "chassis" } },
 
             // Other boats
-            { "squalo", new BoatAnchorConfig { Offset = new Vector3(0f, 3.90f, 0.3f), BoneName = "bow" } },
+            { "squalo", new BoatAnchorConfig { Offset = new Vector3(0f, 3.9f, 0.3f), BoneName = "bow" } },
             { "suntrap", new BoatAnchorConfig { Offset = new Vector3(0f, 3.0f, 0.3f), BoneName = "bow" } },
-            { "tropic", new BoatAnchorConfig { Offset = new Vector3(0f, 3.60f, 0.3f), BoneName = "bow" } },
-            { "tropic2", new BoatAnchorConfig { Offset = new Vector3(0f, 3.60f, 0.3f), BoneName = "bow" } },
+            { "tropic", new BoatAnchorConfig { Offset = new Vector3(0f, 3.6f, 0.3f), BoneName = "bow" } },
+            { "tropic2", new BoatAnchorConfig { Offset = new Vector3(0f, 3.6f, 0.3f), BoneName = "bow" } },
             { "tug", new BoatAnchorConfig { Offset = new Vector3(0f, 13.0f, 0f), BoneName = "bow" } },
 
             // Police/Patrol Boats
@@ -52,6 +52,7 @@ namespace LSR.Vehicles
             { "predator", new BoatAnchorConfig { Offset = new Vector3(0f, 5.16f, 0.2f), BoneName = "bow" } },
 
             //Speedboats
+            { "jetmax", new BoatAnchorConfig { Offset = new Vector3(0f,  4.9f, 0.5f), BoneName = "bow" } },
             { "longfin", new BoatAnchorConfig { Offset = new Vector3(0f,  6.2f, 0.5f), BoneName = "bow" } },
             { "speeder", new BoatAnchorConfig { Offset = new Vector3(0f,  4.8f, 0.6f), BoneName = "bow" } },
             { "speeder2", new BoatAnchorConfig { Offset = new Vector3(0f,  4.8f, 0.6f), BoneName = "bow" } },
@@ -125,7 +126,6 @@ namespace LSR.Vehicles
 
                 SpawnRopeToSeabed();
 
-                Game.DisplayHelp("~g~Anchor deployed.", 5000);
                 Game.DisplaySubtitle("~g~Anchor Down", 3000);
             }
             else
@@ -188,7 +188,7 @@ namespace LSR.Vehicles
                 seabedPos.X, seabedPos.Y, seabedPos.Z);
 
             spawnedRope = true;
-            Game.LogTrivial($"[Anchor] Deployed with {RopeLeewayMultiplier:F1}x leeway | Length: {ropeLength:F1}m | Vertices: {RopeVertexCount}");
+            //Game.LogTrivial($"[Anchor] Deployed with {RopeLeewayMultiplier:F1}x leeway | Length: {ropeLength:F1}m | Vertices: {RopeVertexCount}");
         }
 
         private Vector3 GetBoatAttachPoint(BoatAnchorConfig config, string modelName)
