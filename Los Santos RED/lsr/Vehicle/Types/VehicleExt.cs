@@ -1859,22 +1859,23 @@ namespace LSR.Vehicles
         }
         public void CreateAnchorInteractionMenu(MenuPool menuPool, UIMenu vehicleInteractMenu, IInteractionable player)
         {
-            if (!Vehicle.Exists() || !IsBoat || Vehicle.Speed >= 3.0f || !Game.LocalPlayer.Character.IsInAnyVehicle(false) || !Game.LocalPlayer.Character.IsInVehicle(Vehicle, true) || !Settings.SettingsManager.VehicleSettings.AllowAnchorToggle)
+            if (!Vehicle.Exists() || !IsBoat || Vehicle.Speed >= 3.0f ||
+                !Game.LocalPlayer.Character.IsInAnyVehicle(false) ||
+                !Game.LocalPlayer.Character.IsInVehicle(Vehicle, true) ||
+                !Settings.SettingsManager.VehicleSettings.AllowAnchorToggle)
             {
                 return;
             }
             UIMenu anchorMenu = menuPool.AddSubMenu(vehicleInteractMenu, "Anchor");
             anchorMenu.SubtitleText = "Toggle Anchor State";
             anchorMenu.SetBannerType(EntryPoint.LSRedColor);
-            UIMenuListScrollerItem<string> anchorToggleItem = new UIMenuListScrollerItem<string>("Anchor", "Toggle the boat's anchor", new List<string> { "Deploy", "Retract" })
-            {
-                SelectedItem = Anchor.IsDeployed ? "Retract" : "Deploy" 
-            };
+            string buttonText = Anchor.IsDeployed ? "Retract Anchor" : "Deploy Anchor";
+            UIMenuItem anchorToggleItem = new UIMenuItem(buttonText, "Toggle the boat's anchor");
             anchorToggleItem.Activated += (sender, e) =>
             {
-                bool newState = anchorToggleItem.SelectedItem == "Deploy";
-                Anchor.SetState(newState); 
-                anchorToggleItem.SelectedItem = newState ? "Retract" : "Deploy";
+                bool newState = !Anchor.IsDeployed;
+                Anchor.SetState(newState);
+                anchorToggleItem.Text = newState ? "Retract Anchor" : "Deploy Anchor";
                 player.OnManuallyToggledAnchor(newState);
             };
             anchorMenu.AddItem(anchorToggleItem);
