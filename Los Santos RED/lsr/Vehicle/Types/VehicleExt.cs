@@ -71,6 +71,7 @@ namespace LSR.Vehicles
         public FuelTank FuelTank { get; set; }
         public Windows Windows { get; set; }
         public Doors Doors { get; set; }
+        public Anchor Anchor { get; set; }
         public VehicleBodyManager VehicleBodyManager { get; private set; }
         public WeaponStorage WeaponStorage { get; private set; }
         public Color DescriptionColor { get; set; }
@@ -254,7 +255,7 @@ namespace LSR.Vehicles
                 return false;
             }
         }
-            
+
 
         public bool CanBeHotwired => !IsMotorcycle && !IsBicycle && !IsAircraft && !IsBoat && !IsJetSki && !IsQuad;
         public bool IsFreeEntry => IsMotorcycle || IsBicycle || IsAircraft || IsBoat || IsJetSki || IsQuad;
@@ -351,7 +352,7 @@ namespace LSR.Vehicles
             {
                 OwnedBlipID = 326;//getawaycar?
             }
-            
+
         }
         public int OwnedBlipID { get; private set; } = 326;//getawaycar?
         public bool HasBeenEnteredByPlayer => GameTimeEntered != 0;
@@ -381,6 +382,7 @@ namespace LSR.Vehicles
             Engine = new Engine(this, Settings);
             Windows = new Windows(this, settings);
             Doors = new Doors(this, settings);
+            Anchor = new Anchor(this);
             VehicleBodyManager = new VehicleBodyManager(this, Settings);
             VehicleInteractionMenu = new VehicleInteractionMenu(this);
             WeaponStorage = new WeaponStorage(Settings);
@@ -702,7 +704,10 @@ namespace LSR.Vehicles
                     Radio.Update(Settings.SettingsManager.VehicleSettings.AutoTuneRadioStation);
                     //GameFiber.Yield();//TR Removed 5
                 }
-
+                if (IsBoat)
+                {
+                    Anchor.Update();
+                }
                 VehicleBodyManager.UpdateData();
                 GameFiber.Yield();//TR Added 5
             }
@@ -801,7 +806,7 @@ namespace LSR.Vehicles
             OriginalLicensePlate = new LicensePlate(randomPlate, 0, false, modelHash);
             CarPlate = new LicensePlate(randomPlate, 0, false, modelHash);
             EntryPoint.WriteToConsole($"SET PLATE {randomPlate}");
-  
+
             Vehicle.LicensePlate = randomPlate;
             NativeFunction.Natives.SET_VEHICLE_NUMBER_PLATE_TEXT_INDEX<int>(Vehicle, 0);
             EntryPoint.WriteToConsole($"SET PLATE FINISH {randomPlate}");
@@ -1007,7 +1012,7 @@ namespace LSR.Vehicles
             //}
             GetFuelTankCapacity();
             IsRandomlyLocked = RandomItems.RandomPercent(Settings.SettingsManager.VehicleSettings.LockVehiclePercentage);
-            
+
         }
         public void ForcePlateType(string text, int index)
         {
@@ -1015,11 +1020,11 @@ namespace LSR.Vehicles
             {
                 return;
             }
-            HasUpdatedPlateType = true;      
+            HasUpdatedPlateType = true;
             string cleanedText = text.Left(8);
             Vehicle.LicensePlate = cleanedText;
             OriginalLicensePlate.PlateNumber = cleanedText;
-            CarPlate.PlateNumber = cleanedText;       
+            CarPlate.PlateNumber = cleanedText;
             if (index <= NativeFunction.Natives.GET_NUMBER_OF_VEHICLE_NUMBER_PLATES<int>())
             {
                 NativeFunction.Natives.SET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(Vehicle, index);
@@ -1037,7 +1042,7 @@ namespace LSR.Vehicles
             PlateType CurrentType = PlateTypes.GetPlateType(NativeFunction.CallByName<int>("GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX", Vehicle));
             Zone CurrentZone = Zones.GetZone(Vehicle.Position);
             PlateType NewType = null;
-            
+
             if (forceState)
             {
                 NewType = PlateTypes.GetRandomInStatePlate(CurrentZone.StateID, IsMotorcycle);
@@ -1079,7 +1084,7 @@ namespace LSR.Vehicles
                     Vehicle.LicensePlate = NewPlateNumber;
                     OriginalLicensePlate.PlateNumber = NewPlateNumber;
                     CarPlate.PlateNumber = NewPlateNumber;
- 
+
                 }
                 else
                 {
@@ -1528,7 +1533,7 @@ namespace LSR.Vehicles
             if (NativeFunction.CallByName<bool>("IS_VEHICLE_TYRE_BURST", Vehicle, 5, false))
             {
                 return true;
-            }  
+            }
             return false;
         }
         public bool IsVisiblyDamaged(ITimeReportable Time)
@@ -1551,12 +1556,12 @@ namespace LSR.Vehicles
                         //noWindowsMoved = false;
                         bool isIntact = NativeFunction.Natives.IS_VEHICLE_WINDOW_INTACT<bool>(Vehicle, window.ID);
 
-                       // EntryPoint.WriteToConsole($"VIOLATIONS WINDOW ID {window.ID} isIntact: {isIntact} IsRolledUp{window.IsRolledUp}");
+                        // EntryPoint.WriteToConsole($"VIOLATIONS WINDOW ID {window.ID} isIntact: {isIntact} IsRolledUp{window.IsRolledUp}");
 
 
                         if (!isIntact && window.IsRolledUp)
                         {
-                            
+
                             return true;
                         }
                     }
@@ -1659,7 +1664,7 @@ namespace LSR.Vehicles
         }
         public void CreateWindowInteractionMenu(IInteractionable player, MenuPool menuPool, UIMenu windowAccessHeaderMenu, IVehicleSeatAndDoorLookup vehicleSeatDoorData)
         {
-            List<Tuple<int, string>> stuff = new List<Tuple<int, string>>() { 
+            List<Tuple<int, string>> stuff = new List<Tuple<int, string>>() {
                 new Tuple<int, string>(0, "Driver"),
                 new Tuple<int, string>(1, "Passenger"),
                 new Tuple<int, string>(2, "Rear Driver"),
@@ -1685,23 +1690,23 @@ namespace LSR.Vehicles
         }
         public virtual void UpdateInteractPrompts(IButtonPromptable player)
         {
-            if (!Vehicle.Exists() || (!HasBeenEnteredByPlayer && !IsOwnedByPlayer) || VehicleInteractionMenu.IsShowingMenu || Vehicle.Speed >= 0.5f)
+            if (!Vehicle.Exists() || (!HasBeenEnteredByPlayer && !IsOwnedByPlayer) || VehicleInteractionMenu.IsShowingMenu || Vehicle.Speed >= (IsBoat ? 3.0f : 0.5f))
             {
                 player.ButtonPrompts.RemovePrompts("VehicleInteract");
-               // EntryPoint.WriteToConsole("UpdateInteractPrompts BASE REMOVE 1");
+                // EntryPoint.WriteToConsole("UpdateInteractPrompts BASE REMOVE 1");
                 return;
             }
             if ((!Settings.SettingsManager.UIGeneralSettings.ShowVehicleInteractionPromptInVehicle && player.IsInVehicle) || player.ActivityManager.IsPerformingActivity)
             {
                 player.ButtonPrompts.RemovePrompts("VehicleInteract");
-               //EntryPoint.WriteToConsole("UpdateInteractPrompts BASE REMOVE 2");
+                //EntryPoint.WriteToConsole("UpdateInteractPrompts BASE REMOVE 2");
                 return;
             }
             if (!player.ButtonPrompts.HasPrompt($"VehicleInteract"))
             {
                 Action action = () => { player.ShowVehicleInteractMenu(true); };
                 player.ButtonPrompts.AttemptAddPrompt("VehicleInteract", "Vehicle Interact", $"VehicleInteract", Settings.SettingsManager.KeySettings.VehicleInteractModifier, Settings.SettingsManager.KeySettings.VehicleInteract, 999, action);
-               // EntryPoint.WriteToConsole("UpdateInteractPrompts BASE ADD PROMPT 1");
+                // EntryPoint.WriteToConsole("UpdateInteractPrompts BASE ADD PROMPT 1");
             }
         }
         public void UpdateHotwirePrompt(IButtonPromptable player)
@@ -1709,7 +1714,7 @@ namespace LSR.Vehicles
             if (!Vehicle.Exists() || (!HasBeenEnteredByPlayer && !IsOwnedByPlayer) || !IsHotWireLocked || VehicleInteractionMenu.IsShowingMenu || Vehicle.Speed >= 0.5f)
             {
                 player.ButtonPrompts.RemovePrompts("VehicleHotwire");
-                 EntryPoint.WriteToConsole("UpdateHotwirePrompt BASE REMOVE 1");
+                EntryPoint.WriteToConsole("UpdateHotwirePrompt BASE REMOVE 1");
                 return;
             }
             if (player.ActivityManager.IsPerformingActivity)
@@ -1722,7 +1727,7 @@ namespace LSR.Vehicles
             {
                 Action action = () => { player.ActivityManager.HotwireVehicle(); };
                 player.ButtonPrompts.AttemptAddPrompt("VehicleHotwire", "Hotwire", $"VehicleHotwire", GameControl.VehicleAccelerate, 900, action);
-                 EntryPoint.WriteToConsole("UpdateHotwirePrompt BASE ADD PROMPT 1");
+                EntryPoint.WriteToConsole("UpdateHotwirePrompt BASE ADD PROMPT 1");
             }
         }
         public virtual void AddVehicleToList(IEntityProvideable world)
@@ -1810,7 +1815,7 @@ namespace LSR.Vehicles
 
         public virtual void OnPlayerStartedBreakingInto(IInteractionable player)
         {
-           
+
         }
         public override string ToString()
         {
@@ -1841,8 +1846,8 @@ namespace LSR.Vehicles
         {
             EntryPoint.WriteToConsole($"IsRaceWorthy CURRENT CLASS {vehicleClass}");
             if(vehicleClass == VehicleClass.Muscle || 
-                vehicleClass == VehicleClass.SportClassic || 
-                vehicleClass == VehicleClass.Motorcycle || 
+                vehicleClass == VehicleClass.SportClassic ||
+                vehicleClass == VehicleClass.Motorcycle ||
                 vehicleClass == VehicleClass.Super ||
                 vehicleClass == VehicleClass.Sport ||
                 vehicleClass == VehicleClass.Coupe)
@@ -1850,6 +1855,29 @@ namespace LSR.Vehicles
                 return true;
             }
             return false;
+        }
+        public void CreateAnchorInteractionMenu(MenuPool menuPool, UIMenu vehicleInteractMenu, IInteractionable player)
+        {
+            if (!Vehicle.Exists() || !IsBoat || Vehicle.Speed >= 3.0f ||
+                !Game.LocalPlayer.Character.IsInAnyVehicle(false) ||
+                !Game.LocalPlayer.Character.IsInVehicle(Vehicle, true) ||
+                !Settings.SettingsManager.VehicleSettings.AllowAnchorToggle)
+            {
+                return;
+            }
+            UIMenu anchorMenu = menuPool.AddSubMenu(vehicleInteractMenu, "Anchor");
+            anchorMenu.SubtitleText = "Toggle Anchor State";
+            anchorMenu.SetBannerType(EntryPoint.LSRedColor);
+            string buttonText = Anchor.IsDeployed ? "Retract Anchor" : "Deploy Anchor";
+            UIMenuItem anchorToggleItem = new UIMenuItem(buttonText, "Toggle the boat's anchor");
+            anchorToggleItem.Activated += (sender, e) =>
+            {
+                bool newState = !Anchor.IsDeployed;
+                Anchor.SetState(newState);
+                anchorToggleItem.Text = newState ? "Retract Anchor" : "Deploy Anchor";
+                player.ToggledAnchor(newState);
+            };
+            anchorMenu.AddItem(anchorToggleItem);
         }
     }
 }

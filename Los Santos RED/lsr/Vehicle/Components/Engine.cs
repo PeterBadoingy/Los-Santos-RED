@@ -49,7 +49,7 @@ public class Engine
         GameTimeLastToggleEngine = Game.GameTime;
     }
     public void SetState(bool DesiredStatus)
-    {     
+    {
         if (!CanToggle)
         {
             return;
@@ -94,6 +94,10 @@ public class Engine
             {
                 return;
             }
+            if (VehicleToMonitor.Anchor != null && VehicleToMonitor.Anchor.IsDeployed && IsRunning)
+            {
+                IsRunning = false;
+            }
             if (VehicleToMonitor.IsHotWireLocked)
             {
                 if(!VehicleToMonitor.HasShowHotwireLockPrompt && Settings.SettingsManager.VehicleSettings.AutoHotwire)
@@ -101,12 +105,12 @@ public class Engine
                     VehicleToMonitor.HasShowHotwireLockPrompt = true;
                     Game.DisplayHelp("Screwdriver required to hotwire");
                 }
-                
+
                 VehicleToMonitor.Vehicle.MustBeHotwired = false;
                 VehicleToMonitor.Vehicle.IsDriveable = false;
                 VehicleToMonitor.Vehicle.IsEngineOn = false;
                 IsRunning = false;
-              //  EntryPoint.WriteToConsole($"PLAYER EVENT: VEHICLE SET NOT DRIVEABLE 1");
+                //  EntryPoint.WriteToConsole($"PLAYER EVENT: VEHICLE SET NOT DRIVEABLE 1");
                 return;
             }
 
@@ -116,7 +120,7 @@ public class Engine
                 VehicleToMonitor.Vehicle.IsDriveable = false;
                 VehicleToMonitor.Vehicle.IsEngineOn = false;
                 IsRunning = false;
-               // EntryPoint.WriteToConsole($"PLAYER EVENT: VEHICLE SET NOT DRIVEABLE 2");
+                // EntryPoint.WriteToConsole($"PLAYER EVENT: VEHICLE SET NOT DRIVEABLE 2");
                 return;
             }
 
@@ -138,6 +142,11 @@ public class Engine
             }
             else
             {
+                if (VehicleToMonitor.Anchor == null || !VehicleToMonitor.Anchor.IsDeployed)
+                {
+                    VehicleToMonitor.Vehicle.IsDriveable = true;
+                    VehicleToMonitor.Vehicle.IsEngineOn = true;
+                }
                 VehicleToMonitor.Vehicle.IsDriveable = true;
                 VehicleToMonitor.Vehicle.IsEngineOn = true;
 
