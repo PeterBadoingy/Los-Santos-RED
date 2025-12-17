@@ -217,6 +217,7 @@
     <Compile Include="lsr\Locations\Interiors\Barber\SalonInteract.cs" />
     <Compile Include="lsr\Locations\Interiors\BusinessInterior.cs" />
     <Compile Include="lsr\Locations\Interiors\CraftInteriorInteract.cs" />
+    <Compile Include="lsr\Locations\Interiors\ElevatorInteract.cs" />
     <Compile Include="lsr\Locations\Interiors\ExitInteriorInteract.cs" />
     <Compile Include="lsr\Locations\Interiors\Gambling\Blackjack\BlackJackInteract.cs" />
     <Compile Include="lsr\Locations\Interiors\Theft\AnimationPreInteract.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="lsr\Locations\Places\GameLocations\VehicleLocations\VehicleWindowTintMenu.cs" />
     <Compile Include="lsr\Locations\Places\GameLocations\VehicleLocations\WheelVehicleClassModKitType.cs" />
     <Compile Include="lsr\Locations\Places\GameLocations\VehicleLocations\WheelVehicleModKitType.cs" />
+    <Compile Include="lsr\Locations\Places\Interface\IElevatorableLocation.cs" />
     <Compile Include="lsr\Locations\Places\Interface\IPayoutDisbursable.cs" />
     <Compile Include="lsr\Player\ActiveTasks\Gang\GangArsonTask.cs" />
     <Compile Include="lsr\Player\ActiveTasks\Gang\GangRacketeeringTask.cs" />

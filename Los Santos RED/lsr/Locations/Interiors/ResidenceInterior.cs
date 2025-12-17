@@ -10,6 +10,7 @@ public class ResidenceInterior : Interior
     public List<RestInteract> RestInteracts { get; set; } = new List<RestInteract>();
     public List<InventoryInteract> InventoryInteracts { get; set; } = new List<InventoryInteract>();
     public List<OutfitInteract> OutfitInteracts { get; set; } = new List<OutfitInteract>();
+    public List<ElevatorInteract> ElevatorInteracts { get; set; } = new List<ElevatorInteract>();
     [XmlIgnore]
     public override List<InteriorInteract> AllInteractPoints
     {
@@ -20,6 +21,7 @@ public class ResidenceInterior : Interior
             AllInteracts.AddRange(RestInteracts);
             AllInteracts.AddRange(InventoryInteracts);
             AllInteracts.AddRange(OutfitInteracts);
+            AllInteracts.AddRange(ElevatorInteracts);
             return AllInteracts;
         }
     }
@@ -72,6 +74,10 @@ public class ResidenceInterior : Interior
         foreach (OutfitInteract test in OutfitInteracts)
         {
             test.OutfitableLocation = newResidence;
+        }
+        foreach (ElevatorInteract test in ElevatorInteracts)
+        {
+            test.ElevatorableLocation = newResidence;
         }
     }
     public override void AddLocation(PossibleInteriors interiorList)

@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 [XmlInclude(typeof(AnimationInteract))]
 [XmlInclude(typeof(ToiletInteract))]
 [XmlInclude(typeof(SinkInteract))]
-
+[XmlInclude(typeof(ElevatorInteract))]
 
 [XmlInclude(typeof(TheftInteract))]
 [XmlInclude(typeof(MoneyTheftInteract))]

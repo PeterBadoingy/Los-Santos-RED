@@ -7383,6 +7383,45 @@ public class Interiors : IInteriors
 
                     new InteriorDoor(459707559,new Vector3(534.0909f, 727.2502f, 197.7076f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
                 },
+                ElevatorInteracts = new List<ElevatorInteract>()
+                {
+                    new ElevatorInteract()
+                    {
+                        Name = "Mansion_Elevator",
+                        ButtonPromptText = "Use Elevator",
+                        Floors = new List<ElevatorInteract.Floor>()
+                        {
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 1,
+                                Name = "Main Floor",
+                                Position = new Vector3(552.1137f, 731.9355f, 202.3617f),
+                                Heading = 346.5043f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 2,
+                                Name = "Lower Floor",
+                                Position = new Vector3(552.1535f, 732.0972f, 198.7076f),
+                                Heading = 347.4627f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 3,
+                                Name = "Armory",
+                                Position = new Vector3(549.1128f, 728.1518f, 191.5045f),
+                                Heading = 344.8224f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 4,
+                                Name = "Vault",
+                                Position = new Vector3(549.0665f, 728.0344f, 187.0762f),
+                                Heading = 340.6784f
+                            }
+                        }
+                    }
+                },
                 InteractPoints = new List<InteriorInteract>()
                 {
                     new StandardInteriorInteract()
@@ -7637,6 +7676,45 @@ public class Interiors : IInteriors
 
                     new InteriorDoor(459707559,new Vector3(-1647.886f, 466.0095f, 124.5675f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
                 },
+                ElevatorInteracts = new List<ElevatorInteract>()
+                {
+                    new ElevatorInteract()
+                    {
+                        Name = "Mansion_Elevator",
+                        ButtonPromptText = "Use Elevator",
+                        Floors = new List<ElevatorInteract.Floor>()
+                        {
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 1,
+                                Name = "Main Floor",
+                                Position = new Vector3(-1645.956f, 484.5574f, 129.2216f),
+                                Heading = 55.87373f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 2,
+                                Name = "Lower Floor",
+                                Position = new Vector3(-1645.972f, 484.6459f, 125.5676f),
+                                Heading = 48.44988f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 3,
+                                Name = "Armory",
+                                Position = new Vector3(-1643.412f, 480.4134f, 118.3645f),
+                                Heading = 47.31211f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 4,
+                                Name = "Vault",
+                                Position = new Vector3(-1643.384f, 480.3492f, 113.9361f),
+                                Heading = 51.77242f
+                            }
+                        }
+                    }
+                },
                 InteractPoints = new List<InteriorInteract>()
                 {
                     new StandardInteriorInteract()
@@ -7886,6 +7964,45 @@ public class Interiors : IInteriors
                     new InteriorDoor(379718506,new Vector3(-2599.731f, 1899.676f, 164.1112f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
 
                     new InteriorDoor(459707559,new Vector3(-2602.503f, 1894.561f, 162.7214f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
+                },
+                ElevatorInteracts = new List<ElevatorInteract>()
+                {
+                    new ElevatorInteract()
+                    {
+                        Name = "Mansion_Elevator",
+                        ButtonPromptText = "Use Elevator",
+                        Floors = new List<ElevatorInteract.Floor>()
+                        {
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 1,
+                                Name = "Main Floor",
+                                Position = new Vector3(-2584.687f, 1888.852f, 167.3755f),
+                                Heading = 308.721f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 2,
+                                Name = "Lower Floor",
+                                Position = new Vector3(-2584.565f, 1888.927f, 163.7215f),
+                                Heading = 312.4405f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 3,
+                                Name = "Armory",
+                                Position = new Vector3(-2589.359f, 1887.203f, 156.5184f),
+                                Heading = 311.0694f
+                            },
+                            new ElevatorInteract.Floor
+                            {
+                                ID = 4,
+                                Name = "Vault",
+                                Position = new Vector3(-2589.375f, 1887.244f, 152.09f),
+                                Heading = 306.6189f
+                            }
+                        }
+                    }
                 },
                 InteractPoints = new List<InteriorInteract>()
                 {
