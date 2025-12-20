@@ -145,7 +145,7 @@ public class Interior
             EntryPoint.WriteToConsole($"INTERIOR: {Name} {door.ModelHash} {door.Position} UNLOCKED");
         }
     }
-    public virtual void Load(bool isOpen)
+    public void Load(bool isOpen)
     {
         GameFiber.StartNew(delegate
         {

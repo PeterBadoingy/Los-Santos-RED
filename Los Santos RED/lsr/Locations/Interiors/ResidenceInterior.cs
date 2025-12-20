@@ -91,7 +91,7 @@ public class ResidenceInterior : Interior
     {
         interiorList.ResidenceInteriors.Add(this);
     }
-    public new void Load(bool isOpen)
+    public virtual void Load(bool isOpen)
     {
         base.Load(isOpen);
         SpawnTrophies();
