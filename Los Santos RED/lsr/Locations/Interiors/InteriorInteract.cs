@@ -21,6 +21,7 @@ using System.Xml.Serialization;
 [XmlInclude(typeof(ItemTheftInteract))]
 [XmlInclude(typeof(SalonInteract))]
 [XmlInclude(typeof(CraftInteriorInteract))]
+[XmlInclude(typeof(TrophyInteract))]
 //UrinalInteract
 //ToiletInteract
 public class InteriorInteract

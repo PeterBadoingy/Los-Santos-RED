@@ -7383,6 +7383,16 @@ public class Interiors : IInteriors
 
                     new InteriorDoor(459707559,new Vector3(534.0909f, 727.2502f, 197.7076f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
                 },
+                TrophyInteracts = new List<TrophyInteract>()
+                {
+                    new TrophyInteract("VinewoodTrophy", new Vector3(548.5652f, 739.2119f, 198.7076f), 345.7989f, "Manage Trophies")
+                    {
+                        LinkedInteriorID = 304385, // Vinewood Mansion interior ID
+                        CameraPosition = new Vector3(539.2967f, 738.8112f, 199.5518f),
+                        CameraDirection = new Vector3(-0.7532488f, -0.6125796f, -0.2395045f),
+                        CameraRotation = new Rotator(-13.8573f, 0f, 129.1197f)
+                    },
+                },
                 InteractPoints = new List<InteriorInteract>()
                 {
                     new StandardInteriorInteract()
@@ -7637,6 +7647,16 @@ public class Interiors : IInteriors
 
                     new InteriorDoor(459707559,new Vector3(-1647.886f, 466.0095f, 124.5675f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
                 },
+                TrophyInteracts = new List<TrophyInteract>()
+                {
+                    new TrophyInteract("RichmanTrophy", new Vector3(-1654.08f, 483.7208f, 125.5676f), 53.3514f, "Manage Trophies")
+                    {
+                        LinkedInteriorID = 302593, // Richman Mansion interior ID
+                        CameraPosition = new Vector3(-1656.854f, 475.0268f, 126.2049f),
+                        CameraDirection = new Vector3(0.3005681f, -0.9286817f, -0.2172768f),
+                        CameraRotation = new Rotator(-12.54914f, 0f, -162.0658f)
+                    },
+                },
                 InteractPoints = new List<InteriorInteract>()
                 {
                     new StandardInteriorInteract()
@@ -7886,6 +7906,16 @@ public class Interiors : IInteriors
                     new InteriorDoor(379718506,new Vector3(-2599.731f, 1899.676f, 164.1112f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
 
                     new InteriorDoor(459707559,new Vector3(-2602.503f, 1894.561f, 162.7214f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
+                },
+                TrophyInteracts = new List<TrophyInteract>()
+                {
+                new TrophyInteract("TongvaTrophy", new Vector3(-2583.869f, 1896.979f, 163.7214f), 312.7611f, "Manage Trophies")
+                    {
+                        LinkedInteriorID = 303617, // Tongva Estate interior ID
+                        CameraPosition = new Vector3(-2591.883f, 1901.446f, 164.3784f),
+                        CameraDirection = new Vector3(-0.9708887f, -0.09680843f, -0.2190962f),
+                        CameraRotation = new Rotator(-12.65596f, 0f, 95.69421f)
+                    },
                 },
                 InteractPoints = new List<InteriorInteract>()
                 {
