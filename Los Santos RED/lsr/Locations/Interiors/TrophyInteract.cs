@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 [XmlInclude(typeof(TrophyInteract))]
 public class TrophyInteract : InteriorInteract
 {
-    public string MansionType { get; set; }
+    public string MansionLoc { get; set; } // Mansion Location Name (e.g., "Vinewood", "Richman", "Tongva")
     [XmlIgnore]
     public int LinkedInteriorID { get; internal set; }
 
@@ -165,8 +165,8 @@ public class TrophyInteract : InteriorInteract
                 Game.DisplayHelp("Cabinet Data Missing");
                 return;
             }
-            // Set MansionType BEFORE any menu creation (fixes the crash)
-            MansionType = CabinetDatas.FirstOrDefault(x => x.Value == data).Key;
+            // Set MansionLocation BEFORE any menu creation 
+            MansionLoc = CabinetDatas.FirstOrDefault(x => x.Value == data).Key;
             // Create slot menu
             CreateSlotMenu(data);
             // Keep fiber alive while menu is open
@@ -337,7 +337,7 @@ public class TrophyInteract : InteriorInteract
                     }
                     if (NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash))
                     {
-                        float heading = CabinetDatas[MansionType].TrophyHeading;
+                        float heading = CabinetDatas[MansionLoc].TrophyHeading;
                         Rage.Object restored = new Rage.Object(modelHash, ts.Position, heading);
                         if (restored.Exists())
                         {
@@ -388,7 +388,7 @@ public class TrophyInteract : InteriorInteract
             {
                 GameFiber.Yield();
             }
-            float heading = CabinetDatas[MansionType].TrophyHeading;
+            float heading = CabinetDatas[MansionLoc].TrophyHeading;
             previewObject = new Rage.Object(modelHash, ts.Position, heading)
             {
                 IsPersistent = true
@@ -427,7 +427,7 @@ public class TrophyInteract : InteriorInteract
             }
             if (NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash))
             {
-                float heading = CabinetDatas[MansionType].TrophyHeading;
+                float heading = CabinetDatas[MansionLoc].TrophyHeading;
                 Rage.Object newTrophy = new Rage.Object(modelHash, ts.Position, heading);
                 if (newTrophy.Exists())
                 {

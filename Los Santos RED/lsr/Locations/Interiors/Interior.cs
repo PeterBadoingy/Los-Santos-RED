@@ -21,13 +21,17 @@ public class Interior
     private bool IsRunningInteriorUpdate = false;
     [XmlIgnore]
     public List<Rage.Object> SpawnedProps { get; set; } = new List<Rage.Object>();
+    [XmlIgnore]
+    public Dictionary<int, Rage.Object> SpawnedTrophies { get; set; } = new Dictionary<int, Rage.Object>();
     private int alarmSoundID;
     protected bool isAlarmActive;
     private bool isOpen;
     [XmlIgnore]
     private bool HasEntitySets => (InteriorSets != null && InteriorSets.Any()) || InteriorSetStyleID != -1;
-    private readonly Dictionary<int, HashSet<string>> ActivatedSetsByInterior
-        = new Dictionary<int, HashSet<string>>();
+    private readonly Dictionary<int, HashSet<string>> ActivatedSetsByInterior = new Dictionary<int, HashSet<string>>();
+    [XmlIgnore]
+    public Dictionary<int, int> PlacedTrophies { get; set; } = new Dictionary<int, int>();
+    public string MansionLoc { get; set; }
     public Interior()
     {
 
@@ -290,7 +294,7 @@ public class Interior
 
                 // Load doors
                 LoadDoors(isOpen, false); // re included
-
+                SpawnTrophies();
                 // Disabled interior handling
                 if (DisabledInteriorCoords != Vector3.Zero)
                 {
@@ -351,63 +355,49 @@ public class Interior
         {
             try
             {
+                // Remove all spawned props immediately
+                RemoveSpawnedProps();
+                // Force-clear main interior (brute-force sanitation)
+                ForceClearInterior(InternalID);
+
+                // Deactivate any sets tracked by this script (redundant but safe)
                 DeactivateTrackedSets();
+
+                // Unpin and deactivate the interior
                 NativeFunction.Natives.UNPIN_INTERIOR(InternalID);
                 NativeFunction.Natives.SET_INTERIOR_ACTIVE(InternalID, false);
                 if (NativeFunction.Natives.IS_INTERIOR_CAPPED<bool>(InternalID))
                     NativeFunction.Natives.CAP_INTERIOR(InternalID, true);
 
+                GameFiber.Yield();
+
                 // Remove requested IPLs
-                foreach (string ipl in RequestIPLs)
+                foreach (string ipl in RequestIPLs ?? Enumerable.Empty<string>())
                 {
                     if (!string.IsNullOrEmpty(ipl) && NativeFunction.Natives.IS_IPL_ACTIVE<bool>(ipl))
                         NativeFunction.Natives.REMOVE_IPL(ipl);
                     GameFiber.Yield();
                 }
-                foreach (string ipl in RemoveIPLs)
+
+                // Reapply removed IPLs if needed (rare, but maintains consistency)
+                foreach (string ipl in RemoveIPLs ?? Enumerable.Empty<string>())
                 {
                     if (!string.IsNullOrEmpty(ipl) && !NativeFunction.Natives.IS_IPL_ACTIVE<bool>(ipl))
                         NativeFunction.Natives.REQUEST_IPL(ipl);
                     GameFiber.Yield();
                 }
-                // Deactivate interior sets
-                if (HasEntitySets)
-                {
-                    foreach (string interiorSet in InteriorSets)
-                    {
-                        if (string.IsNullOrEmpty(interiorSet)) continue;
-                        try { NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(InternalID, interiorSet); } catch { }
-                        GameFiber.Yield();
-                    }
-                }
 
-                // Deactivate style patterns
-                if (InteriorSetStyleID != -1)
-                {
-                    foreach (string pattern in GetEntitySetNamePatterns(InteriorSetStyleID))
-                    {
-                        try { NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(InternalID, pattern); } catch { }
-                        GameFiber.Yield();
-                    }
-                }
-
-                // Linked interiors
+                // Clear linked interiors
                 foreach (Vector3 coord in LinkedInteriorCoords ?? Enumerable.Empty<Vector3>())
                 {
                     int linkedID = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(coord.X, coord.Y, coord.Z);
                     if (linkedID == 0) continue;
 
-                    foreach (string interiorSet in InteriorSets)
-                    {
-                        try { NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(linkedID, interiorSet); } catch { }
-                        GameFiber.Yield();
-                    }
-
-                    NativeFunction.Natives.REFRESH_INTERIOR(linkedID);
+                    ForceClearInterior(linkedID);
                     GameFiber.Yield();
                 }
 
-                // Door cleanup
+                // Deactivate doors
                 foreach (InteriorDoor door in Doors ?? Enumerable.Empty<InteriorDoor>())
                 {
                     door.LockDoor();
@@ -415,23 +405,31 @@ public class Interior
                     GameFiber.Yield();
                 }
 
+                // Handle disabled interiors
                 if (DisabledInteriorCoords != Vector3.Zero)
                 {
-                    DisabledInteriorID = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(DisabledInteriorCoords.X, DisabledInteriorCoords.Y, DisabledInteriorCoords.Z);
-                    NativeFunction.Natives.DISABLE_INTERIOR(DisabledInteriorID, true);
-                    NativeFunction.Natives.REFRESH_INTERIOR(DisabledInteriorID);
-                    GameFiber.Yield();
-                }
+                    DisabledInteriorID = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(
+                        DisabledInteriorCoords.X, DisabledInteriorCoords.Y, DisabledInteriorCoords.Z);
 
+                    if (DisabledInteriorID != 0)
+                    {
+                        ForceClearInterior(DisabledInteriorID);
+                        NativeFunction.Natives.DISABLE_INTERIOR(DisabledInteriorID, true);
+                        NativeFunction.Natives.REFRESH_INTERIOR(DisabledInteriorID);
+                        GameFiber.Yield();
+                    }
+                }
+                // Final refresh and alarm cleanup
                 NativeFunction.Natives.REFRESH_INTERIOR(InternalID);
                 TurnOffAlarm();
                 IsActive = false;
+
                 GameFiber.Yield();
                 EntryPoint.WriteToConsole($"Unload Interior {Name}");
             }
             catch (Exception ex)
             {
-                EntryPoint.WriteToConsole(ex.Message + " " + ex.StackTrace, 0);
+                EntryPoint.WriteToConsole($"Unload Exception: {ex.Message}\n{ex.StackTrace}", 0);
                 EntryPoint.ModController.CrashUnload();
             }
         }, "Unload Interiors");
@@ -898,5 +896,46 @@ public class Interior
         }
 
         NativeFunction.Natives.REFRESH_INTERIOR(interiorId);
+    }
+    private void SpawnTrophies()
+    {
+        if (string.IsNullOrEmpty(MansionLoc) || !TrophyInteract.CabinetDatas.TryGetValue(MansionLoc, out CabinetData data))
+        {
+            return;
+        }
+        foreach (KeyValuePair<int, int> kvp in PlacedTrophies)
+        {
+            int slot = kvp.Key;
+            int trophyID = kvp.Value;
+            if (trophyID == 0)
+            {
+                continue;
+            }
+            TrophySlot ts = data.Slots.FirstOrDefault(x => x.SlotID == slot);
+            if (ts == null)
+            {
+                continue;
+            }
+            if (!TrophyInteract.TrophyRegistry.TryGetValue(trophyID, out TrophyDefinition def))
+            {
+                continue;
+            }
+            uint modelHash = Game.GetHashKey(def.ModelName);
+            NativeFunction.Natives.REQUEST_MODEL(modelHash);
+            uint startTime = Game.GameTime;
+            while (!NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash) && Game.GameTime - startTime < 5000)
+            {
+                GameFiber.Yield();
+            }
+            if (NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash))
+            {
+                Rage.Object newTrophy = new Rage.Object(modelHash, ts.Position, ts.Rotation);
+                if (newTrophy.Exists())
+                {
+                    SpawnedTrophies[slot] = newTrophy;
+                    SpawnedProps.Add(newTrophy);
+                }
+            }
+        }
     }
 }

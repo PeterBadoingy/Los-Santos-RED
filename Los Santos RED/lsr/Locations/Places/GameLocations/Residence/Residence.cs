@@ -74,7 +74,7 @@ public class Residence : GameLocation, ILocationSetupable, IRestableLocation, II
     public override bool ShowInteractPrompt => !IgnoreEntranceInteract && CanInteract && !HasHeaderApartmentBuilding && (!IsOwnedOrRented || (IsOwnedOrRented && !DisableInteractAfterPurchase));
     public override bool IsBlipEnabled => base.IsBlipEnabled && !HasHeaderApartmentBuilding;
     public GameLocation GameLocation => this;
-    public string MansionType { get; set; }
+    public string MansionLoc { get; set; }
     public string CraftingFlag { get; set; } = null;
 
     public Residence(Vector3 _EntrancePosition, float _EntranceHeading, string _Name, string _Description) : base(_EntrancePosition, _EntranceHeading, _Name, _Description)

@@ -13,11 +13,6 @@ public class ResidenceInterior : Interior
     public List<OutfitInteract> OutfitInteracts { get; set; } = new List<OutfitInteract>();
     public List<TrophyInteract> TrophyInteracts { get; set; } = new List<TrophyInteract>();
     [XmlIgnore]
-    public Dictionary<int, Rage.Object> SpawnedTrophies { get; set; } = new Dictionary<int, Rage.Object>();
-    [XmlIgnore]
-    public Dictionary<int, int> PlacedTrophies { get; set; } = new Dictionary<int, int>();
-    public string MansionType { get; set; }
-    [XmlIgnore]
     public override List<InteriorInteract> AllInteractPoints
     {
         get
@@ -69,7 +64,7 @@ public class ResidenceInterior : Interior
     public void SetResidence(Residence newResidence)
     {
         residence = newResidence;
-        MansionType = newResidence.MansionType;
+        MansionLoc = newResidence.MansionLoc;
         foreach (RestInteract test in RestInteracts)
         {
             test.RestableLocation = newResidence;
@@ -84,57 +79,11 @@ public class ResidenceInterior : Interior
         }
         foreach (TrophyInteract test in TrophyInteracts)
         {
-            test.MansionType = newResidence.MansionType;
+            test.MansionLoc = newResidence.MansionLoc;
         }
     }
     public override void AddLocation(PossibleInteriors interiorList)
     {
         interiorList.ResidenceInteriors.Add(this);
-    }
-    public virtual void Load(bool isOpen)
-    {
-        base.Load(isOpen);
-        SpawnTrophies();
-    }
-    private void SpawnTrophies()
-    {
-        if (string.IsNullOrEmpty(MansionType) || !TrophyInteract.CabinetDatas.TryGetValue(MansionType, out CabinetData data))
-        {
-            return;
-        }
-        foreach (KeyValuePair<int, int> kvp in PlacedTrophies)
-        {
-            int slot = kvp.Key;
-            int trophyID = kvp.Value;
-            if (trophyID == 0)
-            {
-                continue;
-            }
-            TrophySlot ts = data.Slots.FirstOrDefault(x => x.SlotID == slot);
-            if (ts == null)
-            {
-                continue;
-            }
-            if (!TrophyInteract.TrophyRegistry.TryGetValue(trophyID, out TrophyDefinition def))
-            {
-                continue;
-            }
-            uint modelHash = Game.GetHashKey(def.ModelName);
-            NativeFunction.Natives.REQUEST_MODEL(modelHash);
-            uint startTime = Game.GameTime;
-            while (!NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash) && Game.GameTime - startTime < 5000)
-            {
-                GameFiber.Yield();
-            }
-            if (NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash))
-            {
-                Rage.Object newTrophy = new Rage.Object(modelHash, ts.Position, ts.Rotation);
-                if (newTrophy.Exists())
-                {
-                    SpawnedTrophies[slot] = newTrophy;
-                    SpawnedProps.Add(newTrophy);
-                }
-            }
-        }
     }
 }
