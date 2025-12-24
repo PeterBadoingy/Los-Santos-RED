@@ -31,77 +31,58 @@ public class SavedResidence : SavedGameLocation
 
     public override void LoadSavedData(IInventoryable player, IPlacesOfInterest placesOfInterest, IModItems modItems, ISettingsProvideable settings, IEntityProvideable world)
     {
-        if (!(IsOwnedByPlayer || IsRentedByPlayer))
-            return;
-
-        Residence savedPlace = placesOfInterest.PossibleLocations.Residences
-            .FirstOrDefault(x => x.Name == Name && x.IsCorrectMap(world.IsMPMapLoaded));
-
-        if (savedPlace == null)
-            return;
-
-        // Add the location to the player's owned properties
-        player.Properties.AddOwnedLocation(savedPlace);
-
-        // Set ownership/rental data
-        savedPlace.IsOwned = IsOwnedByPlayer;
-        savedPlace.IsRented = IsRentedByPlayer;
-        savedPlace.DateRentalPaymentDue = RentalPaymentDate;
-        savedPlace.DateRentalPaymentPaid = DateOfLastRentalPayment;
-
-        // Initialize inventory if null
-        if (savedPlace.WeaponStorage == null)
-            savedPlace.WeaponStorage = new WeaponStorage(settings);
-
-        if (savedPlace.SimpleInventory == null)
-            savedPlace.SimpleInventory = new SimpleInventory(settings);
-
-        // Load weapons
-        foreach (StoredWeapon storedWeap in WeaponInventory)
-            savedPlace.WeaponStorage.StoredWeapons.Add(storedWeap.Copy());
-
-        // Load inventory items
-        foreach (InventorySave stest in InventoryItems)
-            savedPlace.SimpleInventory.Add(modItems.Get(stest.ModItemName), stest.RemainingPercent);
-
-        // Load stored cash
-        savedPlace.CashStorage.StoredCash = StoredCash;
-
-        // Handle interior & trophies
-        if (savedPlace.ResidenceInterior != null)
+        if (IsOwnedByPlayer || IsRentedByPlayer)
         {
-            var interior = savedPlace.ResidenceInterior;
-
-            // Clear previous trophies/props
-            interior.RemoveSpawnedProps();
-            interior.PlacedTrophies.Clear();
-            interior.SavedPlacedTrophies.Clear();
-
-            // Set interior references
-            interior.SetResidence(savedPlace);
-
-            // Load trophies from save
-            interior.SavedPlacedTrophies = TrophyPlacements.ToList();
-            foreach (TrophyPlacement tp in interior.SavedPlacedTrophies)
-                interior.PlacedTrophies[tp.SlotID] = tp.TrophyID;
-
-            // Load interior and spawn trophies asynchronously
-            interior.Load(true);
-
-            GameFiber.StartNew(delegate
+            Residence savedPlace = placesOfInterest.PossibleLocations.Residences.Where(x => x.Name == Name && x.IsCorrectMap(world.IsMPMapLoaded)).FirstOrDefault();
+            if (savedPlace != null)
             {
-                // Wait until the interior is valid
-                while (interior.InternalID == 0)
+                player.Properties.AddOwnedLocation(savedPlace);
+                savedPlace.IsOwned = IsOwnedByPlayer;
+                savedPlace.IsRented = IsRentedByPlayer;
+                savedPlace.DateRentalPaymentDue = RentalPaymentDate;
+                savedPlace.DateRentalPaymentPaid = DateOfLastRentalPayment;
+                if (savedPlace.WeaponStorage == null)
                 {
-                    GameFiber.Yield();
+                    savedPlace.WeaponStorage = new WeaponStorage(settings);
                 }
+                if (savedPlace.SimpleInventory == null)
+                {
+                    savedPlace.SimpleInventory = new SimpleInventory(settings);
+                }
+                foreach (StoredWeapon storedWeap in WeaponInventory)
+                {
+                    savedPlace.WeaponStorage.StoredWeapons.Add(storedWeap.Copy());
+                }
+                foreach (InventorySave stest in InventoryItems)
+                {
+                    savedPlace.SimpleInventory.Add(modItems.Get(stest.ModItemName), stest.RemainingPercent);
+                }
+                savedPlace.CashStorage.StoredCash = StoredCash;
+                if (savedPlace.ResidenceInterior != null)
+                {
+                    var interior = savedPlace.ResidenceInterior;
 
-                interior.SpawnTrophies();
-            }, "Spawn Saved Trophies");
+                    // Clear previous trophies/props
+                    interior.RemoveSpawnedProps();
+                    interior.PlacedTrophies.Clear();
+                    interior.SavedPlacedTrophies.Clear();
+
+                    // Set interior references
+                    interior.SetResidence(savedPlace);
+
+                    // Load trophies from save
+                    interior.SavedPlacedTrophies = TrophyPlacements.ToList();
+                    foreach (TrophyPlacement tp in interior.SavedPlacedTrophies)
+                        interior.PlacedTrophies[tp.SlotID] = tp.TrophyID;
+
+                    // Load interior and spawn trophies asynchronously
+                    interior.Load(true);
+
+                }
+            
+                savedPlace.RefreshUI();
+            }
         }
-
-        // Refresh UI
-        savedPlace.RefreshUI();
     }
 
 
