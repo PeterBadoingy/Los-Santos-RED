@@ -76,7 +76,7 @@ public class Residence : GameLocation, ILocationSetupable, IRestableLocation, II
     public GameLocation GameLocation => this;
     public string MansionLoc { get; set; }
     public string CraftingFlag { get; set; } = null;
-
+    public List<TrophyPlacement> TrophyPlacements { get; set; } = new List<TrophyPlacement>();
     public Residence(Vector3 _EntrancePosition, float _EntranceHeading, string _Name, string _Description) : base(_EntrancePosition, _EntranceHeading, _Name, _Description)
     {
         ButtonPromptText = GetButtonPromptText();
@@ -313,6 +313,7 @@ public class Residence : GameLocation, ILocationSetupable, IRestableLocation, II
         SimpleInventory.Reset();
         UpdateStoredData();
         CashStorage.Reset();
+        TrophyPlacements.Clear();
     }
     public void ReRent(IPropertyOwnable player, ITimeReportable time)
     {
@@ -821,6 +822,10 @@ public class Residence : GameLocation, ILocationSetupable, IRestableLocation, II
             if (CashStorage != null)
             {
                 myRes.StoredCash = CashStorage.StoredCash;
+            }
+            if (ResidenceInterior != null)
+            {
+                myRes.TrophyPlacements = ResidenceInterior.SavedPlacedTrophies.ToList();
             }
         }
         return myRes;

@@ -28,11 +28,11 @@ public class ResidenceInterior : Interior
     }
     public ResidenceInterior()
     {
-        PlacedTrophies = new Dictionary<int, int>();
+
     }
     public ResidenceInterior(int iD, string name) : base(iD, name)
     {
-        PlacedTrophies = new Dictionary<int, int>();
+
     }
     protected override void LoadDoors(bool isOpen, bool reLockForcedEntry)
     {
@@ -81,9 +81,44 @@ public class ResidenceInterior : Interior
         {
             test.MansionLoc = newResidence.MansionLoc;
         }
+        SavedPlacedTrophies.Clear();
+
+        if (newResidence.TrophyPlacements != null && newResidence.TrophyPlacements.Any())
+        {
+            foreach (var tp in newResidence.TrophyPlacements)
+            {
+                SavedPlacedTrophies.Add(new TrophyPlacement
+                {
+                    SlotID = tp.SlotID,
+                    TrophyID = tp.TrophyID
+                });
+            }
+
+            EntryPoint.WriteToConsole(
+                $"ResidenceInterior: Loaded {SavedPlacedTrophies.Count} saved trophies from residence '{newResidence.Name}'");
+        }
     }
     public override void AddLocation(PossibleInteriors interiorList)
     {
         interiorList.ResidenceInteriors.Add(this);
+    }
+    public void SyncTrophiesToResidence()
+    {
+        if (residence == null) return;
+
+        // Clear previous saved trophies in the Residence
+        residence.TrophyPlacements.Clear();
+
+        // Copy all currently placed trophies from the interior to the Residence
+        foreach (var tp in SavedPlacedTrophies)
+        {
+            residence.TrophyPlacements.Add(new TrophyPlacement
+            {
+                SlotID = tp.SlotID,
+                TrophyID = tp.TrophyID
+            });
+        }
+
+        EntryPoint.WriteToConsole($"ResidenceInterior: Synced {SavedPlacedTrophies.Count} trophies to Residence '{residence.Name}'");
     }
 }

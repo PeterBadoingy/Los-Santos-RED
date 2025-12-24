@@ -21,7 +21,7 @@ namespace Mod
         private IJurisdictions Jurisdictions;
         private ISettingsProvideable Settings;
         private ICrimes Crimes;
-        private IWeapons Weapons;     
+        private IWeapons Weapons;
         private ITimeControllable Time;
         private IInteriors Interiors;
         private IShopMenus ShopMenus;
@@ -75,7 +75,7 @@ namespace Mod
         public bool IsFEWInstalled { get; private set; }
         public bool IsFMLPInstalled { get; private set; }
 
-        public bool IsFERSInstalled { get; private set; }   
+        public bool IsFERSInstalled { get; private set; }
         public bool IsEUPInstalled { get; private set; }
         public bool IsEUPSUPInstalled { get; private set; }
         public string DebugString => "";
@@ -96,7 +96,7 @@ namespace Mod
         private void CheckSpecialCircumstances()
         {
             IsFEJInstalled = NativeFunction.Natives.IS_DLC_PRESENT<bool>(Game.GetHashKey("greskfej"));
-            EntryPoint.WriteToConsole($"FEJ Installed: {IsFEJInstalled}",0);
+            EntryPoint.WriteToConsole($"FEJ Installed: {IsFEJInstalled}", 0);
 
             IsFMTInstalled = NativeFunction.Natives.IS_DLC_PRESENT<bool>(Game.GetHashKey("greskfmt"));
             EntryPoint.WriteToConsole($"FMT Installed: {IsFMTInstalled}", 0);
@@ -128,9 +128,9 @@ namespace Mod
         }
         public void Update()
         {
-   
+
             SetDensity();
-            
+
             if (Settings.SettingsManager.WorldSettings.AllowPoliceBackupBlip)
             {
                 if (PoliceBackupPoint == Vector3.Zero)
@@ -159,7 +159,7 @@ namespace Mod
                     TotalWantedBlip.Delete();
                 }
             }
-            if(TotalWantedLevel != totalWantedLevel)
+            if (TotalWantedLevel != totalWantedLevel)
             {
                 OnTotalWantedLevelChanged();
             }
@@ -193,6 +193,7 @@ namespace Mod
                 Game.FadeScreenOut(1500, true);
                 NativeFunction.Natives.SET_INSTANCE_PRIORITY_MODE(1);
                 NativeFunction.Natives.x0888C3502DBBEEF5();// ON_ENTER_MP();
+                LoadMansionIPLs();
                 Game.FadeScreenIn(1500, true);
                 IsMPMapLoaded = true;
             }
@@ -202,10 +203,12 @@ namespace Mod
             if (IsMPMapLoaded)
             {
                 Game.FadeScreenOut(1500, true);
+                UnloadMansionIPLs();
                 NativeFunction.Natives.SET_INSTANCE_PRIORITY_MODE(0);
                 NativeFunction.Natives.xD7C10C4A637992C9();// ON_ENTER_SP();
                 Game.FadeScreenIn(1500, true);
                 IsMPMapLoaded = false;
+
             }
         }
         public void AddBlip(Blip myBlip)
@@ -237,7 +240,7 @@ namespace Mod
         {
             CurrentSpawnMultiplier = Settings.SettingsManager.WorldSettings.DefaultSpawnMultiplier;// 1.0f;
             if (Settings.SettingsManager.WorldSettings.LowerPedSpawnsAtHigherWantedLevels)
-            { 
+            {
                 if (TotalWantedLevel >= 10)
                 {
                     CurrentSpawnMultiplier = Settings.SettingsManager.WorldSettings.LowerPedSpawnsAtHigherWantedLevels_Wanted10Multiplier;
@@ -267,7 +270,7 @@ namespace Mod
                     CurrentSpawnMultiplier = Settings.SettingsManager.WorldSettings.LowerPedSpawnsAtHigherWantedLevels_Wanted4Multiplier;
                 }
             }
-            if(isTrafficDisabled)
+            if (isTrafficDisabled)
             {
                 CurrentSpawnMultiplier = 0.0f;
             }
@@ -326,11 +329,11 @@ namespace Mod
         }
         private void OnTotalWantedLevelChanged()
         {
-            if(TotalWantedLevel == 0)
+            if (TotalWantedLevel == 0)
             {
                 OnTotalWantedLevelRemoved();
             }
-            else if(totalWantedLevel == 0)
+            else if (totalWantedLevel == 0)
             {
                 OnTotalWantedLevelAdded();
             }
@@ -362,5 +365,82 @@ namespace Mod
         {
             isTrafficDisabled = false;
         }
+        private void LoadMansionIPLs()
+        {
+            foreach (string ipl in mansionMPIPLs)
+            {
+                NativeFunction.Natives.REQUEST_IPL(ipl);
+            }
+            foreach (string ipl in mansionSPIPLs)
+            {
+                NativeFunction.Natives.REMOVE_IPL(ipl);
+            }
+        }
+        private void UnloadMansionIPLs()
+        {
+            foreach (string ipl in mansionMPIPLs)
+            {
+                NativeFunction.Natives.REMOVE_IPL(ipl);
+            }
+            foreach (string ipl in mansionSPIPLs)
+            {
+                NativeFunction.Natives.REQUEST_IPL(ipl);
+            }
+        }
+        private List<string> mansionMPIPLs = new List<string>()
+        {
+        // VineWood Mansion
+                    "m25_2_ch2_04_mansion_interior_a",
+                    "m25_2_ch2_04_mansion_interior_b",
+                    "m25_2_ch2_04_mansion_interior_c",
+                    "apa_ch2_04_mansion_shared",
+                    "apa_ch2_04_mansion_private",
+                    "apa_ch2_04_mansion_railings_p",
+                    "apa_ch2_04_mansion_furniture",
+                    "apa_ch2_04_mansion_firepit",
+                    "m25_2_east_mansion_gym",
+                    "apa_ch2_04_mansion_grass",
+                    "m25_2_east_dog_house",
+        // Richman Mansion
+                    "m25_2_ch1_06e_mansion_interior_a",
+                    "m25_2_ch1_06e_mansion_interior_b",
+                    "m25_2_ch1_06e_mansion_interior_c",
+                    "m25_2_ch1_06e_mansion_interior_d",// underground garage??  - require TP
+                    "hei_ch1_06e_mansion_shared",
+                    "hei_ch1_06f_mansion_shared",
+                    "hei_ch1_06e_mansion_private",
+                    "hei_ch1_06e_mansion_railings_p",
+                    "hei_ch1_06e_mansion_furniture",
+                    "hei_ch1_06e_mansion_firepit",
+                    "hei_ch1_roads_mansion",
+                    "m25_2_mansion_gym",
+                    "m25_2_dog_house",
+        // Tongva Mansion
+                    "m25_2_ch1_09_mansion_interior_a",
+                    "m25_2_ch1_09_mansion_interior_b",
+                    "m25_2_ch1_09_mansion_interior_c",
+                    "hei_ch1_09_mansion_shared",
+                    "hei_ch1_09_mansion_private",
+                    "hei_ch1_09_mansion_railings_p",
+                    "hei_ch1_09_mansion_furniture",
+                    "hei_ch1_09_mansion_firepit",
+                    "m25_2_tongva_mansion_gym",
+                    "m25_2_tongva_dog_house",
+                    "m25_2_mansion_props",
+        };
+        private List<string> mansionSPIPLs = new List<string>()
+        {
+        // VineWood Mansion
+        "apa_ch2_04_mansion_original",
+        "apa_ch2_04_props_original",
+        // Richman Mansion
+        "hei_ch1_06e_mansion_original",
+        "hei_ch1_06f_mansion_original",
+        "hei_ch1_06e_props_original",
+        // Tongva Mansion
+        "hei_ch1_roads_original",
+        "hei_ch1_09_mansion_original",
+        "hei_ch1_09_props_original"
+        };
     }
 }

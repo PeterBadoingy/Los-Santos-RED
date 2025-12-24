@@ -14,7 +14,6 @@ public class TrophyInteract : InteriorInteract
     public string MansionLoc { get; set; } // Mansion Location Name (e.g., "Vinewood", "Richman", "Tongva")
     [XmlIgnore]
     public int LinkedInteriorID { get; internal set; }
-
     [XmlAttribute("LinkedInteriorID")]
     public int LinkedInteriorIDSerializable
     {
@@ -29,6 +28,7 @@ public class TrophyInteract : InteriorInteract
     private UIMenu trophySubMenu;
     private int selectedSlot;
     private int selectedTrophyID;
+
     public static readonly Dictionary<int, TrophyDefinition> TrophyRegistry = new Dictionary<int, TrophyDefinition>
     {
         { 1, new TrophyDefinition(1, "m25_2_prop_m52_trpy_100races", "100 Races") },
@@ -62,6 +62,7 @@ public class TrophyInteract : InteriorInteract
         { 29, new TrophyDefinition(29, "m25_2_prop_m52_trpy_wellliked", "Well Liked") },
         { 30, new TrophyDefinition(30, "m25_2_prop_m52_trpy_worldrecord", "World Record Holder") }
     };
+
     public static readonly Dictionary<string, CabinetData> CabinetDatas = new Dictionary<string, CabinetData>
     {
         { "Vinewood", new CabinetData
@@ -113,12 +114,14 @@ public class TrophyInteract : InteriorInteract
             }
         }
     };
+
     public static readonly Dictionary<int, CabinetData> CabinetDatasByInterior = new Dictionary<int, CabinetData>
-{
-    { 304385, CabinetDatas["Vinewood"] },
-    { 302593, CabinetDatas["Richman"] },
-    { 303617, CabinetDatas["Tongva"] }
-};
+    {
+        { 304385, CabinetDatas["Vinewood"] },
+        { 302593, CabinetDatas["Richman"] },
+        { 303617, CabinetDatas["Tongva"] }
+    };
+
     public TrophyInteract() { }
 
     public TrophyInteract(string name, Vector3 position, float heading, string buttonPromptText) : base(name, position, heading, buttonPromptText)
@@ -130,7 +133,6 @@ public class TrophyInteract : InteriorInteract
     {
         if (Player == null || Interior == null || !(InteractableLocation is ITrophyLocation trophyLocation))
             return;
-        // Assign ResidenceInterior
         ResidenceInterior = trophyLocation.ResidenceInterior;
         if (ResidenceInterior == null)
         {
@@ -140,12 +142,9 @@ public class TrophyInteract : InteriorInteract
         Interior.IsMenuInteracting = true;
         Interior?.RemoveButtonPrompts();
         RemovePrompt();
-        // Ensure camera exists
         if (LocationCamera == null)
             LocationCamera = trophyLocation.LocationCamera;
-        // Move camera to cabinet
         SetupCamera(false);
-        // Move player to interaction position
         if (!MoveToPosition())
         {
             Game.DisplayHelp("Access Failed");
@@ -156,20 +155,15 @@ public class TrophyInteract : InteriorInteract
         Player.InteriorManager.OnStartedInteriorInteract();
         try
         {
-            // Initialize menu pool
             if (menuPool == null)
                 menuPool = new MenuPool();
-            // Get cabinet data
             if (!CabinetDatasByInterior.TryGetValue(LinkedInteriorID, out CabinetData data) || data == null)
             {
                 Game.DisplayHelp("Cabinet Data Missing");
                 return;
             }
-            // Set MansionLocation BEFORE any menu creation 
             MansionLoc = CabinetDatas.FirstOrDefault(x => x.Value == data).Key;
-            // Create slot menu
             CreateSlotMenu(data);
-            // Keep fiber alive while menu is open
             while ((slotMenu != null && slotMenu.Visible) || (trophySubMenu != null && trophySubMenu.Visible))
             {
                 menuPool.ProcessMenus();
@@ -202,6 +196,7 @@ public class TrophyInteract : InteriorInteract
     private void CreateSlotMenu(CabinetData data)
     {
         if (data == null || data.Slots == null || data.Slots.Count == 0) return;
+
         if (slotMenu != null)
             slotMenu.Clear();
         else
@@ -210,25 +205,24 @@ public class TrophyInteract : InteriorInteract
             menuPool.Add(slotMenu);
             slotMenu.SetBannerType(EntryPoint.LSRedColor);
         }
-        // Use a scroller for slots
+
         List<string> slotNames = new List<string>();
         for (int i = 0; i < data.Slots.Count; i++)
         {
             TrophySlot ts = data.Slots[i];
             slotNames.Add($"Slot {ts.SlotID}");
         }
+
         UIMenuListScrollerItem<string> slotScroller = new UIMenuListScrollerItem<string>("Slot", "Select a slot to preview", slotNames);
         slotMenu.AddItem(slotScroller);
-        // Handle selection change
+
         slotScroller.IndexChanged += (sender, oldIndex, newIndex) =>
         {
             selectedSlot = data.Slots[newIndex].SlotID;
             TrophySlot ts = data.Slots[newIndex];
-            // Move camera to selected slot preview
             LocationCamera?.MoveToPosition(ts.CameraPosition, ts.CameraDirection, ts.CameraRotation, true, false, false);
-            // Update preview trophy if already placed
-            if (ResidenceInterior?.PlacedTrophies != null &&
-                ResidenceInterior.PlacedTrophies.TryGetValue(selectedSlot, out int trophyID))
+
+            if (ResidenceInterior?.PlacedTrophies != null && ResidenceInterior.PlacedTrophies.TryGetValue(selectedSlot, out int trophyID))
             {
                 UpdatePreview(ts, trophyID);
             }
@@ -237,7 +231,7 @@ public class TrophyInteract : InteriorInteract
                 UpdatePreview(ts, 0);
             }
         };
-        // Confirm selection opens trophy submenu
+
         UIMenuItem selectItem = new UIMenuItem("Select Slot", "View trophies for this slot");
         slotMenu.AddItem(selectItem);
         selectItem.Activated += (sender, item) =>
@@ -249,22 +243,17 @@ public class TrophyInteract : InteriorInteract
                 CreateTrophySubMenu(data, ts);
             }
         };
+
         slotMenu.Visible = true;
+
         if (data.Slots.Count > 0)
         {
             slotScroller.Index = 0;
             TrophySlot firstSlot = data.Slots[0];
             selectedSlot = firstSlot.SlotID;
-            // Move camera to first slot
-            LocationCamera?.MoveToPosition(
-                firstSlot.CameraPosition,
-                firstSlot.CameraDirection,
-                firstSlot.CameraRotation,
-                true, false, false
-            );
-            // Preview existing trophy or none
-            if (ResidenceInterior?.PlacedTrophies != null &&
-                ResidenceInterior.PlacedTrophies.TryGetValue(firstSlot.SlotID, out int trophyID))
+            LocationCamera?.MoveToPosition(firstSlot.CameraPosition, firstSlot.CameraDirection, firstSlot.CameraRotation, true, false, false);
+
+            if (ResidenceInterior?.PlacedTrophies != null && ResidenceInterior.PlacedTrophies.TryGetValue(firstSlot.SlotID, out int trophyID))
             {
                 UpdatePreview(firstSlot, trophyID);
             }
@@ -301,8 +290,10 @@ public class TrophyInteract : InteriorInteract
 
         List<string> trophyNames = new List<string> { "None" };
         trophyNames.AddRange(TrophyRegistry.Values.Select(x => x.Description));
+
         UIMenuListScrollerItem<string> trophyScroller = new UIMenuListScrollerItem<string>("Trophy", "Select a trophy to preview", trophyNames);
         trophySubMenu.AddItem(trophyScroller);
+
         trophyScroller.IndexChanged += (sender, oldIndex, newIndex) =>
         {
             string selectedDesc = trophyScroller.SelectedItem;
@@ -324,7 +315,6 @@ public class TrophyInteract : InteriorInteract
         trophySubMenu.AddItem(backItem);
         backItem.Activated += (sender, item) =>
         {
-            // Restore the original placed trophy when backing out without confirming
             if (placedTrophy != null && !placedTrophy.Exists() && originalTrophyID != 0)
             {
                 if (TrophyRegistry.TryGetValue(originalTrophyID, out TrophyDefinition originalDef))
@@ -358,14 +348,13 @@ public class TrophyInteract : InteriorInteract
             LocationCamera?.MoveToPosition(data.CabinetCameraPosition, data.CabinetCameraDirection, data.CabinetCameraRotation, true, false, false);
         };
 
-        // Set initial index from current trophy in slot
         int initialID = 0;
         if (ResidenceInterior?.PlacedTrophies != null)
             ResidenceInterior.PlacedTrophies.TryGetValue(ts.SlotID, out initialID);
+
         TrophyRegistry.TryGetValue(initialID, out TrophyDefinition initialDef);
         trophyScroller.Index = initialDef != null ? trophyNames.IndexOf(initialDef.Description) : 0;
 
-        // Show the first preview (or none)
         selectedTrophyID = initialID;
         UpdatePreview(ts, initialID);
 
@@ -379,7 +368,9 @@ public class TrophyInteract : InteriorInteract
             previewObject.Delete();
             previewObject = null;
         }
+
         if (trophyID == 0) return;
+
         if (TrophyRegistry.TryGetValue(trophyID, out TrophyDefinition def))
         {
             uint modelHash = Game.GetHashKey(def.ModelName);
@@ -388,17 +379,20 @@ public class TrophyInteract : InteriorInteract
             {
                 GameFiber.Yield();
             }
+
             float heading = CabinetDatas[MansionLoc].TrophyHeading;
             previewObject = new Rage.Object(modelHash, ts.Position, heading)
             {
                 IsPersistent = true
             };
+
             if (previewObject.Exists())
             {
                 int entityHandle = (int)previewObject.Handle.Value;
                 NativeFunction.Natives.SET_ENTITY_COLLISION(entityHandle, false, false);
                 NativeFunction.Natives.FREEZE_ENTITY_POSITION(entityHandle, true);
             }
+
             NativeFunction.Natives.SET_MODEL_AS_NO_LONGER_NEEDED(modelHash);
         }
     }
@@ -410,13 +404,16 @@ public class TrophyInteract : InteriorInteract
             previewObject.Delete();
             previewObject = null;
         }
+
         if (ResidenceInterior.SpawnedTrophies.TryGetValue(selectedSlot, out Rage.Object existing) && existing.Exists())
         {
             existing.Delete();
             ResidenceInterior.SpawnedTrophies.Remove(selectedSlot);
             Interior.SpawnedProps.Remove(existing);
         }
+
         ResidenceInterior.PlacedTrophies[selectedSlot] = selectedTrophyID;
+
         if (selectedTrophyID != 0 && TrophyRegistry.TryGetValue(selectedTrophyID, out TrophyDefinition def))
         {
             uint modelHash = Game.GetHashKey(def.ModelName);
@@ -425,6 +422,7 @@ public class TrophyInteract : InteriorInteract
             {
                 GameFiber.Yield();
             }
+
             if (NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash))
             {
                 float heading = CabinetDatas[MansionLoc].TrophyHeading;
@@ -439,7 +437,14 @@ public class TrophyInteract : InteriorInteract
                     Interior.SpawnedProps.Add(newTrophy);
                 }
             }
+
             NativeFunction.Natives.SET_MODEL_AS_NO_LONGER_NEEDED(modelHash);
+        }
+
+        ResidenceInterior.SavedPlacedTrophies.Clear();
+        foreach (KeyValuePair<int, int> kvp in ResidenceInterior.PlacedTrophies)
+        {
+            ResidenceInterior.SavedPlacedTrophies.Add(new TrophyPlacement { SlotID = kvp.Key, TrophyID = kvp.Value });
         }
     }
 
@@ -469,10 +474,14 @@ public class CabinetData
     public Vector3 CabinetCameraPosition { get; set; }
     public Vector3 CabinetCameraDirection { get; set; }
     public Rotator CabinetCameraRotation { get; set; }
-    public float TrophyHeading { get; set; } = 180f; // default, overridden per mansion
+    public float TrophyHeading { get; set; } = 180f;
     public List<TrophySlot> Slots { get; set; }
 }
-
+public class TrophyPlacement
+{
+    public int SlotID { get; set; }
+    public int TrophyID { get; set; }
+}
 public class TrophySlot
 {
     public int SlotID { get; set; }

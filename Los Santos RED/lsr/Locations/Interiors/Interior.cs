@@ -31,6 +31,7 @@ public class Interior
     private readonly Dictionary<int, HashSet<string>> ActivatedSetsByInterior = new Dictionary<int, HashSet<string>>();
     [XmlIgnore]
     public Dictionary<int, int> PlacedTrophies { get; set; } = new Dictionary<int, int>();
+    public List<TrophyPlacement> SavedPlacedTrophies { get; set; } = new List<TrophyPlacement>();
     public string MansionLoc { get; set; }
     public Interior()
     {
@@ -155,167 +156,167 @@ public class Interior
         {
             try
             {
-                // Resolve interior ID
+                // 1. Resolve initial interior
                 InternalID = InternalInteriorCoordinates != Vector3.Zero
-                    ? NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(InternalInteriorCoordinates.X, InternalInteriorCoordinates.Y, InternalInteriorCoordinates.Z)
+                    ? NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(
+                        InternalInteriorCoordinates.X,
+                        InternalInteriorCoordinates.Y,
+                        InternalInteriorCoordinates.Z)
                     : LocalID;
 
-                // Pin interior in memory if needed
-                if (NeedsActivation)
-                {
-                    NativeFunction.Natives.PIN_INTERIOR_IN_MEMORY(InternalID);
-                    NativeFunction.Natives.SET_INTERIOR_ACTIVE(InternalID, true);
-                    if (NativeFunction.Natives.IS_INTERIOR_CAPPED<bool>(InternalID))
-                        NativeFunction.Natives.CAP_INTERIOR(InternalID, false);
-                    GameFiber.Yield();
-                }
-
-                // Request IPLs
+                // 2. Request ALL IPLs FIRST
                 foreach (string ipl in RequestIPLs)
                 {
-                    if (!string.IsNullOrEmpty(ipl) && !NativeFunction.Natives.IS_IPL_ACTIVE<bool>(ipl))
+                    if (!string.IsNullOrEmpty(ipl) &&
+                        !NativeFunction.Natives.IS_IPL_ACTIVE<bool>(ipl))
+                    {
                         NativeFunction.Natives.REQUEST_IPL(ipl);
+                    }
                     GameFiber.Yield();
                 }
 
                 GameFiber.Yield();
 
-                // Re-resolve InternalID after IPLs
+                // 3. Re-resolve interior AFTER IPLs
                 if (InternalInteriorCoordinates != Vector3.Zero)
                 {
-                    int resolved = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(InternalInteriorCoordinates.X, InternalInteriorCoordinates.Y, InternalInteriorCoordinates.Z);
-                    if (resolved != 0) InternalID = resolved;
+                    int resolved = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(
+                        InternalInteriorCoordinates.X,
+                        InternalInteriorCoordinates.Y,
+                        InternalInteriorCoordinates.Z);
+
+                    if (resolved != 0)
+                        InternalID = resolved;
                 }
 
-                NativeFunction.Natives.REFRESH_INTERIOR(InternalID);
-                GameFiber.Yield();
-                // HARD RESET linked interiors BEFORE activation
+                // 4. FORCE CLEAR
+                ForceClearInterior(InternalID);
+
                 foreach (Vector3 coord in LinkedInteriorCoords ?? Enumerable.Empty<Vector3>())
                 {
                     int linkedID = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(
                         coord.X, coord.Y, coord.Z);
 
                     if (linkedID != 0)
-                    {
                         ForceClearInterior(linkedID);
-                        TrackActivatedSet(linkedID, "__forced_clear__");
-                    }
-                }
-                // Remove IPLs
-                foreach (string ipl in RemoveIPLs)
-                {
-                    if (!string.IsNullOrEmpty(ipl) && NativeFunction.Natives.IS_IPL_ACTIVE<bool>(ipl))
-                    {
-                        NativeFunction.Natives.REMOVE_IPL(ipl);
-                        GameFiber.Yield();
-                    }
                 }
 
-                // Deactivate previous entity sets and styles
-                if (HasEntitySets)
-                {
-                    for (int i = 1; i <= 9; i++)
-                    {
-                        foreach (string prefix in new[] { "entity_set_style_", "set_style_", "set_style0", "style_", "style" })
-                        {
-                            try
-                            {
-                                NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(
-                                    InternalID, prefix + i);
-                            }
-                            catch { }
-                        }
-                        GameFiber.Yield();
-                    }
-
-                    NativeFunction.Natives.REFRESH_INTERIOR(InternalID);
-                    GameFiber.Yield();
-                }
-
-                NativeFunction.Natives.REFRESH_INTERIOR(InternalID);
                 GameFiber.Yield();
 
-                // Activate interior sets
-                foreach (string interiorSet in InteriorSets)
+                // 5. Pin / activate interior
+                if (NeedsActivation)
                 {
-                    if (string.IsNullOrEmpty(interiorSet)) continue;
-                    TryActivateEntitySetWithVerify(InternalID, interiorSet, 0);
-                    TrackActivatedSet(InternalID, interiorSet);
+                    NativeFunction.Natives.PIN_INTERIOR_IN_MEMORY(InternalID);
+                    NativeFunction.Natives.SET_INTERIOR_ACTIVE(InternalID, true);
 
-                    if (interiorSet.StartsWith("SET_WALLPAPER_", StringComparison.OrdinalIgnoreCase) && InteriorWallpaperColor != -1)
-                        NativeFunction.Natives.SET_INTERIOR_ENTITY_SET_TINT_INDEX(InternalID, interiorSet, InteriorWallpaperColor);
-                    else if (InteriorTintColor != -1)
-                        SetInteriorColorTint(interiorSet, InteriorTintColor);
+                    if (NativeFunction.Natives.IS_INTERIOR_CAPPED<bool>(InternalID))
+                        NativeFunction.Natives.CAP_INTERIOR(InternalID, false);
 
                     GameFiber.Yield();
                 }
 
-                // Handle linked interiors
+                // 6. Remove IPLs (if any)
+                foreach (string ipl in RemoveIPLs)
+                {
+                    if (!string.IsNullOrEmpty(ipl) &&
+                        NativeFunction.Natives.IS_IPL_ACTIVE<bool>(ipl))
+                    {
+                        NativeFunction.Natives.REMOVE_IPL(ipl);
+                    }
+                    GameFiber.Yield();
+                }
+
+                // 7. Activate entity sets
+                foreach (string interiorSet in InteriorSets)
+                {
+                    if (string.IsNullOrEmpty(interiorSet))
+                        continue;
+
+                    if (TryActivateEntitySetWithVerify(InternalID, interiorSet, 0))
+                        TrackActivatedSet(InternalID, interiorSet);
+
+                    if (interiorSet.StartsWith("SET_WALLPAPER_", StringComparison.OrdinalIgnoreCase)
+                        && InteriorWallpaperColor != -1)
+                    {
+                        NativeFunction.Natives.SET_INTERIOR_ENTITY_SET_TINT_INDEX(
+                            InternalID, interiorSet, InteriorWallpaperColor);
+                    }
+                    else if (InteriorTintColor != -1)
+                    {
+                        SetInteriorColorTint(interiorSet, InteriorTintColor);
+                    }
+
+                    GameFiber.Yield();
+                }
+
+                // 8. Linked interiors (same sets, no re-clear)
                 foreach (Vector3 coord in LinkedInteriorCoords ?? Enumerable.Empty<Vector3>())
                 {
-                    int linkedID = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(coord.X, coord.Y, coord.Z);
-                    if (linkedID == 0) continue;
+                    int linkedID = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(
+                        coord.X, coord.Y, coord.Z);
+
+                    if (linkedID == 0)
+                        continue;
 
                     foreach (string interiorSet in InteriorSets)
                     {
-                        if (string.IsNullOrEmpty(interiorSet)) continue;
-                        TryActivateEntitySetWithVerify(linkedID, interiorSet, 0);
-                        TrackActivatedSet(linkedID, interiorSet);
+                        if (string.IsNullOrEmpty(interiorSet))
+                            continue;
+                        if (TryActivateEntitySetWithVerify(linkedID, interiorSet, 0))
+                            TrackActivatedSet(linkedID, interiorSet);
 
-                        if (interiorSet.StartsWith("SET_WALLPAPER_", StringComparison.OrdinalIgnoreCase) && InteriorWallpaperColor != -1)
-                            NativeFunction.Natives.SET_INTERIOR_ENTITY_SET_TINT_INDEX(linkedID, interiorSet, InteriorWallpaperColor);
-                        else if (InteriorTintColor != -1)
-                            SetInteriorColorTint(interiorSet, InteriorTintColor);
-
-                        GameFiber.Yield();
+                        if (interiorSet.StartsWith("SET_WALLPAPER_", StringComparison.OrdinalIgnoreCase)
+                            && InteriorWallpaperColor != -1)
+                        {
+                            NativeFunction.Natives.SET_INTERIOR_ENTITY_SET_TINT_INDEX(
+                                linkedID, interiorSet, InteriorWallpaperColor);
+                        }
                     }
+
                     NativeFunction.Natives.REFRESH_INTERIOR(linkedID);
                     GameFiber.Yield();
                 }
 
-                // Activate style patterns
+                // 9. Optional style activation
                 if (InteriorSetStyleID != -1)
                 {
-                    bool tried = false;
                     foreach (string styleName in GetEntitySetNamePatterns(InteriorSetStyleID))
                     {
                         if (TryActivateEntitySetWithVerify(InternalID, styleName, 0))
-                        {
-                            EntryPoint.WriteToConsole($"Activated style: {styleName}");
-                            tried = true;
                             break;
-                        }
                     }
-                    if (!tried) EntryPoint.WriteToConsole($"Warning: could not activate style for StyleID {InteriorSetStyleID}");
                     GameFiber.Yield();
                 }
+                // 10. Doors / interactions
+                LoadDoors(isOpen, false);
+                // Final Refresh moved to end to ensure doors are in correct state
+                ResolveMansionLocFromInterior();
 
-                RefreshInteriorAndLinked(InternalID);
-
-                // Load doors
-                LoadDoors(isOpen, false); // re included
-                SpawnTrophies();
-                // Disabled interior handling
-                if (DisabledInteriorCoords != Vector3.Zero)
+                if (SavedPlacedTrophies != null && SavedPlacedTrophies.Any())
                 {
-                    DisabledInteriorID = NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(DisabledInteriorCoords.X, DisabledInteriorCoords.Y, DisabledInteriorCoords.Z);
-                    NativeFunction.Natives.DISABLE_INTERIOR(DisabledInteriorID, false);
-                    NativeFunction.Natives.REFRESH_INTERIOR(DisabledInteriorID);
-                    GameFiber.Yield();
+                    foreach (TrophyPlacement tp in SavedPlacedTrophies)
+                    {
+                        if (tp.TrophyID != 0)
+                            PlacedTrophies[tp.SlotID] = tp.TrophyID;
+                    }
                 }
 
+                SpawnTrophies();
+                // 11. Final refresh
                 NativeFunction.Natives.REFRESH_INTERIOR(InternalID);
+
+                GameFiber.Yield(); // yield to all interior markers to register properly
 
                 foreach (InteriorInteract ii in AllInteractPoints ?? Enumerable.Empty<InteriorInteract>())
                     ii.OnInteriorLoaded();
 
                 IsActive = true;
-                GameFiber.Yield();
                 EntryPoint.WriteToConsole($"Load Interior {Name} isOpen={isOpen}");
             }
             catch (Exception ex)
             {
-                EntryPoint.WriteToConsole($"Load Exception: {ex.Message}\n{ex.StackTrace}", 0);
+                EntryPoint.WriteToConsole(
+                    $"Load Exception: {ex.Message}\n{ex.StackTrace}", 0);
             }
         }, "Load Interior");
     }
@@ -710,7 +711,7 @@ public class Interior
             player.Violations.AddViolating(StaticStrings.ArmedRobberyCrimeID);
         }
     }
-    private void RemoveSpawnedProps()
+    public void RemoveSpawnedProps()
     {
         foreach(Rage.Object prop in SpawnedProps)
         {
@@ -771,27 +772,7 @@ public class Interior
         NativeFunction.Natives.STOP_SOUND(alarmSoundID);
         NativeFunction.Natives.RELEASE_SOUND_ID(alarmSoundID);
     }
-    // Refresh main interior and discovered linked interiors
-
-    private void RefreshInteriorAndLinked(int interiorId)
-    {
-        NativeFunction.Natives.REFRESH_INTERIOR(interiorId);
-
-        // Refresh disabled / linked interior if present
-        if (DisabledInteriorCoords != Vector3.Zero)
-        {
-            DisabledInteriorID =
-                NativeFunction.Natives.GET_INTERIOR_AT_COORDS<int>(
-                    DisabledInteriorCoords.X,
-                    DisabledInteriorCoords.Y,
-                    DisabledInteriorCoords.Z);
-
-            if (DisabledInteriorID != 0)
-            {
-                NativeFunction.Natives.REFRESH_INTERIOR(DisabledInteriorID);
-            }
-        }
-    }
+    // Helper to generate possible entity set names for a given style ID
     private IEnumerable<string> GetEntitySetNamePatterns(int styleID)
     {
         yield return $"entity_set_style_{styleID}";
@@ -801,9 +782,9 @@ public class Interior
         yield return $"style{styleID}";
     }
 
-    // Activate an entity set and do a short verification loop that it "took"
-    // returns true if we observed the set active (best-effort)
-    private bool TryActivateEntitySetWithVerify(int interiorID, string setName, int maxTicksToWait = 60)
+    // Activate an entity set and verify it activated
+    // returns true if activated successfully
+    private bool TryActivateEntitySetWithVerify(int interiorID, string setName, int maxTicksToWait = 30) // 0.5 seconds at 16ms per tick
     {
         if (string.IsNullOrEmpty(setName)) return false;
         try
@@ -813,23 +794,18 @@ public class Interior
         catch
         {
             // swallow - native may ignore invalid names
+            return false;
         }
-
         int ticks = 0;
-        // best-effort: call refresh and yield a few times; there's no direct "is entity set active" native in the environment common to all versions
-        while (ticks < maxTicksToWait)
+        while (!NativeFunction.Natives.IS_INTERIOR_ENTITY_SET_ACTIVE<bool>(interiorID, setName) && ticks < maxTicksToWait)
         {
             NativeFunction.Natives.REFRESH_INTERIOR(interiorID);
             GameFiber.Yield();
             ticks++;
         }
-
-        // We can't reliably query "is entity set active" with the standard natives in all versions,
-        // but calling ACTIVATE + REFRESH stabilizes the state for many DLC types.
-        // Return true as long as we didn't error out (optimistic).
-        // If you have a custom check (GET_INTERIOR_ENTITY_SET_ACTIVE) in your native set, use it here.
-        return true;
+        return NativeFunction.Natives.IS_INTERIOR_ENTITY_SET_ACTIVE<bool>(interiorID, setName);
     }
+
     private void TrackActivatedSet(int interiorId, string setName)
     {
         if (interiorId == 0 || string.IsNullOrEmpty(setName))
@@ -864,78 +840,157 @@ public class Interior
 
         ActivatedSetsByInterior.Clear();
     }
+
     private void ForceClearInterior(int interiorId)
     {
         if (interiorId == 0)
             return;
 
-        // Known persistent offender sets across DLC interiors
-        string[] knownPatterns =
+        string[] prefixes =
         {
-        "SET_BASE_",
-        "SET_VAULT_",
-        "SET_SECURITY_",
-        "SET_STYLE_",
-        "entity_set_style_",
-        "set_style_",
-        "style_",
+        "SET_STYLE",
+        "SET_WALLPAPER",
+        "entity_set_",
+        "entity_set_style",
+        "set_style",
         "style"
-    };
-
-        for (int i = 0; i <= 20; i++)
+        };
+        // Numeric suffixes (0–12)
+        for (int i = 0; i <= 12; i++)
         {
-            foreach (string prefix in knownPatterns)
+            foreach (string p in prefixes)
             {
-                try
-                {
-                    NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(
-                        interiorId, prefix + i);
-                }
-                catch { }
+                TryDeactivate(interiorId, $"{p}_{i}");
+                TryDeactivate(interiorId, $"{p}{i}");
             }
         }
 
-        NativeFunction.Natives.REFRESH_INTERIOR(interiorId);
-    }
-    private void SpawnTrophies()
-    {
-        if (string.IsNullOrEmpty(MansionLoc) || !TrophyInteract.CabinetDatas.TryGetValue(MansionLoc, out CabinetData data))
+        // Letter suffixes (A–Z)
+        for (char c = 'A'; c <= 'Z'; c++)
         {
+            foreach (string p in prefixes)
+            {
+                TryDeactivate(interiorId, $"{p}_{c}");
+                TryDeactivate(interiorId, $"{p}{c}");
+            }
+        }
+
+        // Bare prefixes (many legacy DLCs use exact names)
+        foreach (string p in prefixes)
+        {
+            TryDeactivate(interiorId, p);
+        }
+    }
+
+    private void TryDeactivate(int interiorId, string setName)
+    {
+        try
+        {
+            if (NativeFunction.Natives.IS_INTERIOR_ENTITY_SET_ACTIVE<bool>(interiorId, setName))
+            {
+                NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(interiorId, setName);
+            }
+        }
+        catch
+        {
+            // Silent by design — invalid names are expected
+        }
+    }
+    public void SpawnTrophies()
+    {
+        // Remove existing trophy objects first
+        foreach (var trophy in SpawnedTrophies.Values)
+        {
+            if (trophy.Exists())
+                trophy.Delete();
+        }
+        SpawnedTrophies.Clear();
+
+        // Also remove from general spawned props
+        SpawnedProps.RemoveAll(p => SpawnedTrophies.Values.Contains(p));
+
+        if (string.IsNullOrEmpty(MansionLoc))
+        {
+            EntryPoint.WriteToConsole("SpawnTrophies: MansionLoc is not set!");
             return;
         }
-        foreach (KeyValuePair<int, int> kvp in PlacedTrophies)
+
+        if (!TrophyInteract.CabinetDatas.TryGetValue(MansionLoc, out CabinetData cabinetData))
         {
-            int slot = kvp.Key;
+            EntryPoint.WriteToConsole($"SpawnTrophies: No CabinetData found for MansionLoc '{MansionLoc}'");
+            return;
+        }
+
+        if (PlacedTrophies == null || !PlacedTrophies.Any())
+        {
+            EntryPoint.WriteToConsole("SpawnTrophies: No trophies to spawn (PlacedTrophies is empty)");
+            return;
+        }
+
+        foreach (var kvp in PlacedTrophies)
+        {
+            int slotID = kvp.Key;
             int trophyID = kvp.Value;
-            if (trophyID == 0)
-            {
-                continue;
-            }
-            TrophySlot ts = data.Slots.FirstOrDefault(x => x.SlotID == slot);
-            if (ts == null)
-            {
-                continue;
-            }
-            if (!TrophyInteract.TrophyRegistry.TryGetValue(trophyID, out TrophyDefinition def))
-            {
-                continue;
-            }
-            uint modelHash = Game.GetHashKey(def.ModelName);
+
+            if (trophyID == 0) continue;
+
+            TrophySlot slot = cabinetData.Slots.FirstOrDefault(x => x.SlotID == slotID);
+            if (slot == null) continue;
+
+            if (!TrophyInteract.TrophyRegistry.TryGetValue(trophyID, out TrophyDefinition trophyDef)) continue;
+
+            uint modelHash = Game.GetHashKey(trophyDef.ModelName);
             NativeFunction.Natives.REQUEST_MODEL(modelHash);
+
             uint startTime = Game.GameTime;
             while (!NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash) && Game.GameTime - startTime < 5000)
-            {
                 GameFiber.Yield();
-            }
-            if (NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash))
+
+            if (!NativeFunction.Natives.HAS_MODEL_LOADED<bool>(modelHash)) continue;
+
+            Rage.Object newTrophy = new Rage.Object(modelHash, slot.Position, cabinetData.TrophyHeading);
+            if (!newTrophy.Exists()) continue;
+
+            int entityHandle = (int)newTrophy.Handle.Value;
+            NativeFunction.Natives.SET_ENTITY_COLLISION(entityHandle, false, false);
+            NativeFunction.Natives.FREEZE_ENTITY_POSITION(entityHandle, true);
+            newTrophy.IsPersistent = true;
+
+            SpawnedTrophies[slotID] = newTrophy;
+            SpawnedProps.Add(newTrophy);
+
+            NativeFunction.Natives.SET_MODEL_AS_NO_LONGER_NEEDED(modelHash);
+        }
+    }
+    protected void ResolveMansionLocFromInterior()
+    {
+        if (!string.IsNullOrEmpty(MansionLoc))
+            return;
+
+        // Interior must already be resolved
+        if (InternalID == 0)
+            return;
+
+        // Map interior -> cabinet data
+        if (TrophyInteract.CabinetDatasByInterior.TryGetValue(InternalID, out CabinetData cabinetData))
+        {
+            // Reverse lookup MansionLoc key
+            var match = TrophyInteract.CabinetDatas
+                .FirstOrDefault(x => x.Value == cabinetData);
+
+            if (!string.IsNullOrEmpty(match.Key))
             {
-                Rage.Object newTrophy = new Rage.Object(modelHash, ts.Position, ts.Rotation);
-                if (newTrophy.Exists())
-                {
-                    SpawnedTrophies[slot] = newTrophy;
-                    SpawnedProps.Add(newTrophy);
-                }
+                MansionLoc = match.Key;
+                EntryPoint.WriteToConsole($"Resolved MansionLoc '{MansionLoc}' from InteriorID {InternalID}");
             }
+            else
+            {
+                EntryPoint.WriteToConsole($"ResolveMansionLoc: CabinetData found but no MansionLoc key matched");
+            }
+        }
+        else
+        {
+            EntryPoint.WriteToConsole($"ResolveMansionLoc: No CabinetData mapped for InteriorID {InternalID}");
         }
     }
 }
