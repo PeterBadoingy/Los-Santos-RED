@@ -27,10 +27,8 @@ public class CustomizeAncestryMenu
     private UIMenuItem RandomizeHead;
     private UIMenuListScrollerItem<HeadLookup> Parent1IDMenu;
     private UIMenuListScrollerItem<HeadLookup> Parent2IDMenu;
-    private UIMenuListScrollerItem<HeadLookup> Parent3IDMenu; // Added 3rd Parent
     private UIMenuNumericScrollerItem<float> Parent1MixMenu;
     private UIMenuNumericScrollerItem<float> Parent2MixMenu;
-    private UIMenuNumericScrollerItem<float> Parent3MixMenu; // Added 3rd Mix
     private UIMenu HeadSubMenu;
     private UIMenu CustomizeMainMenu;
     private UIMenu AncestrySubMenu;
@@ -123,46 +121,53 @@ public class CustomizeAncestryMenu
 
         Parent1IDMenu = new UIMenuListScrollerItem<HeadLookup>("First Parent", "Select first parent", HeadList);
         Parent1IDMenu.SelectedItem = HeadList.FirstOrDefault(x => x.HeadID == 0);
-        Parent1IDMenu.Activated += (sender, selectedItem) => { Parent1Activated(); };
-        Parent1IDMenu.IndexChanged += (sender, oldIndex, newIndex) => { Parent1Activated(); };
+        Parent1IDMenu.Activated += (sender, selectedItem) =>
+        {
+            Parent1Activated();
+        };
+        Parent1IDMenu.IndexChanged += (sender, oldIndex, newIndex) =>
+        {
+            Parent1Activated();
+        };
         AncestrySubMenu.AddItem(Parent1IDMenu);
 
         Parent2IDMenu = new UIMenuListScrollerItem<HeadLookup>("Second Parent", "Select second parent", HeadList);
         Parent2IDMenu.SelectedItem = HeadList.FirstOrDefault(x => x.HeadID == 0);
-        Parent2IDMenu.Activated += (sender, selectedItem) => { Parent2Activated(); };
-        Parent2IDMenu.IndexChanged += (sender, oldIndex, newIndex) => { Parent2Activated(); };
+        Parent2IDMenu.Activated += (sender, selectedItem) =>
+        {
+            Parent2Activated();
+        };
+        Parent2IDMenu.IndexChanged += (sender, oldIndex, newIndex) =>
+        {
+            Parent2Activated();
+        };
         AncestrySubMenu.AddItem(Parent2IDMenu);
 
-        // --- Added 3rd Parent UI ---
-        Parent3IDMenu = new UIMenuListScrollerItem<HeadLookup>("Grand Parent", "Select grand parent", HeadList);
-        Parent3IDMenu.SelectedItem = HeadList.FirstOrDefault(x => x.HeadID == 0);
-        Parent3IDMenu.Activated += (sender, selectedItem) => { Parent3Activated(); };
-        Parent3IDMenu.IndexChanged += (sender, oldIndex, newIndex) => { Parent3Activated(); };
-        AncestrySubMenu.AddItem(Parent3IDMenu);
-
-        Parent1MixMenu = new UIMenuNumericScrollerItem<float>("Resemblance", "Select if your resemblance is influenced more by the first parent or second parent.", 0.0f, 1.0f, 0.05f);
+        Parent1MixMenu = new UIMenuNumericScrollerItem<float>("Resemblance", "Select if your resemblance is influenced more by the first parent or second parent.", 0.0f, 1.0f, 0.1f);
         Parent1MixMenu.Formatter = v => "First - " + (1.0f - v).ToString("P0") + " Second - " + v.ToString("P0");
         Parent1MixMenu.Value = 1.0f;
-        Parent1MixMenu.Activated += (sender, selectedItem) => { Parent1MixActivated(); };
-        Parent1MixMenu.IndexChanged += (sender, oldIndex, newIndex) => { Parent1MixActivated(); };
+        Parent1MixMenu.Activated += (sender, selectedItem) =>
+        {
+            Parent1MixActivated();
+        };
+        Parent1MixMenu.IndexChanged += (sender, oldIndex, newIndex) =>
+        {
+            Parent1MixActivated();
+        };
         AncestrySubMenu.AddItem(Parent1MixMenu);
 
-        Parent2MixMenu = new UIMenuNumericScrollerItem<float>("Skin Tone", "Select if your skin tone is influenced more by the first parent or second parent.", 0.0f, 1.0f, 0.05f);
+        Parent2MixMenu = new UIMenuNumericScrollerItem<float>("Skin Tone", "Select if your skin tone is influenced more by the first parent or second parent.", 0.0f, 1.0f, 0.1f);
         Parent2MixMenu.Formatter = v => "First - " + (1.0f - v).ToString("P0") + " Second - " + v.ToString("P0");
         Parent2MixMenu.Value = 1.0f;
-        Parent2MixMenu.Activated += (sender, selectedItem) => { Parent2MixActivated(); };
-        Parent2MixMenu.IndexChanged += (sender, oldIndex, newIndex) => { Parent2MixActivated(); };
+        Parent2MixMenu.Activated += (sender, selectedItem) =>
+        {
+            Parent2MixActivated();
+        };
+        Parent2MixMenu.IndexChanged += (sender, oldIndex, newIndex) =>
+        {
+            Parent2MixActivated();
+        };
         AncestrySubMenu.AddItem(Parent2MixMenu);
-
-        // --- Added 3rd Mix UI ---
-        // Capped at 0.3f (30%) to match randomization logic and prevent a full overwrite. 
-        // The step is changed to 0.05f for finer control.
-        Parent3MixMenu = new UIMenuNumericScrollerItem<float>("Grandparent Influence", "Select how much the third parent influences the final look.", 0.0f, 0.5f, 0.05f);
-        Parent3MixMenu.Formatter = v => "Influence - " + v.ToString("P0");
-        Parent3MixMenu.Value = 0.0f;
-        Parent3MixMenu.Activated += (sender, selectedItem) => { Parent3MixActivated(); };
-        Parent3MixMenu.IndexChanged += (sender, oldIndex, newIndex) => { Parent3MixActivated(); };
-        AncestrySubMenu.AddItem(Parent3MixMenu);
 
         OnHeadblendValuesChanged();
     }
@@ -188,21 +193,12 @@ public class CustomizeAncestryMenu
         PedCustomizer.WorkingVariation.HeadBlendData.shapeSecond = Parent2IDMenu.SelectedItem.HeadID;
         PedCustomizer.OnVariationChanged();
     }
-
-    private void Parent3Activated() // New Method
+    private void Parent1MixActivated()
     {
         if (PedCustomizerMenu.IsProgramicallySettingFieldValues)
         {
             return;
         }
-        PedCustomizer.WorkingVariation.HeadBlendData.skinThird = Parent3IDMenu.SelectedItem.HeadID;
-        PedCustomizer.WorkingVariation.HeadBlendData.shapeThird = Parent3IDMenu.SelectedItem.HeadID;
-        PedCustomizer.OnVariationChanged();
-    }
-
-    private void Parent1MixActivated()
-    {
-        if (PedCustomizerMenu.IsProgramicallySettingFieldValues) return;
         float newMix = Parent1MixMenu.Value;
         PedCustomizer.WorkingVariation.HeadBlendData.shapeMix = newMix;
         PedCustomizer.OnVariationChanged();
@@ -217,18 +213,6 @@ public class CustomizeAncestryMenu
         PedCustomizer.WorkingVariation.HeadBlendData.skinMix = newMix;
         PedCustomizer.OnVariationChanged();
     }
-
-    private void Parent3MixActivated()
-    {
-        if (PedCustomizerMenu.IsProgramicallySettingFieldValues)
-        {
-            return;
-        }
-
-        PedCustomizer.WorkingVariation.HeadBlendData.thirdMix = Parent3MixMenu.Value;
-        PedCustomizer.OnVariationChanged();
-    }
-
     private void RandomizePedHead()
     {
         if (PedCustomizer.ModelPed.Exists() && PedCustomizer.PedModelIsFreeMode)
@@ -243,15 +227,10 @@ public class CustomizeAncestryMenu
     {
         int MotherID = 0;
         int FatherID = 0;
-        int GrandID = 0;
         float FatherSide = 0f;
         float MotherSide = 0f;
-        float GrandSide = 0f;
-
         MotherID = RandomItems.GetRandomNumberInt(0, 45);
         FatherID = RandomItems.GetRandomNumberInt(0, 45);
-        GrandID = RandomItems.GetRandomNumberInt(0, 45);
-
         if (PedCustomizer.ModelPed.IsMale)
         {
             FatherSide = RandomItems.GetRandomNumber(0.75f, 1.0f);
@@ -262,10 +241,7 @@ public class CustomizeAncestryMenu
             MotherSide = RandomItems.GetRandomNumber(0.75f, 1.0f);
             FatherSide = 1.0f - MotherSide;
         }
-
-        GrandSide = RandomItems.GetRandomNumber(0.0f, 0.3f);
-
-        PedCustomizer.WorkingVariation.HeadBlendData = new HeadBlendData(MotherID, FatherID, GrandID, MotherID, FatherID, GrandID, MotherSide, FatherSide, GrandSide);
+        PedCustomizer.WorkingVariation.HeadBlendData = new HeadBlendData(MotherID, FatherID, 0, MotherID, FatherID, 0, MotherSide, FatherSide, 0.0f);
         OnHeadblendValuesChanged();
     }
     private void OnHeadblendValuesChanged()
@@ -288,18 +264,9 @@ public class CustomizeAncestryMenu
                 Parent2IDMenu.SelectedItem = Parent2IDMenuHead;
                 //EntryPoint.WriteToConsoleTestLong($"OnHeadblendValuesChanged Parent2IDMenuHead {Parent2IDMenuHead.HeadName}");
             }
-
-            // Added Sync for 3rd Parent
-            HeadLookup Parent3IDMenuHead = HeadList.FirstOrDefault(x => x.HeadID == PedCustomizer.WorkingVariation.HeadBlendData.skinThird);
-            if (Parent3IDMenuHead != null)
-            {
-                Parent3IDMenu.SelectedItem = Parent3IDMenuHead;
-            }
             Parent1MixMenu.Value = PedCustomizer.WorkingVariation.HeadBlendData.shapeMix == -1 ? 0 : PedCustomizer.WorkingVariation.HeadBlendData.shapeMix;
             Parent2MixMenu.Value = PedCustomizer.WorkingVariation.HeadBlendData.skinMix == -1 ? 0 : PedCustomizer.WorkingVariation.HeadBlendData.skinMix;
             //EntryPoint.WriteToConsoleTestLong($"OnHeadblendValuesChanged MIX P1{Parent1MixMenu.Value} P2{Parent2MixMenu.Value}");
-            float currentThirdMix = PedCustomizer.WorkingVariation.HeadBlendData.thirdMix == -1 ? 0 : PedCustomizer.WorkingVariation.HeadBlendData.thirdMix;
-            Parent3MixMenu.Value = currentThirdMix; // Pass the raw value directly
         }
         //EntryPoint.WriteToConsoleTestLong("OnHeadblendValuesChanged Executed");
     }
@@ -309,10 +276,7 @@ public class CustomizeAncestryMenu
         PedCustomizer.WorkingVariation.HeadBlendData.shapeFirst = Parent1IDMenu.SelectedItem.HeadID;
         PedCustomizer.WorkingVariation.HeadBlendData.skinSecond = Parent2IDMenu.SelectedItem.HeadID;
         PedCustomizer.WorkingVariation.HeadBlendData.shapeSecond = Parent2IDMenu.SelectedItem.HeadID;
-        PedCustomizer.WorkingVariation.HeadBlendData.skinThird = Parent3IDMenu.SelectedItem.HeadID;
-        PedCustomizer.WorkingVariation.HeadBlendData.shapeThird = Parent3IDMenu.SelectedItem.HeadID;
         PedCustomizer.WorkingVariation.HeadBlendData.shapeMix = Parent1MixMenu.Value;
         PedCustomizer.WorkingVariation.HeadBlendData.skinMix = Parent2MixMenu.Value;
-        PedCustomizer.WorkingVariation.HeadBlendData.thirdMix = Parent3MixMenu.Value;
     }
 }
