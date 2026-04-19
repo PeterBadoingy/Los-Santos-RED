@@ -72,7 +72,20 @@ public enum eCustomDrivingStyles : int
 
     Vanilla_Alerted = (int)786469,
 
-	RacingNew2 = (int)VanillaDrivingStyles.DF_SwerveAroundAllCars | (int) VanillaDrivingStyles.DF_SteerAroundObjects | (int)VanillaDrivingStyles.DF_UseShortCutLinks | (int)VanillaDrivingStyles.DF_ChangeLanesAroundObstructions,
+    //RacingNew2 = (int)VanillaDrivingStyles.DF_SwerveAroundAllCars | (int) VanillaDrivingStyles.DF_SteerAroundObjects | (int)VanillaDrivingStyles.DF_UseShortCutLinks | (int)VanillaDrivingStyles.DF_ChangeLanesAroundObstructions, // original
+	RacingNew2 = 786468, //  I am race control!
+
+	//Testing Corner
+    //RacingNew2 = (int)VanillaDrivingStyles.DF_SwerveAroundAllCars |
+    //             (int)VanillaDrivingStyles.DF_SteerAroundObjects |
+    // (int)VanillaDrivingStyles.DF_UseShortCutLinks |
+    // (int)VanillaDrivingStyles.DF_ChangeLanesAroundObstructions |
+    // (int)VanillaDrivingStyles.DF_DriveIntoOncomingTraffic | // Allows using the wrong side
+    // (int)VanillaDrivingStyles.DF_UseSwitchedOffNodes,       // Uses the full navmesh width
+    //RacingNew2 = 4 | 8 | 16 | 32 | 512 | 262144 | 524288 | 2097152,
+    //RacingNew2 = 787260, 
+    //RacingNew2 = 1074528805,
+    //RacingNew2 = 1074528293, // Looks like it should be a racing preset in game, but it isn't.
 
 
     CopRacingNew2Based = (int)VanillaDrivingStyles.DF_SwerveAroundAllCars | (int)VanillaDrivingStyles.DF_SteerAroundObjects | (int)VanillaDrivingStyles.DF_SteerAroundPeds | (int)VanillaDrivingStyles.DF_UseShortCutLinks | (int)VanillaDrivingStyles.DF_ChangeLanesAroundObstructions | (int)VehicleDrivingFlags.AllowWrongWay | VanillaDrivingStyles.DF_DriveIntoOncomingTraffic | (int)VanillaDrivingStyles.DF_UseSwitchedOffNodes,

@@ -2362,6 +2362,7 @@ public class PlacesOfInterest : IPlacesOfInterest
                 OpenTime = 0,
                 CloseTime = 24,
                 MaxBax = 7000,
+                SupportedTracks = new List<string>() { "popDrag", "eastsideCircuit", "ElBurroPoint", "Vinewoodhills","ely_freeway", "ely_freeloop","freewaydrag" },
             },
         };
     }

@@ -319,35 +319,27 @@ public class VehicleRace
     }
     private void DoCountdown()
     {
-       //EntryPoint.WriteToConsole($"COUNTDOWN START {Game.GameTime - GameTimeStartedCountdown}");
         GameTimeStartedCountdown = Game.GameTime;
-        string toShow = "";
         string showing = "";
-        HudColor toShowColor = HudColor.RedDark;
+
         while (Game.GameTime - GameTimeStartedCountdown <= 3000)
         {
-            //NativeHelper.DisablePlayerMovementControl();
-            if (Game.GameTime - GameTimeStartedCountdown < 1000)
-            {
-                toShow = "3";
-                toShowColor = HudColor.RedDark;
-            }
-            else if (Game.GameTime - GameTimeStartedCountdown < 2000)
-            {
-                toShow = "2";
-                toShowColor = HudColor.Red;
-            }
-            else if (Game.GameTime - GameTimeStartedCountdown < 3000)
-            {
-                toShow = "1";
-                toShowColor = HudColor.OrangeDark;
-            }
-            if(toShow != showing)
+            string toShow = "";
+            HudColor toShowColor = HudColor.RedDark;
+
+            long elapsed = Game.GameTime - GameTimeStartedCountdown;
+
+            if (elapsed < 1000) { toShow = "3"; toShowColor = HudColor.RedDark; }
+            else if (elapsed < 2000) { toShow = "2"; toShowColor = HudColor.Red; }
+            else { toShow = "1"; toShowColor = HudColor.OrangeDark; }
+
+            if (toShow != showing)
             {
                 PlayerRacer.ShowMessage(toShow, "", HudColor.Black, toShowColor, 1000);
                 showing = toShow;
             }
-            GameFiber.Yield();
+
+            GameFiber.Yield(); // CRITICAL: Keeps the game from freezing
         }
     }
     private void HandleBetting()

@@ -55,7 +55,26 @@ public class GeneralRace : ComplexTask, ILocationReachable
     {
         HasReachedLocatePosition = false;
         CurrentTaskState?.Stop();
-        //World.Pedestrians.RemoveSeatAssignment(PedGeneral);
+
+        if (PedGeneral != null && PedGeneral.Pedestrian.Exists())
+        {
+            Ped racePed = PedGeneral.Pedestrian;
+
+            NativeFunction.Natives.SET_DRIVER_ABILITY(racePed, 1.0f);
+            NativeFunction.Natives.SET_DRIVER_AGGRESSIVENESS(racePed, 1.0f);
+            NativeFunction.Natives.SET_DRIVER_RACING_MODIFIER(racePed, 1.0f);
+
+            // This is the SPEED LIMITER. Set it high so our rubber-banding isn't capped.
+            NativeFunction.Natives.SET_DRIVE_TASK_MAX_CRUISE_SPEED(racePed, 250f, true);
+
+            // Remove the SET_DRIVE_TASK_CRUISE_SPEED(500f) call from here. 
+            // Let AIVehicleRacer.cs handle the actual speed.
+
+            NativeFunction.Natives.SET_PED_SEEING_RANGE(racePed, 10000f);
+            NativeFunction.Natives.SET_PED_COMBAT_ATTRIBUTES(racePed, 3, false);
+            NativeFunction.Natives.SET_PED_CONFIG_FLAG(racePed, 118, true);
+        }
+
         GetNewTaskState();
         CurrentTaskState?.Start();
     }
@@ -63,8 +82,17 @@ public class GeneralRace : ComplexTask, ILocationReachable
     {
         CurrentTaskState?.Stop();
     }
+
     public override void Update()
     {
+        if (VehicleRacer == null || PedGeneral == null) return;
+
+        // Detect if the racer has moved on to a new checkpoint in the base class
+        if (AssignedCheckpoint != VehicleRacer.TargetCheckpoint)
+        {
+            GetNewTaskState();
+        }
+
         if (CurrentTaskState == null || !CurrentTaskState.IsValid)
         {
             Start();
@@ -74,18 +102,20 @@ public class GeneralRace : ComplexTask, ILocationReachable
             SubTaskName = CurrentTaskState.DebugName;
             CurrentTaskState.Update();
         }
-        if (PedGeneral != null && PedGeneral.Pedestrian.Exists())
-        {
-            NativeFunction.Natives.SET_DRIVER_ABILITY(PedGeneral.Pedestrian, 1.0f);
-            NativeFunction.Natives.SET_DRIVER_AGGRESSIVENESS(PedGeneral.Pedestrian, 1.0f);
-            NativeFunction.Natives.SET_DRIVER_RACING_MODIFIER(Ped.Pedestrian, 1.0f);
-        }
-       //EntryPoint.WriteToConsole("GENERAL RACE UPDATE RAN");
     }
+
     private void GetNewTaskState()
     {
-        EntryPoint.WriteToConsole($"AI RACER TASKED {VehicleRacer.TargetCheckpoint.Position}");
-        CurrentTaskState = new GoToPositionVehicleRaceTaskState(PedGeneral, Player, World, SeatAssigner, Settings, true, VehicleRacer.TargetCheckpoint.Position, this);   
+        if (VehicleRacer?.TargetCheckpoint != null)
+        {
+            AssignedCheckpoint = VehicleRacer.TargetCheckpoint;
+
+           
+            CurrentTaskState = new GoToPositionVehicleRaceTaskState(
+                PedGeneral, Player, World, SeatAssigner, Settings, true, AssignedCheckpoint.Position, this);
+
+            CurrentTaskState.Start();
+        }
     }
 }
 

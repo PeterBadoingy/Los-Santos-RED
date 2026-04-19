@@ -89,15 +89,11 @@ public class VehicleRacer
     {
         return ConvertMSToTime(GameTimeFinishedRace - GameTimeStartedRace);
     }
-    private string ConvertMSToTime(uint TotalGameTime)
+    private string ConvertMSToTime(uint totalMS)
     {
-        TimeSpan t = TimeSpan.FromMilliseconds(TotalGameTime);
-        string answer = string.Format("{0:00}:{1:00}.{2:000}",
-                                t.Minutes,
-                                t.Seconds,
-                                t.Milliseconds);
-
-        return answer;
+        TimeSpan t = TimeSpan.FromMilliseconds(totalMS);
+        // Correctly pads Minutes to 2 digits, Seconds to 2 digits, and Milliseconds to 3 digits
+        return $"{t.Minutes:00}:{t.Seconds:00}.{t.Milliseconds:000}";
     }
     public virtual void OnReachedCheckpoint(VehicleRace vehicleRace)
     {
