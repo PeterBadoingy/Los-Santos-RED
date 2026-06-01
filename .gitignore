@@ -338,3 +338,11 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Los Santos RED/.dotnet-home/.dotnet/MachineId.v1.dotnetUserLevelCache
+/Los Santos RED/.dotnet-home/.dotnet/9.0.312_MachineId.dotnetUserLevelCache
+/Los Santos RED/.dotnet-home/.dotnet/9.0.312_IsDockerContainer.dotnetUserLevelCache
+/Los Santos RED/.dotnet-home/.dotnet/9.0.312.toolpath.sentinel
+/Los Santos RED/.dotnet-home/.dotnet/9.0.312.dotnetFirstUseSentinel
+/Los Santos RED/.dotnet-home/.dotnet/9.0.312.aspNetCertificateSentinel
+/Los Santos RED/.dotnet-home/.dotnet/TelemetryStorageService/20260531000100_38b826682ec2467b8fefa471b123f67d.trn
+/Los Santos RED/.dotnet-home/.dotnet/TelemetryStorageService/20260531000049_3fc4988fb7d44484a830044110723faf.trn
