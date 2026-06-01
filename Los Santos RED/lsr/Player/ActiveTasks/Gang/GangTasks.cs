@@ -231,6 +231,15 @@ public class GangTasks : IPlayerTaskGroup
         dugMeetTask.Start();
     }
 
+    public void StartRaidLocationTask(Gang gang, GangContact gangContact, RaidLocation raidLocation, int targetCount)
+    {
+        GangRaidLocationTask raidLocationTask = new GangRaidLocationTask(Player, Time, Gangs, PlacesOfInterest, Settings, World, Crimes, Weapons, Names, PedGroups, ShopMenus, ModItems, PlayerTasks, this,
+            gangContact, gang, raidLocation, targetCount);
+        AllGenericGangTasks.Add(raidLocationTask);
+        raidLocationTask.Setup();
+        raidLocationTask.Start();
+    }
+
 
 
     public string GetGeneircTaskAbortMessage()

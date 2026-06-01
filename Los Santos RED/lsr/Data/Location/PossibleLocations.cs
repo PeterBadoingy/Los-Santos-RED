@@ -58,6 +58,7 @@ public class PossibleLocations
     public List<IllicitMarketplace> IllicitMarketplaces { get; private set; } = new List<IllicitMarketplace>();
     public List<BlankLocation> BlankLocations { get; private set; } = new List<BlankLocation>();
     public List<MilitaryBase> MilitaryBases { get; private set; } = new List<MilitaryBase>();
+    public List<RaidLocation> RaidLocations { get; private set; } = new List<RaidLocation>();
 
 
 
@@ -129,6 +130,7 @@ public class PossibleLocations
         AllLocations.AddRange(IllicitMarketplaces);
         AllLocations.AddRange(BlankLocations);
         AllLocations.AddRange(MilitaryBases);
+        AllLocations.AddRange(RaidLocations);
         AllLocations.AddRange(BarberShops);
         AllLocations.AddRange(PlasticSurgeryClinics);
         AllLocations.AddRange(TattooShops);
@@ -241,6 +243,12 @@ public class PossibleLocations
         AllLocations.AddRange(IllicitMarketplaces);
         AllLocations.AddRange(ScrapYards);
         AllLocations.AddRange(CarCrushers);
+        return AllLocations;
+    }
+    public List<GameLocation> RaidTaskLocations()
+    {
+        List<GameLocation> AllLocations = new List<GameLocation>();
+        AllLocations.AddRange(RaidLocations);
         return AllLocations;
     }
 }

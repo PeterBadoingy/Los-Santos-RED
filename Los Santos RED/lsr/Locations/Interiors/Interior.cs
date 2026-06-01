@@ -177,12 +177,24 @@ public class Interior
                     GameFiber.Yield();
                 }
                 // Deactivate the current entity set style before activating the new one ( If one is loaded )
-                if (InteriorSetStyleID != -1)
+                //if (InteriorSetStyleID != -1)
+                //{
+                //    string previousEntitySetStyle = $"entity_set_style_{InteriorSetStyleID}";
+                //    EntryPoint.WriteToConsole($"Deactivating previous entity set style: {previousEntitySetStyle}");
+                //    NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(InternalID, previousEntitySetStyle);
+                //    GameFiber.Yield();
+                //}
+                if (InteriorSetStyleID >= -1)
                 {
-                    string previousEntitySetStyle = $"entity_set_style_{InteriorSetStyleID}";
-                    EntryPoint.WriteToConsole($"Deactivating previous entity set style: {previousEntitySetStyle}");
-                    NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(InternalID, previousEntitySetStyle);
-                    GameFiber.Yield();
+                    for (int i = 0; i <= 9; i++)
+                    {
+                        string previousEntitySetStyle = $"entity_set_style_{i}";
+                        if (NativeFunction.Natives.IS_INTERIOR_ENTITY_SET_ACTIVE<bool>(InternalID, previousEntitySetStyle))
+                        {
+                            NativeFunction.Natives.DEACTIVATE_INTERIOR_ENTITY_SET(InternalID, previousEntitySetStyle);
+                            GameFiber.Yield();
+                        }
+                    }
                 }
                 foreach (string interiorSet in InteriorSets)
                 {

@@ -962,6 +962,1086 @@ public class Interiors : IInteriors
 //new Vector3(981.5935f, -98.13846f, 74.97108f), 222.2108f, "Name", "Description"),  //lostmcpiss1
                 },
             },
+
+            // The Stash House Collection - R Conversion 
+            // Default Interior ID = 28979301
+            // Increased by 1 for each new Stash House, up to 25 total (28979301-28979325) for each Prop Spawn Interior Set variation
+            // InteriorSetStyleID 1 to 5, 5 different interior style that can be applied for each Stash House interior (Currently R Defaults)
+            // Safe xm3_prop_xm3_safe_01a - closed / Animation Set ? / xm3_prop_xm3_safe_01b - open
+            // InteriorSets = new List<string>() { "entity_set_style_1"},
+            // RequestIPLs = new List<string>() { "reh_dlc_int_04_sum2"},
+
+             new GangDenInterior(28979301, "Stash House 001") // Paleto Bay Entrance Location -156.3501f, 6292.674f, 31.67826f), 133.7562f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(848.344f, -2995.688f, -49.982f), 89.199f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_c_s", new SpawnPlace(new Vector3(850.909f, -3003.479f, -50.000f), 90.997f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(852.228f, -3003.408f, -49.795f), -0.601f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(843.896f, -3003.781f, -50.000f), 88.798f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(847.268f, -2999.631f, -49.819f), 21.799f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(848.313f, -2997.674f, -49.580f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.411f, -3000.358f, -50.000f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(854.355f, -3000.322f, -49.161f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bigbag_open_01a", new SpawnPlace(new Vector3(854.261f, -3001.129f, -49.162f), -135.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_scales_01a", new SpawnPlace(new Vector3(854.419f, -2999.744f, -49.068f), 153.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.464f, -3000.035f, -49.394f), 58.597f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(844.905f, -3004.134f, -49.394f), -115.604f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.384f, -2996.190f, -49.394f), 122.145f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(853.988f, -2998.153f, -49.236f), 0.546f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_c_s", new SpawnPlace(new Vector3(854.202f, -3003.746f, -50.000f), -96.804f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cork_board", new SpawnPlace(new Vector3(852.644f, -3005.187f, -49.375f), 179.998f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(848.118f, -3003.646f, -49.991f), -91.401f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(846.149f, -2999.762f, -50.000f), 4.397f)) { PlaceOnGround = true }, // Closed Safe - Can Swap out for other Large Safe with interactive door.
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(854.360f, -2995.760f, -50.000f), 90.998f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(844.436f, -3000.690f, -49.996f), -149.855f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(851.640f, -2994.773f, -49.819f), -90.656f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_03a", new SpawnPlace(new Vector3(849.690f, -3004.704f, -49.999f), 61.599f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse1Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse1Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouseSafe1",new Vector3(846.2252f, -3000.636f, -48.99985f), 4.472474f),
+                    GenerateCokeStashInteract1("StashHouseCoke1",new Vector3(844.7819f, -3003.495f, -48.99985f), 107.9641f),
+                    GenerateMethStashInteract1("StashHouseMeth1",new Vector3(853.5051f, -2995.549f, -48.99985f), 255.099f),
+                    GenerateWeedStashInteract1("StashHouseWeed1",new Vector3(853.5314f, -3001.168f, -48.99985f), 285.4727f),
+
+                },
+             },
+             new GangDenInterior(28979302, "Stash House 002") // Altruist Camp Entrance Location -1101.667f, 4940.919f, 218.354f), 250.6345f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 4,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(848.344f, -2995.688f, -49.982f), 89.199f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_c_s", new SpawnPlace(new Vector3(851.944f, -2995.424f, -50.000f), 87.597f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(853.376f, -2995.438f, -49.795f), 8.599f)) { PlaceOnGround = true },
+                    new PropSpawn("p_planning_board_01", new SpawnPlace(new Vector3(854.572f, -2995.817f, -48.689f), -85.800f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(851.436f, -3004.014f, -50.000f), 88.599f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(854.408f, -2998.508f, -50.000f), -90.602f)) { PlaceOnGround = true },  // Closed Safe - Can Swap out for other Large Safe with interactive door.
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(843.896f, -3003.781f, -50.000f), 88.798f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(846.700f, -2999.914f, -49.819f), -18.601f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(853.356f, -3004.677f, -49.991f), -178.402f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cork_board", new SpawnPlace(new Vector3(854.913f, -3003.039f, -49.375f), -90.013f)) { PlaceOnGround = false },
+                    new PropSpawn("ba_prop_battle_crate_beer_01", new SpawnPlace(new Vector3(848.034f, -3004.397f, -50.004f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(847.794f, -2999.868f, -49.580f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(846.917f, -3004.701f, -49.580f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.411f, -3000.358f, -50.000f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(854.355f, -3000.322f, -49.161f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bigbag_open_01a", new SpawnPlace(new Vector3(854.261f, -3001.129f, -49.162f), -135.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_scales_01a", new SpawnPlace(new Vector3(854.419f, -2999.744f, -49.068f), 153.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.451f, -3000.122f, -49.394f), 58.597f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(844.905f, -3004.134f, -49.394f), -115.604f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(850.194f, -3004.400f, -49.394f), 135.546f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(844.382f, -3000.975f, -49.236f), 88.146f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(851.403f, -2997.014f, -50.000f), -8.655f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse2Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse2Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse2Safe1",new Vector3(853.5398f, -2998.526f, -48.99985f), 268.0723f),
+                    GenerateCokeStashInteract1("StashHouse2Coke1",new Vector3(844.7784f, -3003.469f, -48.99985f), 101.6296f),
+                    GenerateWeedStashInteract1("StashHouse2Weed1",new Vector3(853.4625f, -3001.091f, -48.99985f), 274.0926f),
+                    GenerateWeedStashInteract1("StashHouse2Weed2",new Vector3(850.5603f, -3003.797f, -48.99985f), 268.1238f),
+                    GenerateBeerStashInteract1("StashHouse2Beer1",new Vector3(847.9788f, -3003.378f, -48.99985f), 182.6534f),
+                },
+             },
+             new GangDenInterior(28979303, "Stash House 003") //Grapeseed Entrance Location 2258.136f, 5165.946f, 59.11175f), 240.0951f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(845.448f, -3002.922f, -49.795f), -160.401f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(846.488f, -2999.493f, -49.580f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.272f, -3000.439f, -49.986f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(854.355f, -3000.322f, -49.161f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bigbag_open_01a", new SpawnPlace(new Vector3(854.261f, -3001.129f, -49.162f), -135.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_scales_01a", new SpawnPlace(new Vector3(854.419f, -2999.744f, -49.068f), 153.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.453f, -2999.920f, -49.394f), 58.597f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(850.474f, -3003.685f, -49.394f), -32.255f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(854.089f, -3004.090f, -49.236f), -91.054f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_c_s", new SpawnPlace(new Vector3(843.763f, -3001.611f, -50.000f), 88.795f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(848.373f, -3003.786f, -49.991f), -91.401f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(849.982f, -3004.601f, -50.000f), -3.202f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_05a", new SpawnPlace(new Vector3(852.081f, -3004.082f, -49.718f), 144.944f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_03a", new SpawnPlace(new Vector3(848.537f, -3001.683f, -49.999f), 65.799f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(853.376f, -2998.659f, -49.991f), -2.201f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(854.315f, -2995.274f, -50.000f), -90.203f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(854.429f, -2997.252f, -50.000f), -90.203f)) { PlaceOnGround = true },  // Closed Safe - Can Swap out for other Large Safe with interactive door.
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.395f, -2995.742f, -49.394f), 129.197f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_01", new SpawnPlace(new Vector3(849.299f, -2994.584f, -49.994f), -0.404f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(851.533f, -2994.674f, -49.819f), -40.804f)) { PlaceOnGround = true },
+                    new PropSpawn("p_planning_board_01", new SpawnPlace(new Vector3(845.586f, -3004.940f, -48.667f), -179.604f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(845.553f, -2999.274f, -49.819f), -40.804f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse3Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse3Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse3Safe1",new Vector3(853.571f, -2997.242f, -48.99985f), 269.024f),
+                    GenerateMethStashInteract1("StashHouse3Meth1",new Vector3(849.7336f, -3003.825f, -48.99985f), 206.9012f),
+                    GenerateWeedStashInteract1("StashHouse3Weed1",new Vector3(853.488f, -2995.028f, -48.99985f), 264.5032f),
+                    GenerateWeedStashInteract1("StashHouse3Weed2",new Vector3(853.4197f, -3001.038f, -48.99985f), 268.9337f),
+                },
+             },
+             new GangDenInterior(28979304, "Stash House 004") //San Chianski Entrance Location 2881.959f, 4511.69f, 48.01416f), 67.04136f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 4,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.411f, -3000.358f, -50.000f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(854.355f, -3000.322f, -49.161f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bigbag_open_01a", new SpawnPlace(new Vector3(854.261f, -3001.129f, -49.162f), -135.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_scales_01a", new SpawnPlace(new Vector3(854.419f, -2999.744f, -49.068f), 153.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.123f, -3000.029f, -49.394f), 58.597f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(850.844f, -3003.648f, -49.394f), -32.255f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(848.785f, -2995.192f, -49.236f), -91.054f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(848.118f, -3003.646f, -49.991f), -91.401f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(850.344f, -3004.617f, -50.000f), -3.202f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_05a", new SpawnPlace(new Vector3(850.851f, -2995.366f, -49.718f), -88.857f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_03a", new SpawnPlace(new Vector3(848.537f, -3001.683f, -49.999f), 65.799f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(853.376f, -2998.659f, -49.991f), -2.201f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(853.777f, -3003.920f, -50.000f), -139.003f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(844.087f, -2999.098f, -50.000f), 3.197f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.411f, -3002.922f, -49.394f), 17.397f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(854.423f, -3002.158f, -49.819f), -40.804f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_campbed_01", new SpawnPlace(new Vector3(846.767f, -3003.869f, -49.957f), -92.001f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_campbed_01", new SpawnPlace(new Vector3(844.114f, -3003.728f, -49.957f), -92.001f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_b_s", new SpawnPlace(new Vector3(853.762f, -2997.547f, -49.999f), 178.596f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_plan_board_01c", new SpawnPlace(new Vector3(853.092f, -2994.178f, -49.565f), 0.0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(853.648f, -2995.622f, -49.795f), -66.750f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse4Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse4Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse4Safe1",new Vector3(844.1379f, -3000.113f, -48.99985f), 3.885361f),
+                    GenerateMethStashInteract1("StashHouse4Meth1",new Vector3(850.1418f, -3003.793f, -48.99986f), 190.6752f),
+                    GenerateWeedStashInteract1("StashHouse4Weed1",new Vector3(852.9894f, -3003.467f, -48.99986f), 248.9348f),
+                    GenerateWeedStashInteract1("StashHouse4Weed2",new Vector3(853.6411f, -3001.041f, -48.99986f), 270.9019f),
+                },
+             },
+             new GangDenInterior(28979305, "Stash House 005") // Galilee Entrance Location 1334.465f, 4306.764f, 38.23389f), 259.3055f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 2,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.411f, -3000.358f, -50.000f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(854.355f, -3000.322f, -49.161f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bigbag_open_01a", new SpawnPlace(new Vector3(854.261f, -3001.129f, -49.162f), -135.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_scales_01a", new SpawnPlace(new Vector3(854.419f, -2999.744f, -49.068f), 153.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.123f, -3000.029f, -49.394f), 58.597f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(844.118f, -3001.507f, -49.236f), -91.054f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(853.151f, -3004.660f, -50.000f), 179.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.708f, -3003.751f, -49.394f), -38.403f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(854.423f, -3002.158f, -49.819f), -40.804f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_campbed_01", new SpawnPlace(new Vector3(844.777f, -3004.428f, -49.957f), -179.801f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_a_s", new SpawnPlace(new Vector3(846.926f, -3003.406f, -50.012f), 88.795f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cork_board", new SpawnPlace(new Vector3(849.322f, -3005.206f, -49.375f), -179.997f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(848.798f, -3003.462f, -49.795f), -93.605f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_c_s", new SpawnPlace(new Vector3(850.744f, -3003.676f, -50.015f), -94.806f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(848.969f, -2994.805f, -50.000f), -2.206f)) { PlaceOnGround = true }, // Closed Safe - Can Swap out for other Large Safe with interactive door.
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(853.758f, -2995.010f, -50.000f), -1.806f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(854.263f, -2996.004f, -49.394f), -132.603f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(848.191f, -2997.174f, -49.580f), 109.994f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_vw_barrel_pile_02a", new SpawnPlace(new Vector3(846.943f, -2999.762f, -49.991f), 179.793f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_vw_barrel_01a", new SpawnPlace(new Vector3(845.591f, -3000.019f, -49.552f), 179.793f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(853.346f, -2998.755f, -49.991f), -0.206f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(851.014f, -2995.117f, -49.236f), -178.854f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse5Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse5Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse5Safe1",new Vector3(848.9993f, -2995.696f, -48.99985f), 357.9581f),
+                    GenerateMethStashInteract1("StashHouse5Meth1",new Vector3(853.5673f, -2995.894f, -48.99985f), 336.2319f),
+                    GenerateWeedStashInteract1("StashHouse5Weed1",new Vector3(853.647f, -3001.161f, -48.99985f), 273.8236f),
+                    GenerateWeedStashInteract1("StashHouse5Weed2",new Vector3(853.0141f, -3003.837f, -48.99985f), 191.6663f),
+                },
+             },
+             new GangDenInterior(28979306, "Stash House 006") // Sandy Shores Entrance Location 1857.707f, 3854.739f, 33.10221f), 194.6901f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(848.344f, -2995.688f, -49.982f), 89.199f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(843.875f, -3000.934f, -50.000f), 88.599f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(850.648f, -2994.771f, -50.000f), 0.198f)) { PlaceOnGround = true }, // Closed Safe - Can Swap out for other Large Safe with interactive door.
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(843.896f, -3003.781f, -50.000f), 88.798f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fruit_plas_crate_01", new SpawnPlace(new Vector3(846.700f, -2999.914f, -49.819f), -18.601f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(854.449f, -2995.694f, -49.991f), 89.798f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cork_board", new SpawnPlace(new Vector3(854.913f, -3002.836f, -49.375f), -90.015f)) { PlaceOnGround = false },
+                    new PropSpawn("ba_prop_battle_crate_beer_01", new SpawnPlace(new Vector3(850.445f, -3004.340f, -50.004f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(847.794f, -2999.868f, -49.580f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.411f, -3000.358f, -50.000f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(854.355f, -3000.322f, -49.161f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bigbag_open_01a", new SpawnPlace(new Vector3(854.261f, -3001.129f, -49.162f), -135.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_scales_01a", new SpawnPlace(new Vector3(854.419f, -2999.744f, -49.068f), 153.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(853.123f, -3000.029f, -49.394f), 58.597f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(844.905f, -3004.134f, -49.394f), -115.604f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(844.821f, -3000.663f, -49.394f), -70.455f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(848.743f, -3003.999f, -49.236f), 88.146f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(852.999f, -3003.279f, -49.795f), 75.745f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_c_s", new SpawnPlace(new Vector3(853.113f, -3004.764f, -50.000f), 179.745f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_pseudoephedrine", new SpawnPlace(new Vector3(851.595f, -2994.643f, -50.000f), 21.198f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(854.522f, -2998.714f, -49.999f), -30.402f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(854.152f, -2998.040f, -49.999f), 52.398f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse6Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse6Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse5Safe1",new Vector3(850.6879f, -2995.745f, -48.99985f), 357.78f),
+                    GenerateCokeStashInteract1("StashHouse5Coke1",new Vector3(844.6773f, -3003.338f, -48.99985f), 111.3026f),
+                    GenerateWeedStashInteract1("StashHouse5Weed1",new Vector3(844.6971f, -3001.271f, -48.99985f), 67.01158f),
+                    GenerateWeedStashInteract1("StashHouse5Weed2",new Vector3(853.6052f, -3001.05f, -48.99985f), 272.2758f),
+                    GenerateBeerStashInteract1("StashHouse5Beers1",new Vector3(850.3819f, -3003.343f, -48.9999f), 179.0919f),
+                },
+             },
+             new GangDenInterior(28979307, "Stash House 007") // Grand Senora Desert Entrance Location 905.8231f, 3586.154f, 33.54653f), 354.066f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 2,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("prop_tapeplayer_01", new SpawnPlace(new Vector3(854.722f, -2999.819f, -48.795f), -91.001f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_bag_01a", new SpawnPlace(new Vector3(852.324f, -2994.825f, -49.993f), -42.201f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_campbed_01", new SpawnPlace(new Vector3(849.638f, -2995.449f, -49.957f), 90.799f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table01", new SpawnPlace(new Vector3(853.988f, -2994.767f, -49.693f), -89.002f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(845.836f, -3004.098f, -49.795f), -175.802f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_hei_skid_chair", new SpawnPlace(new Vector3(852.035f, -2996.119f, -49.599f), 119.598f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_cabinet01", new SpawnPlace(new Vector3(854.524f, -2999.897f, -50.002f), -89.803f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_pizza02", new SpawnPlace(new Vector3(848.424f, -2995.980f, -49.944f), -125.402f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_binbag_01b", new SpawnPlace(new Vector3(850.188f, -3000.188f, -49.675f), -110.401f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_couch04", new SpawnPlace(new Vector3(847.603f, -3003.649f, -50.026f), -85.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cd_paper_pile3", new SpawnPlace(new Vector3(849.183f, -3005.210f, -48.370f), 179.187f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_cd_paper_pile2", new SpawnPlace(new Vector3(849.460f, -3005.210f, -48.498f), 179.187f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_rub_binbag_03b", new SpawnPlace(new Vector3(845.677f, -2999.376f, -50.085f), 31.587f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_blackboard_01a", new SpawnPlace(new Vector3(854.935f, -2996.799f, -48.436f), -89.002f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_skid_box_07", new SpawnPlace(new Vector3(851.333f, -2999.457f, -50.008f), -89.002f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(843.781f, -3001.582f, -50.000f), 90.598f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(853.514f, -3004.632f, -49.991f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(853.507f, -3001.537f, -49.991f), -179.400f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_table_02", new SpawnPlace(new Vector3(848.633f, -3003.924f, -49.584f), 93.200f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(851.422f, -3004.834f, -49.580f), 38.598f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_pseudoephedrine", new SpawnPlace(new Vector3(854.618f, -3003.081f, -50.000f), 0.598f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(846.514f, -2999.712f, -49.999f), 0.598f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(853.923f, -2998.285f, -49.236f), 0.598f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_laptop_01a", new SpawnPlace(new Vector3(848.564f, -3003.943f, -49.190f), 92.979f)) { PlaceOnGround = false },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse7Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse7Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse7Safe1",new Vector3(844.7854f, -3001.56f, -48.99985f), 92.0545f),
+                },
+             },
+             new GangDenInterior(28979308, "Stash House 008") // Thomson Scrapyard Entrance Location 2403.49f, 3127.865f, 48.15289f), 244.175f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 5,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm_prop_x17_bag_01a", new SpawnPlace(new Vector3(845.130f, -3003.176f, -49.993f), -176.801f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(843.843f, -3004.481f, -49.795f), 178.398f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cd_paper_pile3", new SpawnPlace(new Vector3(849.183f, -3005.210f, -48.370f), 179.187f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_cd_paper_pile2", new SpawnPlace(new Vector3(849.460f, -3005.210f, -48.498f), 179.187f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_clubhouse_blackboard_01a", new SpawnPlace(new Vector3(854.935f, -2995.799f, -48.436f), -89.002f)) { PlaceOnGround = false },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(844.085f, -2998.296f, -50.000f), -0.602f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(853.437f, -2994.645f, -49.991f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(853.509f, -2997.115f, -49.991f), 0.199f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(851.568f, -2994.604f, -49.580f), 38.598f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(845.085f, -2998.340f, -49.999f), 0.598f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(850.607f, -3000.959f, -49.236f), -91.002f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(848.347f, -2994.916f, -50.000f), 90.000f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(849.001f, -2997.003f, -49.997f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_elecbox_02a", new SpawnPlace(new Vector3(843.741f, -3001.471f, -49.999f), -90.200f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fire_exting_1b", new SpawnPlace(new Vector3(843.739f, -3002.087f, -49.999f), -131.000f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_labvats", new SpawnPlace(new Vector3(854.088f, -3002.163f, -50.003f), -88.002f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_med_01b", new SpawnPlace(new Vector3(853.937f, -3004.375f, -50.019f), 178.398f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_dyn_pc", new SpawnPlace(new Vector3(847.610f, -3004.926f, -49.734f), 178.398f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_monitor_04a", new SpawnPlace(new Vector3(848.161f, -3004.910f, -49.200f), 168.668f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_table_03", new SpawnPlace(new Vector3(848.540f, -3004.572f, -49.600f), 179.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keyboard_01a", new SpawnPlace(new Vector3(848.565f, -3004.594f, -49.199f), -179.000f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(848.912f, -3003.457f, -49.398f), -63.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(854.284f, -2999.564f, -50.000f), 92.998f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_couch01", new SpawnPlace(new Vector3(845.638f, -3004.498f, -49.535f), -88.401f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse8Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse8Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse8Safe1",new Vector3(844.1138f, -2999.223f, -48.99986f), 3.583764f),
+                    GenerateCokeStashInteract1("StashHouse8Coke1",new Vector3(853.4878f, -2999.708f, -48.99986f), 272.7567f),
+                },
+             },
+             new GangDenInterior(28979309, "Stash House 009") // Harmony Entrance Location 550.3796f, 2656.521f, 42.21735f), 187.161f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 4,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("prop_ld_farm_table01", new SpawnPlace(new Vector3(854.446f, -3004.354f, -49.693f), -179.402f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_blackboard_01a", new SpawnPlace(new Vector3(854.935f, -2995.799f, -48.436f), -89.002f)) { PlaceOnGround = false },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(853.707f, -2994.807f, -50.000f), -0.602f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(845.441f, -3004.774f, -49.991f), -0.800f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(843.739f, -3002.947f, -49.991f), -90.001f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(847.553f, -2999.682f, -49.580f), 38.598f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(847.145f, -3004.844f, -49.999f), 0.598f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(844.078f, -2998.120f, -50.000f), 0.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(846.391f, -3000.274f, -49.997f), -91.601f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_elecbox_02a", new SpawnPlace(new Vector3(850.081f, -2994.525f, -49.999f), 0.400f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fire_exting_1b", new SpawnPlace(new Vector3(850.772f, -3004.833f, -49.999f), -131.000f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_gascyl_02b", new SpawnPlace(new Vector3(845.238f, -2998.172f, -50.000f), 90.999f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(853.304f, -3001.657f, -49.398f), 13.400f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(848.565f, -3004.066f, -50.000f), 91.198f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_07a", new SpawnPlace(new Vector3(851.920f, -2996.178f, -49.999f), -88.402f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(851.724f, -2998.601f, -50.000f), -179.003f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(852.113f, -2998.527f, -49.101f), -3.203f)) { PlaceOnGround = true },
+                    new PropSpawn("imp_prop_impexp_tablet", new SpawnPlace(new Vector3(851.369f, -2998.600f, -49.160f), 0.0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(848.512f, -2997.033f, -49.993f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(849.797f, -3004.620f, -50.000f), -177.400f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_hei_cash_trolly_03", new SpawnPlace(new Vector3(848.457f, -3002.646f, -49.527f), -177.400f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ghettoblast_02", new SpawnPlace(new Vector3(846.397f, -3000.720f, -48.750f), 58.200f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_filecab_01a", new SpawnPlace(new Vector3(843.596f, -3001.137f, -50.000f), 90.399f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_couch01", new SpawnPlace(new Vector3(851.779f, -3003.648f, -49.548f), -173.601f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse9Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse9Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse9Safe1",new Vector3(853.728f, -2995.701f, -48.99985f), 359.3498f),
+                    GenerateCokeStashInteract1("StashHouse9Coke1",new Vector3(849.3434f, -3003.73f, -48.99985f), 118.8595f),
+                },
+             },
+             new GangDenInterior(28979310, "Stash House 010") // Zancudo River Entrance Location -1102.169f, 2721.812f, 18.8004f), 313.0412f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm_prop_x17_bag_01a", new SpawnPlace(new Vector3(851.596f, -3002.239f, -49.993f), -60.401f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(854.407f, -2994.680f, -50.000f), -88.802f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(845.441f, -3004.774f, -49.991f), -0.800f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(851.115f, -2996.706f, -49.580f), 38.598f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(847.145f, -3004.844f, -49.999f), 0.598f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(844.078f, -2998.120f, -50.000f), 0.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(851.240f, -2998.112f, -49.997f), -91.601f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_elecbox_02a", new SpawnPlace(new Vector3(850.081f, -2994.525f, -49.999f), 0.400f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fire_exting_1b", new SpawnPlace(new Vector3(850.789f, -2994.518f, -49.999f), -131.000f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_gascyl_02b", new SpawnPlace(new Vector3(845.238f, -2998.172f, -50.000f), 90.999f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(853.276f, -2998.551f, -49.398f), 124.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_couch01", new SpawnPlace(new Vector3(854.220f, -3003.616f, -49.486f), 2.999f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.385f, -2998.305f, -49.993f), 90.397f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(854.373f, -2997.855f, -49.162f), -77.003f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(854.290f, -2996.532f, -49.993f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(854.479f, -3000.201f, -50.000f), -91.000f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_hei_cash_trolly_03", new SpawnPlace(new Vector3(845.695f, -3001.681f, -49.527f), -141.400f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_filecab_01a", new SpawnPlace(new Vector3(843.596f, -3001.137f, -50.000f), 90.399f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bucket_01a", new SpawnPlace(new Vector3(848.435f, -3002.643f, -50.001f), -140.600f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(846.441f, -2999.850f, -50.000f), -177.600f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(848.419f, -3004.084f, -50.000f), 91.200f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_tv_stand_01a", new SpawnPlace(new Vector3(851.720f, -3003.356f, -50.000f), 89.197f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_02", new SpawnPlace(new Vector3(843.748f, -3002.930f, -49.991f), 91.400f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boombox_01", new SpawnPlace(new Vector3(854.383f, -2998.765f, -48.927f), -102.340f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse10Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse10Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse10Safe1",new Vector3(853.6093f, -2994.68f, -48.99984f), 270.6804f),
+                    GenerateMethStashInteract1("StashHouse10Meth1",new Vector3(846.6302f, -3000.602f, -48.99984f), 10.16887f),
+                    GenerateWeedStashInteract1("StashHouse10Weed1",new Vector3(849.1788f, -3004.066f, -48.99984f), 93.63348f),
+                },
+             },
+             new GangDenInterior(28979311, "Stash House 011") // Great Chaparral Entrance Location -126.0899f, 1896.612f, 197.333f), 182.3983f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 4,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(850.498f, -3004.695f, -50.000f), -178.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(848.647f, -2996.849f, -50.000f), 0.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(848.599f, -2995.311f, -49.997f), 88.798f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_gascyl_02b", new SpawnPlace(new Vector3(843.694f, -3001.309f, -50.000f), 90.999f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(852.818f, -3003.719f, -49.398f), 55.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(852.820f, -3004.767f, -50.000f), -0.203f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(853.385f, -3004.735f, -49.162f), -165.803f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boombox_01", new SpawnPlace(new Vector3(852.091f, -3004.958f, -48.927f), 166.200f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_02", new SpawnPlace(new Vector3(843.794f, -3003.100f, -49.991f), 90.000f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_01", new SpawnPlace(new Vector3(845.625f, -3004.750f, -49.994f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(847.482f, -3003.001f, -49.991f), -89.801f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cabinet_01b", new SpawnPlace(new Vector3(843.952f, -2997.980f, -50.122f), 1.399f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_hei_cash_trolly_03", new SpawnPlace(new Vector3(846.494f, -3001.470f, -49.527f), -158.400f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_pseudoephedrine", new SpawnPlace(new Vector3(846.507f, -3001.487f, -49.858f), -67.602f)) { PlaceOnGround =  false},
+                    new PropSpawn("v_tre_sofa_mess_b_s", new SpawnPlace(new Vector3(851.684f, -2999.904f, -49.999f), 89.999f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cd_paper_pile3", new SpawnPlace(new Vector3(849.183f, -3005.210f, -48.370f), 179.187f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_cd_paper_pile2", new SpawnPlace(new Vector3(849.460f, -3005.210f, -48.498f), 179.187f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.403f, -3004.093f, -50.000f), -90.204f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_laptop_01a", new SpawnPlace(new Vector3(854.545f, -3003.637f, -49.156f), -90.204f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_table_04", new SpawnPlace(new Vector3(853.997f, -2994.724f, -49.597f), 1.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_coffee_mac_01", new SpawnPlace(new Vector3(854.015f, -2994.495f, -48.978f), 1.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fbi3_coffee_table", new SpawnPlace(new Vector3(853.180f, -2999.220f, -49.931f), 91.399f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_w_board_blank", new SpawnPlace(new Vector3(853.802f, -2999.890f, -50.000f), -103.000f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(852.511f, -2995.617f, -49.991f), 89.999f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse11Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse11Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse11Safe1",new Vector3(850.4731f, -3003.8f, -48.99986f), 181.263f),
+                },
+             },
+             new GangDenInterior(28979312, "Stash House 012") // Farmhouse Entrance Location 1546.837f, 2166.487f, 78.72321f), 87.95683f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(848.392f, -2995.648f, -50.000f), 89.597f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(850.916f, -3004.545f, -50.000f), 179.998f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(852.818f, -3003.719f, -49.398f), 55.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(852.820f, -3004.767f, -50.000f), -0.203f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(853.385f, -3004.735f, -49.162f), -165.803f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boombox_01", new SpawnPlace(new Vector3(852.091f, -3004.958f, -48.927f), 166.200f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bucket_01a", new SpawnPlace(new Vector3(846.011f, -2998.604f, -50.001f), 3.000f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_02", new SpawnPlace(new Vector3(848.426f, -3004.704f, -49.991f), -178.400f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_01", new SpawnPlace(new Vector3(844.839f, -3004.783f, -49.994f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(846.605f, -3002.985f, -49.991f), -87.401f)) { PlaceOnGround = true },
+                    new PropSpawn("reh_prop_reh_case_drone_01a", new SpawnPlace(new Vector3(848.636f, -2994.751f, -49.999f), 89.600f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_b_s", new SpawnPlace(new Vector3(851.419f, -2994.642f, -49.999f), 1.200f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.394f, -3004.142f, -49.987f), -90.204f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_laptop_01a", new SpawnPlace(new Vector3(854.545f, -3003.637f, -49.156f), -90.204f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_w_board_blank", new SpawnPlace(new Vector3(843.648f, -3002.491f, -50.000f), 88.799f)) { PlaceOnGround = false },
+                    new PropSpawn("v_res_cdstorage", new SpawnPlace(new Vector3(854.537f, -3003.306f, -49.082f), -89.004f)) { PlaceOnGround = false },
+                    new PropSpawn("ex_prop_crate_closed_bc", new SpawnPlace(new Vector3(844.150f, -2998.623f, -49.881f), -91.004f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_table_04", new SpawnPlace(new Vector3(853.997f, -2994.724f, -49.597f), 1.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_coffee_mac_01", new SpawnPlace(new Vector3(854.015f, -2994.495f, -48.978f), 1.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fbi3_coffee_table", new SpawnPlace(new Vector3(851.356f, -2996.063f, -49.931f), 2.199f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_tv_stand_01a", new SpawnPlace(new Vector3(850.118f, -2996.684f, -50.000f), 150.798f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_air_cargo_04b", new SpawnPlace(new Vector3(851.252f, -3000.667f, -50.007f), 89.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_cargo_03a", new SpawnPlace(new Vector3(853.560f, -3000.578f, -49.999f), 89.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_muster_wboard_02", new SpawnPlace(new Vector3(854.632f, -2998.135f, -48.665f), -90.401f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse12Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse12Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse12Safe1",new Vector3(849.3044f, -2995.629f, -48.99985f), 91.76073f),
+                },
+             },
+             new GangDenInterior(28979313, "Stash House 013") // Chumash Entrance Location -3170.207f, 1034.294f, 20.84833f), 246.2453f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 5,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(848.457f, -2996.512f, -49.993f), 88.998f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(854.339f, -2995.289f, -50.000f), 88.198f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_elecbox_14", new SpawnPlace(new Vector3(844.266f, -2998.538f, -49.995f), 0.198f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_heist_off_chair", new SpawnPlace(new Vector3(853.042f, -3004.136f, -49.991f), 141.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.393f, -3003.871f, -50.006f), 88.797f)) { PlaceOnGround = true },
+                    new PropSpawn("p_cs_laptop_02", new SpawnPlace(new Vector3(854.400f, -3004.740f, -49.192f), -100.603f)) { PlaceOnGround = true },
+                    new PropSpawn("v_serv_plas_boxg4", new SpawnPlace(new Vector3(854.304f, -3002.189f, -50.017f), 91.396f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(847.103f, -3000.247f, -49.997f), -1.803f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boombox_01", new SpawnPlace(new Vector3(847.654f, -3000.244f, -48.669f), 108.197f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(850.337f, -3004.079f, -50.000f), 89.396f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(853.866f, -2997.281f, -49.987f), 2.396f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(844.106f, -3004.184f, -49.236f), -91.404f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(845.684f, -3004.138f, -49.235f), 89.995f)) { PlaceOnGround = true },
+                    new PropSpawn("p_cs_laptop_02", new SpawnPlace(new Vector3(850.521f, -3003.873f, -49.187f), -91.005f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_skid_box_07", new SpawnPlace(new Vector3(844.441f, -3001.057f, -50.008f), -178.006f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_06", new SpawnPlace(new Vector3(847.048f, -3003.328f, -49.728f), 94.194f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_heist_off_chair", new SpawnPlace(new Vector3(849.752f, -3004.091f, -49.991f), 94.194f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_binbag_06", new SpawnPlace(new Vector3(851.708f, -3004.690f, -49.941f), -178.406f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_crates_pistols_01a", new SpawnPlace(new Vector3(854.386f, -2998.619f, -50.000f), 2.399f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(854.263f, -2999.933f, -49.993f), -87.801f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cork_board", new SpawnPlace(new Vector3(851.408f, -2994.172f, -49.375f), -0.202f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_crate_11e", new SpawnPlace(new Vector3(845.761f, -2998.440f, -50.000f), -0.002f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(848.344f, -2995.083f, -50.000f), 89.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood01a", new SpawnPlace(new Vector3(853.455f, -2998.425f, -49.999f), -87.801f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse13Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse13Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse13Safe1",new Vector3(849.3016f, -2995.102f, -48.99985f), 88.66225f),
+                    GenerateWeedStashInteract1("StashHouse13Weed1",new Vector3(853.5904f, -2994.895f, -48.99985f), 286.1106f),
+                },
+             },
+             new GangDenInterior(28979314, "Stash House 014") // Downtown Vinewood Entrance Location 121.3937f, 319.0936f, 112.1519f), 118.1146f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(844.204f, -2999.037f, -50.000f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(848.329f, -2996.327f, -50.000f), -90.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_lrg_01a", new SpawnPlace(new Vector3(844.376f, -3004.016f, -49.988f), -90.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_lrg_01a", new SpawnPlace(new Vector3(844.399f, -3002.720f, -49.988f), -167.600f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_med_01a", new SpawnPlace(new Vector3(845.747f, -3004.030f, -50.000f), -90.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(854.061f, -2996.842f, -50.000f), -90.000f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(854.092f, -3003.584f, -49.993f), -179.000f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_tv_flat_03", new SpawnPlace(new Vector3(854.195f, -3003.462f, -48.866f), -90.601f)) { PlaceOnGround = false },
+                    new PropSpawn("sf_prop_sf_laptop_01a", new SpawnPlace(new Vector3(854.033f, -2996.483f, -49.158f), -92.601f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_off_chair_04", new SpawnPlace(new Vector3(853.005f, -2996.182f, -49.948f), 47.999f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_b_s", new SpawnPlace(new Vector3(851.352f, -3003.737f, -49.998f), 90.199f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_off_chair_04", new SpawnPlace(new Vector3(848.985f, -2995.487f, -49.948f), -68.201f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(854.431f, -3004.844f, -49.580f), -68.201f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_05a", new SpawnPlace(new Vector3(847.462f, -3000.333f, -49.757f), -86.603f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_crate_stack_01", new SpawnPlace(new Vector3(854.228f, -3002.210f, -49.462f), -179.604f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_plan_board_01c", new SpawnPlace(new Vector3(847.605f, -3005.187f, -49.565f), -179.800f)) { PlaceOnGround = false },
+                    new PropSpawn("sf_prop_sf_lamp_studio_02a", new SpawnPlace(new Vector3(846.674f, -3000.939f, -49.995f), -34.002f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_closed_bc", new SpawnPlace(new Vector3(850.786f, -3000.483f, -49.880f), 3.197f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(854.127f, -2998.992f, -49.997f), -88.754f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(854.183f, -3000.038f, -48.994f), -88.754f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(850.536f, -2994.805f, -50.000f), -180.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(848.571f, -2994.646f, -49.999f), -180.000f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(854.130f, -2994.905f, -49.996f), 178.000f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_07", new SpawnPlace(new Vector3(852.927f, -2994.883f, -49.678f), -89.801f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse14Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse14Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse14Safe1",new Vector3(844.2067f, -2999.955f, -48.99985f), 2.114391f),
+                    GenerateMethStashInteract1("StashHouse14Meth1",new Vector3(850.6577f, -2995.619f, -48.99985f), 3.181653f),
+                    GenerateWeedStashInteract1("StashHouse14Weed1",new Vector3(849.1112f, -2996.595f, -48.99985f), 105.0171f),
+                },
+             },
+             new GangDenInterior(28979315, "Stash House 015") // West Vinewood Entrance Location -583.1677f, 195.3845f, 71.44419f), 89.73394f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 2,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(844.086f, -3002.327f, -50.000f), 89.849f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_vw_barrel_pile_01a", new SpawnPlace(new Vector3(843.968f, -3001.020f, -50.000f), 87.649f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_pseudoephedrine", new SpawnPlace(new Vector3(854.248f, -2994.718f, -49.990f), 84.648f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(853.686f, -2994.859f, -50.000f), -179.952f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(849.020f, -2994.913f, -50.000f), 179.847f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(851.391f, -2994.859f, -50.000f), 179.847f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_cut_02", new SpawnPlace(new Vector3(852.051f, -2994.957f, -49.158f), -16.553f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_press_01aa", new SpawnPlace(new Vector3(851.114f, -2994.560f, -49.164f), 6.847f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(853.631f, -2996.180f, -49.398f), -141.353f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_offchair_exec_01", new SpawnPlace(new Vector3(851.378f, -2996.300f, -49.398f), 159.447f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(854.331f, -2998.450f, -49.991f), 90.846f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_drop_crate_01_set", new SpawnPlace(new Vector3(847.314f, -3000.605f, -49.462f), 2.046f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(850.411f, -3004.554f, -49.996f), 5.847f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_elecbox_14", new SpawnPlace(new Vector3(844.144f, -3004.091f, -49.995f), -90.953f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fire_hosebox_01", new SpawnPlace(new Vector3(846.804f, -3005.210f, -48.819f), 179.686f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_watercooler_dark", new SpawnPlace(new Vector3(854.611f, -3000.241f, -50.002f), -87.154f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_bar_stool_01", new SpawnPlace(new Vector3(848.250f, -2995.828f, -50.000f), -87.154f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fib_clipboard", new SpawnPlace(new Vector3(847.858f, -2997.083f, -48.232f), 91.196f)) { PlaceOnGround = false },
+                    new PropSpawn("xm3_prop_xm3_boxwood_01a", new SpawnPlace(new Vector3(845.657f, -2999.944f, -50.000f), 1.745f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(854.214f, -3002.208f, -49.997f), 92.945f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_01", new SpawnPlace(new Vector3(852.152f, -3004.596f, -50.000f), 76.744f)) { PlaceOnGround = true },
+                    new PropSpawn("sm_prop_smug_crate_s_bones", new SpawnPlace(new Vector3(854.363f, -3004.224f, -49.682f), -84.151f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_01", new SpawnPlace(new Vector3(848.290f, -3001.349f, -50.000f), 16.744f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_bar_stool_01", new SpawnPlace(new Vector3(844.999f, -3001.344f, -50.000f), -87.154f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse15Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse15Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse15Safe1",new Vector3(845.0145f, -3002.3f, -48.99985f), 89.88532f),
+                    GenerateCokeStashInteract1("StashHouse15Coke1",new Vector3(851.9222f, -2995.62f, -48.99985f), 4.424969f),
+                    GenerateMethStashInteract1("StashHouse15Meth1",new Vector3(853.5299f, -2995.781f, -48.99985f), 357.879f),
+                    GenerateWeedStashInteract1("StashHouse15Weed1",new Vector3(848.8243f, -2995.672f, -48.99985f), 39.6638f),
+                },
+             },
+             new GangDenInterior(28979316, "Stash House 016") // Rockford Hills Entrance Location -1308.488f, -168.8399f, 44.1404f), 274.1358f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 5,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(843.881f, -3004.516f, -50.000f), 91.800f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_couch04", new SpawnPlace(new Vector3(847.373f, -3001.649f, -50.035f), -90.401f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_ex_tv_flat_01", new SpawnPlace(new Vector3(843.283f, -3001.316f, -49.000f), 88.999f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(846.179f, -3001.691f, -49.795f), -179.400f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(844.025f, -2998.704f, -49.993f), -178.400f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_table_02", new SpawnPlace(new Vector3(853.620f, -3004.438f, -49.577f), 2.200f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bigbag_01a", new SpawnPlace(new Vector3(854.284f, -3004.427f, -49.180f), -178.801f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_meth_smallbag_01a", new SpawnPlace(new Vector3(854.257f, -3004.421f, -48.922f), -5.601f)) { PlaceOnGround = false },
+                    new PropSpawn("sf_prop_sf_laptop_01a", new SpawnPlace(new Vector3(853.232f, -3004.453f, -49.182f), 170.174f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_fh_kitchtable", new SpawnPlace(new Vector3(849.528f, -3004.674f, -49.500f), -179.401f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(851.516f, -3004.462f, -49.997f), 179.799f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_beerpat1", new SpawnPlace(new Vector3(851.183f, -3004.413f, -48.742f), 87.199f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_offchair_01a", new SpawnPlace(new Vector3(854.068f, -3003.209f, -49.398f), -56.002f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(852.606f, -2999.889f, -49.996f), 91.996f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_05a", new SpawnPlace(new Vector3(853.946f, -3000.013f, -50.000f), 91.397f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(851.519f, -2994.779f, -50.000f), -178.553f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(848.844f, -2995.023f, -49.236f), -178.553f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(851.698f, -2995.619f, -49.394f), -160.553f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(853.904f, -2997.892f, -49.997f), 90.998f)) { PlaceOnGround = true },
+                    new PropSpawn("p_planning_board_02", new SpawnPlace(new Vector3(854.918f, -3002.292f, -49.565f), -89.755f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_wood01a", new SpawnPlace(new Vector3(852.769f, -2998.128f, -49.999f), -175.955f)) { PlaceOnGround = true },
+                    new PropSpawn("p_cs_locker_01_s", new SpawnPlace(new Vector3(848.317f, -3004.798f, -49.899f), -179.963f)) { PlaceOnGround = true },
+                    new PropSpawn("ng_proc_box_01a", new SpawnPlace(new Vector3(848.117f, -2996.376f, -50.000f), -176.955f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_filecab_01a", new SpawnPlace(new Vector3(854.541f, -2994.522f, -50.000f), 0.445f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse16Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse16Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse16Safe1",new Vector3(844.848f, -3004.508f, -48.99985f), 87.64998f),
+                    GenerateMethStashInteract1("StashHouse16Meth1",new Vector3(853.5313f, -3003.656f, -48.99985f), 226.691f),
+                    GenerateWeedStashInteract1("StashHouse16Weed1",new Vector3(851.1292f, -2995.549f, -48.99985f), 21.66432f),
+                },
+             },
+             new GangDenInterior(28979317, "Stash House 017") // Alta Entrance Location -1308.488f, -168.8399f, 44.1404f), 274.1358f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 4,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("prop_ld_farm_couch02", new SpawnPlace(new Vector3(843.883f, -3002.260f, -49.489f), 0.799f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_table_01", new SpawnPlace(new Vector3(844.100f, -3004.215f, -49.564f), 0.799f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_patio_lounger1_table", new SpawnPlace(new Vector3(844.051f, -3000.628f, -49.842f), 0.799f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_portable_hifi_01", new SpawnPlace(new Vector3(843.956f, -3000.478f, -49.592f), 94.799f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(846.812f, -3001.789f, -49.997f), -89.002f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_tv_flat_03", new SpawnPlace(new Vector3(846.272f, -3001.678f, -48.830f), -89.801f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(848.209f, -3001.659f, -49.236f), 91.799f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cork_board", new SpawnPlace(new Vector3(847.853f, -3005.195f, -49.375f), 179.999f)) { PlaceOnGround = false },
+                    new PropSpawn("xm_prop_x17dlc_rep_sign_01a", new SpawnPlace(new Vector3(847.281f, -3005.166f, -48.670f), -91.153f)) { PlaceOnGround = false },
+                    new PropSpawn("imp_prop_impexp_boxpile_01", new SpawnPlace(new Vector3(851.409f, -2994.714f, -50.010f), 179.247f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(854.384f, -3004.466f, -49.992f), -91.754f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_tea01a", new SpawnPlace(new Vector3(854.483f, -2996.780f, -50.000f), 179.047f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(849.397f, -2996.764f, -49.996f), 179.047f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_09a", new SpawnPlace(new Vector3(851.095f, -2997.076f, -50.000f), 179.047f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_pizza_box_03", new SpawnPlace(new Vector3(843.710f, -3003.579f, -49.137f), 126.446f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_rub_boxpile_06", new SpawnPlace(new Vector3(852.491f, -2998.072f, -49.743f), -90.754f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_table_02", new SpawnPlace(new Vector3(854.458f, -3002.936f, -49.584f), -90.754f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_tool_broom", new SpawnPlace(new Vector3(850.082f, -3005.083f, -49.329f), 3.799f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_02", new SpawnPlace(new Vector3(854.373f, -3000.499f, -49.991f), -90.001f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_game_clock_02", new SpawnPlace(new Vector3(850.819f, -3005.210f, -48.093f), 177.399f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(851.148f, -3004.577f, -49.993f), 87.998f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_smallbag_01a", new SpawnPlace(new Vector3(854.284f, -3002.429f, -49.243f), 91.598f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_laptop_01a", new SpawnPlace(new Vector3(854.279f, -3003.466f, -49.177f), -93.803f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_off_chair_04", new SpawnPlace(new Vector3(853.484f, -3002.526f, -49.948f), 63.397f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse17Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse17Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse17Safe1",new Vector3(853.5201f, -3004.425f, -48.99985f), 270.618f),
+                    GenerateWeedStashInteract1("StashHouse17Weed1",new Vector3(853.5408f, -3002.683f, -48.99984f), 293.4523f),
+                },
+             },
+             new GangDenInterior(28979318, "Stash House 018") // Mirror Park Entrance Location (1152.763f, -431.955f, 67.01271f), 76.32034f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 4,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(854.006f, -2994.680f, -50.017f), -1.601f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunlocker_01a", new SpawnPlace(new Vector3(848.148f, -2996.556f, -49.991f), 91.999f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gunlocker_ammo_01a", new SpawnPlace(new Vector3(848.242f, -2996.538f, -48.505f), 91.999f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(847.891f, -2994.798f, -48.960f), -1.001f)) { PlaceOnGround =  true },
+                    new PropSpawn("prop_elecbox_14", new SpawnPlace(new Vector3(844.336f, -2998.506f, -49.995f), 178.199f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_table_04", new SpawnPlace(new Vector3(852.467f, -2994.780f, -49.614f), -0.801f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_off_chair_04_s", new SpawnPlace(new Vector3(853.101f, -2995.563f, -49.948f), -173.801f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(853.038f, -2994.885f, -49.216f), -2.802f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(850.360f, -2994.741f, -50.040f), -1.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_off_chair_04b", new SpawnPlace(new Vector3(850.862f, -2995.454f, -49.948f), 169.798f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_smallbag_01a", new SpawnPlace(new Vector3(852.182f, -2994.762f, -49.245f), 91.598f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_cratepile_05a", new SpawnPlace(new Vector3(854.526f, -2998.445f, -49.756f), -91.602f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_07a", new SpawnPlace(new Vector3(846.961f, -2999.998f, -50.022f), -178.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(854.323f, -2999.885f, -49.998f), 88.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(854.299f, -3002.235f, -49.991f), 88.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(854.286f, -3000.965f, -48.840f), 87.399f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_wood03a", new SpawnPlace(new Vector3(854.068f, -3004.164f, -49.993f), -160.002f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(844.778f, -3004.377f, -49.236f), 177.998f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_cratepile_07a", new SpawnPlace(new Vector3(844.528f, -3002.719f, -49.682f), 177.998f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_table_02", new SpawnPlace(new Vector3(848.995f, -3003.661f, -49.570f), 5.197f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_skid_chair_01", new SpawnPlace(new Vector3(849.483f, -3004.629f, -49.599f), -179.803f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_skid_chair_02", new SpawnPlace(new Vector3(848.557f, -3004.527f, -49.599f), -179.803f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_skid_chair_03", new SpawnPlace(new Vector3(849.332f, -3003.107f, -49.599f), -21.603f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_06", new SpawnPlace(new Vector3(853.099f, -3001.478f, -49.728f), -87.003f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse18Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse18Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse18Safe1",new Vector3(853.9711f, -2995.555f, -48.99985f), 0.004090454f),
+                    GenerateMethStashInteract1("StashHouse18Meth1",new Vector3(852.1877f, -2995.552f, -48.99985f), 359.2556f),
+                    GenerateMethStashInteract1("StashHouse18Meth2",new Vector3(850.428f, -2995.599f, -48.99985f), 0.1283789f),
+                },
+             },
+             new GangDenInterior(28979319, "Stash House 019") // Little Seoul Entrance Location -545.9579f, -873.4446f, 27.19872f), 178.7813f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(848.351f, -2995.019f, -50.000f), 90.149f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_fib_clipboard", new SpawnPlace(new Vector3(847.849f, -2995.785f, -48.521f), 89.549f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_dart_bd_cab_01", new SpawnPlace(new Vector3(843.277f, -3003.680f, -48.478f), 89.549f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_table_04", new SpawnPlace(new Vector3(848.034f, -3004.650f, -49.597f), 2.549f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(853.807f, -2994.703f, -50.000f), 1.349f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(851.636f, -2994.698f, -50.043f), 1.998f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_offchair_exec_01", new SpawnPlace(new Vector3(853.718f, -2995.582f, -49.398f), -173.002f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(853.777f, -2999.479f, -50.000f), -179.002f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(853.911f, -2998.965f, -49.398f), 18.198f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_02", new SpawnPlace(new Vector3(854.461f, -2997.632f, -49.733f), 89.397f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_game_clock_02", new SpawnPlace(new Vector3(849.940f, -3005.201f, -47.996f), 177.597f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_pizza_box_03", new SpawnPlace(new Vector3(847.951f, -3004.611f, -49.149f), 174.396f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_boxpile_04a", new SpawnPlace(new Vector3(854.102f, -3004.258f, -49.236f), 88.996f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_06", new SpawnPlace(new Vector3(852.801f, -3003.373f, -49.728f), 88.996f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(853.806f, -3002.405f, -50.000f), 0.396f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_offchair_exec_01", new SpawnPlace(new Vector3(853.911f, -3001.338f, -49.398f), -49.605f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_01a", new SpawnPlace(new Vector3(853.512f, -3002.301f, -49.182f), -178.600f)) { PlaceOnGround = false },
+                    new PropSpawn("v_res_desktidy", new SpawnPlace(new Vector3(854.620f, -3002.380f, -49.163f), -178.600f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_rub_boxpile_01", new SpawnPlace(new Vector3(849.728f, -3004.733f, -50.000f), 86.996f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_drug_statue_stack", new SpawnPlace(new Vector3(851.466f, -3005.167f, -49.700f), -170.804f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_crate_02a", new SpawnPlace(new Vector3(850.416f, -3003.251f, -49.767f), 89.800f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_cardpile_02", new SpawnPlace(new Vector3(850.027f, -3004.418f, -49.724f), -84.401f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_07a", new SpawnPlace(new Vector3(845.325f, -3001.352f, -49.999f), -177.802f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_wood04a", new SpawnPlace(new Vector3(846.427f, -2999.830f, -50.002f), 179.798f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse19Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse19Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse19Safe1",new Vector3(849.2909f, -2994.997f, -48.99985f), 91.22735f),
+                    GenerateCokeStashInteract1("StashHouse19Coke1",new Vector3(853.3302f, -2998.697f, -48.99985f), 207.3223f),
+                    GenerateMethStashInteract1("StashHouse19Meth1",new Vector3(853.5953f, -2995.492f, -48.99484f), 335.6371f),
+                    GenerateWeedStashInteract1("StashHouse19Weed1",new Vector3(851.7201f, -2995.465f, -48.99985f), 2.428616f),
+
+                },
+             },
+             new GangDenInterior(28979320, "Stash House 020") // Vespucci Entrance Location -1293.034f, -1259.422f, 4.197716f), 110.1427f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 2,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("bkr_prop_biker_campbed_01", new SpawnPlace(new Vector3(844.078f, -3001.591f, -50.001f), 89.800f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_08", new SpawnPlace(new Vector3(846.037f, -3004.264f, -49.471f), 89.800f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_08", new SpawnPlace(new Vector3(847.748f, -3004.369f, -49.471f), -85.601f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_a_s", new SpawnPlace(new Vector3(849.486f, -2994.614f, -49.977f), 0.598f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table02", new SpawnPlace(new Vector3(849.652f, -2995.630f, -49.794f), -89.803f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_table_03b", new SpawnPlace(new Vector3(846.869f, -3004.396f, -49.757f), -2.804f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_jukebox_01", new SpawnPlace(new Vector3(843.994f, -3004.461f, -49.147f), 135.796f)) { PlaceOnGround = true },
+                    new PropSpawn("h4_prop_h4_box_ammo_02a", new SpawnPlace(new Vector3(846.594f, -2999.098f, -49.999f), 53.400f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_h4_mil_crate_02", new SpawnPlace(new Vector3(845.537f, -2998.818f, -50.001f), 1.400f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_pallet_01a", new SpawnPlace(new Vector3(850.704f, -3000.667f, -49.148f), -89.287f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_fertiliser_pallet_02a", new SpawnPlace(new Vector3(850.782f, -3001.825f, -49.999f), -178.687f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cs_beer_box", new SpawnPlace(new Vector3(846.662f, -3004.450f, -49.220f), 56.113f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_ml_beerpat1", new SpawnPlace(new Vector3(847.685f, -3003.542f, -49.839f), -49.287f)) { PlaceOnGround = false },
+                    new PropSpawn("sf_prop_sf_box_wood_01a", new SpawnPlace(new Vector3(853.766f, -3004.402f, -50.003f), -1.287f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(854.518f, -2996.301f, -49.999f), -135.287f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(854.467f, -3003.313f, -49.580f), 3.913f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_cashtrolley_01a", new SpawnPlace(new Vector3(852.243f, -3004.513f, -49.999f), -65.000f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_hei_cash_trolly_03", new SpawnPlace(new Vector3(851.138f, -2996.681f, -49.527f), 42.000f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_tablea", new SpawnPlace(new Vector3(854.357f, -2997.792f, -49.241f), -88.888f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(852.890f, -2994.740f, -50.007f), -179.688f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_vw_barrel_01a", new SpawnPlace(new Vector3(847.213f, -2999.570f, -49.555f), -179.688f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(854.421f, -2999.670f, -50.000f), -88.288f)) { PlaceOnGround = true },
+                    new PropSpawn("tr_prop_tr_adv_case_01a", new SpawnPlace(new Vector3(854.141f, -3000.980f, -49.717f), -23.089f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_crate_11e", new SpawnPlace(new Vector3(846.907f, -3000.289f, -50.000f), -116.089f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse20Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse20Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse20Safe1",new Vector3(853.5629f, -2999.704f, -48.99985f), 271.4036f),
+                    GenerateWeedStashInteract1("StashHouse19Weed1",new Vector3(852.5348f, -2995.502f, -48.99985f), 34.27626f),
+                },
+             },
+             new GangDenInterior(28979321, "Stash House 021") // Strawberry Entrance Location -1293.034f, -1259.422f, 4.197716f), 110.1427f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 4,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("bkr_prop_biker_campbed_01", new SpawnPlace(new Vector3(844.654f, -3004.437f, -49.957f), -178.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_08", new SpawnPlace(new Vector3(849.016f, -3002.215f, -49.471f), 89.800f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_08", new SpawnPlace(new Vector3(850.817f, -3002.101f, -49.471f), -67.401f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(845.326f, -3002.217f, -49.997f), -143.201f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_table_03b", new SpawnPlace(new Vector3(849.892f, -3002.124f, -49.600f), 1.396f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_pallet_01a", new SpawnPlace(new Vector3(854.780f, -3002.241f, -49.107f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_beerpis2", new SpawnPlace(new Vector3(853.555f, -2999.538f, -49.837f), -155.088f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_box_wood_01a", new SpawnPlace(new Vector3(854.081f, -3004.393f, -50.003f), -40.287f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(853.553f, -2995.158f, -49.999f), -135.287f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(854.335f, -2995.379f, -49.580f), 3.913f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(848.387f, -2996.024f, -50.000f), -90.088f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(847.411f, -3004.681f, -50.000f), 179.512f)) { PlaceOnGround = true },
+                    new PropSpawn("tr_prop_tr_adv_case_01a", new SpawnPlace(new Vector3(843.741f, -3002.855f, -49.705f), 92.510f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_farm_table01", new SpawnPlace(new Vector3(843.817f, -3000.330f, -49.693f), -0.001f)) { PlaceOnGround = true },
+                    new PropSpawn("v_tre_sofa_mess_b_s", new SpawnPlace(new Vector3(846.639f, -3000.547f, -49.999f), -88.603f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(854.402f, -2997.261f, -50.000f), 90.197f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_tableb", new SpawnPlace(new Vector3(851.598f, -2994.708f, -49.579f), 179.197f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_kitchtable", new SpawnPlace(new Vector3(849.987f, -3004.687f, -49.500f), 0.200f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_jukebox_02a", new SpawnPlace(new Vector3(852.199f, -3004.857f, -50.014f), -178.604f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_02b", new SpawnPlace(new Vector3(853.449f, -3002.343f, -49.875f), -179.287f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crate_beer_03", new SpawnPlace(new Vector3(854.188f, -3000.686f, -49.997f), -90.802f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_bucket_01a", new SpawnPlace(new Vector3(849.453f, -2994.881f, -50.001f), 37.112f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_09a", new SpawnPlace(new Vector3(851.214f, -2998.479f, -50.000f), -179.688f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_pizza_box_03", new SpawnPlace(new Vector3(849.679f, -3002.863f, -49.175f), -101.488f)) { PlaceOnGround = false },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse21Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse21Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse21Safe1",new Vector3(847.424f, -3003.816f, -48.99985f), 179.0103f),
+                    GenerateCokeStashInteract1("StashHouse21Coke1",new Vector3(853.6218f, -2997.43f, -48.99985f), 270.2321f),
+                    GenerateWeedStashInteract1("StashHouse21Weed1",new Vector3(849.2449f, -2996.186f, -48.99985f), 92.657f),
+                    GenerateBeerStashInteract1("StashHouse2Beers1",new Vector3(853.2554f, -3000.647f, -48.99989f), 272.2427f),
+                },
+             },
+             new GangDenInterior(28979322, "Stash House 022") // Cypress Flats Entrance Location 979.2536f, -1982.396f, 30.65101f), 313.7285f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 5,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("v_ret_fh_shelf_01", new SpawnPlace(new Vector3(848.302f, -2996.219f, -49.994f), 89.000f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_03", new SpawnPlace(new Vector3(850.312f, -2994.597f, -49.989f), -0.401f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(844.133f, -2999.095f, -50.000f), 0.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_05a", new SpawnPlace(new Vector3(846.684f, -2999.743f, -49.741f), 0.0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_w_board_blank", new SpawnPlace(new Vector3(854.645f, -2998.842f, -50.000f), -90.005f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_gc_chair02", new SpawnPlace(new Vector3(853.067f, -2999.485f, -49.457f), 111.000f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(853.139f, -2994.747f, -50.030f), 179.597f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_tablec", new SpawnPlace(new Vector3(848.802f, -3003.119f, -49.574f), -91.003f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_laptop_01c", new SpawnPlace(new Vector3(852.754f, -2994.762f, -49.178f), -11.203f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_offchair_01a", new SpawnPlace(new Vector3(852.678f, -2995.877f, -49.398f), 176.196f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_pseudoephedrine", new SpawnPlace(new Vector3(849.285f, -2997.075f, -50.000f), 22.396f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_doll_bigbox", new SpawnPlace(new Vector3(854.431f, -2996.742f, -49.995f), -88.805f)) { PlaceOnGround = true },
+                    //new PropSpawn("bkr_prop_coke_dollboxfolded", new SpawnPlace(new Vector3(853.819f, -2994.987f, -49.095f), 60.194f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(852.022f, -3003.115f, -50.008f), 90.600f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(850.385f, -3004.680f, -50.000f), -0.401f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_ch_service_trolley_01a", new SpawnPlace(new Vector3(848.879f, -3001.601f, -50.000f), 177.398f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cabinet_01b", new SpawnPlace(new Vector3(854.597f, -3001.022f, -50.122f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_bag_01a", new SpawnPlace(new Vector3(854.572f, -3001.207f, -49.091f), 100.399f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_filecab_01a", new SpawnPlace(new Vector3(854.588f, -3002.053f, -50.000f), -89.202f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_meth", new SpawnPlace(new Vector3(849.048f, -3001.590f, -48.954f), -67.002f)) { PlaceOnGround = false },
+                    new PropSpawn("hei_prop_drug_statue_box_big", new SpawnPlace(new Vector3(851.381f, -3001.612f, -49.769f), -127.003f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_02d", new SpawnPlace(new Vector3(844.212f, -3004.176f, -50.003f), 90.797f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(853.721f, -3004.663f, -50.004f), -0.403f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_06", new SpawnPlace(new Vector3(845.748f, -3004.689f, -49.737f), -179.604f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse22Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse22Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse22Safe1",new Vector3(844.1571f, -2999.85f, -48.99985f), 2.696028f),
+                    GenerateCokeStashInteract1("StashHouse22Coke1",new Vector3(850.2969f, -3003.821f, -48.99985f), 182.5182f),
+                    GenerateMethStashInteract1("StashHouse22Meth1",new Vector3(851.2145f, -3002.83f, -48.99985f), 286.5746f),
+                    GenerateWeedStashInteract1("StashHouse22Weed1",new Vector3(853.8176f, -3003.805f, -48.99985f), 188.3357f),
+                },
+             },
+             new GangDenInterior(28979323, "Stash House 023") // Murrieta Heights Entrance Location 1125.249f, -1010.411f, 44.67262f), 92.41462f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 2,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("v_ret_fh_shelf_02", new SpawnPlace(new Vector3(849.242f, -2996.454f, -50.004f), 180.000f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(853.403f, -3000.987f, -49.997f), 178.399f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_09", new SpawnPlace(new Vector3(851.426f, -3000.275f, -49.987f), 143.398f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_boxpile_05", new SpawnPlace(new Vector3(851.374f, -3001.421f, -49.736f), 177.997f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_doll_bigbox", new SpawnPlace(new Vector3(850.216f, -3001.289f, -49.995f), 123.397f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_campbed_01", new SpawnPlace(new Vector3(844.109f, -3001.570f, -50.003f), -90.004f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_table_02", new SpawnPlace(new Vector3(844.034f, -3004.114f, -49.588f), -90.004f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_x17_laptop_mrsr", new SpawnPlace(new Vector3(843.963f, -3004.643f, -49.193f), 112.795f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_meth_smallbag_01a", new SpawnPlace(new Vector3(843.930f, -3003.618f, -49.239f), -144.806f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_clubhouse_offchair_01a", new SpawnPlace(new Vector3(845.328f, -3004.237f, -49.398f), -112.006f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(848.356f, -2995.139f, -50.000f), 90.193f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(854.337f, -2998.733f, -50.000f), 90.193f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(854.261f, -3003.276f, -50.000f), 90.193f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(854.310f, -2995.733f, -50.000f), 91.193f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(848.336f, -3003.145f, -49.394f), 21.993f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_chair_01", new SpawnPlace(new Vector3(849.673f, -3003.383f, -49.394f), 0.993f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cork_board", new SpawnPlace(new Vector3(849.325f, -3005.197f, -49.375f), 179.793f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_tourist_map_01", new SpawnPlace(new Vector3(848.429f, -3005.197f, -48.999f), 179.191f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_tea01a", new SpawnPlace(new Vector3(851.590f, -3004.715f, -50.000f), 92.391f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_weed_tub_01", new SpawnPlace(new Vector3(853.273f, -2997.799f, -49.717f), -77.610f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_pallet_pile_04", new SpawnPlace(new Vector3(845.940f, -2999.466f, -49.103f), 2.590f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_hei_cash_trolly_03", new SpawnPlace(new Vector3(852.101f, -2995.303f, -49.527f), -21.611f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse23Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse23Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse23Safe1",new Vector3(849.2202f, -2995.14f, -48.99985f), 93.05927f),
+                    GenerateCokeStashInteract1("StashHouse23Coke1",new Vector3(853.5536f, -2995.895f, -48.99985f), 275.8831f),
+                    GenerateMethStashInteract1("StashHouse23Meth1",new Vector3(853.402f, -3003.262f, -48.99985f), 271.0178f),
+                    GenerateMethStashInteract1("StashHouse23Meth2",new Vector3(844.8966f, -3003.554f, -48.99985f), 92.68999f),
+                    GenerateWeedStashInteract1("StashHouse23Weed1",new Vector3(853.4773f, -2998.591f, -48.99985f), 298.14f),
+                },
+             },
+             new GangDenInterior(28979324, "Stash House 024") // Banning Entrance Location 167.7749f, -2221.892f, 7.319801f), 184.5975f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 1,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("v_ilev_liconftable_sml", new SpawnPlace(new Vector3(849.118f, -2994.799f, -50.000f), -90.000f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_hei_med_benchset1", new SpawnPlace(new Vector3(849.126f, -2994.556f, -49.170f), 2.999f)) { PlaceOnGround = false },
+                    new PropSpawn("xm_prop_x17_labvats", new SpawnPlace(new Vector3(846.555f, -3000.018f, -50.023f), 0.399f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_tableb", new SpawnPlace(new Vector3(849.862f, -3003.146f, -49.580f), -0.801f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_barrel_pile_03", new SpawnPlace(new Vector3(844.332f, -3004.048f, -50.001f), 127.999f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_lab_barrier02", new SpawnPlace(new Vector3(851.526f, -2999.533f, -48.757f), -90.001f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_lab_barrier01", new SpawnPlace(new Vector3(851.526f, -3001.611f, -48.767f), 89.198f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_lab_barrier01", new SpawnPlace(new Vector3(850.529f, -3002.588f, -48.774f), -179.802f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_lab_barrier01", new SpawnPlace(new Vector3(851.513f, -2997.434f, -48.759f), -89.602f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(852.099f, -3001.172f, -50.000f), -90.201f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(852.140f, -2997.996f, -50.000f), 90.799f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_lab_barrier02", new SpawnPlace(new Vector3(852.543f, -2999.620f, -48.764f), -1.802f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_boardchair01", new SpawnPlace(new Vector3(848.980f, -2995.988f, -49.398f), 154.800f)) { PlaceOnGround = true },
+                    new PropSpawn("v_serv_plas_boxg4", new SpawnPlace(new Vector3(850.986f, -2998.026f, -49.994f), -88.401f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_08a", new SpawnPlace(new Vector3(844.101f, -3000.474f, -50.001f), -90.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(854.466f, -3004.440f, -50.003f), -90.600f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_boxpile_02c", new SpawnPlace(new Vector3(845.694f, -3004.264f, -50.011f), 177.798f)) { PlaceOnGround = true },
+                    new PropSpawn("xm_prop_lab_barrier01", new SpawnPlace(new Vector3(848.486f, -3002.559f, -48.779f), -1.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_plantpot_stack_01c", new SpawnPlace(new Vector3(854.581f, -2994.504f, -49.999f), -1.803f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_weed_tub_01", new SpawnPlace(new Vector3(853.793f, -2994.778f, -49.722f), -52.403f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(853.451f, -3004.802f, -49.999f), -1.803f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_doll_bigbox", new SpawnPlace(new Vector3(851.767f, -3003.064f, -49.995f), 25.397f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mb_crate_01a", new SpawnPlace(new Vector3(850.609f, -3001.676f, -49.998f), -129.803f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(843.805f, -3002.561f, -50.000f), 89.597f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse24Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse24Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse24Safe1",new Vector3(844.6605f, -3002.582f, -48.99985f), 91.01221f),
+                    GenerateCokeStashInteract1("StashHouse24Coke1",new Vector3(852.9267f, -2997.76f, -48.99985f), 103.2097f),
+                    GenerateWeedStashInteract1("StashHouse23Weed1",new Vector3(852.9017f, -3001.501f, -48.99985f), 114.8958f),
+                },
+             },
+             new GangDenInterior(28979325, "Stash House 025") // LA Puerta Entrance Location -559.4573f, -1804.348f, 22.6092f), 333.5736f
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 5,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("p_planning_board_04", new SpawnPlace(new Vector3(847.850F, -2995.878f, -49.467f), 90.000f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_weed_chair_01a", new SpawnPlace(new Vector3(849.781f, -2995.296f, -49.996f), -58.801f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(846.348f, -2999.996f, -50.003f), -0.601f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cabinet_01b", new SpawnPlace(new Vector3(843.604f, -3001.748f, -50.121f), 90.599f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cabinet_01", new SpawnPlace(new Vector3(843.603f, -3000.816f, -50.000f), 90.999f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_02", new SpawnPlace(new Vector3(847.845f, -3003.794f, -49.986f), 89.999f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_01", new SpawnPlace(new Vector3(851.465f, -3003.775f, -49.987f), -89.402f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(853.506f, -2998.018f, -50.000f), 179.799f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_phosphorus", new SpawnPlace(new Vector3(854.4279f, -3003.137f, -49.99985f), 90.490f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_scales_01a", new SpawnPlace(new Vector3(845.855f, -3000.047f, -49.189f), 66.180f)) { PlaceOnGround = false },
+                    new PropSpawn("bkr_prop_weed_table_01a", new SpawnPlace(new Vector3(849.639f, -3004.651f, -50.000f), 0.599f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_table01a", new SpawnPlace(new Vector3(853.358f, -3004.656f, -50.000f), 0.599f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_table01a", new SpawnPlace(new Vector3(854.373f, -2999.719f, -50.000f), 89.398f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_tablea", new SpawnPlace(new Vector3(854.346f, -2995.874f, -49.255f), -89.003f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_laptop_jimmy", new SpawnPlace(new Vector3(846.840f, -3000.023f, -49.175f), -20.420f)) { PlaceOnGround = false },
+                    new PropSpawn("ch_prop_ch_service_trolley_01a", new SpawnPlace(new Vector3(850.295f, -3000.167f, -50.000f), -106.821f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_prop_drug_statue_box_big", new SpawnPlace(new Vector3(851.235f, -3000.275f, -49.929f), 61.379f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(846.509f, -3004.688f, -49.996f), 0.979f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cratepile_05a", new SpawnPlace(new Vector3(852.053f, -2994.622f, -49.700f), 0.779f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_coke_boxeddoll", new SpawnPlace(new Vector3(850.299f, -2999.804f, -48.999f), 11.698f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_keg_01", new SpawnPlace(new Vector3(852.808f, -2994.585f, -49.580f), 11.698f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_meth_pseudoephedrine", new SpawnPlace(new Vector3(854.304f, -3002.026f, -50.000f), 71.698f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_offchair_01a", new SpawnPlace(new Vector3(846.143f, -3001.190f, -49.398f), 149.897f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_safe_01a", new SpawnPlace(new Vector3(843.774f, -3003.984f, -50.000f), 89.897f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StashHouse25Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    //new StandardInteriorInteract("StashHouse25Standard",new Vector3(853.0457f, -3000.306f, -48.99985f), 276.4827f,"Manage"){AutoCamera = false},
+                    GenerateStashSafeDrillingInteract("StashHouse25Safe1",new Vector3(844.6481f, -3003.955f, -48.99985f), 92.445f),
+                    GenerateCokeStashInteract1("StashHouse25Coke1",new Vector3(853.6112f, -2999.894f, -48.99985f), 281.5969f),
+                    GenerateMethStashInteract1("StashHouse23Meth2",new Vector3(853.3151f, -3003.796f, -48.99985f), 185.0422f),
+                    GenerateWeedStashInteract1("StashHouse25Weed1",new Vector3(845.5872f, -3000.846f, -48.99985f), 340.7162f),
+                    GenerateWeedStashInteract1("StashHouse25Weed2",new Vector3(849.9968f, -3003.773f, -48.99985f), 195.8185f),
+                },
+             },
+
+
+
+
         });
     }
     private void Residence()
@@ -9559,8 +10639,8 @@ public class Interiors : IInteriors
             ,
             new Interior(3330,"Lifeinvader",new List<string>() { "facelobby","facelobby_lod" },new List<string>() { "facelobbyfake","facelobbyfake_lod" }) { SearchLocations = new List<Vector3>() {
                 new Vector3(-1075.071f, -250.3029f, 37.76332f),
-new Vector3(-1077.251f, -251.8201f, 44.02116f),
-new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
+            new Vector3(-1077.251f, -251.8201f, 44.02116f),
+            new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
             new Interior(119042,"Union Depository",new List<string>() { "FINBANK" },new List<string>() { }){ IsRestricted = true },
             new Interior(28162,"Clucking Bell Farms",new List<string>() { "CS1_02_cf_onmission1","CS1_02_cf_onmission2","CS1_02_cf_onmission3","CS1_02_cf_onmission4" },new List<string>() { "CS1_02_cf_offmission" }){ IsRestricted = true },
             new Interior(35330,"Clucking Bell Farms",new List<string>() {  },new List<string>() {  }){ IsRestricted = true },
@@ -10001,9 +11081,14 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraRotation = new Rotator(-19.34171f, -4.524213E-07f, -21.88633f)
                     }
                 },
-            }
+            },
+
         });
+
+
+
     }
+
 
     private ItemTheftInteract GenerateSafeDrillingInteract(string name, Vector3 position, float heading)
     {
@@ -10026,7 +11111,6 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         }
         };
     }
-
 
     private ItemTheftInteract Generate247Interact1(string name, Vector3 position, float heading)
     {
@@ -10140,5 +11224,131 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         }
         };
     }
+
+    //Stash House Setup
+
+    private ItemTheftInteract GenerateStashSafeDrillingInteract(string name, Vector3 position, float heading)
+    {
+        return new ItemTheftInteract(name, position, heading, "Drill Safe")
+        {
+            MinItems = 1,
+            MaxItems = 3,
+            SpawnPercent = 100,
+            ViolatingCrimeID = StaticStrings.ArmedRobberyCrimeID,
+            UseNavmesh = false,
+            HasPreInteractRequirement = true,
+            ItemUsePreInteract = new DrillUsePreInteract(),
+            PossibleItems = new List<TheftInteractItem>()
+            {
+                // common  $5k–$10k
+                new TheftInteractItem("Marked Cash Stack", 2, 4, 100),
+
+                // better  $15k–$30k
+                new TheftInteractItem("Marked Cash Stack", 4, 6, 45),
+
+                // rare  $40k–$50k
+                new TheftInteractItem("Marked Cash Stack", 6, 8, 15),
+            }
+        };
+    }
+
+    private ItemTheftInteract GenerateCokeStashInteract1(string name, Vector3 position, float heading)
+    {
+        int minItems = RandomItems.GetRandomNumberInt(2, 4);
+        int maxItems = minItems + RandomItems.GetRandomNumberInt(1, 3);
+
+        return new ItemTheftInteract(name, position, heading, "Take Coke")
+        {
+            MinItems = minItems,
+            MaxItems = maxItems,
+            ViolatingCrimeID = StaticStrings.ArmedRobberyCrimeID,
+            PossibleItems = new List<TheftInteractItem>()
+            {
+                new TheftInteractItem("Cocaine",15,40,100),
+            },
+        };
+    }
+
+    private ItemTheftInteract GenerateMethStashInteract1(string name, Vector3 position, float heading)
+    {
+        int minItems = RandomItems.GetRandomNumberInt(2, 4);
+        int maxItems = minItems + RandomItems.GetRandomNumberInt(1, 3);
+
+        return new ItemTheftInteract(name, position, heading, "Take Meth")
+        {
+            MinItems = minItems,
+            MaxItems = maxItems,
+            ViolatingCrimeID = StaticStrings.ArmedRobberyCrimeID,
+            PossibleItems = new List<TheftInteractItem>()
+            {
+                new TheftInteractItem("Crack",5,15,25),
+                new TheftInteractItem("Methamphetamine",15,40,100),
+            },
+        };
+    }
+
+    private ItemTheftInteract GenerateWeedStashInteract1(string name, Vector3 position, float heading)
+    {
+        int minItems = RandomItems.GetRandomNumberInt(1, 3);
+        int maxItems = minItems + RandomItems.GetRandomNumberInt(1, 2);
+
+        return new ItemTheftInteract(name, position, heading, "Take Weed")
+        {
+            MinItems = minItems,
+            MaxItems = maxItems,
+            ViolatingCrimeID = StaticStrings.ArmedRobberyCrimeID,
+            PossibleItems = new List<TheftInteractItem>()
+            {
+                new TheftInteractItem("Marijuana",56,224,100),
+            },
+        };
+    }
+    private ItemTheftInteract GenerateBeerStashInteract1(string name, Vector3 position, float heading)
+    {
+        int minItems = RandomItems.GetRandomNumberInt(10, 25);
+        int maxItems = minItems + RandomItems.GetRandomNumberInt(2, 10);
+        return new ItemTheftInteract(name, position, heading, "Take Beer")
+        {
+            MinItems = minItems,
+            MaxItems = maxItems,
+            IncrementGameTimeMin = 1500,
+            IncrementGameTimeMax = 2000,
+            ViolatingCrimeID = StaticStrings.ArmedRobberyCrimeID,
+            IntroAnimationDictionary = "anim@scripted@heist@ig1_table_grab@cash@male@",
+            IntroAnimation = "enter",
+            LoopAnimationDictionary = "anim@scripted@heist@ig1_table_grab@cash@male@",
+            LoopAnimation = "grab",
+            RightHandAnimationPoints = new List<AnimationPoint>() {
+                            new AnimationPoint(0, 0.05f,true),
+                            new AnimationPoint(1, 0.08f, false),
+                            new AnimationPoint(2, 0.15f, true),
+                            new AnimationPoint(3, 0.2f, false),
+                            new AnimationPoint(4, 0.25f, true),
+                            new AnimationPoint(5, 0.3f, false),
+                            new AnimationPoint(6, 0.35f, true),
+                            new AnimationPoint(7, 0.39f, false),
+                            new AnimationPoint(8, 0.43f, true),
+                            new AnimationPoint(9, 0.5f, false),
+                            new AnimationPoint(10, 0.55f, true),
+                            new AnimationPoint(11, 0.6f, false),
+                            new AnimationPoint(12, 0.65f, true),
+                            new AnimationPoint(13, 0.7f, false),
+                            new AnimationPoint(14, 0.75f, true),
+                            new AnimationPoint(15, 0.8f, false),
+                            new AnimationPoint(16, 0.85f, true),
+                            new AnimationPoint(17, 0.9f, false),
+                            new AnimationPoint(18, 0.95f, true),
+                            new AnimationPoint(19, 0.98f, false),
+                        },
+            PossibleItems = new List<TheftInteractItem>()
+            {
+                new TheftInteractItem("Bottle of Logger",1,1,100),
+                new TheftInteractItem("Bottle of Jakeys",1,1,100),
+                new TheftInteractItem("Bottle of PiBwasser",1,1,100),
+                new TheftInteractItem("Bottle of Patriot",1,1,100),
+            }
+        };
+    }
+
 }
 

@@ -56,6 +56,7 @@ public class GangInteraction : IContactMenuInteraction
     private UIMenu BackupSubMenu;
     private UIMenu DrugMeetSubMenu;
     private UIMenu ReferencesSubMenu;
+    private UIMenu RaidLocationSubMenu;
     private IShopMenus ShopMenus;
 
     private string TargetGangDescription => $"Choose a target gang~n~~n~~r~RED~s~ Gangs are enemies~n~~o~ORANGE~s~ Gangs are hostile~n~~g~GREEN~s~ Gangs are friendly";
@@ -295,6 +296,7 @@ public class GangInteraction : IContactMenuInteraction
 
         AddDrugMeetSubMenu();
         AddDrugBuySubMenu();
+        AddRaidLocationSubMenu();
 
 
     }
@@ -328,6 +330,25 @@ public class GangInteraction : IContactMenuInteraction
         DrugMeetSubMenu.AddItem(DealingGangMenu);
         DrugMeetSubMenu.AddItem(quantityScroller);
         DrugMeetSubMenu.AddItem(DrugMeetupStart);
+    }
+
+    private void AddRaidLocationSubMenu()
+    {
+        RaidLocationSubMenu = MenuPool.AddSubMenu(ReferencesSubMenu, "Raid Location");
+        ReferencesSubMenu.MenuItems[ReferencesSubMenu.MenuItems.Count() - 1].Description = $"Raid a gang-held location.";
+        ReferencesSubMenu.MenuItems[ReferencesSubMenu.MenuItems.Count() - 1].RightLabel = $"~HUD_COLOUR_GREENDARK~{ActiveGang.RaidPaymentMin:C0}-{ActiveGang.RaidPaymentMax:C0}~s~";
+        RaidLocationSubMenu.RemoveBanner();
+        UIMenuListScrollerItem<GameLocation> LocationMenu = new UIMenuListScrollerItem<GameLocation>("Location", "Select the location for the raid", PlacesOfInterest.PossibleLocations.RaidTaskLocations().Where(x => x.IsCorrectMap(World.IsMPMapLoaded) && x.IsSameState(Player.CurrentLocation?.CurrentZone?.GameState)));
+        UIMenuNumericScrollerItem<int> TargetCountMenu = new UIMenuNumericScrollerItem<int>("Targets", $"Select the number of targets", 5, 10, 1) { Value = 5 };
+        UIMenuItem StartTaskMenu = new UIMenuItem("Start", $"Start the task.") { RightLabel = $"~HUD_COLOUR_GREENDARK~{ActiveGang.RaidPaymentMin:C0}-{ActiveGang.RaidPaymentMax:C0}~s~" };
+        StartTaskMenu.Activated += (sender, selectedItem) =>
+        {
+            Player.PlayerTasks.GangTasks.StartRaidLocationTask(ActiveGang, GangContact, LocationMenu.SelectedItem as RaidLocation, TargetCountMenu.Value);
+            sender.Visible = false;
+        };
+        RaidLocationSubMenu.AddItem(LocationMenu);
+        RaidLocationSubMenu.AddItem(TargetCountMenu);
+        RaidLocationSubMenu.AddItem(StartTaskMenu);
     }
 
 

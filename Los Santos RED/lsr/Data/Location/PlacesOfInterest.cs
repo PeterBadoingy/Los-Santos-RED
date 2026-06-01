@@ -68,6 +68,7 @@ public class PlacesOfInterest : IPlacesOfInterest
     private List<BlankLocation> BlankLocationPlaces;
     private List<ApartmentBuilding> ApartmentBuildings;
     private List<MilitaryBase> MilitaryBasePlaces;
+    private List<RaidLocation> RaidLocationPlaces;
     private List<StoredSpawn> TunnelSpawnPlaces;
     private List<TattooShop> TattooShopPlaces;
     private List<PlasticSurgeryClinic> PlasticSurgeryClinics;
@@ -232,6 +233,7 @@ public class PlacesOfInterest : IPlacesOfInterest
         DefaultConfig_Morgues();
         DefaultConfig_Airports();
         DefaultConfig_MilitaryBases();
+        DefaultConfig_RaidLocations();
         DefaultConfig_TunnelSpawns();
         DefaultConfig_BarberShops();
         DefaultConfig_PlasticSurgeryClinics();
@@ -283,6 +285,7 @@ public class PlacesOfInterest : IPlacesOfInterest
         PossibleLocations.IllicitMarketplaces.AddRange(illicitMarketplaces);
         PossibleLocations.BlankLocations.AddRange(BlankLocationPlaces);
         PossibleLocations.MilitaryBases.AddRange(MilitaryBasePlaces);
+        PossibleLocations.RaidLocations.AddRange(RaidLocationPlaces);
         PossibleLocations.StoredSpawns.AddRange(TunnelSpawnPlaces);
         PossibleLocations.BarberShops.AddRange(BarberShopPlaces);
         PossibleLocations.PlasticSurgeryClinics.AddRange(PlasticSurgeryClinics);
@@ -759,6 +762,7 @@ public class PlacesOfInterest : IPlacesOfInterest
             },
         };
     }
+
     private void DefaultConfig_TattooShops()
     {
         TattooShopPlaces = new List<TattooShop>()
@@ -816,6 +820,92 @@ public class PlacesOfInterest : IPlacesOfInterest
                 },
 
             },
+        };
+    }
+    private void DefaultConfig_RaidLocations()
+    {
+        List<SpawnPlace> stashHouseAssaultSpawns = new List<SpawnPlace>()
+        {
+            new SpawnPlace(new Vector3(844.172f, -3003.501f, -44.40063f), 1.723501f), // enterance top of stairs
+            new SpawnPlace(new Vector3(843.8777f, -2998.48f, -47.00825f), 244.4962f), // middle of stairs
+        };
+        RaidLocationPlaces = new List<RaidLocation>()
+        {
+            CreateStashHouseRaidLocation(new Vector3(-156.3501f, 6292.674f, 31.67826f), 133.7562f, "Paleto Bay Stash House", "Paleto Bay, Stash House", 28979301, "AMBIENT_GANG_LUPISELLA", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-1101.667f, 4940.919f, 218.354f), 250.6345f, "Altruist Camp Stash House", "Altruist Camp, Stash House", 28979302, "AMBIENT_GANG_HILLBILLY", stashHouseAssaultSpawns), // AMBIENT_GANG_CULT Needs to be Activated to work here, Replaced with Rednecks for now
+            CreateStashHouseRaidLocation(new Vector3(2258.136f, 5165.946f, 59.11175f), 240.0951f, "Grapeseed Stash House", "Grapeseed, Stash House", 28979303, "AMBIENT_GANG_PAVANO", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(2881.959f, 4511.69f, 48.01416f), 67.04136f, "San Chianski Stash House", "San Chianski, Stash House", 28979304, "AMBIENT_GANG_PAVANO", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(1334.465f, 4306.764f, 38.23389f), 259.3055f, "Galilee Stash House", "Galilee, Stash House", 28979305, "AMBIENT_GANG_PAVANO", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(1857.707f, 3854.739f, 33.10221f), 194.6901f, "Sandy Shores Stash House", "Sandy Shores, Stash House", 28979306, "AMBIENT_GANG_HILLBILLY", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(905.8231f, 3586.154f, 33.54653f), 354.066f, "Grand Senora Desert Stash House", "Grand Senora Desert, Stash House", 28979307, "AMBIENT_GANG_HILLBILLY", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(2403.49f, 3127.865f, 48.15289f), 244.175f, "Thomson Scrapyard Stash House", "Thomson Scrapyard, Stash House", 28979308, "AMBIENT_GANG_HILLBILLY", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(550.3796f, 2656.521f, 42.21735f), 187.161f, "Harmony Stash House", "Harmony, Stash House", 28979309, "AMBIENT_GANG_ANGELS", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-1102.169f, 2721.812f, 18.8004f), 313.0412f, "Zancudo River Stash House", "Zancudo River, Stash House", 28979310, "AMBIENT_GANG_LOST", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-126.0899f, 1896.612f, 197.333f), 182.3983f, "Great Chaparral Stash House", "Great Chaparral, Stash House", 28979311, "AMBIENT_GANG_MADRAZO", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(1546.837f, 2166.487f, 78.72321f), 87.95683f, "Farmhouse Stash House", "Farmhouse, Stash House", 28979312, "AMBIENT_GANG_MADRAZO", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-3170.207f, 1034.294f, 20.84833f), 246.2453f, "Chumash Stash House", "Chumash, Stash House", 28979313, "AMBIENT_GANG_ANCELOTTI", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(121.3937f, 319.0936f, 112.1519f), 118.1146f, "Downtown Vinewood Stash House", "Downtown Vinewood, Stash House", 28979314, "AMBIENT_GANG_GAMBETTI", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-583.1677f, 195.3845f, 71.44419f), 89.73394f, "West Vinewood Stash House", "West Vinewood, Stash House", 28979315, "AMBIENT_GANG_GAMBETTI", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-1308.488f, -168.8399f, 44.1404f), 274.1358f, "Rockford Hills Stash House", "Rockford Hills, Stash House", 28979316, "AMBIENT_GANG_MESSINA", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(99.4289f, -240.7982f, 51.39944f), 158.8637f, "Alta Stash House", "Alta, Stash House", 28979317, "AMBIENT_GANG_WEICHENG", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(1152.763f, -431.955f, 67.01271f), 76.32034f, "Mirror Park Stash House", "Mirror Park, Stash House", 28979318, "AMBIENT_GANG_LOST", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-545.9579f, -873.4446f, 27.19872f), 178.7813f, "Little Seoul Stash House", "Little Seoul, Stash House", 28979319, "AMBIENT_GANG_KKANGPAE", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-1293.034f, -1259.422f, 4.197716f), 110.1427f, "Vespucci Stash House", "Vespucci, Stash House", 28979320, "AMBIENT_GANG_YARDIES", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(161.5157f, -1307.533f, 29.35469f), 330.6742f, "Strawberry Stash House", "Strawberry, Stash House", 28979321, "AMBIENT_GANG_FAMILY", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(979.2536f, -1982.396f, 30.65101f), 313.7285f, "Cypress Flats Stash House", "Cypress Flats, Stash House", 28979322, "AMBIENT_GANG_MEXICAN", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(1125.249f, -1010.411f, 44.67262f), 92.41462f, "Murrieta Heights Stash House", "Murrieta Heights, Stash House", 28979323, "AMBIENT_GANG_MARABUNTE", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(167.7749f, -2221.892f, 7.319801f), 184.5975f, "Banning Stash House", "Banning, Stash House", 28979324, "AMBIENT_GANG_DIABLOS", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(-559.4573f, -1804.348f, 22.6092f), 333.5736f, "La Puerta Stash House", "La Puerta, Stash House", 28979325, "AMBIENT_GANG_ARMENIAN", stashHouseAssaultSpawns),
+            CreateStashHouseRaidLocation(new Vector3(6.276872f, -1816.468f, 25.35293f), 231.4173f, "Davis Stash House", "Davis, Stash House", 28979321, "AMBIENT_GANG_BALLAS", stashHouseAssaultSpawns), // Additionals from this point on.
+            CreateStashHouseRaidLocation(new Vector3(459.7571f, -1869.597f, 27.10747f), 225.1879f, "Rancho Stash House", "Rancho, Stash House", 28979323, "AMBIENT_GANG_SALVA", stashHouseAssaultSpawns),
+        };
+    }
+    private RaidLocation CreateStashHouseRaidLocation(Vector3 entrancePosition, float entranceHeading, string name, string fullName, int interiorID, string assignedAssociationID, List<SpawnPlace> assaultSpawns)
+    {
+        return new RaidLocation(entrancePosition, entranceHeading, name, "")
+        {
+            FullName = fullName,
+            InteriorID = interiorID,
+            AssignedAssociationID = assignedAssociationID,
+            OpenTime = 0,
+            CloseTime = 24,
+            //MapIcon = 845,
+            //IsBlipEnabled = false,
+            CanInteractWhenWanted = true,
+            IsOnSPMap = false,
+            AssaultSpawnLocations = assaultSpawns.Select(x => new SpawnPlace(x.Position, x.Heading)).ToList(),
+            MaxAssaultSpawns = 8,
+            RestrictAssaultSpawningUsingPedSpawns = true,
+            AssaultSpawnHeavyWeaponsPercent = 80f,
+            PossiblePedSpawns = CreateStashHouseRaidPedSpawns(assignedAssociationID),
+        };
+    }
+    private List<ConditionalLocation> CreateStashHouseRaidPedSpawns(string associationID)
+    {
+        return new List<ConditionalLocation>()
+        {
+            //CreateStashHouseRaidPedSpawn(new Vector3(845.425f, -3002.990f, -50.000f), 121.599f, associationID),
+            //CreateStashHouseRaidPedSpawn(new Vector3(853.641f, -3003.466f, -50.000f), 175.598f, associationID),
+            //CreateStashHouseRaidPedSpawn(new Vector3(849.777f, -2995.777f, -50.000f), 105.398f, associationID),
+            //CreateStashHouseRaidPedSpawn(new Vector3(850.871f, -2999.737f, -50.000f), 152.598f, associationID),
+            //CreateStashHouseRaidPedSpawn(new Vector3(849.941f, -3000.812f, -50.000f), 301.397f, associationID),
+
+            CreateStashHouseRaidPedSpawn(new Vector3(849.4338f, -3000.907f, -50.000f), 342.5854f, associationID),
+            CreateStashHouseRaidPedSpawn(new Vector3(849.6326f, -2999.238f, -50.000f), 174.3422f, associationID),
+            CreateStashHouseRaidPedSpawn(new Vector3(846.1784f, -3002.299f, -50.000f), 116.2831f, associationID),
+            CreateStashHouseRaidPedSpawn(new Vector3(852.8738f, -3002.846f, -50.000f), 50.73624f, associationID),
+            CreateStashHouseRaidPedSpawn(new Vector3(852.9210f, -2996.562f, -50.000f), 125.2165f, associationID),
+            CreateStashHouseRaidPedSpawn(new Vector3(849.7732f, -2996.411f, -50.000f), 88.83459f, associationID),
+        };
+    }
+    private GangConditionalLocation CreateStashHouseRaidPedSpawn(Vector3 position, float heading, string associationID)
+    {
+        return new GangConditionalLocation(position, heading, 100f)
+        {
+            AssociationID = associationID,
+            ForceLongGun = true,
+            LongGunAlwaysEquipped = true,
+            TaskRequirements = TaskRequirements.EquipLongGunWhenIdle | TaskRequirements.Guard,
         };
     }
     private void DefaultConfig_TunnelSpawns()
@@ -5241,6 +5331,9 @@ public class PlacesOfInterest : IPlacesOfInterest
         DefaultConfig_GangDens_Redneck();
         DefaultConfig_GangDens_Korean();
     }
+
+
+
     private void DefaultConfig_GangDens_Cartel()
     {
         GangDen Den1 = new GangDen(new Vector3(1389.966f, 1131.907f, 114.3344f), 91.72424f, "Madrazo Cartel Den", "", "MadrazoDenMenu", "AMBIENT_GANG_MADRAZO")
@@ -5458,7 +5551,7 @@ public class PlacesOfInterest : IPlacesOfInterest
             BannerImagePath = "gangs\\altruist.png",
             OpenTime = 0,
             CloseTime = 24,
-            IsEnabled = false,
+            IsEnabled = true,
         };
         GangDens.Add(Den1);
     }

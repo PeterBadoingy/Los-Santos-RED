@@ -62,7 +62,7 @@ public class LocationDispatcher
     }
     public void Dispatch()
     {
-        foreach (GameLocation ps in World.Places.ActiveLocations.ToList().Where(x => x.IsEnabled && x.DistanceToPlayer <= x.ActivateDistance && x.IsNearby && !x.IsDispatchFilled && (x.PossibleGroupSpawns != null || x.PossiblePedSpawns != null || x.PossibleVehicleSpawns != null)).ToList())
+        foreach (GameLocation ps in World.Places.ActiveLocations.ToList().Where(x => !(x is RaidLocation) && x.IsEnabled && x.DistanceToPlayer <= x.ActivateDistance && x.IsNearby && !x.IsDispatchFilled && (x.PossibleGroupSpawns != null || x.PossiblePedSpawns != null || x.PossibleVehicleSpawns != null)).ToList())
         {
             if (ps.PossibleGroupSpawns != null)
             {

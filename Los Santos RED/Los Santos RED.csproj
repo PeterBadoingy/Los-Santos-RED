@@ -312,6 +312,7 @@
     <Compile Include="lsr\Player\ActiveTasks\Gang\GangRacketeeringTask.cs" />
     <Compile Include="lsr\Player\ActiveTasks\Gang\RivalGangAmbushTask.cs" />
     <Compile Include="lsr\Player\ActiveTasks\Gang\GangBriberyTask.cs" />
+    <Compile Include="lsr\Player\ActiveTasks\Gang\Generic\GangRaidLocationTask.cs" />
     <Compile Include="lsr\Player\ActiveTasks\Gang\Generic\DrugMeetTask.cs" />
     <Compile Include="lsr\Player\ActiveTasks\Generic Contact\PayoffContactTask.cs" />
     <Compile Include="lsr\Player\Activity\ForceDoorActivity.cs" />
@@ -956,6 +957,7 @@
     <Compile Include="lsr\Locations\Places\GameLocations\Pharmacy.cs" />
     <Compile Include="lsr\Locations\Places\GameLocations\Residence\Residence.cs" />
     <Compile Include="lsr\Locations\Places\GameLocations\Restaurant.cs" />
+    <Compile Include="lsr\Locations\Places\GameLocations\RaidLocation.cs" />
     <Compile Include="lsr\Camera\LocationCamera.cs" />
     <Compile Include="lsr\Old\PurchaseMenu_Old.cs" />
     <Compile Include="lsr\Old\SellMenu_Old.cs" />
