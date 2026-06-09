@@ -51,6 +51,7 @@ public class InteriorManager
     }
     public void Reset()
     {
+        CleanupCurrentTeleportInterior();
         IsUpdatingSingleLocation = false;
         IsInsideTeleportInterior = false;
         CurrentTeleportInteriorLocation = null;
@@ -104,6 +105,7 @@ public class InteriorManager
     }
     public void Dispose()
     {
+        CleanupCurrentTeleportInterior();
         IsUpdatingSingleLocation = false;
         IsInsideTeleportInterior = false;
         CurrentTeleportInteriorLocation = null;
@@ -255,6 +257,15 @@ public class InteriorManager
         IsInsideTeleportInterior = false;
         CurrentTeleportInteriorLocation = null;
         InteriorUpdateLocations.Clear();
+    }
+
+    private void CleanupCurrentTeleportInterior()
+    {
+        if (!IsInsideTeleportInterior || CurrentTeleportInteriorLocation?.Interior == null)
+        {
+            return;
+        }
+        CurrentTeleportInteriorLocation.Interior.CleanupAbandonedTeleportInterior();
     }
 
     public void OnStartedInteriorInteract()

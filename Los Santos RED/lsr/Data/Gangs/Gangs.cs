@@ -34,6 +34,7 @@ public class Gangs : IGangs
     private Gang Yardies;
     private Gang Diablos;
     private Gang AngelsOfDeath;
+    //private Gang Altruist;
     private LoanParameters defaultLoanParameters;
 
     public Gangs()
@@ -798,18 +799,19 @@ public class Gangs : IGangs
         };//Meth
 
 
-        //new Gang("~w~", "AMBIENT_GANG_CULT", "Altruist Cult","Altruist", "White", "AltruistPeds", "GenericGangVehicles", "","MeleeWeapons","FamiliesSidearms","FamiliesLongGuns","Altruist Leader","CHAR_PA_MALE","Altruist Member") { 
-        //                                DenName = "Gathering Location",AmbientMemberMoneyMin = 200, AmbientMemberMoneyMax = 1000,EnemyGangs = new List<string>() { "AMBIENT_GANG_HILLBILLY" }, DealerMenuGroup = "ToiletCleanerDealerMenu",
-        //                                PickupPaymentMin = 100, PickupPaymentMax = 500, TheftPaymentMin = 500, TheftPaymentMax = 2000, HitPaymentMin = 5000, HitPaymentMax = 10000,DeliveryPaymentMin = 800, DeliveryPaymentMax = 3000
-        //                                ,NeutralRepLevel = 0, FriendlyRepLevel = 4500, StartingRep = 0, MaximumRep = 5000, MinimumRep = -5000
-        //                                ,PercentageWithMelee = 20f, PercentageWithSidearms = 30f, PercentageWithLongGuns = 5f} ,
+        //Altruist = new Gang("~w~", "AMBIENT_GANG_CULT", "Altruist Cult", "Altruist", "White", "AltruistPeds", "GenericGangVehicles", "", "MeleeWeapons", "FamiliesSidearms", "FamiliesLongGuns", "Altruist Leader", "CHAR_PA_MALE", "Altruist Member") {
+        //    DenName = "Gathering Location", AmbientMemberMoneyMin = 200, AmbientMemberMoneyMax = 1000, EnemyGangs = new List<string>() { "AMBIENT_GANG_HILLBILLY" }, DealerMenuGroup = "ToiletCleanerDealerMenu",
+        //    PickupPaymentMin = 100, PickupPaymentMax = 500, TheftPaymentMin = 500, TheftPaymentMax = 2000, HitPaymentMin = 5000, HitPaymentMax = 10000, DeliveryPaymentMin = 800, DeliveryPaymentMax = 3000
+        //                                , NeutralRepLevel = 0, FriendlyRepLevel = 4500, StartingRep = 0, MaximumRep = 5000, MinimumRep = -5000
+        //                                , PercentageWithMelee = 20f, PercentageWithSidearms = 30f, PercentageWithLongGuns = 5f 
+        //}; 
 
     }
     private void DefaultConfig()
     {    
         GangsList = new List<Gang>
         {
-            LOST,Vagos,Families,Ballas,Marabunte,Varrios,Triads,Redneck,Korean,Gambetti,Pavano,Lupisella,Messina,Ancelotti,Cartel,Armenian,Yardies,Diablos,AngelsOfDeath
+            LOST,Vagos,Families,Ballas,Marabunte,Varrios,Triads,Redneck,Korean,Gambetti,Pavano,Lupisella,Messina,Ancelotti,Cartel,Armenian,Yardies,Diablos,AngelsOfDeath,//Altruist
         };
         Serialization.SerializeParams(GangsList, ConfigFileName);
     }

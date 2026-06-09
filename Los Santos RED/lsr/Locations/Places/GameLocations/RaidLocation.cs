@@ -18,7 +18,7 @@ public class RaidLocation : GameLocation, IAssaultSpawnable
     public override bool ShowsOnDirectory { get; set; } = false;
     public override bool ShowsOnTaxi { get; set; } = false;
     public override string TypeName { get; set; } = "Raid Location";
-    public override int MapIcon { get; set; } = (int)BlipSprite.BountyHit2;
+    public override int MapIcon { get; set; } = (int)BlipSprite.BountyHit2;    
     public int MaxAssaultSpawns { get; set; } = 15;
     public List<SpawnPlace> AssaultSpawnLocations { get; set; }
     public bool RestrictAssaultSpawningUsingPedSpawns { get; set; } = false;
@@ -50,7 +50,7 @@ public class RaidLocation : GameLocation, IAssaultSpawnable
     {
         IsRaidMissionActive = isActive;
         IsBlipEnabled = isActive; 
-
+        TotalAssaultSpawns = 0;
         if (!isActive)
         {
             HasRaidStarted = false;
@@ -70,7 +70,6 @@ public class RaidLocation : GameLocation, IAssaultSpawnable
         {
             AssaultSpawnHeavyWeaponsPercent = 80f;
         }
-        IsBlipEnabled = IsRaidMissionActive;
     }
 
     public override void AddLocation(PossibleLocations possibleLocations)

@@ -826,8 +826,9 @@ public class PlacesOfInterest : IPlacesOfInterest
     {
         List<SpawnPlace> stashHouseAssaultSpawns = new List<SpawnPlace>()
         {
-            new SpawnPlace(new Vector3(844.172f, -3003.501f, -44.40063f), 1.723501f), // enterance top of stairs
-            new SpawnPlace(new Vector3(843.8777f, -2998.48f, -47.00825f), 244.4962f), // middle of stairs
+            new SpawnPlace(new Vector3(844.129f, -3003.256f, -44.40116f), 0f), // enterance top of stairs
+            new SpawnPlace(new Vector3(844.1273f, -3001.072f, -45.48745f), 0f), // middle of stairs
+            //new SpawnPlace(new Vector3(843.8777f, -2998.48f, -47.00825f), 244.4962f), // middle SQAURE of stairs
         };
         RaidLocationPlaces = new List<RaidLocation>()
         {
@@ -869,7 +870,6 @@ public class PlacesOfInterest : IPlacesOfInterest
             AssignedAssociationID = assignedAssociationID,
             OpenTime = 0,
             CloseTime = 24,
-            //MapIcon = 845,
             //IsBlipEnabled = false,
             CanInteractWhenWanted = true,
             IsOnSPMap = false,
@@ -884,12 +884,6 @@ public class PlacesOfInterest : IPlacesOfInterest
     {
         return new List<ConditionalLocation>()
         {
-            //CreateStashHouseRaidPedSpawn(new Vector3(845.425f, -3002.990f, -50.000f), 121.599f, associationID),
-            //CreateStashHouseRaidPedSpawn(new Vector3(853.641f, -3003.466f, -50.000f), 175.598f, associationID),
-            //CreateStashHouseRaidPedSpawn(new Vector3(849.777f, -2995.777f, -50.000f), 105.398f, associationID),
-            //CreateStashHouseRaidPedSpawn(new Vector3(850.871f, -2999.737f, -50.000f), 152.598f, associationID),
-            //CreateStashHouseRaidPedSpawn(new Vector3(849.941f, -3000.812f, -50.000f), 301.397f, associationID),
-
             CreateStashHouseRaidPedSpawn(new Vector3(849.4338f, -3000.907f, -50.000f), 342.5854f, associationID),
             CreateStashHouseRaidPedSpawn(new Vector3(849.6326f, -2999.238f, -50.000f), 174.3422f, associationID),
             CreateStashHouseRaidPedSpawn(new Vector3(846.1784f, -3002.299f, -50.000f), 116.2831f, associationID),
@@ -5551,7 +5545,7 @@ public class PlacesOfInterest : IPlacesOfInterest
             BannerImagePath = "gangs\\altruist.png",
             OpenTime = 0,
             CloseTime = 24,
-            IsEnabled = true,
+            IsEnabled = false,
         };
         GangDens.Add(Den1);
     }

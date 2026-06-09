@@ -592,6 +592,18 @@ public class Interior
         RemoveButtonPrompts();
         TeleportOut();
     }
+    public virtual void CleanupAbandonedTeleportInterior()
+    {
+        IsInside = false;
+        IsMenuInteracting = false;
+        RemoveButtonPrompts();
+        if (InteractableLocation != null && VendorLocations != null && VendorLocations.Any())
+        {
+            InteractableLocation.AttemptVendorDespawn();
+        }
+        RemoveSpawnedProps();
+        Unload();
+    }
     public virtual void RemoveButtonPrompts()
     {
         EntryPoint.WriteToConsole("INTERIOR RemoveButtonPrompts RAN");
