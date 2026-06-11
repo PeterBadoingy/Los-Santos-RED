@@ -42,6 +42,10 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
             {
                 RaidLocation.IsPlayerInterestedInLocation = false;
                 RaidLocation.SetRaidMissionActive(false);
+                if (RaidLocation.Interior != null && RaidLocation.Interior.IsTeleportEntry)
+                {
+
+                }
             }
             base.Dispose();
         }
@@ -130,7 +134,7 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
                 }
 
                 // FAILURE: Player ran away before clearing defenders
-                if (HasArrivedNearRaid && !HasMetObjective && RaidLocation.DistanceToPlayer > 150f)
+                if (HasArrivedNearRaid && !HasMetObjective && RaidLocation.DistanceToPlayer > 200f)
                 {
                     EntryPoint.WriteToConsole("RAID LOCATION TASK FAILED - PLAYER LEFT AREA BEFORE CLEARING");
                     SetFailed();
@@ -385,6 +389,7 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
                 RaidLocation.IsPlayerInterestedInLocation = false;
                 RaidLocation.SetRaidMissionActive(false);
             }
+
         }
     }
 }

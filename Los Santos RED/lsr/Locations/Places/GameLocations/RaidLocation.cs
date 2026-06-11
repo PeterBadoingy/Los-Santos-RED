@@ -60,6 +60,11 @@ public class RaidLocation : GameLocation, IAssaultSpawnable
             {
                 this.Blip.Delete();
             }
+
+            if (Interior != null)
+            {
+                Interior.CleanupAbandonedTeleportInterior();
+            }
         }
     }
 
