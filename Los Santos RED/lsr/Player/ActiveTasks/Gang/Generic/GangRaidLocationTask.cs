@@ -19,12 +19,13 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
         private List<GangMember> SpawnedMembers = new List<GangMember>();
         private List<GangMember> DefenderMembers = new List<GangMember>();
         private List<GangMember> ConfirmedDeadDefenders = new List<GangMember>();
-        private const uint TimeBetweenAssaultSpawns = 30000; 
+        private const uint TimeBetweenAssaultSpawns = 30000;
         private const float MinAssaultSpawnDistanceToPlayer = 5f;
 
         public GangRaidLocationTask(ITaskAssignable player, ITimeReportable time, IGangs gangs, IPlacesOfInterest placesOfInterest, ISettingsProvideable settings, IEntityProvideable world,
             ICrimes crimes, IWeapons weapons, INameProvideable names, IPedGroups pedGroups, IShopMenus shopMenus, IModItems modItems, PlayerTasks playerTasks, GangTasks gangTasks,
-            PhoneContact hiringContact, Gang hiringGang, RaidLocation raidLocation) : base(player, time, gangs, placesOfInterest, settings, world, crimes, weapons, names, pedGroups, shopMenus, modItems, playerTasks, gangTasks, hiringContact, hiringGang)
+            PhoneContact hiringContact, Gang hiringGang, RaidLocation raidLocation)
+            : base(player, time, gangs, placesOfInterest, settings, world, crimes, weapons, names, pedGroups, shopMenus, modItems, playerTasks, gangTasks, hiringContact, hiringGang)
         {
             DebugName = "Raid Location";
             RepOnCompletion = 500;
@@ -97,7 +98,7 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
             List<string> Replies = new List<string>() {
                 $"{TargetGang.ColorPrefix}{TargetGang.ShortName}~s~ are around ~p~{RaidLocation.Name}~s~ on ~y~{RaidLocation.FullStreetAddress}~s~. Clear them out for ${PaymentAmount}."
                 //$"Raid set. {TargetGang.ColorPrefix}{TargetGang.ShortName}~s~ are around ~p~{RaidLocation.Name}~s~ on ~y~{RaidLocation.FullStreetAddress}~s~. Clear them out and get back to the {HiringGang.DenName} on {HiringGangDen.FullStreetAddress}. ${PaymentAmount}"
-                };
+            };
             Player.CellPhone.AddPhoneResponse(HiringGang.Contact.Name, HiringGang.Contact.IconName, Replies.PickRandom());
         }
 
@@ -125,6 +126,14 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
                 CurrentTask = PlayerTasks.GetTask(HiringGang.ContactName);
                 if (CurrentTask == null || !CurrentTask.IsActive)
                 {
+                    break;
+                }
+
+                // FAILURE: Player ran away before clearing defenders
+                if (HasArrivedNearRaid && !HasMetObjective && RaidLocation.DistanceToPlayer > 150f)
+                {
+                    EntryPoint.WriteToConsole("RAID LOCATION TASK FAILED - PLAYER LEFT AREA BEFORE CLEARING");
+                    SetFailed();
                     break;
                 }
 
@@ -173,7 +182,7 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
             }
             else if (CurrentTask != null && CurrentTask.IsActive)
             {
-                SetFailed(); 
+                SetFailed();
             }
             else
             {
@@ -363,6 +372,9 @@ namespace LosSantosRED.lsr.Player.ActiveTasks
                     gm.Pedestrian.IsPersistent = false;
                 }
             }
+            SpawnedMembers.Clear();
+            DefenderMembers.Clear();
+            ConfirmedDeadDefenders.Clear();
         }
 
         protected override void OnTaskCompletedOrFailed()
