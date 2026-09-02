@@ -1036,10 +1036,78 @@ public class Interiors : IInteriors
                         CameraDirection = new Vector3(-0.3653991f, 0.3671501f, -0.8553855f), 
                         CameraRotation = new Rotator(-58.80235f, 5.439181E-05f, 44.86304f), AllowBlackjack = true, },
                 },
+
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(1088.292f, 221.3296f, -51.20042f), 181.6752f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "Floor man",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                    },
+                    new CivilianConditionalLocation(new Vector3(1117.751f, 220.0541f, -51.43516f), 91.29733f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "Cashier",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                    },
+                    new CivilianConditionalLocation(new Vector3(1100.626f, 195.572f, -51.4401f), 319.4391f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "ShopStaff",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                    },
+                    new CivilianConditionalLocation(new Vector3(1143.979f, 263.6072f, -53.84084f), 45.65644f, 100f) // table 1
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "TableWorkers",
+                        TaskRequirements = TaskRequirements.Guard,
+                    },
+                    new CivilianConditionalLocation(new Vector3(1145.642f, 261.8447f, -53.84084f), 228.2771f, 100f) // opposite - table 2
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "TableWorkers",
+                        TaskRequirements = TaskRequirements.Guard,
+                    },
+                    new CivilianConditionalLocation(new Vector3(1149.497f, 269.1279f, -53.84084f), 46.69583f, 100f) // table 3
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "TableWorkers",
+                        TaskRequirements = TaskRequirements.Guard,
+                    },
+                    new CivilianConditionalLocation(new Vector3(1151.14f, 267.3297f, -53.84084f), 225.3231f, 100f) // table 4
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "TableWorkers",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(1138.14f, 256.0103f, -53.03576f), 310.1765f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "FloorWorkers",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                    },
+                    new CivilianConditionalLocation(new Vector3(1123.571f, 242.1376f, -52.4408f), 134.5502f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "FloorWorkers",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                    },
+                },
             },
             
             
 
+            // -24.58899 -73.79967 -75 - m25_1_int_tycoon_studio_lo
+            // 60.36966 -80.91821 -75 - m25_1_int_tycoon_studio_mid
+
+            // Multiple Interiors for the same interior set, use the interior id + 20+ to avoid conflicts with traps setups.
+            //  Low Casino id 299009 + 20
+            //  Mid Casino id 299265 + 20 
+
+            // Basement Interior Default Interior ID = 28979301
+            // Stash Houses are setup on 28979301-28979325
+            // Set to 28979330 to avoid conflicts with stash houses.
 
             new GamblingDenInterior(29926520, "Mid End Casino")
             {
@@ -1067,16 +1135,16 @@ public class Interiors : IInteriors
                     new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(61f, -80.39201f, -75.19622f), -90f)) { PlaceOnGround = true },
                     new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(59.2f, -79.25f, -75.19622f), 0f)) { PlaceOnGround = true },
                     new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(59.23f, -81.7f, -75.19622f), -180f)) { PlaceOnGround = true },
-                    new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(56.87f, -87f, -75.19622f), -180f)) { PlaceOnGround = true },
-                    new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(56.85f, -83.35f, -75.19622f), 0f)) { PlaceOnGround = true },
-                    new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(55.65f, -85.24f, -75.19622f), 90f)) { PlaceOnGround = true },
-                    new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(58.08f, -85.2f, -75.19622f), -90f)) { PlaceOnGround = true },
+                    //new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(56.87f, -87f, -75.19622f), -180f)) { PlaceOnGround = true },
+                    //new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(56.85f, -83.35f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    //new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(55.65f, -85.24f, -75.19622f), 90f)) { PlaceOnGround = true },
+                    //new PropSpawn("h4_prop_h4_weed_chair_01a", new SpawnPlace(new Vector3(58.08f, -85.2f, -75.19622f), -90f)) { PlaceOnGround = true },
 
-                    new PropSpawn("vw_prop_vw_table_01a", new SpawnPlace(new Vector3(56.86f, -85.21f, -75.19622f), -90.00028f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_casino_roulette_01b", new SpawnPlace(new Vector3(57.04f, -84.97343f, -75.19622f), -90.00009f)) { PlaceOnGround = true },
                     new PropSpawn("vw_prop_vw_table_01a", new SpawnPlace(new Vector3(59.227726f, -80.4621353f, -75.19622f), 0.99747926f)) { PlaceOnGround = true },
 
                     new PropSpawn("m25_2_prop_m52_sofa_corner_01a", new SpawnPlace(new Vector3(56.6f, -77.23f, -75.19622f), 0f)) { PlaceOnGround = true },
-                    new PropSpawn("bkr_prop_clubhouse_jukebox_02a", new SpawnPlace(new Vector3(62.87f, -80.73f, -75.19622f), -89.99932f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_clubhouse_jukebox_02a", new SpawnPlace(new Vector3(62.87f, -80.73f, -75.19622f), -90f)) { PlaceOnGround = true },
                     new PropSpawn("sum_prop_ac_drinkglobe_01a", new SpawnPlace(new Vector3(62.3582039f, -76.7331f, -75.19622f), -36.99995f)) { PlaceOnGround = true },
 
                     new PropSpawn("apa_mp_h_tab_sidesml_01", new SpawnPlace(new Vector3(55.25f, -80.56f, -75.19622f), 90f)) { PlaceOnGround = true },
@@ -1150,7 +1218,7 @@ public class Interiors : IInteriors
                         UseNavmesh = false,
                     },
 
-                new ToiletInteract("Toilet1",new Vector3(64.35353f, -77.11946f, -74.19622f), 356.5656f,"Use Toilet") {
+                    new ToiletInteract("Toilet1",new Vector3(64.35353f, -77.11946f, -74.19622f), 356.5656f,"Use Toilet") {
                         UseNavmesh = false,
                     },
                     new SinkInteract("Sink1",new Vector3(64.80113f, -78.44011f, -74.19625f), 85.11085f,"Use Sink")
@@ -1162,26 +1230,46 @@ public class Interiors : IInteriors
                 },
                 GamblingInteracts = new List<GamblingInteract>()
                 {
-                    new GamblingInteract("LoanStart1",new Vector3(61.52148f, -86.61871f, -74.19619f), 232.2846f,"Get Loan") { AllowLoans = true, },
+                    new GamblingInteract("MidEndLoanStart1",new Vector3(61.52148f, -86.61871f, -74.19619f), 232.2846f,"Get Loan") { AllowLoans = true, },
                     new GamblingInteract("MidEndStartGame1",new Vector3(60.14028f, -81.58334f, -74.19619f), 35.47474f,"Play Blackjack") { 
                         CameraPosition = new Vector3(59.10886f, -80.72547f, -73.33494f), 
                         CameraDirection = new Vector3(-0.004071531f, 0.2077488f, -0.9781737f), 
                         CameraRotation = new Rotator(-78.0072f, 2.824837E-06f, 1.122758f), AllowBlackjack = true, },
 
-                    new GamblingInteract("MidEndStartGame2",new Vector3(57.81444f, -83.78535f, -74.19619f), 139.1142f,"Play Roulette") {
-                        CameraPosition = new Vector3(57.19349f, -85.21532f, -73.41826f), 
-                        CameraDirection = new Vector3(-0.293947f, 0.002025444f, -0.9558195f), 
-                        CameraRotation = new Rotator(-72.90517f, 5.5366E-06f, 89.60521f) ,AllowRoulette = true, },
+                    new GamblingInteract("MidEndCasino2StartGame2",new Vector3(55.92815f, -84.08271f, -74.19624f), 219.1936f,"Play Roulette") {
+                        CameraPosition = new Vector3(56.28103f, -85.36378f, -73.81536f),
+                        CameraDirection = new Vector3(0.7085543f, 0.0008191445f, -0.7056559f),
+                        CameraRotation = new Rotator(-44.88255f, 3.388924E-07f, -89.93376f) ,AllowRoulette = true, },
                 },
-                PossiblePedSpawns = new List<ConditionalLocation>() {
-
+                PossiblePedSpawns = new List<ConditionalLocation>() 
+                {
+                    new GangConditionalLocation(new Vector3(66.34817f, -90.15186f, -74.19619f), 89.03592f, 100f){TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
                     new GangConditionalLocation(new Vector3(55.94663f, -81.44022f, -74.19627f), 236.0395f, 100f){TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
                     new GangConditionalLocation(new Vector3(64.13995f, -81.67818f, -74.19627f), 175.9137f, 100f) {TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
 
+                    new CivilianConditionalLocation(new Vector3(62.03f, -78.31f, -76.2f), 78f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(61.17f, -77.78f, -76.2f), -138.03f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(58.45f, -85.01f, -76.2f), 229.7024f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(61.2f, -83.98f, -76.2f), -1.41f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
                 },
                 
             },
-
             new GamblingDenInterior(29926521, "Mid End Casino Alt")
             {
                 IsTeleportEntry = true,
@@ -1332,16 +1420,455 @@ public class Interiors : IInteriors
                         CameraDirection = new Vector3(0.7085543f, 0.0008191445f, -0.7056559f),
                         CameraRotation = new Rotator(-44.88255f, 3.388924E-07f, -89.93376f) ,AllowRoulette = true, },
                 },
-                PossiblePedSpawns = new List<ConditionalLocation>() {
-
+                PossiblePedSpawns = new List<ConditionalLocation>() 
+                {
+                    new GangConditionalLocation(new Vector3(66.10674f, -91.23429f, -74.19617f), 90.26899f, 100f){TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
                     new GangConditionalLocation(new Vector3(55.94663f, -81.44022f, -74.19627f), 236.0395f, 100f){TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
                     new GangConditionalLocation(new Vector3(64.13995f, -81.67818f, -74.19627f), 175.9137f, 100f) {TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
 
+                    new CivilianConditionalLocation(new Vector3(57.78f, -81.43f, -76.2f), -59.76f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(58.43f, -82.07f, -76.2f), -10f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(60.31f, -84.39f, -76.2f), 158f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(60.29f, -85.55f, -76.2f), 28f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
                 },
 
             },
 
-              new GamblingDenInterior(28979330, "Basement Casino") // Paleto Bay Entrance Location -156.3501f, 6292.674f, 31.67826f), 133.7562f
+            new GamblingDenInterior(29900920, "Low Casino Crib") // The Gang Member Crib setup - Single Table
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(-18.88808f, -83.62676f, -76.00856f),
+                InteriorEgressHeading = 0.0f,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    // Entrance Area
+                    new PropSpawn("prop_washer_03", new SpawnPlace(new Vector3(-20.3781567f, -79.84284f, -75.00862f), 91.99972f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_phonebox_05a", new SpawnPlace(new Vector3(-19.8483734f, -79.98925f, -75.00862f), 1.9999696f)) { PlaceOnGround = true }, // Odd name for a traffic cone...
+                    new PropSpawn("prop_rub_boxpile_09", new SpawnPlace(new Vector3(-18.59f, -78.68f, -75.00862f), -163.999786f)) { PlaceOnGround = true },
+
+                    // Main Room
+                    new PropSpawn("vw_prop_vw_wallart_79a", new SpawnPlace(new Vector3(-21.1738033f, -79.7f, -74f), -90f)) { PlaceOnGround = true }, //bedroom wall art
+
+                    new PropSpawn("h4_prop_battle_lights_wall_l_a", new SpawnPlace(new Vector3(-29.0654373f, -71.52985f, -73.12f), 90f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_battle_lights_wall_l_a", new SpawnPlace(new Vector3(-29.06584f, -75.0005951f, -73.1184845f), 90f)) { PlaceOnGround = false },
+                    new PropSpawn("vw_prop_vw_wallart_39a", new SpawnPlace(new Vector3(-28.91168f, -73.17f, -73.7f), 90f)) { PlaceOnGround = false },
+
+                    new PropSpawn("ba_prop_battle_trophy_battler", new SpawnPlace(new Vector3(-22.4f, -72.0f, -73.82f), -90f)) { PlaceOnGround = false },
+
+                    new PropSpawn("prop_speaker_03", new SpawnPlace(new Vector3(-28.73f, -75.1254959f, -75.00862f), 111.999435f)) { PlaceOnGround = true },
+                    new PropSpawn("ng_proc_pizza01a", new SpawnPlace(new Vector3(-28.5601788f, -75.05767f, -74.1043854f), 99.99961f)) { PlaceOnGround = false },
+
+                    new PropSpawn("prop_speaker_03", new SpawnPlace(new Vector3(-28.72f, -71.85f, -75.00862f), 64.99944f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_cds_pile_01b", new SpawnPlace(new Vector3(-28.5887318f, -71.8755f, -74.1043854f), -94.9982147f)) { PlaceOnGround = false },
+
+                    //new PropSpawn("m24_2_prop_m42_shelfdoor_01a", new SpawnPlace(new Vector3(-28.33f, -75.87f, -73.76827f), 179.999985f)) { PlaceOnGround = true },
+
+
+                    //new PropSpawn("v_club_ch_briefchair", new SpawnPlace(new Vector3(-24.41f, -73.82f, -74.92f), -96.99904f)) { PlaceOnGround = true }, // tester
+                    //new PropSpawn("v_res_fa_chair01", new SpawnPlace(new Vector3(-27.96f, -73.75f, -74.92f), 93.00102f)) { PlaceOnGround = true }, // tester
+
+
+                    //new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-24.5f, -73.68f, -75.00862f), -89.999794f)) { PlaceOnGround = true },
+                    //new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-27.69f, -73.71f, -75.00862f), 89.00019f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-26.16f, -72.7f, -75.00862f), 0.999912441f)) { PlaceOnGround = true }, // dealer
+                    new PropSpawn("bkr_prop_weed_chair_01a", new SpawnPlace(new Vector3(-26.15f, -74.58f, -75.00862f), 173.9997f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_vw_table_01a", new SpawnPlace(new Vector3(-26.09693f, -73.71252f, -75.00862f), -180f)) { PlaceOnGround = true },
+                    //new PropSpawn("prop_bar_nuts", new SpawnPlace(new Vector3(-25.7801628f, -73.6659241f, -74.16921f), 0f)) { PlaceOnGround = false },
+
+                    new PropSpawn("vw_prop_vw_wallart_72a", new SpawnPlace(new Vector3(-22.4429226f, -77.85662f, -73.7f), 180f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_couch_lg_06", new SpawnPlace(new Vector3(-22.5f, -77.3f, -75.00862f), -179.000275f)) { PlaceOnGround = true },
+                    new PropSpawn("apa_mp_h_acc_rugwools_03", new SpawnPlace(new Vector3(-22.5f, -75.75f, -75f), 89.9993057f)) { PlaceOnGround = true },
+                    new PropSpawn("apa_mp_h_stn_foot_stool_01", new SpawnPlace(new Vector3(-22.4973259f, -75.985466f, -74.95965f), 24f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_mp_ashtraya", new SpawnPlace(new Vector3(-22.69f, -76f, -74.47f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_art_box_cig_01a", new SpawnPlace(new Vector3(-22.4f, -75.95f, -74.47f), 19.9999962f)) { PlaceOnGround = true },
+
+                    new PropSpawn("sf_prop_sf_art_basketball_01a", new SpawnPlace(new Vector3(-18.4590664f, -76.7529f, -75.00862f), -31.9999638f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_casino_art_basketball_02a", new SpawnPlace(new Vector3(-18.5007477f, -77.03742f, -75.00862f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("bkr_prop_biker_chairstrip_01", new SpawnPlace(new Vector3(-22.9f, -73.3f, -75.00862f), -78.99978f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_chairstrip_01", new SpawnPlace(new Vector3(-24.1059475f, -71.67655f, -75.00862f), -28.9995441f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_table_07", new SpawnPlace(new Vector3(-23.1711578f, -72.20674f, -75.00862f), -48.9999046f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_bikerset", new SpawnPlace(new Vector3(-23.2003345f, -72.23349f, -74.18397f), 36.9997749f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_bar_nuts", new SpawnPlace(new Vector3(-22.9901943f, -72.04661f, -74.18397f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_beer_blr", new SpawnPlace(new Vector3(-23.6155262f, -72.24693f, -75.00862f), -60.9997139f)) { PlaceOnGround = true },
+
+                    new PropSpawn("apa_mp_h_str_sideboardl_11", new SpawnPlace(new Vector3(-27.01115f, -71.52405f, -75.00862f), 180f)) { PlaceOnGround = true },
+                    new PropSpawn("sm_prop_smug_tv_flat_01", new SpawnPlace(new Vector3(-27.0560265f, -71.27753f, -74.12696f), 11.999403f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_hifi_01", new SpawnPlace(new Vector3(-28.1283569f, -71.27692f, -73.97f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_cds_pile_01a", new SpawnPlace(new Vector3(-28.44941f, -71.36646f, -74.12696f), 92.0001755f)) { PlaceOnGround = false },
+                    new PropSpawn("v_res_tre_dvdplayer", new SpawnPlace(new Vector3(-25.8047886f, -71.2939f, -74.12696f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_tt_porndvd03", new SpawnPlace(new Vector3(-25.78862f, -71.27162f, -74.03654f), 48.9999046f)) { PlaceOnGround = false },
+
+                    new PropSpawn("sf_prop_sf_acc_stand_01a", new SpawnPlace(new Vector3(-25.1735058f, -71.17586f, -75.00862f), 0f)) { PlaceOnGround = true },
+
+                    //new PropSpawn("apa_p_h_acc_artwalls_03", new SpawnPlace(new Vector3(-18.15f, -75.44644f, -73.7f), -90f)) { PlaceOnGround = false },
+                    //new PropSpawn("apa_p_h_acc_artwalls_04", new SpawnPlace(new Vector3(-18.15f, -77.17756f, -73.7f), -90f)) { PlaceOnGround = false },
+
+                    new PropSpawn("apa_mp_h_acc_phone_01", new SpawnPlace(new Vector3(-18.4315338f, -75.47151f, -73.89508f), -74.9995956f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_basketball_01a", new SpawnPlace(new Vector3(-18.4121857f, -75.88009f, -73.89511f), -106.999428f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_res_rubberplant", new SpawnPlace(new Vector3(-18.6544056f, -77.4032059f, -75.00862f), 117.999779f)) { PlaceOnGround = true },
+
+                    // Kitchen Area
+                    //new PropSpawn("ch_prop_ch_boodyhand_01b", new SpawnPlace(new Vector3(-20.604454f, -71.17907f, -73.10313f), 0f)) { PlaceOnGround = true },// test
+
+                    new PropSpawn("prop_glass_stack_02", new SpawnPlace(new Vector3(-20.14665f, -71.15503f, -74.03969f), -88.9999f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_glass_stack_07", new SpawnPlace(new Vector3(-20.1366615f, -70.87865f, -74.03969f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_glass_stack_10", new SpawnPlace(new Vector3(-18.4398785f, -71.09825f, -73.7470f), -38.9999428f)) { PlaceOnGround = false },
+
+                    new PropSpawn("beerrow_world", new SpawnPlace(new Vector3(-21.3332653f, -71.30066f, -74.03969f), -0.99946326f)) { PlaceOnGround = true },
+                    new PropSpawn("m25_1_prop_m51_box_weed_01a", new SpawnPlace(new Vector3(-20.61f, -71.27f, -73.99f), 127f)) { PlaceOnGround = true },
+                    new PropSpawn("p_cs_papers_02", new SpawnPlace(new Vector3(-20.3024311f, -71.4361038f, -74.03969f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_tool_broom", new SpawnPlace(new Vector3(-21.88f, -71.77f, -74.34f), 91.00035f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_bin_11a", new SpawnPlace(new Vector3(-21.3752842f, -71.7936859f, -75.00862f), 6.99999762f)) { PlaceOnGround = true },
+
+                    new PropSpawn("sf_prop_sf_bowl_fruit_01a", new SpawnPlace(new Vector3(-18.5502281f, -73.07927f, -74.0396957f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ret_ml_beerjak1", new SpawnPlace(new Vector3(-21.6088333f, -72.62949f, -74.85f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_beerbla1", new SpawnPlace(new Vector3(-21.6134415f, -73.02275f, -74.85f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_beerben1", new SpawnPlace(new Vector3(-21.6f, -73.4f, -74.85f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_tre_table2", new SpawnPlace(new Vector3(-21.574585f, -72.94622f, -75.00866f), 90.9996262f)) { PlaceOnGround = true },
+                    new PropSpawn("beerrow_local", new SpawnPlace(new Vector3(-21.6819763f, -73.01825f, -74.2538452f), 92.9996948f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_heist_cs_beer_box", new SpawnPlace(new Vector3(-21.6369534f, -72.25097f, -74.11f), -14.9996834f)) { PlaceOnGround = true },
+                    new PropSpawn("ng_proc_food_chips01c", new SpawnPlace(new Vector3(-21.4055729f, -72.9143143f, -74.2538452f), 33.99771f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_peanut_bowl_01", new SpawnPlace(new Vector3(-21.43748f, -73.590126f, -74.2538452f), -87.9997253f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ret_ml_beerpat1", new SpawnPlace(new Vector3(-18.4207764f, -74.8455658f, -74.85f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ml_beerpis1", new SpawnPlace(new Vector3(-18.4193649f, -74.84333f, -74.53f), 0f)) { PlaceOnGround = false },
+
+                    new PropSpawn("ch_prop_ch_trophy_teller_01a", new SpawnPlace(new Vector3(-22.04f, -72.41f, -74.08f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_mp_ashtrayb", new SpawnPlace(new Vector3(-22.032444f, -73.25359f, -74.08781f), -102.999886f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_money_pokerbucket", new SpawnPlace(new Vector3(-21.5976067f, -74.16576f, -75.00863f), -121.999451f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_med_p_notebook", new SpawnPlace(new Vector3(-18.62f, -71.6f, -74.04f), -68f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_bkr_cash_roll_01", new SpawnPlace(new Vector3(-18.56f, -71.62f, -74.01f), -64f)) { PlaceOnGround = true },
+
+                    // Bedroom
+
+
+                    new PropSpawn("m25_1_prop_m51_cash_box_01a", new SpawnPlace(new Vector3(-22.4924488f, -78.92211f, -75.0085754f), 14.9998541f)) { PlaceOnGround = true },
+                    new PropSpawn("m25_1_prop_m51_boxers_01a", new SpawnPlace(new Vector3(-22.18f, -79.55f, -74.96f), 30.9999962f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_box_pspt_01a", new SpawnPlace(new Vector3(-21.99685f, -80.25f, -75f), 4.999999f)) { PlaceOnGround = true },
+                    new PropSpawn("m25_1_prop_m51_bunkerbed_01a", new SpawnPlace(new Vector3(-21.95f, -79.35f, -75.00859f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("hei_heist_bed_chestdrawer_04", new SpawnPlace(new Vector3(-23.47f, -78.1f, -75.0086f), 0f)) { PlaceOnGround = true },
+                    // new PropSpawn("m23_2_prop_m32_desk_lamp", new SpawnPlace(new Vector3(-22.9793987f, -78.28f, -74.04f), 70.99982f)) { PlaceOnGround = false }, // Arm type lamps seem to always fall over
+                    new PropSpawn("prop_boxing_glove_01", new SpawnPlace(new Vector3(-23.9967823f, -78.3570251f, -74.04189f), 93.00049f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_fh_aftershavebox", new SpawnPlace(new Vector3(-23.49f, -78.28f, -73.83f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_exercisebike", new SpawnPlace(new Vector3(-21.9f, -81.09f, -74.9f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m23_2_prop_m32_sanitationbox_01a", new SpawnPlace(new Vector3(-23.09732f, -81.04054f, -75.00862f), 18.00006f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_fa_trainer04l", new SpawnPlace(new Vector3(-23.5305767f, -81.3251953f, -74.94f), -4.00075865f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_fa_trainer04r", new SpawnPlace(new Vector3(-23.6662254f, -81.31286f, -74.94f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ng_proc_box_01a", new SpawnPlace(new Vector3(-24.14477f, -81.181366f, -75.00862f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_guncase_02a", new SpawnPlace(new Vector3(-24.1564789f, -81.16121f, -74.6641f), 167.998856f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_boxpile_01a", new SpawnPlace(new Vector3(-24.9f, -80.7f, -75.00854f), -89.99962f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crate_beer_04", new SpawnPlace(new Vector3(-25.64283f, -80.58626f, -75.00854f), -87.99975f)) { PlaceOnGround = true },
+
+                    // Bathroom
+                    new PropSpawn("v_res_tre_washbasket", new SpawnPlace(new Vector3(-29.62878f, -78.4272461f, -75.00992f), 0f)) { PlaceOnGround = true },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("LowCasino1Exit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
+
+                    new ToiletInteract("LowCasino1Toilet1",new Vector3(-28.60018f, -77.9942f, -74.00988f), 176.571f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-29.7327f, -76.48601f, -72.75478f),
+                        CameraDirection = new Vector3(0.4087335f, -0.7303663f, -0.5472678f),
+                        CameraRotation = new Rotator(-33.17977f, 2.856257E-05f, -150.7674f)
+                    },
+                    new SinkInteract("LowCasino1Sink1",new Vector3(-29.33106f, -76.99864f, -74.0099f), 358.8088f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-28.35945f, -77.647f, -73.01905f),
+                        CameraDirection = new Vector3(-0.4885934f, 0.6959789f, -0.5262032f),
+                        CameraRotation = new Rotator(-31.74928f, 0f, 35.06975f)
+                    },
+                },
+                GamblingInteracts = new List<GamblingInteract>()
+                {
+                    new GamblingInteract("LowCasino1StartGame1",new Vector3(-25.22074f, -74.55657f, -74.00864f), 43.63675f,"Play Blackjack") {
+                        CameraPosition = new Vector3(-26.08792f, -74.29747f, -73.56122f),
+                        CameraDirection = new Vector3(-0.01920648f, 0.5620789f, -0.8268606f),
+                        CameraRotation = new Rotator(-55.77758f, 7.210837E-06f, 1.957061f), AllowBlackjack = true, },
+                    },
+                PossiblePedSpawns = new List<ConditionalLocation>() 
+                {
+                    new CivilianConditionalLocation(new Vector3(-20.44896f, -72.78099f, -76f), 121.4448f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard| TaskRequirements.AnyScenario, 
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                        //    "WORLD_HUMAN_SMOKING_POT_CLUBHOUSE",
+                        //    "WORLD_HUMAN_HANG_OUT_STREET_CLUBHOUSE"
+                        //},
+                    },
+                    new CivilianConditionalLocation(new Vector3(-26.28586f, -75.96916f, -76f), 271.4886f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds", 
+                        TaskRequirements = TaskRequirements.Guard| TaskRequirements.AnyScenario, 
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_HANG_OUT_STREET_CLUBHOUSE",
+                        //    "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                        //    "WORLD_HUMAN_SMOKING_POT_CLUBHOUSE",
+                        //},
+                    },               
+                    new CivilianConditionalLocation(new Vector3(-24.79075f, -76.42732f, -76f), 66.34495f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard| TaskRequirements.AnyScenario, 
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_HANG_OUT_STREET_CLUBHOUSE",
+                        //    "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                        //    "WORLD_HUMAN_SMOKING_POT_CLUBHOUSE",
+                        //},
+                    },
+
+                    // Testers
+                    //new CivilianConditionalLocation(new Vector3(-24.73f, -74.57f, -75f),57.06f, 100f)
+                    //{
+                    //    OverrideDispatchablePersonGroupID = "RegularPeds",
+                    //    TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario,   
+                    //},
+                    //new CivilianConditionalLocation(new Vector3(-27.47f, -72.88f, -75f), -105f, 100f)
+                    //{
+                    //    OverrideDispatchablePersonGroupID = "RegularPeds",
+                    //    TaskRequirements = TaskRequirements.Guard| TaskRequirements.LocalScenario,
+                    //},
+                },
+            },
+            new GamblingDenInterior(29900921, "Low Casino Room") // Hardware Store
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(-18.88808f, -83.62676f, -76.00856f),
+                InteriorEgressHeading = 0.0f,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    // Entry Room
+                    new PropSpawn("sum_prop_ac_constructsign_01a", new SpawnPlace(new Vector3(-19.7803917f, -78.14727f, -72.510376f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ind_cm_ladder", new SpawnPlace(new Vector3(-18.25f, -78.46f, -74.07f), 87.99859f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_vertdrill_01", new SpawnPlace(new Vector3(-20.2970924f, -79.87131f, -75.00862f), -88.00031f)) { PlaceOnGround = true },
+
+                    // Main Room
+                    new PropSpawn("m23_2_prop_m32_shelve_crt_01a", new SpawnPlace(new Vector3(-20.0348473f, -75.74699f, -75.00862f), 98.99978f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_shelve_crt_01a", new SpawnPlace(new Vector3(-25.87113f, -76.91144f, -75.00862f), 6.999395f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_shelve_crt_01a", new SpawnPlace(new Vector3(-20.0348473f, -75.74699f, -75.00862f), 98.99978f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_shelve_crt_01a", new SpawnPlace(new Vector3(-25.87113f, -76.91144f, -75.00862f), 6.999395f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_cardpile_06", new SpawnPlace(new Vector3(-21.4125938f, -76.01094f, -75.00862f), -88.99936f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_rub_cardpile_06", new SpawnPlace(new Vector3(-27.3972149f, -74.5060959f, -75.00862f), -89.99904f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m23_2_prop_m32_dustsheet_01a", new SpawnPlace(new Vector3(-28.07505f, -71.00618f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_dustsheet_01a", new SpawnPlace(new Vector3(-24.1293125f, -71.00776f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_dustsheet_01a", new SpawnPlace(new Vector3(-28.5f, -73.91f, -75.00862f), 89.99987f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ind_cs_toolboard", new SpawnPlace(new Vector3(-27.6f, -75.85f, -73.94597f), -180f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_scafold_frame1c", new SpawnPlace(new Vector3(-19.77f, -77.73f, -75.00862f), -89.99999f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_tshirt_stand_01b", new SpawnPlace(new Vector3(-22.67f, -71.73f, -74.01f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_tshirt_stand_04", new SpawnPlace(new Vector3(-22.69f, -72.29f, -74.01f), 180f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ret_fh_shelf_01", new SpawnPlace(new Vector3(-28.15f, -74.43f, -75.00862f), 88.9996f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_02", new SpawnPlace(new Vector3(-24.69f, -71.42f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(-27.55f, -71.42f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_maskcrate", new SpawnPlace(new Vector3(-28.0290375f, -73.5334854f, -73.15914f), -0.000333785982f)) { PlaceOnGround = false },
+
+                    new PropSpawn("v_serv_abox_g3", new SpawnPlace(new Vector3(-28.05f, -72.61f, -75f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_toilet_01", new SpawnPlace(new Vector3(-27.43f, -72.36137f, -74.67f), 0.9986014f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_roadcone_02a", new SpawnPlace(new Vector3(-27.4813385f, -72.9527f, -75.00862f), -169.000137f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ind_cm_weldmachine", new SpawnPlace(new Vector3(-23.61f, -72.2662048f, -74.39f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_byard_gastank02", new SpawnPlace(new Vector3(-24.18f, -72.17f, -75.00862f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_paints_bench01", new SpawnPlace(new Vector3(-22.68f, -73.37f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("imp_prop_bench_grinder_01a", new SpawnPlace(new Vector3(-22.2791252f, -73.0011444f, -74.0885f), 88.99991f)) { PlaceOnGround = false },
+                    new PropSpawn("imp_prop_bench_vice_01a", new SpawnPlace(new Vector3(-22.99f, -74.18f, -74.0885f), 0f)) { PlaceOnGround = false },
+
+                    new PropSpawn("prop_beer_box_01", new SpawnPlace(new Vector3(-24.5605259f, -74.91634f, -74.94f), 33.9999123f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_heist_cs_beer_box", new SpawnPlace(new Vector3(-25.59f, -73.91f, -74.87f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-23.9031258f, -75.5858f, -75.00862f), -132.999832f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-26.2011585f, -73.2339249f, -75.00862f), 41.0000648f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-24.5660553f, -73.7475739f, -75.00862f), -49.99983f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_chair_01a", new SpawnPlace(new Vector3(-25.7021255f, -74.92837f, -75.00862f), 129.999313f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_vw_table_01a", new SpawnPlace(new Vector3(-25.09f, -74.46f, -75.00862f), 134.999451f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ind_cs_hifi", new SpawnPlace(new Vector3(-18.4123135f, -75.39409f, -73.78f), -83.9996262f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_cm_lubcan", new SpawnPlace(new Vector3(-18.5582027f, -75.82204f, -73.87f), -168.000412f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_smallplasticbox", new SpawnPlace(new Vector3(-19.0193634f, -76.15884f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_toolbox_01b", new SpawnPlace(new Vector3(-19.06223f, -76.15529f, -74.5303345f), 89.99999f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_tool_hardhat", new SpawnPlace(new Vector3(-18.3369255f, -75.94528f, -73.89516f), -52.99989f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_cable_tie_01", new SpawnPlace(new Vector3(-18.5429134f, -76.40619f, -73.89513f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_rc_workbag", new SpawnPlace(new Vector3(-18.5196323f, -74.8130951f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_monitor_01", new SpawnPlace(new Vector3(-18.4256077f, -76.63221f, -75.00862f), 177.998978f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_fireaxe", new SpawnPlace(new Vector3(-18.34f, -77.81f, -75f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_serv_plas_boxgt2", new SpawnPlace(new Vector3(-18.5f, -77.34f, -75.00862f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_bar_fridge_03", new SpawnPlace(new Vector3(-19.04499f, -75.41339f, -75.00862f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_clipboard_cc", new SpawnPlace(new Vector3(-19.0118866f, -75.494606f, -74.08f), -68.99982f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_plasticcan_01a", new SpawnPlace(new Vector3(-19.0166912f, -75.21753f, -74.0909348f), 89.9998856f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_jerrycan_01a", new SpawnPlace(new Vector3(-20.97f, -77.62f, -75.00862f), 89.9991f)) { PlaceOnGround = true },
+                    new PropSpawn("sm_prop_smug_crate_m_01a", new SpawnPlace(new Vector3(-22.6789131f, -77.54506f, -75.00862f), 1.99999988f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_rubble_03", new SpawnPlace(new Vector3(-22.68725f, -77.545784f, -74.45715f), -169.9993f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_tool_bench01", new SpawnPlace(new Vector3(-21.76264f, -77.46581f, -75.00862f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("xs_prop_x18_tool_box_02a", new SpawnPlace(new Vector3(-21.18f, -77.59f, -75f), 87.0000839f)) { PlaceOnGround = true },
+                    new PropSpawn("xs_prop_x18_tool_box_01b", new SpawnPlace(new Vector3(-18.3677311f, -76.86367f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("xs_prop_x18_tool_box_01a", new SpawnPlace(new Vector3(-18.3801765f, -76.74946f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-24f, -77.4f, -75.00862f), -179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-23.45f, -77.4f, -75.00862f), -179.999985f)) { PlaceOnGround = true },
+                    //new PropSpawn("prop_workwall_02", new SpawnPlace(new Vector3(-22.35f, -77.85f, -74.05f), -179.000015f)) { PlaceOnGround = false },
+
+                    // Office/bedroom
+                    //new PropSpawn("m23_2_prop_m32_sign_03a", new SpawnPlace(new Vector3(-25f, -78.0136f, -72.45f), 0f)) { PlaceOnGround = false }, // What's My Name!!
+                    new PropSpawn("m23_2_prop_m32_shelve_crt_01a", new SpawnPlace(new Vector3(-24.0064526f, -79.586586f, -75.00862f), -13.9999428f)) { PlaceOnGround = true },
+
+                    //new PropSpawn("v_med_p_deskchair", new SpawnPlace(new Vector3(-22.2109375f, -79.2641144f, -75.00858f), -154.9997f)) { PlaceOnGround = true },
+                    //new PropSpawn("m24_2_prop_m42_smalldesk_01a", new SpawnPlace(new Vector3(-22.6f, -78.43f, -73.73f), 0f)) { PlaceOnGround = true }, // stupid thing freaks out and ruins the room
+                    //new PropSpawn("m23_2_prop_m32_cassette_01a", new SpawnPlace(new Vector3(-22.3216419f, -78.67128f, -74.21f), 12.9999933f)) { PlaceOnGround = false },
+                    //new PropSpawn("m23_2_prop_m32_carkey_fob_01a", new SpawnPlace(new Vector3(-22.13213f, -78.74503f, -74.21f), -22.9993649f)) { PlaceOnGround = false },
+                    //new PropSpawn("prop_tool_hardhat", new SpawnPlace(new Vector3(-21.9596252f, -78.33954f, -74.22126f), -35.999794f)) { PlaceOnGround = false },
+                    //new PropSpawn("prop_cs_beer_bot_01", new SpawnPlace(new Vector3(-22.2372475f, -78.340416f, -74.08f), 16.0001316f)) { PlaceOnGround = false },
+
+                    new PropSpawn("prop_skid_box_07", new SpawnPlace(new Vector3(-22.32f, -78.6f, -75.01f), 0)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_ld_int_safe_01", new SpawnPlace(new Vector3(-23.71675f, -78.4f, -74.53f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("reh_prop_reh_deskflag_us_01a", new SpawnPlace(new Vector3(-23.7076931f, -78.41175f, -74.05718f), 19.0002174f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_package_01a", new SpawnPlace(new Vector3(-23.5589066f, -78.50656f, -74.05718f), -40.99993f)) { PlaceOnGround = false },
+
+                    new PropSpawn("v_ind_cs_mallet", new SpawnPlace(new Vector3(-21.4019947f, -78.7321548f, -74.98f), -105.999443f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_1_prop_m31_box_metal_01a", new SpawnPlace(new Vector3(-21.3515778f, -79.10336f, -75.00856f), 89.99966f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m23_2_prop_m32_tallcabinet_01a", new SpawnPlace(new Vector3(-21.5f, -80.3f, -75f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(-22.6301441f, -81.01844f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_rc_lockeropn", new SpawnPlace(new Vector3(-25.50f, -80.96685f, -75.00856f), 180f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_rc_locker", new SpawnPlace(new Vector3(-24.64f, -80.96685f, -75.00856f), 180f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_cs_hammer", new SpawnPlace(new Vector3(-24.1477356f, -80.99888f, -75f), -173.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_roadcone_03a", new SpawnPlace(new Vector3(-25.7191086f, -80.3777161f, -75.00855f), 0f)) { PlaceOnGround = true },
+                    // Kitchen
+                    new PropSpawn("m24_1_prop_m41_scratches_01a", new SpawnPlace(new Vector3(-20.1967678f, -72.95052f, -75.0086441f), 22.9995823f)) { PlaceOnGround = true },
+
+                    new PropSpawn("bkr_prop_fakeid_deskfan_01a", new SpawnPlace(new Vector3(-18.3914852f, -71.0314941f, -73.7475f), -40.99993f)) { PlaceOnGround = false },
+
+                    new PropSpawn("bkr_prop_bkr_cash_roll_01", new SpawnPlace(new Vector3(-18.6240768f, -71.50109f, -74.03969f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ng_proc_spraycan01b", new SpawnPlace(new Vector3(-18.5644474f, -71.71539f, -74.03969f), -72.9997253f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_coffee_mac_02", new SpawnPlace(new Vector3(-18.4725647f, -73.3746948f, -73.79f), -89.9997f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_blueprt_01a", new SpawnPlace(new Vector3(-18.5533886f, -72.81817f, -74.0396957f), 1.99998212f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ind_cs_drill", new SpawnPlace(new Vector3(-21.64f, -71.22f, -73.99f), -46.9999161f)) { PlaceOnGround = true },
+                    new PropSpawn("xs_prop_trinket_mug_01a", new SpawnPlace(new Vector3(-20.1367531f, -70.99129f, -74.03969f), 91.9996948f)) { PlaceOnGround = true },
+                    new PropSpawn("v_serv_bs_mug", new SpawnPlace(new Vector3(-20.143322f, -71.29566f, -73.98f), -56.998867f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_ta_mug", new SpawnPlace(new Vector3(-20.2858734f, -71.2686844f, -73.98f), -88.9997253f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mug_01", new SpawnPlace(new Vector3(-20.232357f, -71.38846f, -73.97f), -129.998917f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_tt_mug2", new SpawnPlace(new Vector3(-18.6499615f, -73.1083145f, -73.97f), 149.999435f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_mug_03", new SpawnPlace(new Vector3(-20.7035217f, -71.2743149f, -73.97f), -2.99940777f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_snack_01", new SpawnPlace(new Vector3(-20.47774f, -71.34801f, -74.03969f), 32.9998131f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_mp_ashtrayb", new SpawnPlace(new Vector3(-20.9726f, -71.31272f, -74.03969f), -155.000473f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ret_gc_mug03", new SpawnPlace(new Vector3(-22.0387917f, -72.41579f, -73.99f), 150.998337f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ld_fags_01", new SpawnPlace(new Vector3(-22.0459366f, -72.47f, -74.04f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("sm_prop_smug_radio_01", new SpawnPlace(new Vector3(-22.01644f, -73.5925751f, -74.08781f), -86.00003f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_blowtorch_01a", new SpawnPlace(new Vector3(-22.0412769f, -73.30121f, -74.08781f), 146.000168f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_cs_screwdrivr3", new SpawnPlace(new Vector3(-22.1f, -73.62f, -74.08f), -177.999756f)) { PlaceOnGround = true },
+                    new PropSpawn("h4_prop_h4_bolt_cutter_01a", new SpawnPlace(new Vector3(-22.0829659f, -72.5925751f, -74.08781f), 9.999976f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ind_rc_overallfld", new SpawnPlace(new Vector3(-21.5378113f, -71.94252f, -75.00862f), -97.99955f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_chair_06", new SpawnPlace(new Vector3(-20.8499947f, -72.04518f, -75.00862f), -100.999344f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_desk_01b", new SpawnPlace(new Vector3(-21.4f, -72.05f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_cs_spanner01", new SpawnPlace(new Vector3(-21.22315f, -72.08349f, -74.0647354f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ind_cs_spanner02", new SpawnPlace(new Vector3(-21.1635761f, -72.0121841f, -74.0647354f), 32.9999542f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ind_cs_spanner03", new SpawnPlace(new Vector3(-21.1965637f, -71.90002f, -74.0647354f), 95.99967f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ind_cs_screwdrivr1", new SpawnPlace(new Vector3(-21.3451252f, -72.10798f, -74.06f), -153.999619f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_tool_torch", new SpawnPlace(new Vector3(-21.75f, -72.38f, -73.95f), 74.99977f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ind_rc_plaztray", new SpawnPlace(new Vector3(-21.6343021f, -71.90911f, -74.0647354f), 90.99961f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ind_cs_wrench", new SpawnPlace(new Vector3(-20.9843769f, -72.0423f, -74.0647354f), 5.999721f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ind_cs_pliers", new SpawnPlace(new Vector3(-21.27241f, -72.3171844f, -74.06f), 66.99983f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_beer_logopen", new SpawnPlace(new Vector3(-21.2181644f, -71.79055f, -74.0647354f), 34.9999542f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_h4_can_beer_01a", new SpawnPlace(new Vector3(-21.0967979f, -72.46334f, -74.0647354f), 51.99946f)) { PlaceOnGround = false },
+
+                    new PropSpawn("prop_barrier_work01c", new SpawnPlace(new Vector3(-21.8752842f, -73.14353f, -75.00863f), 91.9996948f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_barrier_work01a", new SpawnPlace(new Vector3(-21.4886189f, -73.1846f, -75.0086746f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ind_cfwaste", new SpawnPlace(new Vector3(-21.684618f, -74.23884f, -75.00862f), -53.00008f)) { PlaceOnGround = true },
+
+
+
+                    // Bathroom 
+                    new PropSpawn("m23_2_prop_m32_body_parts", new SpawnPlace(new Vector3(-30.60828f, -77.17046f, -74.93285f), -50.00023f)) { PlaceOnGround = true },
+
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("LowCasino2Exit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
+
+                    new ToiletInteract("LowCasino2Toilet1",new Vector3(-28.60018f, -77.9942f, -74.00988f), 176.571f,"Use Toilet") 
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-29.7327f, -76.48601f, -72.75478f),
+                        CameraDirection = new Vector3(0.4087335f, -0.7303663f, -0.5472678f),
+                        CameraRotation = new Rotator(-33.17977f, 2.856257E-05f, -150.7674f)
+                    },
+                    new SinkInteract("LowCasino2Sink1",new Vector3(-29.33106f, -76.99864f, -74.0099f), 358.8088f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-28.35945f, -77.647f, -73.01905f),
+                        CameraDirection = new Vector3(-0.4885934f, 0.6959789f, -0.5262032f),
+                        CameraRotation = new Rotator(-31.74928f, 0f, 35.06975f)
+                    },
+                },
+                GamblingInteracts = new List<GamblingInteract>()
+                {
+                    new GamblingInteract("LowCasino2LoanStart1",new Vector3(-19.30448f, -71.90086f, -73.99454f), 289.4536f,"Get Loan")
+                    {
+                        AutoCamera = false,
+                        AllowLoans = true,
+                    },
+                    new GamblingInteract("LowCasino2StartGame1",new Vector3(-25.1967f, -75.61451f, -74.00858f), 359.5804f,"Play Blackjack") {
+                        CameraPosition = new Vector3(-25.52704f, -74.89313f, -73.64111f),
+                        CameraDirection = new Vector3(0.4225345f, 0.4264789f, -0.7997377f),
+                        CameraRotation = new Rotator(-53.10506f, 9.954889E-05f, -44.73381f), AllowBlackjack = true, }, // table 1 cam
+                    },
+                PossiblePedSpawns = new List<ConditionalLocation>() {
+
+                    new GangConditionalLocation(new Vector3(-19.37453f, -74.01799f, -76.00858f), 90.90241f, 100f){TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
+                    new GangConditionalLocation(new Vector3(-26.11079f, -77.43771f, -76.00858f), 5.568038f, 100f) {TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
+
+
+                    new CivilianConditionalLocation(new Vector3(-20.66258f, -73.77576f, -75.98452f), 238.3364f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(-22.55306f, -76.9024f, -76.00858f), 11.33584f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                },
+            },
+
+            new GamblingDenInterior(28979330, "Basement Casino")
              {
                 InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
                 IsTeleportEntry = true,
@@ -1466,7 +1993,7 @@ public class Interiors : IInteriors
                     new ExitInteriorInteract("Basement1Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
                     new AudioEmitterInteract()
                     {
-                        Name = "GamblingJukeBox2",
+                        Name = "Basement1GamblingJukeBox2",
                         Position = new Vector3(849.2769f, -3003.709f, -48.99986f),
                         Heading =  176.4054f,
                         ButtonPromptText = "Jukebox Control",
@@ -1475,7 +2002,7 @@ public class Interiors : IInteriors
                 },
                 GamblingInteracts = new List<GamblingInteract>()
                 {
-                    new GamblingInteract("LoanStart1",new Vector3(854.0677f, -2997.701f, -48.99989f), 1.434849f,"Get Loan") { 
+                    new GamblingInteract("Basement1LoanStart1",new Vector3(854.0677f, -2997.701f, -48.99989f), 1.434849f,"Get Loan") {
                         AllowLoans = true,
                         CameraPosition = new Vector3(852.887f, -2998.804f, -47.68785f),
                         CameraDirection = new Vector3(0.4981446f, 0.6811287f, -0.5365777f),
@@ -1498,6 +2025,170 @@ public class Interiors : IInteriors
                     new GangConditionalLocation(new Vector3(854.4016f, -2999.259f, -48.99988f), 96.13211f, 100f){TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
                     new GangConditionalLocation(new Vector3(845.2484f, -2999.839f, -48.99988f), 230.9509f, 100f) {TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
                     //new GangConditionalLocation(new Vector3(847.781f, -3002.46021f, -49.99987f), -0f, 100f) {TaskRequirements = TaskRequirements.AnyScenario }, CHAIR TESTER
+
+                    new CivilianConditionalLocation(new Vector3(850.0471f, -3000.285f, -50.99986f), 268.7639f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(851.3555f, -3000.565f, -50.99986f), 70.93231f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(850.3456f, -2997.648f, -50.99986f), 2.48175f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(846.94f, -3004.27f, -50.99986f), 151.7548f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                },
+
+             },
+            new GamblingDenInterior(28979331, "Basement Casino")
+             {
+                InternalInteriorCoordinates = new Vector3(844.1353f, -3005.111f, -50f),
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(844.1353f, -3005.111f, -44.40003f),
+                InteriorEgressHeading =  3.067018f,
+                InteriorSetStyleID = 5,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("ex_prop_crate_elec_sc", new SpawnPlace(new Vector3(844.22f, -2998.48f, -49.88f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_vw_crate_01a", new SpawnPlace(new Vector3(844.2f, -3004.45f, -49.99f), 89.9996948f)) { PlaceOnGround = true },
+                    new PropSpawn("sm_prop_smug_crate_m_tobacco", new SpawnPlace(new Vector3(844.06f, -3000.25f, -49.99f), 89.99999f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_booze_cigs2", new SpawnPlace(new Vector3(845.5166f, -2998.62817f, -49.99987f), 87.99967f)) { PlaceOnGround = true },
+
+                    new PropSpawn("v_ret_ml_fridge", new SpawnPlace(new Vector3(843.63f, -3002.93f, -48.88f), 90.99951f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_bar_fridge_01", new SpawnPlace(new Vector3(843.59f, -3001.71f, -49.99987f), 90.9996643f)) { PlaceOnGround = true },
+
+                    new PropSpawn("ch_prop_casino_bin_01a", new SpawnPlace(new Vector3(845.59f, -3002.85f, -49.99987f), 90f)) { PlaceOnGround = true },
+
+                    new PropSpawn("vw_prop_casino_art_plant_05a", new SpawnPlace(new Vector3(845.6237f, -3004.548f, -49.99987f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_casino_art_plant_05a", new SpawnPlace(new Vector3(853.3368f, -3004.70215f, -49.99987f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_casino_art_plant_09a", new SpawnPlace(new Vector3(851.33f, -2994.85f, -49.99987f), -37.0007362f)) { PlaceOnGround = true },
+
+
+                    new PropSpawn("vw_prop_casino_roulette_01b", new SpawnPlace(new Vector3(852f, -3000.4f, -49.99f), -89.99996f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_casino_blackjack_01a", new SpawnPlace(new Vector3(848.2f, -3001.45f, -49.99987f), 89.99999f)) { PlaceOnGround = true },
+
+                    new PropSpawn("bkr_prop_clubhouse_sofa_01a", new SpawnPlace(new Vector3(849.4f, -2994.63f, -50f), 0f)) { PlaceOnGround =  true },
+
+                    //new PropSpawn("bkr_int_02_coffee_table", new SpawnPlace(new Vector3(849.65f, -2996f, -49.99f), -180f)) { PlaceOnGround =  false },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(848.609f, -2994.4043f, -49.99987f), 11.9996853f)) { PlaceOnGround = true },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(850.2257f, -2994.447f, -49.99987f), -11.9994678f)) { PlaceOnGround = true },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(848.5938f, -2997.5105f, -49.99987f), 163.999359f)) { PlaceOnGround = true },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(850.495361f, -2997.62549f, -49.99987f), -161.999466f)) { PlaceOnGround = true },
+                    //new PropSpawn("bkr_int_02_coffee_table", new SpawnPlace(new Vector3(849.65f, -2996f, -49.99f), -180f)) { PlaceOnGround =  false },
+                    new PropSpawn("m24_1_prop_m41_coftableb_01a", new SpawnPlace(new Vector3(849.4f, -2996.35181f, -49.99987f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_stripset", new SpawnPlace(new Vector3(849.45f, -2996.56f, -49.58f), 179.999985f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m24_1_prop_m41_coftableb_01a", new SpawnPlace(new Vector3(853.3f, -2996.35254f, -49.99987f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_stripset", new SpawnPlace(new Vector3(853.05f, -2996.42f, -49.5914955f), 90f)) { PlaceOnGround = true },
+
+                    new PropSpawn("bkr_prop_clubhouse_sofa_01a", new SpawnPlace(new Vector3(853.3f, -2994.63f, -50f), 0f)) { PlaceOnGround =  false },
+                    //new PropSpawn("bkr_int_02_coffee_table", new SpawnPlace(new Vector3(852.9f, -2996f, -49.99f), 0f)) { PlaceOnGround =  false },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(853.809631f, -2997.6f, -49.99987f), -155.999435f)) { PlaceOnGround = true },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(854.0002f, -2994.5293f, -49.99987f), -27.9993668f)) { PlaceOnGround = true },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(852.3174f, -2994.46582f, -49.99987f), 8.999498f)) { PlaceOnGround = true },
+                    //new PropSpawn("ex_mp_h_stn_chairarm_24", new SpawnPlace(new Vector3(852.2737f, -2997.47852f, -49.99987f), 168.998962f)) { PlaceOnGround = true },
+
+                    new PropSpawn("hei_heist_str_sideboards_02", new SpawnPlace(new Vector3(851.25f, -3004.92065f, -49.99987f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_bar_nuts", new SpawnPlace(new Vector3(851.0016f, -3004.88281f, -49.1859665f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("ba_prop_club_tonic_bottle", new SpawnPlace(new Vector3(850.7778f, -3004.938f, -49.1958351f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_bottle_cap_01", new SpawnPlace(new Vector3(850.971741f, -3005.11523f, -49.1958351f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_bottle_macbeth", new SpawnPlace(new Vector3(851.1341f, -3005.06348f, -49.1758351f), 162.000092f)) { PlaceOnGround = false },
+                    new PropSpawn("ex_prop_exec_ashtray_01", new SpawnPlace(new Vector3(851.3296f, -3004.90845f, -49.17f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_whiskey_glasses", new SpawnPlace(new Vector3(851.6479f, -3004.995f, -49.1758351f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_drink_whisky", new SpawnPlace(new Vector3(851.167f, -3004.75146f, -49.1758351f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_drink_whisky", new SpawnPlace(new Vector3(851.5154f, -3004.7395f, -49.1758351f), 0f)) { PlaceOnGround = false },
+
+                    new PropSpawn("bkr_prop_clubhouse_jukebox_01b", new SpawnPlace(new Vector3(849.28f, -3004.73f, -50f), -180f)) { PlaceOnGround = true },
+
+                    new PropSpawn("hei_heist_str_sideboards_02", new SpawnPlace(new Vector3(847.6474f, -3004.9f, -49.99f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_bar_nuts", new SpawnPlace(new Vector3(847.9937f, -3004.85229f, -49.18f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_h4_can_beer_01a", new SpawnPlace(new Vector3(847.4572f, -3004.89258f, -49.18f), 178.999954f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_beer_amopen", new SpawnPlace(new Vector3(847.6805f, -3004.88428f, -49.18f), -108.99913f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_beer_bottle", new SpawnPlace(new Vector3(847.8932f, -3004.78271f, -49.18f), -175.00029f)) { PlaceOnGround = false },
+                    new PropSpawn("ba_prop_club_water_bottle", new SpawnPlace(new Vector3(848.14624f, -3005.07373f, -49.18f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("ba_prop_club_water_bottle", new SpawnPlace(new Vector3(848.0521f, -3005.07153f, -49.18f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_bottle_cap_01", new SpawnPlace(new Vector3(847.7526f, -3004.77344f, -49.18f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_cs_bottle_opener", new SpawnPlace(new Vector3(847.58f, -3004.77222f, -49.18f), -60.999855f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_ml_6bottles", new SpawnPlace(new Vector3(847.0356f, -3005.08f, -49.04f), -179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ashtray_01", new SpawnPlace(new Vector3(847.7889f, -3005.00171f, -49.17f), 0f)) { PlaceOnGround = false },
+
+                    new PropSpawn("xm3_prop_xm3_crate_01c", new SpawnPlace(new Vector3(854.3733f, -3004.14014f, -49.99987f), 88.9996262f)) { PlaceOnGround = true },
+
+                    new PropSpawn("ch_prop_ch_valet_01a", new SpawnPlace(new Vector3(854.64f, -2997.68f, -49.99f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_1_prop_m41_notebook_01a", new SpawnPlace(new Vector3(854.67f, -2997.68f, -49f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_bkr_cash_roll_01", new SpawnPlace(new Vector3(854.66f, -2997.72f, -48.97f), -94f)) { PlaceOnGround =  false },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("Basement2Exit",new Vector3(844.1353f, -3005.111f, -44.40003f), 273.5927f,"Exit"){UseNavmesh = false},
+                    new AudioEmitterInteract()
+                    {
+                        Name = "Basement2GamblingJukeBox2",
+                        Position = new Vector3(849.2769f, -3003.709f, -48.99986f),
+                        Heading =  176.4054f,
+                        ButtonPromptText = "Jukebox Control",
+                        UseNavmesh = false,
+                    },
+                },
+                GamblingInteracts = new List<GamblingInteract>()
+                {
+                    new GamblingInteract("Basement2LoanStart1",new Vector3(854.0677f, -2997.701f, -48.99989f), 270.1647f,"Get Loan") {
+                        AllowLoans = true,
+                        CameraPosition = new Vector3(852.887f, -2998.804f, -47.68785f),
+                        CameraDirection = new Vector3(0.4981446f, 0.6811287f, -0.5365777f),
+                        CameraRotation = new Rotator(-32.45097f, -1.011759E-06f, -36.17993f)
+
+                    },
+                    new GamblingInteract("Basement2StartGame1",new Vector3(848.9404f, -3000.934f, -48.99985f), 109.8323f,"Play Blackjack") {
+                        CameraPosition = new Vector3(848.6221f, -3001.088f, -48.56856f),
+                        CameraDirection = new Vector3(-0.5664486f, -0.2242576f, -0.7929972f),
+                        CameraRotation = new Rotator(-52.4665f, -1.821832E-05f, 111.5987f), AllowBlackjack = true, }, 
+
+                    new GamblingInteract("Basement2StartGame2",new Vector3(851.2636f, -3001.84f, -48.99985f), 337.5004f,"Play Roulette") {
+                        CameraPosition = new Vector3(851.3026f, -3000.799f, -48.46148f),
+                        CameraDirection = new Vector3(0.5885811f, 0.004301494f, -0.8084267f),
+                        CameraRotation = new Rotator(-53.9425f, -1.269208E-06f, -89.58128f), AllowRoulette = true, UseNavmesh = false }, 
+                    },
+                PossiblePedSpawns = new List<ConditionalLocation>() {
+
+                    new GangConditionalLocation(new Vector3(854.62f, -2998.61f, -50.99985f), 90f, 100f){TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
+                    new GangConditionalLocation(new Vector3(845.1819f, -3001.541f, -50.99985f), 275.0603f, 100f) {TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario },
+
+
+                    new CivilianConditionalLocation(new Vector3(848.8944f, -3001.871f, -50.99986f), 66.75868f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(848.2386f, -3002.609f, -50.99986f), 18.49743f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(847.3469f, -3004.089f, -50.99986f), 199.9248f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(851.771f, -3004.145f, -50.99986f), 29.05623f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(850.5508f, -3004.073f, -50.99986f), 287.0507f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "RegularPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
                 },
 
              },
@@ -7901,6 +8592,240 @@ public class Interiors : IInteriors
             },
             },
 
+            // The Diamond Casino  Penthouse
+            new ResidenceInterior(274689,"Casino Penthouse") 
+            {
+                IsTeleportEntry = true,
+                //InternalInteriorCoordinates = new Vector3(976.636f, 70.295f, 115.164f),
+                RequestIPLs = new List<string>() { "vw_casino_penthouse" },
+                InteriorSets = new List<string>() { "Set_Pent_Tint_Shell", "Set_Pent_Pattern_09", "Set_Pent_Spa_Bar_Open","Set_Pent_Media_Bar_Open","Set_Pent_Arcade_Retro","set_pent_bar_light_02","set_pent_bar_party_2" }, //"Set_Pent_Bar_Clutter","Set_Pent_Clutter_03" - NO DEALER SPAWN - "Set_Pent_Dealer"
+                InteriorSetStyleID = -1,
+                InteriorTintColor = 3,
+                InteriorWallpaperColor = -1,
+                InteriorEgressPosition = new Vector3(980.4498f,56.60941f,116.1641f),
+                InteriorEgressHeading = 5795929f,
+                MaxUpdateDistance = 75,
+                AudioEmitters = new List<AudioEmitter>()
+                {
+
+                    new AudioEmitter($"se_vw_dlc_casino_apart_apart_arcade_room_radio","Arcade"),
+                    new AudioEmitter($"se_vw_dlc_casino_apart_apart_party_music_01","Bar"),
+                    new AudioEmitter($"iz_vw_dlc_casino_apart_apart_arcade_room_party","Bar(2)"),
+                    new AudioEmitter($"se_vw_dlc_casino_apart_apart_default_room_radio","Penthouse"),
+                    new AudioEmitter($"se_vw_dlc_casino_apart_apart_party_music_02","Spa"),
+                    new AudioEmitter($"se_vw_dlc_casino_apart_apart_party_music_03","Kitchen"),
+                    new AudioEmitter($"se_vw_dlc_casino_apart_apart_lounge_room_radio","Lounge"),
+                    //Terrace
+                    new AudioEmitter($"se_vw_dlc_casino_exterior_terrace_bar","Terrace Bar"),
+                    new AudioEmitter($"se_vw_dlc_casino_exterior_terrace_01","Terrace"),
+                    new AudioEmitter($"se_vw_dlc_casino_exterior_terrace_02","Terrace(2)"),
+                    new AudioEmitter($"se_vw_dlc_casino_exterior_terrace_03","Terrace(3)"),
+                },
+                Doors = new List<InteriorDoor>()
+                {
+                    new InteriorDoor(3148580203, new Vector3(973.5854f, 39.23685f, 116.2144f)) { NeedsDefaultUnlock = true, ForceRotateOpen = true }, // OFFICE SAFES L 
+                    new InteriorDoor(2642659608, new Vector3(971.3591f, 40.62897f, 116.2144f)) { NeedsDefaultUnlock = true, ForceRotateOpen = false }, // OFFICE SAFES R - DOOR ROTATES WRONG DIRECTION
+                //    new InteriorDoor(-1531126741, new Vector3(981.7401f, 57.1052f, 117.0361f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(-464856246, new Vector3(980.6803f, 55.4091f, 117.0361f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(323644026, new Vector3(975.8081f, 53.1021f, 117.5600f)) { NeedsDefaultUnlock = true, ForceRotateOpen = true },
+                //    new InteriorDoor(-549748115, new Vector3(973.7188f, 54.4077f, 117.5600f)) { NeedsDefaultUnlock = true, ForceRotateOpen = true,  },
+                //    new InteriorDoor(-240066874, new Vector3(985.7617f, 64.9539f, 117.0204f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(1562850737, new Vector3(984.7018f, 63.2578f, 117.0204f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(-821130675, new Vector3(959.8186f, 38.5589f, 116.6799f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(1685665052, new Vector3(957.8350f, 39.7984f, 116.6799f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(1771070731, new Vector3(960.5482f, 26.6171f, 117.0141f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(320518177, new Vector3(959.4884f, 24.9210f, 117.0141f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(-1147425388, new Vector3(958.5330f, 24.8084f, 117.5600f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(1218070419, new Vector3(956.4436f, 26.1140f, 117.5600f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(1456991631, new Vector3(966.6516f, 54.2652f, 116.6768f)) { ForceRotateOpen = true },
+                //    new InteriorDoor(203642915, new Vector3(968.9543f, 52.8262f, 116.6777f)) { ForceRotateOpen = true  },
+                //    new InteriorDoor(-2085552652, new Vector3(977.2200f, 66.3449f, 116.2655f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(370844369, new Vector3(975.5239f, 67.4048f, 116.2655f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(-85445434, new Vector3(969.5818f, 47.0427f, 116.2636f)) { NeedsDefaultUnlock = true },
+                //    new InteriorDoor(-630645233, new Vector3(979.4877f, 62.2093f, 116.2874f)) {  NeedsDefaultUnlock = true },
+                //    new InteriorDoor(-1759963288, new Vector3(981.1838f, 61.1495f, 116.2874f)) {  NeedsDefaultUnlock = true },
+                },
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("sm_prop_smug_wall_radio_01", new SpawnPlace(new Vector3(972.7683f, 74.81021f, 116.623634f), -31.9999981f)) { PlaceOnGround = false }, // Main
+                    new PropSpawn("sm_prop_smug_wall_radio_01", new SpawnPlace(new Vector3(970.439636f, 51.75206f, 116.664513f), -31.9999981f)) { PlaceOnGround = false }, // Lounge
+                    new PropSpawn("sm_prop_smug_wall_radio_01", new SpawnPlace(new Vector3(939.35f, 14.6f, 116.421906f), 56.99994f)) { PlaceOnGround = false }, // Bar
+                },
+                InteractPoints = new List<InteriorInteract>(){
+                    new ExitInteriorInteract("CasinoPentohuseExit1",new Vector3(980.4498f,56.60941f,116.1641f), 239.6305f ,"Exit") ,
+
+                    //new StandardInteriorInteract("PentHouseMainStandard1",new Vector3(974.3377f, 70.32742f, 116.1642f), 96.06052f,"Interact")
+                    //{
+                    //    CameraPosition = new Vector3(973.0408f, 71.38581f, 116.9318f),
+                    //    CameraDirection = new Vector3(-0.914969f, -0.3862853f, -0.1166846f),
+                    //    CameraRotation = new Rotator(-6.700797f, 4.513141E-06f, 112.8887f)
+                    //},
+
+                    new StandardInteriorInteract("PenthouseOfficeStandard1",new Vector3(977.448f, 47.76044f, 116.1744f), 171.3684f,"Interact")
+                    {
+                        CameraPosition = new Vector3(977.8333f, 47.87738f, 117.1018f),
+                        CameraDirection = new Vector3(0.1482201f, -0.9739323f, -0.1717167f),
+                        CameraRotation = new Rotator(-9.887648f, -3.89991E-06f, -171.3467f)
+                    },
+
+                    // Main PenthouseSuite
+                    new AudioEmitterInteract("PentHouseMainRadio1",new Vector3(972.4985f, 74.37421f, 116.1641f), 331.7285f,"Use Radio")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(972.8891f, 72.44788f, 116.9691f),
+                        CameraDirection = new Vector3(0.0366377f, 0.9564142f, -0.2897059f),
+                        CameraRotation = new Rotator(-16.84035f, -1.505296E-06f, -2.193777f),
+                    },
+                    new ToiletInteract("PentHouseMainToilet1",new Vector3(982.002f, 76.83281f, 116.1641f), 327.5488f,"Use Toilet") 
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(980.8537f, 75.34085f, 117.0434f),
+                        CameraDirection = new Vector3(0.5737867f, 0.686281f, -0.4469756f),
+                        CameraRotation = new Rotator(-26.54981f, 2.863263E-06f, -39.89837f)
+                    },
+                    new SinkInteract("PentHouseMainSink1",new Vector3(979.4111f, 78.34264f, 116.1641f), 326.0536f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(978.2126f, 76.54234f, 117.297f),
+                        CameraDirection = new Vector3(0.7098815f, 0.6140805f, -0.3449252f),
+                        CameraRotation = new Rotator(-20.17723f, -1.182474E-05f, -49.13867f),
+                    },
+                    new SinkInteract("PentHouseMainSink2",new Vector3(980.4493f, 77.63163f, 116.1641f), 324.1975f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(978.2126f, 76.54234f, 117.297f),
+                        CameraDirection = new Vector3(0.7098815f, 0.6140805f, -0.3449252f),
+                        CameraRotation = new Rotator(-20.17723f, -1.182474E-05f, -49.13867f),
+                    },
+                    // Guest Room
+                    new ToiletInteract("PentHouseGuestRoomToilet1",new Vector3(983.7452f, 75.51986f, 116.1642f), 52.88021f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(985.4401f, 74.3552f, 117.0624f),
+                        CameraDirection = new Vector3(-0.7111478f, 0.5899636f, -0.3823766f),
+                        CameraRotation = new Rotator(-22.48097f, 7.391928E-06f, 50.32112f)
+                    },
+                    new SinkInteract("PentHouseGuestRoomSink1",new Vector3(982.2181f, 72.86107f, 116.1642f), 57.2726f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(983.4992f, 71.47607f, 117.1825f),
+                        CameraDirection = new Vector3(-0.4892318f, 0.7874127f, -0.3750112f),
+                        CameraRotation = new Rotator(-22.02501f, -6.44691E-06f, 31.85333f)
+                    },
+                    new SinkInteract("PentHouseGuestRoomSink2",new Vector3(982.8758f, 73.92586f, 116.1642f), 58.69447f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(983.4992f, 71.47607f, 117.1825f),
+                        CameraDirection = new Vector3(-0.4892318f, 0.7874127f, -0.3750112f),
+                        CameraRotation = new Rotator(-22.02501f, -6.44691E-06f, 31.85333f)
+                    },
+                    // Lounge
+                    new AudioEmitterInteract("PentHouseLoungeRadio1",new Vector3(970.1276f, 51.17265f, 116.1642f), 329.8499f,"Use Radio")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(970.3207f, 48.67272f, 117.3254f),
+                        CameraDirection = new Vector3(0.07165348f, 0.9080416f, -0.412706f),
+                        CameraRotation = new Rotator(-24.37494f, -3.046298E-06f, -4.511856f)
+                    },
+                    new ToiletInteract("PentHouseLoungeToilet1",new Vector3(964.4792f, 27.50644f, 116.1642f), 237.4378f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(962.5315f, 27.95204f, 116.9634f),
+                        CameraDirection = new Vector3(0.8551243f, -0.3321357f, -0.3980557f),
+                        CameraRotation = new Rotator(-23.45669f, -6.514789E-06f, -111.2265f)
+                    },
+                    new SinkInteract("PentHouseLoungeRoomSink1",new Vector3(962.8151f, 27.84678f, 116.1642f), 149.4207f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(964.3032f, 28.2552f, 117.0922f),
+                        CameraDirection = new Vector3(-0.8011132f, -0.460529f, -0.3822705f),
+                        CameraRotation = new Rotator(-22.47439f, -9.239471E-07f, 119.8929f)
+                    },
+                    // SPA
+                    new SinkInteract("PentHouseSPARoomSink1",new Vector3(962.5179f, 22.73746f, 116.1642f), 241.8332f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(962.2557f, 24.38645f, 117.1738f),
+                        CameraDirection = new Vector3(0.1751435f, -0.8886092f, -0.4239086f),
+                        CameraRotation = new Rotator(-25.0816f, 1.036928E-05f, -168.85f)
+                    },
+                    // BAR
+                    new AudioEmitterInteract("PentHouseBarRadio1",new Vector3(940.0129f, 14.0886f, 116.1642f), 57.29913f,"Use Radio")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(941.8491f, 14.51343f, 117.173f),
+                        CameraDirection = new Vector3(-0.8801508f, 0.03050004f, -0.4737134f),
+                        CameraRotation = new Rotator(-28.27561f, 6.664963E-07f, 88.01531f)
+                    },
+                },
+                InventoryInteracts = new List<InventoryInteract>()
+                {
+                    new InventoryInteract("PenthouseLoungeInventory1",new Vector3(968.6448f, 39.49984f, 116.1642f), 237.0017f ,"Access Items")
+                    {
+                        CanAccessCash = false,
+                        CanAccessWeapons = false,
+                        CameraPosition = new Vector3(968.1819f, 41.84015f, 117.2228f),
+                        CameraDirection = new Vector3(0.2612498f, -0.9090146f, -0.3247169f),
+                        CameraRotation = new Rotator(-18.94842f, -4.513446E-07f, -163.9654f)
+                     },
+                    new InventoryInteract("PenthouseOfficeInventory2",new Vector3(973.3439f, 40.0523f, 116.1642f), 145.6478f  ,"Access Weapons")
+                    {
+                        CanAccessItems = false,
+                        CanAccessCash = false,
+                        CameraPosition = new Vector3(973.0475f, 42.06659f, 117.11f),
+                        CameraDirection = new Vector3(-0.02384271f, -0.8997657f, -0.4357215f),
+                        CameraRotation = new Rotator(-25.83122f, 1.215332E-05f, 178.4821f)
+                    },
+                    new InventoryInteract("PenthouseOfficeInventory2",new Vector3(972.1319f, 40.87755f, 116.1642f), 148.5665f ,"Access Cash")
+                    {
+                        CanAccessItems = false,
+                        CanAccessWeapons = false,
+                        CameraPosition = new Vector3(974.3806f, 41.7489f, 117.0058f),
+                        CameraDirection = new Vector3(-0.8440909f, -0.3807448f, -0.3775501f),
+                        CameraRotation = new Rotator(-22.18201f, 2.489433E-05f, 114.2787f)
+                    },
+                },
+                OutfitInteracts = new List<OutfitInteract>()
+                {
+                    new OutfitInteract("PentHouseMainChange1",new Vector3(975.2488f, 64.83788f, 116.1642f), 328.4053f,"Change Outfit")
+                    {
+                        CameraPosition = new Vector3(976.2965f, 66.80067f, 116.8041f),
+                        CameraDirection = new Vector3(-0.5374743f, -0.7907535f, -0.2929681f),
+                        CameraRotation = new Rotator(-17.03574f, 2.678863E-06f, 145.7961f)
+                    },
+                    // Guest Room
+                    new OutfitInteract("PentHouseGuestRoomChange1",new Vector3(984.6868f, 60.17248f, 116.1642f), 324.5023f,"Change Outfit")
+                    {
+                        CameraPosition = new Vector3(986.0579f, 62.2301f, 116.8627f),
+                        CameraDirection = new Vector3(-0.5596769f, -0.7810489f, -0.2769916f),
+                        CameraRotation = new Rotator(-16.08073f, -4.4427E-06f, 144.3757f),
+                    },
+                },
+                RestInteracts = new List<RestInteract>()
+                {
+                    new RestInteract("PentHouseMainRest1", new Vector3(973.4299f, 76.04744f, 116.1755f), 59.37484f,"Sleep")
+                    {
+                        CameraPosition = new Vector3(974.9189f, 79.07078f, 117.1199f),
+                        CameraDirection = new Vector3(-0.836942f, -0.4091218f, -0.363521f),
+                        CameraRotation = new Rotator(-21.31659f, 2.474478E-05f, 116.0507f)
+                    },
+                    // Guest Room
+                    new RestInteract("PentHouseGuestRoomRest1", new Vector3(985.9973f, 73.6018f, 116.1642f), 235.9543f,"Sleep")
+                    {
+                        CameraPosition = new Vector3(984.4908f, 70.54072f, 117.2942f),
+                        CameraDirection = new Vector3(0.7408416f, 0.4872648f, -0.4623059f),
+                        CameraRotation = new Rotator(-27.53601f, -1.347981E-05f, -56.66637f)
+                    },
+                    new RestInteract("PentHouseGuestRoomRest2", new Vector3(988.6277f, 72.28185f, 116.2163f), 234.5019f,"Sleep")
+                    {
+                        CameraPosition = new Vector3(987.1357f, 68.66113f, 117.37f),
+                        CameraDirection = new Vector3(0.7400594f, 0.5169947f, -0.4301496f),
+                        CameraRotation = new Rotator(-25.47705f, -3.59381E-05f, -55.06241f)
+                    },
+                },
+            },
+
+
             // Mansion Update - Safe House in The Hills
             //Styles
             //    cali 
@@ -7996,7 +8921,7 @@ public class Interiors : IInteriors
                 Doors = new List<InteriorDoor>()
                 {
                     //Front Gates
-                    new InteriorDoor(546378757,new Vector3(540.4052f, 772.7877f, 202.3633f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },// Left Gate
+                    new InteriorDoor(546378757,new Vector3(540.4052f, 772.7877f, 202.3633f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false, NeedsDefaultUnlock = true },// Left Gate
                     new InteriorDoor(3045375478,new Vector3(537.0177f, 777.0928f, 202.3633f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },// Right Gate
                     //Front Main Door
                     new InteriorDoor(1214652241,new Vector3(537.6889f, 748.1211f, 202.7288f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
@@ -10076,6 +11001,13 @@ public class Interiors : IInteriors
     {
         PossibleInteriors.GeneralInteriors.AddRange(new List<Interior>()
         {
+            new Interior(311818518,"USS Luxington",new List<string>() //3082.3117 -4717.1191 15.2622
+            { "hei_carrier","hei_carrier_lodlights",
+                "hei_carrier_int1", "hei_carrier_int2","hei_carrier_int3",
+                "hei_carrier_int4","hei_carrier_int5","hei_carrier_int6"})
+            {
+
+            },
 
 
             new Interior(-3232,"Diamond Casino Exterior",new List<string>() {
@@ -10091,7 +11023,8 @@ public class Interiors : IInteriors
                 new List<string>() { "farm", "farmint", "farm_lod", "farm_props","des_farmhs_startimap","des_farmhs_start_occl" },
                 new List<string>() { "farm_burnt", "farm_burnt_lod", "farm_burnt_props", "farmint_cap", "farmint_cap_lod", "des_farmhouse", "des_farmhs_endimap", "des_farmhs_end_occl"})
 
-            { SearchLocations = new List<Vector3>()
+            { 
+                SearchLocations = new List<Vector3>()
             {
                 new Vector3(2452.9f, 4973.177f, 46.81016f),
                 new Vector3(2438.356f, 4963.151f, 46.8106f),
@@ -10100,14 +11033,16 @@ public class Interiors : IInteriors
                 new Vector3(2448.677f, 4983.571f, 46.84687f),
                 new Vector3(2442.995f, 4971.742f, 51.56486f),
                 new Vector3(2447.533f, 4985.781f, 51.56487f),
-            }, }
+
+            },
+
+        },
 
 
-            ,
             new Interior(3330,"Lifeinvader",new List<string>() { "facelobby","facelobby_lod" },new List<string>() { "facelobbyfake","facelobbyfake_lod" }) { SearchLocations = new List<Vector3>() {
                 new Vector3(-1075.071f, -250.3029f, 37.76332f),
-new Vector3(-1077.251f, -251.8201f, 44.02116f),
-new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
+                new Vector3(-1077.251f, -251.8201f, 44.02116f),
+                new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
             new Interior(119042,"Union Depository",new List<string>() { "FINBANK" },new List<string>() { }){ IsRestricted = true },
             new Interior(28162,"Clucking Bell Farms",new List<string>() { "CS1_02_cf_onmission1","CS1_02_cf_onmission2","CS1_02_cf_onmission3","CS1_02_cf_onmission4" },new List<string>() { "CS1_02_cf_offmission" }){ IsRestricted = true },
             new Interior(35330,"Clucking Bell Farms",new List<string>() {  },new List<string>() {  }){ IsRestricted = true },
@@ -10243,6 +11178,7 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
     {
         PossibleInteriors.BusinessInteriors.AddRange(new List<BusinessInterior>()
         {
+            // Cash Businesses
             new BusinessInterior(298497, "Car Wash")
             {
                 IsTeleportEntry = true,
@@ -10289,12 +11225,39 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 },
                 OutfitInteracts = new List<OutfitInteract>()
                 {
-                    new OutfitInteract("CarWashOutfit",new Vector3(26.62634f, -1389.169f, -73.99987f), 173.1986f,"Change Outfit")
+                    new OutfitInteract("CarWashOutfit",new Vector3(26.62634f, -1389.169f, -74.99987f), 173.1986f,"Change Outfit")
                     {
                         CameraPosition = new Vector3(25.94946f, -1391.412f, -73.18571f),
                         CameraDirection = new Vector3(0.3517275f, 0.8755532f, -0.3312014f),
                         CameraRotation = new Rotator(-19.34171f, -4.524213E-07f, -21.88633f)
                     }
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(22.42017f, -1401.317f, -75.7f), 316.6561f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "ChopShop",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.BasicScenario,
+                        ForcedScenarios = new List<string>()
+                        {
+                            "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                            "WORLD_HUMAN_CLIPBOARD",
+                            "WORLD_HUMAN_CLIPBOARD_FACILITY"
+                        },
+                    },
+                    new CivilianConditionalLocation(new Vector3(17.7629f, -1393.571f, -75.7f), 357.9334f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "ChopShop",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.BasicScenario,
+                        ForcedScenarios = new List<string>()
+                        {
+                            "WORLD_HUMAN_INSPECT_CROUCH",
+                            "WORLD_HUMAN_INSPECT_STAND",
+                            "WORLD_HUMAN_JANITOR"
+                        },
+                    },
                 },
             },
             new BusinessInterior(252673, "Chop Shop")
@@ -10302,6 +11265,7 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 IsTeleportEntry = true,
                 InteriorEgressPosition = new Vector3(970.872f, -2987.221f, -39.64696f),
                 InteriorEgressHeading = 180.365f,
+                MaxUpdateDistance = 75f,
                 InteriorSets = new List<string>() { "basic_style_set", "door_blocker"},
                 RequestIPLs = new List<string>() { "imp_impexp_interior_placement_interior_1_impexp_intwaremedmilo"},
                 AudioEmitters = new List<AudioEmitter>()
@@ -10370,14 +11334,221 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraRotation = new Rotator(-16.23699f, -1.556174E-05f, 78.16393f)
                     }
                 },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(955.6559f, -3005.546f, -40.64f), 94.19627f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "ChopShop",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>()
+                        {
+                            "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                            "WORLD_HUMAN_CLIPBOARD",
+                            "WORLD_HUMAN_CLIPBOARD_FACILITY"
+                        },
+                    },
+                    new CivilianConditionalLocation(new Vector3(991.8078f, -2989.026f, -40.64f), 4.214914f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "ChopShop",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>()
+                        {
+                            "WORLD_HUMAN_WELDING",
+                            "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                            "WORLD_HUMAN_STAND_IMPATIENT_UPRIGHT_FACILITY",
+                        },
+                    },
+                    new CivilianConditionalLocation(new Vector3(966.5159f, -2992.953f, -40.64f), 264.841f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "ChopShop",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>()
+                        {
+                            "WORLD_HUMAN_SMOKING_CLUBHOUSE",
+                            "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                            "WORLD_HUMAN_AA_COFFEE",
+                        },
+                    },
+
+                    // Lazy Sit
+                    new CivilianConditionalLocation(new Vector3(981.85f, -3007.39f, -40.64f), 136.89f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "ChopShop",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario,
+                    },
+                },
             },
+            // Cash Offices
+            new BusinessInterior(298753, "Smoke On The Water Office")  //-1160.493, -1538.932, -50.0 
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(-1164.453f, -1541.061f, -48.99994f),
+                InteriorEgressHeading = 183.1528f,
+                InternalInteriorCoordinates = new Vector3(-1160.493f, -1538.932f, -50.0f),
+                RequestIPLs = new List<string>() { "m25_1_int_tycoon_smoke_heli"},
+                InteriorSets = new List<string>() { "set_smoke","set_smoke_tint"},
+                InteriorTintColor = 2,  // 0-8
+                AudioEmitters = new List<AudioEmitter>()
+                {
+                    new AudioEmitter($"se_m25_1_int_tycoon_smoke_heli_room_main","Radio"),
+                },
+                PropSpawns = new List<PropSpawn>()
+                {
+                     new PropSpawn("sm_prop_smug_wall_radio_01", new SpawnPlace(new Vector3(-1162.45825f, -1534.0675f, -48.46826f), 0f)){PlaceOnGround =  false},
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("WeedOfficeExit",new Vector3(-1164.453f, -1541.061f, -48.99994f), 3.837764f,"Exit"),
+                    new StandardInteriorInteract("WeedOfficeStandard",new Vector3(-1160.585f, -1535.766f, -48.99497f), 179.6551f,"Manage"){AutoCamera = false},
+                    new AudioEmitterInteract()
+                    {
+                        Name = "WeedOfficeRadio1",
+                        Position = new Vector3(-1162.401f, -1534.89f, -48.99497f),// -1162.401f, -1534.89f, -48.99497f), 359.818f
+                        Heading =  359.818f,
+                        ButtonPromptText = "Radio Control",
+                        UseNavmesh = false,
+                    },
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(-1162.05f, -1535.38f, -49f), -3.85f, 100f) // standing -1159.708f, -1542.661f, -50.99f), 46.76257f
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "SmokeStaff",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario,
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_SMOKING_POT",
+                        //    "WORLD_HUMAN_SMOKING_POT_CLUBHOUSE",
+                        //},
+                    },
+                },
+            },
+            new BusinessInterior(29875301, "Higgins Tour Office")  // 298753 +01 
+            {
+                InternalInteriorCoordinates = new Vector3(-1160.493f, -1538.932f, -50.0f),// This REQUIRES InternalInteriorCoordinates to work changing interior id prevents it from loading the shell/tints.
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(-1164.453f, -1541.061f, -48.99994f),
+                InteriorEgressHeading = 183.1528f,
+                RequestIPLs = new List<string>() { "m25_1_int_tycoon_smoke_heli"},
+                InteriorSets = new List<string>() { "set_heli","set_heli_tint"},
+                InteriorTintColor = 0,  // 0-8
+                AudioEmitters = new List<AudioEmitter>()
+                {
+                    new AudioEmitter($"se_m25_1_int_tycoon_smoke_heli_room_main","Radio"),
+                },
+                PropSpawns = new List<PropSpawn>()
+                {
+                     new PropSpawn("sm_prop_smug_wall_radio_01", new SpawnPlace(new Vector3(-1163.49377f, -1535.63464f, -48.54092f), 90f)){PlaceOnGround =  false},
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("HeliOfficeExit",new Vector3(-1164.453f, -1541.061f, -48.99994f), 3.837764f,"Exit"),
+                    new StandardInteriorInteract("HeliOfficeStandard",new Vector3(-1160.585f, -1535.766f, -48.99497f), 179.6551f,"Manage"){AutoCamera = false},
+                    new AudioEmitterInteract()
+                    {
+                        Name = "HeliOfficeRadio1",
+                        Position = new Vector3(-1162.659f, -1535.602f, -48.99994f),
+                        Heading =  94.07722f,
+                        ButtonPromptText = "Radio Control",
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-1161.273f, -1536.887f, -47.99898f),
+                        CameraDirection = new Vector3(-0.7673499f, 0.5490307f, -0.3312694f),
+                        CameraRotation = new Rotator(-19.34584f, 1.719245E-05f, 54.41668f)
+                    },
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(-1164.29f, -1542.48f, -49.9f), -55.66f, 100f) // Standing - -1159.708f, -1542.661f, -50.09f), 46.76257f
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "HeliStaff",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario,
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_CLIPBOARD",
+                        //    "WORLD_HUMAN_CLIPBOARD_FACILITY",
+                        //},
+                    },
+                },
+            },
+            new BusinessInterior(297985, "McKenzie Field Hangar Office") 
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(2152.405f, 4784.54f, -46.37496f),
+                InteriorEgressHeading = 1.202426f,
+                RequestIPLs = new List<string>() { "m24_2_int_office_gen"},
+                InteriorSets = new List<string>() { "set_bed", "set_laptop", "set_ammo", "set_intel", "set_weapons", "collision_9k04j35", "set_24_2"},
+                InteriorTintColor = 1, 
+                InteriorSetStyleID = 1,
+                AudioEmitters = new List<AudioEmitter>()
+                {
+                    new AudioEmitter($"se_m24_2_int_office_gen_radio_01","Radio"),
+                },
+                PropSpawns = new List<PropSpawn>()
+                {
+                     new PropSpawn("m24_1_prop_m41_radio_01a", new SpawnPlace(new Vector3(2153.34f, 4785.73f, -46.42f), -90f)){PlaceOnGround =  false},
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("McKenzieOfficeExit",new Vector3(2152.405f, 4784.54f, -46.42f), 177.2152f,"Exit"),
+                    new StandardInteriorInteract("McKenzieOfficeStandard",new Vector3(2147.988f, 4785.286f, -46.37496f), 272.0798f,"Manage"){AutoCamera = false},
+                    new AudioEmitterInteract()
+                    {
+                        Name = "McKenzieOfficeRadio1",
+                        Position = new Vector3(2152.619f, 4785.957f, -46.37496f),
+                        Heading =  268.069f,
+                        ButtonPromptText = "Radio Control",
+                        UseNavmesh = false,
+                    },
+                },
+                RestInteracts = new List<RestInteract>()
+                {
+                    new RestInteract("McKenzieOfficeRest",new Vector3(2151.47f, 4788.775f, -46.37496f), 270f,"Rest")
+                    {
+                        CameraPosition = new Vector3(2150.685f, 4786.83f, -45.05301f),
+                        CameraDirection = new Vector3(0.67665f, 0.5582175f, -0.4801438f),
+                        CameraRotation = new Rotator(-28.69479f, 1.84928E-05f, -50.47832f)
+                    }
+                },
+                OutfitInteracts = new List<OutfitInteract>()
+                {
+                    new OutfitInteract("McKenzieOutfit",new Vector3(2147.329f, 4788.027f, -46.37496f), 267.8364f,"Change Outfit")
+                    {
+                        CameraPosition = new Vector3(2149.763f, 4788.082f, -45.47561f),
+                        CameraDirection = new Vector3(-0.928919f, 0.02537464f, -0.3694126f),
+                        CameraRotation = new Rotator(-21.6794f, -3.215666E-06f, 88.43528f)
+                    }
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    //Sitting Pilot
+                    new CivilianConditionalLocation(new Vector3(2148.78f, 4787.73f, -46.38f), 0.64f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "PilotStaff",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario,
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_CLIPBOARD",
+                        //    "WORLD_HUMAN_CLIPBOARD_FACILITY",
+                        //},
+                    },
+                },
+            },
+
+            // Drug Businesses
             new BusinessInterior(247553, "Cocaine Lockup")
             {
                 IsTeleportEntry = true,
                 InteriorEgressPosition = new Vector3(1088.617f, -3187.503f, -38.99346f),
                 InteriorEgressHeading = 181.0876f,
                 InteriorSets = new List<string>() { "set_up", "equipment_upgrade", "coke_press_upgrade", "production_upgrade", "table_equipment_upgrade", "coke_cut_04", "coke_cut_05", "coke_cut_01", "coke_cut_02", "coke_cut_03", "security_high"},
-                RequestIPLs = new List<string>() { "bkr_biker_interior_placement_interior_4_biker_dlc_int_ware03_milo"},
+                RequestIPLs = new List<string>() { "bkr_biker_dlc_int_ware03"},
                 AudioEmitters = new List<AudioEmitter>()
                 {
                     new AudioEmitter($"se_dlc_biker_crack_warehouse_radio","Radio"),
@@ -10405,7 +11576,55 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraDirection = new Vector3(-0.7004394f, 0.5336794f, -0.4738892f),
                         CameraRotation = new Rotator(-28.28705f, 3.296481E-05f, 52.69547f),
                     },
-                }
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(1087.393f, -3190.544f, -40.99347f), 271.0176f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Coke",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(1090.389f, -3196.714f, -40.99347f), 3.806099f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Coke",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                        ForcedScenarios = new List<string>(){ "WORLD_HUMAN_DRUG_PROCESSORS_COKE", },
+                    },
+                    new CivilianConditionalLocation(new Vector3(1095.294f, -3194.827f, -40.99347f), 180.4458f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Coke",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                        ForcedScenarios = new List<string>(){ "WORLD_HUMAN_DRUG_PROCESSORS_COKE", },
+                    },
+                    new CivilianConditionalLocation(new Vector3(1099.713f, -3194.306f, -40.99347f), 87.22012f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Coke",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                        ForcedScenarios = new List<string>()
+                        {
+                            "WORLD_HUMAN_JANITOR",
+                            "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                            "WORLD_HUMAN_CLIPBOARD",
+                            "WORLD_HUMAN_CLIPBOARD_FACILITY"
+                        },
+                    },
+                    new CivilianConditionalLocation(new Vector3(1090.161f, -3190.925f, -40.99347f), 19.14387f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "CokeSec2",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(1095.776f, -3198.997f, -40.99347f), 3.961117f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "CokeSec",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario
+                    },
+                },
             },
             new BusinessInterior(247809, "Counterfeit Cash")
             {
@@ -10438,6 +11657,7 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraRotation = new Rotator(-20.38591f, 9.108204E-07f, 47.5108f),
                     },
                 }
+
             },
             new BusinessInterior(246785, "Document forgery")
             {
@@ -10452,7 +11672,7 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 },
                 PropSpawns = new List<PropSpawn>()
                 {
-                     new PropSpawn("v_res_fh_speakerdock", new SpawnPlace(new Vector3(1156.13f, -3196.93f, -38.04f), 91.75924f)),
+                     new PropSpawn("v_res_fh_speakerdock", new SpawnPlace(new Vector3(1156.13f, -3196.55f, -38.03f), 90f)),
                 },
                 InteractPoints = new List<InteriorInteract>()
                 {
@@ -10469,15 +11689,49 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraDirection = new Vector3(-0.7669014f, 0.5397997f, -0.3471001f),
                         CameraRotation = new Rotator(-20.31005f, -1.820747E-06f, 54.85939f),
                     },
-                }
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(1166.567f, -3198.109f, -41f), 134.9248f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "Counterfeit",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE",
+                        //    "WORLD_HUMAN_CLIPBOARD",
+                        //    "WORLD_HUMAN_CLIPBOARD_FACILITY"
+                        //},
+                    },
+                    new CivilianConditionalLocation(new Vector3(1158.42f, -3195.766f, -41f), 205.8045f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "Counterfeit",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                        //ForcedScenarios = new List<string>()
+                        //{
+                        //    "WORLD_HUMAN_INSPECT_CROUCH",
+                        //    "WORLD_HUMAN_INSPECT_STAND",
+                        //    "WORLD_HUMAN_JANITOR"
+                        //},
+                    },
+                    new CivilianConditionalLocation(new Vector3(1172.86f, -3197.96f, -40f), 62.52f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "OfficeFacilityPeds",
+                        RequiredPedGroup = "CounterSec",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario
+                    },
+                },
             },
             new BusinessInterior(247041, "Meth Lab")
             {
                 IsTeleportEntry = true,
                 InteriorEgressPosition = new Vector3(996.9052f, -3200.659f, -36.39368f),
                 InteriorEgressHeading = 272.8723f,
-                InteriorSets = new List<string>() { "meth_lab_upgrade", "meth_lab_setup", "meth_lab_security_high", "meth_lab_production"},
+                InteriorSets = new List<string>() { "meth_lab_setup", "meth_lab_upgrade", "meth_lab_production", "meth_lab_security_high" },
                 RequestIPLs = new List<string>() { "bkr_biker_interior_placement_interior_2_biker_dlc_int_ware01_milo"},
+                InteriorSetStyleID = 1,
                 AudioEmitters = new List<AudioEmitter>()
                 {
                     new AudioEmitter($"se_dlc_biker_meth_warehouse_radio","Radio"),
@@ -10510,7 +11764,84 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraDirection = new Vector3(0.5848997f, 0.7280532f, -0.3575346f),
                         CameraRotation = new Rotator(-20.94887f, -9.142023E-07f, -38.77752f),
                     },
-                }
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(1010.206f, -3195.252f, -40.99313f), 0.1221509f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Meth",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>()
+                        {
+                            "WORLD_HUMAN_CLIPBOARD",
+                            "WORLD_HUMAN_CLIPBOARD_FACILITY"
+                        },
+                    },
+                    new CivilianConditionalLocation(new Vector3(998.4276f, -3199.884f, -40.99313f), 274.3416f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Meth",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(1016.514f, -3196.001f, -40.99312f), 266.7444f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Meth",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>() { "WORLD_HUMAN_INSPECT_STAND", "WORLD_HUMAN_CLIPBOARD" },
+                    },
+                    new CivilianConditionalLocation(new Vector3(999.0585f, -3198.869f, -38.39361f), 273.64f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "MethSec",
+                        TaskRequirements = TaskRequirements.Guard
+                    },
+                },
+            },
+            new BusinessInterior(290305, "Meth Trailer") // RV VAN - Since we don't have Acid - set as Meth 
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(482.394f, -2623.878f, -49.06403f),
+                InteriorEgressHeading = 180.3035f,
+                RequestIPLs = new List<string>() { "xm3_dlc_int_01_xm3"},
+                InteriorSets = new List<string>() { "set_equipment_upgrade", "set_product_01", "set_product_02", "set_product_03", "set_product_04", "set_product_05", "set_product_05", "set_supplies_01", "set_supplies_02", "set_supplies_03", "set_supplies_04", "set_supplies_05", "meth_lab_production"},
+                AudioEmitters = new List<AudioEmitter>()
+                {
+                    new AudioEmitter($"se_xm3_dlc_int_01_xm3_radioemitter","Radio"),
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("MethTrailerExit",new Vector3(482.394f, -2623.878f, -49.06403f), 0.3136316f,"Exit"),
+                    new StandardInteriorInteract("MethTrailerStandard",new Vector3(484.2433f, -2625.979f, -49.06403f), 180.5341f ,"Manage")
+                    {
+                        CameraPosition = new Vector3(483.5235f, -2624.796f, -48.03077f),
+                        CameraDirection = new Vector3(0.3852386f, -0.8063081f, -0.4488412f),
+                        CameraRotation = new Rotator(-26.66936f, 0f, -154.4624f)
+                    },
+
+                    new AudioEmitterInteract()
+                    {
+                        Name = "MethTrailerRadio1",
+                        Position = new Vector3(483.521f, -2623.896f, -49.06403f),
+                        Heading = 3.527949f,
+                        ButtonPromptText = "Radio Control",
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(484.4085f, -2624.307f, -48.24563f),
+                        CameraDirection = new Vector3(-0.6061347f, 0.6345592f, -0.4795158f),
+                        CameraRotation = new Rotator(-28.65378f, 1.945849E-05f, 43.68758f)
+                    },
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    //Sitting Pilot
+                    new CivilianConditionalLocation(new Vector3(487.2758f, -2623.878f, -50.66407f), 91.12684f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "HazMat",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                    },
+                },
             },
             new BusinessInterior(247297, "Weed Farm")
             {
@@ -10547,7 +11878,43 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraDirection = new Vector3(-0.5777964f, 0.7016782f, -0.4168921f),
                         CameraRotation = new Rotator(-24.63853f, -1.127148E-05f, 39.46973f),
                     },
-                }
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(1060.578f, -3182.25f, -42.16463f), 164.2331f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Weed",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>(){ "WORLD_HUMAN_CLIPBOARD_FACILITY" },
+                    },
+                    new CivilianConditionalLocation(new Vector3(1060.198f, -3202.308f, -42.16116f), 262.6629f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Weed",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>(){ "WORLD_HUMAN_INSPECT_CROUCH", "WORLD_HUMAN_INSPECT_STAND" },
+                    },
+                    new CivilianConditionalLocation(new Vector3(1054.8f, -3194.544f, -42.16134f), 270.0117f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Weed",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(1031.575f, -3205.655f, -40.18856f), 269.9974f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Weed",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string>(){ "WORLD_HUMAN_HANG_OUT_STREET" },
+                    },
+                    new CivilianConditionalLocation(new Vector3(1044.453f, -3196.536f, -39.7f), 250.6385f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "WeedSec",
+                        TaskRequirements = TaskRequirements.Guard
+                    },
+                },
             },
 
             // Custom Trap Houses
@@ -10564,7 +11931,10 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
 
             // 29926520 Gambling Interior - reminder! replace clipboard with v_med_p_notebook
 
-            // Lo Interiors
+            // Fight Club props - makeshift viewing steps
+            // prop_conslift_steps - prop_portasteps_01 + 02
+
+            // Trap Lo Interiors
             new BusinessInterior(29900901, "Low Weed GrowHouse")
             {
                 IsTeleportEntry = true,
@@ -10584,7 +11954,7 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                     new PropSpawn("h4_prop_h4_pile_letters_01a", new SpawnPlace(new Vector3(-20.5180016f, -78.67476f, -75.00862f), 0f)) { PlaceOnGround = true },
                     new PropSpawn("h4_prop_h4_pile_letters_01a", new SpawnPlace(new Vector3(-19.3165512f, -77.38736f, -75.00862f), 0f)) { PlaceOnGround = true },
                     new PropSpawn("prop_rub_binbag_03", new SpawnPlace(new Vector3(-18.52838f, -79.0898361f, -75.00862f), -89.99882f)) { PlaceOnGround = true },
-                    new PropSpawn("prop_rub_binbag_03b", new SpawnPlace(new Vector3(-18.8598652f, -76.9282f, -75.00962f), 91.9983139f)) { PlaceOnGround = true },
+                    //new PropSpawn("prop_rub_binbag_03b", new SpawnPlace(new Vector3(-18.8598652f, -76.9282f, -75.00962f), 91.9983139f)) { PlaceOnGround = true },
                     new PropSpawn("ng_proc_binbag_02a", new SpawnPlace(new Vector3(-19.00739f, -77.53129f, -75.00862f), -143.000381f)) { PlaceOnGround = true },
                     new PropSpawn("ng_proc_litter_plasbot3", new SpawnPlace(new Vector3(-18.9697132f, -76.46788f, -74.9439f), -54.99978f)) { PlaceOnGround = true },
                     new PropSpawn("m25_1_prop_m51_wndwbarricade_01b", new SpawnPlace(new Vector3(-23.6261749f, -70.9907455f, -74.4696045f), 0f)) { PlaceOnGround = false  },
@@ -10620,7 +11990,7 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                     new PropSpawn("m24_2_prop_m42_weedboxpile_01a", new SpawnPlace(new Vector3(-25.5284948f, -80.74139f, -75.00852f), -90.0002f)) { PlaceOnGround = true },
                     new PropSpawn("bkr_prop_weed_chair_01a", new SpawnPlace(new Vector3(-24.6952912f, -81.00641f, -75.00855f), 130.999451f)) { PlaceOnGround = true },
                     new PropSpawn("prop_tv_02", new SpawnPlace(new Vector3(-24.60f, -80.91f, -74.34f), 120f)) { PlaceOnGround = false },
-                    new PropSpawn("m24_1_prop_m41_clothpile_01a", new SpawnPlace(new Vector3(-23.2818489f, -79.1324844f, -75.00862f), 0f)) { PlaceOnGround = true },
+                    //new PropSpawn("m24_1_prop_m41_clothpile_01a", new SpawnPlace(new Vector3(-23.2818489f, -79.1324844f, -75.00862f), 0f)) { PlaceOnGround = true },
                     new PropSpawn("imp_prop_impexp_sofabed_01a", new SpawnPlace(new Vector3(-22.45742f, -79.30518f, -74.47f), 179.99884f)) { PlaceOnGround = true },
                     new PropSpawn("m25_1_prop_m51_bedsidetable_02a", new SpawnPlace(new Vector3(-21.5333519f, -81.02327f, -75.00862f), -91.00022f)) { PlaceOnGround = true },
                     new PropSpawn("prop_bong_01", new SpawnPlace(new Vector3(-21.6047077f, -81.1472244f, -74.22847f), 102.999672f)) { PlaceOnGround = true },
@@ -10639,7 +12009,37 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 {
                     new ExitInteriorInteract("HouseWeedExit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
                     new StandardInteriorInteract("HouseWeedStandard1",new Vector3(-19.30448f, -71.90086f, -73.99454f), 289.4536f,"Manage"){AutoCamera = false},
-                },             
+                    new ToiletInteract("HouseWeedToilet1",new Vector3(-28.60018f, -77.9942f, -74.00988f), 176.571f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-29.7327f, -76.48601f, -72.75478f),
+                        CameraDirection = new Vector3(0.4087335f, -0.7303663f, -0.5472678f),
+                        CameraRotation = new Rotator(-33.17977f, 2.856257E-05f, -150.7674f)
+                    },
+                    new SinkInteract("HouseWeedSink1",new Vector3(-29.33106f, -76.99864f, -74.0099f), 358.8088f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-28.35945f, -77.647f, -73.01905f),
+                        CameraDirection = new Vector3(-0.4885934f, 0.6959789f, -0.5262032f),
+                        CameraRotation = new Rotator(-31.74928f, 0f, 35.06975f)
+                    },
+                },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(-23.95337f, -73.45313f, -75.9466f), 273.601f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "TrapWeed1",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(-20.50918f, -72.05987f, -75.99355f), 355.3359f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "TrapWeed2",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                }
+
             },
             new BusinessInterior(29900902, "Low Spank House")
             {
@@ -10741,11 +12141,25 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 {
                     new ExitInteriorInteract("SpankHouseExit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
                     new StandardInteriorInteract("SpankHouseStandard1",new Vector3(-19.30448f, -71.90086f, -73.99454f), 289.4536f,"Manage"){AutoCamera = false},
+                    new ToiletInteract("SpankHouseToilet1",new Vector3(-28.60018f, -77.9942f, -74.00988f), 176.571f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-29.7327f, -76.48601f, -72.75478f),
+                        CameraDirection = new Vector3(0.4087335f, -0.7303663f, -0.5472678f),
+                        CameraRotation = new Rotator(-33.17977f, 2.856257E-05f, -150.7674f)
+                    },
+                    new SinkInteract("SpankHouseSink1",new Vector3(-29.33106f, -76.99864f, -74.0099f), 358.8088f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-28.35945f, -77.647f, -73.01905f),
+                        CameraDirection = new Vector3(-0.4885934f, 0.6959789f, -0.5262032f),
+                        CameraRotation = new Rotator(-31.74928f, 0f, 35.06975f)
+                    },
                 },
                 RestInteracts = new List<RestInteract>()
                 {
                    new RestInteract("SpankHouseRest1", new Vector3(-26.58828f, -73.13326f, -73.95607f), 85.31104f,"Rest")
-                    {
+                   {
                         CameraPosition = new Vector3(-25.10688f, -75.88168f, -72.71764f),
                         CameraDirection = new Vector3(-0.6515624f, 0.6844945f, -0.3270072f),
                         CameraRotation = new Rotator(-19.08722f, -5.420659E-06f, 43.58802f),
@@ -10762,8 +12176,23 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                             new AnimationBundle("savecouch@", "t_getout_couch", (int)(eAnimationFlags.AF_HOLD_LAST_FRAME | eAnimationFlags.AF_TURN_OFF_COLLISION), 4.0f, -4.0f) { Gender = "U" }
                         },
                         UseDefaultAnimations = false,
-                    },
+                   },
                 },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(-24.91946f, -77.73508f, -76.00856f), 354.7064f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "TrapSpank1",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(-23.02701f, -73.18638f, -76.00856f), 92.59538f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "TrapSpank2",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                }
             },
             new BusinessInterior(29900903, "Low Crack House")
             {
@@ -10880,11 +12309,25 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 {
                     new ExitInteriorInteract("CrackHouseExit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
                     new StandardInteriorInteract("CrackHouseStandard1",new Vector3(-19.30448f, -71.90086f, -73.99454f), 289.4536f,"Manage"){AutoCamera = false},
+                    new ToiletInteract("CrackHouseToilet1",new Vector3(-28.60018f, -77.9942f, -74.00988f), 176.571f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-29.7327f, -76.48601f, -72.75478f),
+                        CameraDirection = new Vector3(0.4087335f, -0.7303663f, -0.5472678f),
+                        CameraRotation = new Rotator(-33.17977f, 2.856257E-05f, -150.7674f)
+                    },
+                    new SinkInteract("CrackHouseSink1",new Vector3(-29.33106f, -76.99864f, -74.0099f), 358.8088f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-28.35945f, -77.647f, -73.01905f),
+                        CameraDirection = new Vector3(-0.4885934f, 0.6959789f, -0.5262032f),
+                        CameraRotation = new Rotator(-31.74928f, 0f, 35.06975f)
+                    },
                 },
                 RestInteracts = new List<RestInteract>()
                 {
                    new RestInteract("CrackHouseRest1", new Vector3(-22.4689f, -75.73814f, -74.00864f), 176.639f,"Rest")
-                    {
+                   {
                         CameraPosition = new Vector3(-19.22018f, -75.18319f, -73.26081f),
                         CameraDirection = new Vector3(-0.9037492f, -0.3751423f, -0.206169f),
                         CameraRotation = new Rotator(-11.89794f, 5.235109E-06f, 112.5431f),
@@ -10901,8 +12344,23 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                             new AnimationBundle("savecouch@", "t_getout_couch", (int)(eAnimationFlags.AF_HOLD_LAST_FRAME | eAnimationFlags.AF_TURN_OFF_COLLISION), 4.0f, -4.0f) { Gender = "U" }
                         },
                         UseDefaultAnimations = false,
-                    },
+                   },
                 },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(-24.24741f, -73.84636f, -76.00858f), 226.7503f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Labrat",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(-22.52f, -80.83f, -76.00858f), 180f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "HomelessPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                        ForcedScenarios = new List<string>() { "WORLD_HUMAN_BUM_SLUMPED" } 
+                    },
+                }
             },
             new BusinessInterior(29900904, "Low Coke House")
             {
@@ -11021,6 +12479,20 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 {
                     new ExitInteriorInteract("CokeHouseExit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
                     new StandardInteriorInteract("CokeHouseStandard1",new Vector3(-19.30448f, -71.90086f, -73.99454f), 289.4536f,"Manage"){AutoCamera = false},
+                    new ToiletInteract("CokeHouseToilet1",new Vector3(-28.60018f, -77.9942f, -74.00988f), 176.571f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-29.7327f, -76.48601f, -72.75478f),
+                        CameraDirection = new Vector3(0.4087335f, -0.7303663f, -0.5472678f),
+                        CameraRotation = new Rotator(-33.17977f, 2.856257E-05f, -150.7674f)
+                    },
+                    new SinkInteract("CokeHouseSink1",new Vector3(-29.33106f, -76.99864f, -74.0099f), 358.8088f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-28.35945f, -77.647f, -73.01905f),
+                        CameraDirection = new Vector3(-0.4885934f, 0.6959789f, -0.5262032f),
+                        CameraRotation = new Rotator(-31.74928f, 0f, 35.06975f)
+                    },
                 },
                 RestInteracts = new List<RestInteract>()
                 {
@@ -11031,6 +12503,21 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         CameraRotation = new Rotator(-19.18863f, -2.169596E-05f, -122.5253f)
                     }
                 },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(-27.34514f, -72.80263f, -76.00858f), 358.2133f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Coke",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(-23.77946f, -73.4276f, -76.00858f), 272.3931f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Coke",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                }
             },
             new BusinessInterior(29900905, "Low Heroin House")
             {
@@ -11075,7 +12562,7 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                     new PropSpawn("prop_homeless_matress_02", new SpawnPlace(new Vector3(-23.6611252f, -78.62589f, -75.00862f), 0f)) { PlaceOnGround = true },
                     new PropSpawn("prop_rub_matress_02", new SpawnPlace(new Vector3(-22.3853226f, -80.85262f, -75.00862f), -179.000153f)) { PlaceOnGround = true },
                     new PropSpawn("prop_rub_matress_03", new SpawnPlace(new Vector3(-24.9753437f, -80.87292f, -75.00854f), 0f)) { PlaceOnGround = true },
-                    new PropSpawn("prop_rub_matress_03", new SpawnPlace(new Vector3(-22.17f, -79.1f, -75f), -123.0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_hobo_seat_01", new SpawnPlace(new Vector3(-22.17f, -79.1f, -75f), -123.0f)) { PlaceOnGround = true },
 
 
 
@@ -11157,12 +12644,26 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 },
                 InteractPoints = new List<InteriorInteract>()
                 {
-                    new ExitInteriorInteract("CrackHouseExit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
-                    new StandardInteriorInteract("CrackHouseStandard1",new Vector3(-19.30448f, -71.90086f, -73.99454f), 289.4536f,"Manage"){AutoCamera = false},
+                    new ExitInteriorInteract("HeroinHouseExit1",new Vector3(-18.88808f, -83.62676f, -76.00856f), 180.0f,"Exit"),
+                    new StandardInteriorInteract("HeroinHouseStandard1",new Vector3(-19.30448f, -71.90086f, -73.99454f), 289.4536f,"Manage"){AutoCamera = false},
+                    new ToiletInteract("HeroinHouseToilet1",new Vector3(-28.60018f, -77.9942f, -74.00988f), 176.571f,"Use Toilet")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-29.7327f, -76.48601f, -72.75478f),
+                        CameraDirection = new Vector3(0.4087335f, -0.7303663f, -0.5472678f),
+                        CameraRotation = new Rotator(-33.17977f, 2.856257E-05f, -150.7674f)
+                    },
+                    new SinkInteract("HeroinHouseSink1",new Vector3(-29.33106f, -76.99864f, -74.0099f), 358.8088f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                        CameraPosition = new Vector3(-28.35945f, -77.647f, -73.01905f),
+                        CameraDirection = new Vector3(-0.4885934f, 0.6959789f, -0.5262032f),
+                        CameraRotation = new Rotator(-31.74928f, 0f, 35.06975f)
+                    },
                 },
                 RestInteracts = new List<RestInteract>()
                 {
-                   new RestInteract("CrackHouseRest1", new Vector3(-22.4689f, -75.73814f, -74.00864f), 176.639f,"Rest")
+                   new RestInteract("HeroinHouseRest1", new Vector3(-22.4689f, -75.73814f, -74.00864f), 176.639f,"Rest")
                     {
                         CameraPosition = new Vector3(-19.22018f, -75.18319f, -73.26081f),
                         CameraDirection = new Vector3(-0.9037492f, -0.3751423f, -0.206169f),
@@ -11182,9 +12683,24 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         UseDefaultAnimations = false,
                     },
                 },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(-26.39859f, -74.35877f, -76.00858f), 88.62341f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "AcidLabCook",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(-22.52f, -80.83f, -76.00858f), 120f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "HomelessPeds",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario,
+                        ForcedScenarios = new List<string>() { "WORLD_HUMAN_BUM_SLUMPED" }
+                    },
+                }
             },
 
-            // Mid Interiors
+            // Trap Mid Interiors
             new BusinessInterior(29926501, "Mid Weed GrowHouse")
             {
                 IsTeleportEntry = true,
@@ -11279,12 +12795,19 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 },
                 InteractPoints = new List<InteriorInteract>()
                 {
-                    new ExitInteriorInteract("HouseWeedExit1",new Vector3(64.01186f, -91.76822f, -74.19619f), 172.8977f,"Exit"),
-                    new StandardInteriorInteract("HouseWeedStandard1",new Vector3(61.52148f, -86.61871f, -74.19619f), 232.2846f,"Manage"){AutoCamera = false},
+                    new ExitInteriorInteract("MedWeedHouseExit1",new Vector3(64.01186f, -91.76822f, -74.19619f), 172.8977f,"Exit"),
+                    new StandardInteriorInteract("MedWeedHouseStandard1",new Vector3(61.52148f, -86.61871f, -74.19619f), 232.2846f,"Manage"){AutoCamera = false},
+                    new ToiletInteract("MedWeedHouseToilet1",new Vector3(64.35353f, -77.11946f, -74.19622f), 356.5656f,"Use Toilet") {
+                        UseNavmesh = false,
+                    },
+                    new SinkInteract("MedWeedHouseSink1",new Vector3(64.80113f, -78.44011f, -74.19625f), 85.11085f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                    },
                 },
                 RestInteracts = new List<RestInteract>()
                 {
-                   new RestInteract("HouseWeedRest1", new Vector3(68.37695f, -82.47778f, -74.19624f), 265.8344f,"Rest")
+                   new RestInteract("MedWeedHouseRest1", new Vector3(68.37695f, -82.47778f, -74.19624f), 265.8344f,"Rest")
                     {
                         CameraPosition = new Vector3(67.65885f, -79.69322f, -73.42982f),
                         CameraDirection = new Vector3(0.4737984f, -0.8457404f, -0.2454348f),
@@ -11304,6 +12827,27 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                         UseDefaultAnimations = false,
                     },
                 },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(63.86349f, -81.5884f, -76.19619f), 170.1472f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Weed",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(57.49305f, -84.3903f, -76.19617f), 245.4016f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Weed",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+                    new CivilianConditionalLocation(new Vector3(69.70146f, -78.55044f, -76.19622f), 100.6441f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "Weed",
+                        TaskRequirements = TaskRequirements.Guard | TaskRequirements.LocalScenario
+                    },
+                }
             },
             new BusinessInterior(29926502, "Mid Meth House")
             {
@@ -11469,18 +13013,49 @@ new Vector3(-1051.115f, -237.8116f, 44.02106f), } } ,
                 },
                 InteractPoints = new List<InteriorInteract>()
                 {
-                    new ExitInteriorInteract("MethHouseExit1",new Vector3(64.01186f, -91.76822f, -74.19619f), 172.8977f,"Exit"),
-                    new StandardInteriorInteract("MethHouseStandard1",new Vector3(61.52148f, -86.61871f, -74.19619f), 232.2846f,"Manage"){AutoCamera = false},
+                    new ExitInteriorInteract("MidMethHouseExit1",new Vector3(64.01186f, -91.76822f, -74.19619f), 172.8977f,"Exit"),
+                    new StandardInteriorInteract("MidMethHouseStandard1",new Vector3(61.52148f, -86.61871f, -74.19619f), 232.2846f,"Manage"){AutoCamera = false},
+                    new ToiletInteract("MidMethHouseToilet1",new Vector3(64.35353f, -77.11946f, -74.19622f), 356.5656f,"Use Toilet") {
+                        UseNavmesh = false,
+                    },
+                    new SinkInteract("MidMethHouseSink1",new Vector3(64.80113f, -78.44011f, -74.19625f), 85.11085f,"Use Sink")
+                    {
+                        UseNavmesh = false,
+                    },
                 },
                 RestInteracts = new List<RestInteract>()
                 {
-                    new RestInteract("MethHouseRest",new Vector3(67.92207f, -77.30927f, -74.19622f), 266.9109f,"Rest")
+                    new RestInteract("MidMethHouseRest1",new Vector3(67.92207f, -77.30927f, -74.19622f), 266.9109f,"Rest")
                     {
                         CameraPosition = new Vector3(68.05341f, -81.11894f, -72.81269f),
                         CameraDirection = new Vector3(0.4261037f, 0.8366504f, -0.3441683f),
                         CameraRotation = new Rotator(-20.13103f, -9.093263E-06f, -26.98962f)
                     }
                 },
+                PossiblePedSpawns = new List<ConditionalLocation>()
+                {
+                    new CivilianConditionalLocation(new Vector3(57.36466f, -85.32547f, -76.1342f), 181.3443f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "MethHead",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string> () { "WORLD_HUMAN_INSPECT_CROUCH", "WORLD_HUMAN_INSPECT_STAND" }
+                    },
+                    new CivilianConditionalLocation(new Vector3(59.19408f, -80.75591f, -76.19618f), 353.283f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "MethHead",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string> () { "WORLD_HUMAN_CLIPBOARD" }
+                    },
+                    new CivilianConditionalLocation(new Vector3(62.10384f, -81.70258f, -76.19617f), 180.7057f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
+                        RequiredPedGroup = "MethHead",
+                        TaskRequirements = TaskRequirements.Guard,
+                        ForcedScenarios = new List<string> () { "WORLD_HUMAN_HANG_OUT_STREET_CLUBHOUSE" }
+                    },
+                }
             },
 
         });

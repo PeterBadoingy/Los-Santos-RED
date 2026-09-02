@@ -1,4 +1,5 @@
-﻿using ExtensionsMethods;
+﻿using Blackjack;
+using ExtensionsMethods;
 using LosSantosRED.lsr.Helper;
 using LosSantosRED.lsr.Interface;
 using Rage;
@@ -7,9 +8,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 
 public class DispatchablePeople : IDispatchablePeople
@@ -64,6 +67,11 @@ public class DispatchablePeople : IDispatchablePeople
 
     private List<DispatchablePerson> SpanishLordsPeds;
     public List<DispatchablePerson> OtherPeds { get; private set; }
+    public List<DispatchablePerson> DrugFacilityPeds { get; private set; }
+    public List<DispatchablePerson> OfficeFacilityPeds { get; private set; }
+    public List<DispatchablePerson> CasinoPeds { get; private set; }
+    public List<DispatchablePerson> HighSecurityPeds { get; private set; }
+    public List<DispatchablePerson> HomelessPeds { get; private set; }
     public List<DispatchablePerson> TaxiDrivers { get; private set; }
     public List<DispatchablePerson> KnowayDrivers { get; private set; }
     public List<DispatchablePerson> VendorPeds { get; private set; }
@@ -1885,6 +1893,1016 @@ public class DispatchablePeople : IDispatchablePeople
                 ,CombatRange = 2
             },
         };
+
+        DrugFacilityPeds = new List<DispatchablePerson>() 
+        {
+            new DispatchablePerson("MP_F_Weed_01",100,100)
+            {
+                DebugName = "Weed Female 1",
+                GroupName = "Weed",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 0, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_F_Weed_01",100,100)
+            {
+                DebugName = "Weed Female 2",
+                GroupName = "Weed",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(3, 1, 0, 0),
+                        new PedComponent(4, 0, 1, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Weed_01",100,100)
+            {
+                DebugName = "Weed Male 1 Security",
+                GroupName = "WeedSec",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(3, 5, 0, 0),
+                        new PedComponent(0, 4, 0, 0),
+                        new PedComponent(4, 3, 0, 0),
+                        new PedComponent(5, 0, 0, 0),
+                        new PedComponent(8, 2, 0, 0),
+                        new PedComponent(9, 1, 0, 0),
+                    }
+                ),
+            }, 
+            new DispatchablePerson("MP_M_Weed_01",100,100)
+            {
+                DebugName = "Weed Male 2",
+                GroupName = "Weed",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 1, 0, 0),
+                        new PedComponent(5, 0, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                        new PedComponent(9, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Weed_01",100,100)
+            {
+                DebugName = "Weed Male 3",
+                GroupName = "Weed",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 0, 0),
+                        new PedComponent(3, 1, 0, 0),
+                        new PedComponent(4, 1, 0, 0),
+                        new PedComponent(5, 0, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                        new PedComponent(9, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Weed_01",100,100)
+            {
+                DebugName = "Weed Male 4",
+                GroupName = "Weed",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 1, 0),
+                        new PedComponent(3, 2, 0, 0),
+                        new PedComponent(4, 2, 0, 0),
+                        new PedComponent(5, 0, 0, 0),
+                        new PedComponent(8, 1, 0, 0),
+                        new PedComponent(9, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Weed_01",100,100)
+            {
+                DebugName = "Weed Male 5",
+                GroupName = "Weed",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(3, 4, 0, 0),
+                        new PedComponent(0, 2, 0, 0),
+                        new PedComponent(4, 2, 1, 0),
+                        new PedComponent(5, 1, 0, 0),
+                        new PedComponent(8, 1, 0, 0),
+                        new PedComponent(9, 1, 0, 0),
+                    },
+                    new List<PedPropComponent>()
+                    {
+                        new PedPropComponent(0, 1, 0)
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Weed_01",100,100)
+            {
+                DebugName = "Weed Male 6",
+                GroupName = "Weed",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(3, 3, 0, 0),
+                        new PedComponent(0, 3, 0, 0),
+                        new PedComponent(4, 3, 0, 0),
+                        new PedComponent(5, 1, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                        new PedComponent(9, 1, 0, 0),
+                    }
+                ),
+            },
+
+
+            new DispatchablePerson("MP_F_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Female 1",
+                GroupName = "Coke",
+                AllowRandomizeBeforeVariationApplied = true,
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 0, 0),
+                        new PedComponent(3, 0, 1, 0),
+                        new PedComponent(4, 0, 1, 0),
+                        new PedComponent(6, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_F_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Female 2",
+                GroupName = "Coke",
+                AllowRandomizeBeforeVariationApplied = true,
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 0, 0),
+                        new PedComponent(3, 0, 5, 0),
+                        new PedComponent(4, 0, 5, 0),
+                        new PedComponent(6, 0, 2, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_F_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Female 3",
+                GroupName = "Coke",
+                AllowRandomizeBeforeVariationApplied = true,
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 0, 0),
+                        new PedComponent(3, 0, 3, 0),
+                        new PedComponent(4, 0, 3, 0),
+                        new PedComponent(6, 0, 1, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Male 1 Security",
+                GroupName = "CokeSec",
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 1, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(3, 1, 0, 0),
+                        new PedComponent(4, 2, 1, 0),
+                        new PedComponent(6, 1, 0, 0),
+                        new PedComponent(8, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Male 2 Security",
+                GroupName = "CokeSec2",
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(8, 1, 0, 0),
+                        new PedComponent(6, 1, 0, 0),
+                        new PedComponent(4, 2, 1, 0),
+                        new PedComponent(3, 1, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(0, 3, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Male 3 Worker",
+                GroupName = "Coke",
+                AllowRandomizeBeforeVariationApplied = true,
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 2, 0),
+                        new PedComponent(2, 0, 1, 0),
+                        new PedComponent(3, 0, 1, 0),
+                        new PedComponent(4, 0, 1, 0),
+                        new PedComponent(6, 0, 1, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Male 4 Worker",
+                GroupName = "Coke",
+                AllowRandomizeBeforeVariationApplied = true,
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 0, 0),
+                        new PedComponent(2, 0, 2, 0),
+                        new PedComponent(3, 0, 2, 0),
+                        new PedComponent(4, 0, 2, 0),
+                        new PedComponent(6, 0, 2, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Cocaine_01",100,100)
+            {
+                DebugName = "Coke Male 5 Worker",
+                GroupName = "Coke",
+                AllowRandomizeBeforeVariationApplied = true,
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 2, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(6, 0, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    }
+                 )
+            },
+
+            new DispatchablePerson("MP_F_Meth_01",100,100)
+            {
+                DebugName = "Meth Female 1", 
+                GroupName = "Meth" 
+            }, // No Variations Available
+            new DispatchablePerson("MP_M_Meth_01",100,100)
+            {
+                DebugName = "Meth Male 1 Security",
+                GroupName = "MethSec",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 0, 0),
+                        new PedComponent(2, 2, 0, 0),
+                        new PedComponent(3, 2, 0, 0),
+                        new PedComponent(4, 1, 0, 0),
+                        new PedComponent(8, 2, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Meth_01",100,100)
+            {
+                DebugName = "Meth Male 2 Worker",
+                GroupName = "Meth",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(3, 1, 1, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(8, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Meth_01",100,100)
+            {
+                DebugName = "Meth Male 3 Worker",
+                GroupName = "Meth",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 1, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    }
+                 )
+            },
+
+
+            new DispatchablePerson("S_M_M_HazmatWorker_01",100,100) 
+            {
+                DebugName = "HazMat Male 1 Worker",
+                GroupName = "HazMat",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 0, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(5, 0, 0, 0),
+                        new PedComponent(6, 0, 2, 0),
+                        new PedComponent(10, 1, 0, 0),
+                        new PedComponent(11, 1, 0, 0),
+                    }
+                )
+            },// NO Face Variations Available - BB Ref
+            new DispatchablePerson("G_M_M_ChemWork_01",100,100)
+            {
+                DebugName = "ChemWork Male 1 Worker",
+                GroupName = "ChemWork"
+            }, // Only Face Variation Available
+            new DispatchablePerson("IG_Labrat",100,100)
+            {
+                DebugName = "Labrat Male 1 Worker",
+                GroupName = "Labrat",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 0, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(5, 0, 0, 0),
+                        new PedComponent(6, 0, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                        new PedComponent(9, 1, 0, 0),
+                        new PedComponent(11, 0, 0, 0),
+                    }
+                )
+            }, // Alts a Furry
+            new DispatchablePerson("IG_AcidLabCook",100,100)
+            {
+                DebugName = "AcidLab Cook",
+                GroupName = "AcidLabCook" 
+            }, // No Variations Available
+            new DispatchablePerson("A_M_Y_MethHead_01",100,100)
+            {
+                DebugName = "Meth Head Male",
+                GroupName = "MethHead"
+            },
+            new DispatchablePerson("A_F_Y_RurMeth_01",100,100)
+            {
+                DebugName = "Meth Head Female",
+                GroupName = "MethHead"
+            },
+
+            // The Wall of the Drug Processors - S_M_M_DrugProcess_01
+            // Ped Creator Resets this Character to Default Look when changes are made but applies on Becoming Character.
+            // Resorted to manually sort and build.
+            //
+            // Face - 0: 
+            // 0 - 0 - 0 - Black | 0 - 0 - 1 - Alt 2 | 0 - 0 - 2 - Alt 3 - 
+            // 0 - 1 - 0 -  Alt 4 | 0 - 1 - 1 -  Alt 5 | 0 - 1 - 2 - Alt 6
+            //
+            // 0 - 2 - 0 White | 0 - 2 - 1 - Alt 1 | 0 - 2 - 2 Alt 2
+            //
+            // 0 - 3 - 0 Asian | 0 - 3 - 1 - Alt 1 | 0 - 3 - 2 Alt 2
+
+            // Mask/Beard - 1:
+            // 1 - 0 - 0  - Dusk Mask | 1 - 1 - 0  - Dusk Mask Alt | 1 - 2 - 0  - Bandana Mask | 1 - 3 - 0  - No Mask
+            // No Texture Colors
+
+            // Hair - 2:
+            // 2 - 0 - 0 - Short | 2 - 1 - 0 - Normal | 2 - 2 - 0 - Cornrows/Braids?
+            // 0 - 2 on Texture Color - Seems to just change highlights
+
+
+            // Lower - 4:
+            // 4 - 0 - 0 - Cargo Pants | 4 - 1 - 0 - Pants Alt | 4 - 2 - 0 - Shorts
+            // 0 - 5 Texture Color
+
+            // Bags - 5:
+            // Controller of Arms and Body Skin Color
+            // 5 - 0 - 0 - White | 5 - 0 - 1 - Black - Full Body
+            // 5 - 1 - 0 - White | 5 - 1 - 1 - Black - Arms Above Elbow
+            // 5 - 2 - 0 - White | 5 - 2 - 1 - Black - Arms Below Elbow
+            // 5 - 3 - 0 - White | 5 - 3 - 1 - Black - Full Body + Gloves
+            // 5 - 4 - 0 - White | 5 - 4 - 1 - Black - Arms Above Elbow + Gloves
+            // 5 - 5 - 0 - White | 5 - 5 - 1 - Black - Arms Below Elbow + Gloves
+
+            // Feet - 6:         
+            // 6 - 0 - 0 - Flat Shoes | 6 - 1 - 0 - Boots | 6 - 2 - 0 - Running Shoes
+            // 0 - 2 Texture Color
+
+            // Tops - 11: T-Shirts
+            // 11 - 0 - 0 - TwoTone | 11 - 1 - 0 Plain | 11 - 2 - 0 - Sports | 11 - 3 - 0 V-Neck - | 11 - 4 - 0 - No T-Shirt
+            // 0 - 2 on Texture Color 
+
+            // Props:
+            // (0) Hats Drawable: 0-4 | 0-2 Texture Colors
+            // (1) Glasses Drawable: 0-2 | 0-1 Texture Colors
+
+            // Spank trap
+            new DispatchablePerson("S_M_M_DrugProcess_01",100,100)
+            {
+                DebugName = "DrugProcesser Male 1",
+                GroupName = "TrapSpank1",
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 2, 0),
+                        new PedComponent(1, 3, 0, 0),
+                        new PedComponent(2, 2, 2, 0),
+                        new PedComponent(4, 1, 5, 0),
+                        new PedComponent(5, 4, 3, 0),
+                        new PedComponent(6, 1, 1, 0),
+                        new PedComponent(11, 2, 0, 0),
+                    },
+                    new List<PedPropComponent>()
+                    {
+                        new PedPropComponent(0, 2, 2),
+                        new PedPropComponent(1, 0, 1),
+                    }
+                 ),
+                OptionalComponents = new List<PedComponent>()
+                {
+                    new PedComponent(4, 1, 2, 0),
+                    new PedComponent(5, 1, 3, 0),
+                    new PedComponent(6, 0, 0, 0),
+                    new PedComponent(11, 3, 0, 0),
+                },
+                OptionalProps = new List<PedPropComponent>()
+                { 
+                    new PedPropComponent(0, 2, 1),
+                    new PedPropComponent(1,1,1)
+                },
+                OptionalPropChance = 30,
+                OptionalComponentChance = 50
+            },
+            new DispatchablePerson("S_M_M_DrugProcess_01",100,100)
+            {
+                DebugName = "DrugProcesser Male 2",
+                GroupName = "TrapSpank2",
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 1, 0),
+                        new PedComponent(1, 1, 0, 0),
+                        new PedComponent(2, 1, 2, 0),
+                        new PedComponent(4, 2, 2, 0),
+                        new PedComponent(5, 2, 1, 0),
+                        new PedComponent(6, 2, 1, 0),
+                        new PedComponent(11, 0, 1, 0),
+                    },
+                    new List<PedPropComponent>()
+                    {
+                        new PedPropComponent(0, 4, 0),
+                        new PedPropComponent(1, 1, 0)
+                    }
+                 ),
+                OptionalComponents = new List<PedComponent>()
+                {
+                    new PedComponent(4, 0, 2, 0),
+                    new PedComponent(5, 5, 1, 0),
+                    new PedComponent(6, 2, 1, 0),
+                    new PedComponent(11, 0, 2, 0),
+                },
+                OptionalProps = new List<PedPropComponent>()
+                {
+                    new PedPropComponent(0, 2, 1),
+                    new PedPropComponent(1,1,1)
+                },
+                OptionalPropChance = 30,
+                OptionalComponentChance = 50
+            },
+            // Weed trap (low)
+            new DispatchablePerson("S_M_M_DrugProcess_01",100,100)
+            {
+                DebugName = "DrugProcesser Male 3",
+                GroupName = "TrapWeed1",
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 1, 0),
+                        new PedComponent(1, 3, 0, 0),
+                        new PedComponent(2, 0, 2, 0),
+                        new PedComponent(4, 0, 2, 0),
+                        new PedComponent(5, 4, 0, 0),
+                        new PedComponent(6, 2, 1, 0),
+                        new PedComponent(11, 2, 2, 0),
+                    },
+                    new List<PedPropComponent>()
+                    {
+                        new PedPropComponent(0, 2, 2),
+                        new PedPropComponent(1, 0, 1),
+                    }
+                 ),
+                OptionalComponents = new List<PedComponent>()
+                {
+                    new PedComponent(1, 1, 0, 0),
+                    new PedComponent(4, 0, 3, 0),
+                    new PedComponent(5, 1, 0, 0),
+                    new PedComponent(6, 2, 0, 0),
+                    new PedComponent(11, 2, 1, 0),
+                },
+                OptionalProps = new List<PedPropComponent>()
+                {
+                    new PedPropComponent(0, 2, 1),
+                    new PedPropComponent(1, 1, 1)
+                },
+                OptionalPropChance = 30,
+                OptionalComponentChance = 50
+            },
+            new DispatchablePerson("S_M_M_DrugProcess_01",100,100)
+            {
+                DebugName = "DrugProcesser Male 4",
+                GroupName = "TrapWeed2",
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 2, 0),
+                        new PedComponent(1, 3, 0, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(4, 1, 2, 0),
+                        new PedComponent(5, 2, 1, 0),
+                        new PedComponent(6, 2, 0, 0),
+                        new PedComponent(11, 0, 1, 0),
+                    },
+                    new List<PedPropComponent>()
+                    {
+                        new PedPropComponent(0, 4, 0),
+                        new PedPropComponent(1, 1, 0)
+                    }
+                 ),
+                OptionalComponents = new List<PedComponent>()
+                {
+                    new PedComponent(1, 2, 0, 0),
+                    new PedComponent(4, 1, 4, 0),
+                    new PedComponent(5, 5, 1, 0),
+                    new PedComponent(6, 0, 1, 0),
+                    new PedComponent(11, 0, 2, 0),
+                },
+                OptionalProps = new List<PedPropComponent>()
+                {
+                    new PedPropComponent(0, 4, 1),
+                    new PedPropComponent(1, 2, 1)
+                },
+                OptionalPropChance = 30,
+                OptionalComponentChance = 50
+            },
+
+
+            new DispatchablePerson("S_M_M_DrugProcess_01",100,100)
+            {
+                DebugName = "DrugProcesser Male 1",
+                GroupName = "DrugProcess1",
+                RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 2, 0),
+                        new PedComponent(1, 0, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(5, 2, 1, 0),
+                        new PedComponent(6, 1, 1, 0),
+                    },
+                    new List<PedPropComponent>()
+                    {
+                        new PedPropComponent(0, 4, 0),
+                        new PedPropComponent(1, 0, 1)
+                    }
+                 )
+            },
+        };
+
+        OfficeFacilityPeds = new List<DispatchablePerson>()
+        {
+            new DispatchablePerson("IG_Mechanic_01",100,100)
+            {
+                DebugName = "ChopShop Male 1",
+                GroupName = "ChopShop"
+            },
+            new DispatchablePerson("IG_Mechanic_02",100,100)
+            {
+                DebugName = "ChopShop Female 1",
+                GroupName = "ChopShop"
+            },
+
+            new DispatchablePerson("MP_F_Counterfeit_01",100,100)
+            {
+                DebugName = "Counterfeit Female 1",
+                GroupName = "Counterfeit",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 0, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 1, 0, 0),
+                        new PedComponent(4, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_F_Counterfeit_01",100,100)
+            {
+                DebugName = "Counterfeit Female 2",
+                GroupName = "Counterfeit",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_F_Counterfeit_01",100,100)
+            {
+                DebugName = "Counterfeit Female 3",
+                GroupName = "Counterfeit",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 0, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Counterfeit_01",100,100)
+            {
+                DebugName = "Counterfeit Male 1 Security",
+                GroupName = "CounterSec",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 0, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 2, 0, 0),
+                        new PedComponent(4, 2, 0, 0),
+                        new PedComponent(11, 0, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Counterfeit_01",100,100)
+            {
+                DebugName = "Counterfeit Male 2",
+                GroupName = "Counterfeit",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 0, 0),
+                        new PedComponent(2, 2, 0, 0),
+                        new PedComponent(3, 1, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(11, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Counterfeit_01",100,100)
+            {
+                DebugName = "Counterfeit Male 3",
+                GroupName = "Counterfeit",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 0, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 1, 0, 0),
+                        new PedComponent(4, 1, 0, 0),
+                        new PedComponent(11, 1, 0, 0),
+                    }
+                 )
+            },
+            new DispatchablePerson("MP_M_Counterfeit_01",100,100)
+            {
+                DebugName = "Counterfeit Male 4",
+                GroupName = "Counterfeit",
+                 RequiredVariation = new PedVariation
+                 (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 3, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(3, 3, 0, 0),
+                        new PedComponent(4, 3, 0, 0),
+                        new PedComponent(11, 2, 0, 0),
+                    }
+                 )
+            },
+
+            new DispatchablePerson("MP_F_Forgery_01",100,100)
+            {
+                DebugName = "ForgeryFemale 1",
+                GroupName = "Forgery",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 0, 0),
+                        new PedComponent(2, 1, 0, 0),
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    }
+                )
+            },
+            new DispatchablePerson("MP_F_Forgery_01",100,100)
+            {
+                DebugName = "ForgeryFemale 2",
+                GroupName = "Forgery",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 3, 0, 0),
+                        new PedComponent(2, 0, 0, 0),
+                        new PedComponent(3, 4, 0, 0),
+                        new PedComponent(4, 5, 0, 0),
+                        new PedComponent(8, 2, 0, 0),
+                    }
+                )
+            },
+            new DispatchablePerson("MP_M_Forgery_01",100,100)
+            {
+                DebugName = "ForgeryMale 1 Security",
+                GroupName = "ForgeSec",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 0, 1, 0),
+                        new PedComponent(3, 3, 0, 0),
+                        new PedComponent(4, 3, 0, 0),
+                        new PedComponent(5, 1, 0, 0),
+                        new PedComponent(8, 1, 0, 0),
+                    }
+                ),
+            },
+            new DispatchablePerson("MP_M_Forgery_01",100,100)
+            {
+                DebugName = "ForgeryMale 2",
+                GroupName = "Forgery",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 1, 0, 0),
+                        new PedComponent(3, 2, 0, 0),
+                        new PedComponent(4, 2, 0, 0),
+                        new PedComponent(5, 1, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    },
+                    new List<PedPropComponent>() 
+                    { 
+                        new PedPropComponent(1, 0, 0) 
+                    }
+                ),
+            },
+            new DispatchablePerson("MP_M_Forgery_01",100,100)
+            {
+                DebugName = "ForgeryMale 3",
+                GroupName = "Forgery",
+                RequiredVariation = new PedVariation
+                (
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(0, 2, 0, 0),
+                        new PedComponent(3, 0, 1, 0),
+                        new PedComponent(4, 3, 0, 0),
+                        new PedComponent(5, 1, 0, 0),
+                        new PedComponent(8, 0, 0, 0),
+                    },
+                    new List<PedPropComponent>()
+                    { 
+                        new PedPropComponent(1, 2, 0) 
+                    }
+                ),
+            },
+
+            new DispatchablePerson("MP_F_HeliStaff_01",100,100)
+            {
+                DebugName = "HeliStaff Female 1",
+                GroupName = "HeliStaff"
+            },
+            new DispatchablePerson("IG_Pilot_02",100,100)
+            {
+                DebugName = "PilotStaff Male 1",
+                GroupName = "PilotStaff"
+            },
+            new DispatchablePerson("IG_HippyLeader",100,100)
+            {
+                DebugName = "SmokeStaff Male 1",
+                GroupName = "SmokeStaff"
+            },
+        };
+
+        CasinoPeds = new List<DispatchablePerson>()  // Casino Peds
+        {
+            new DispatchablePerson("U_F_M_CasinoCash_01",100,100)
+            {
+                DebugName = " Female Cashier",
+                GroupName = "Cashier"
+            },
+            new DispatchablePerson("U_F_M_CasinoShop_01",100,100)
+            {
+                DebugName = " Female Shop Staff",
+                GroupName = "ShopStaff"
+            },
+
+            // LS = Long Sleeve, SS = Short Sleeve,
+            // Vest = Red, Black,
+            //
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 1 (LS Bowtie Black Vest)",
+                GroupName = "TableWorkers",
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 1, 0, 0), // Earpiece Off
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(7, 2, 0, 0), // 0 - Vest Tie | 1 - Long Tie | 2 - Bow Tie | 3 - No Tie
+                        new PedComponent(8, 1, 0, 0), // 0 - Shirt + Closed Vest | 1 - Vest Shirt - 2 Plain Shirt | 3 - Vest Shirt
+                        new PedComponent(10, 1, 0, 0), // DC Badge Location
+                        new PedComponent(11, 1, 0, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+            },
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 2 (LS Bowtie Red Vest)",
+                GroupName = "TableWorkers",
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 1, 0, 0), // Earpiece Off
+                        new PedComponent(3, 0, 0, 0),
+                        new PedComponent(7, 2, 0, 0), // 0 - Vest Tie | 1 - Long Tie | 2 - Bow Tie | 3 - No Tie
+                        new PedComponent(8, 1, 0, 0), // 0 - Shirt + Closed Vest | 1 - Vest Shirt - 2 Plain Shirt | 3 - Vest Shirt 
+                        new PedComponent(10, 1, 0, 0), // DC Badge Location
+                        new PedComponent(11, 1, 1, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+            },
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 3 (SS Tie Black Vest)",
+                GroupName = "TableWorkers",
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 1, 0, 0), // Earpiece Off
+                        new PedComponent(3, 1, 4, 0), // Short Sleeve Shirt 
+                        new PedComponent(7, 0, 0, 0), // 0 - Vest Tie | 1 - Long Tie | 2 - Bow Tie | 3 - No Tie
+                        new PedComponent(8, 3, 0, 0), // 0 - Shirt + Closed Vest | 1 - Vest Shirt - 2 Plain Shirt | 3 - Vest Shirt
+                        new PedComponent(10, 1, 0, 0), // DC Badge Location
+                        new PedComponent(11, 1, 0, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+            },
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 4 (SS Tie Red Vest)",
+                GroupName = "TableWorkers",
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 1, 0, 0), // Earpiece Off
+                        new PedComponent(3, 1, 4, 0), // Short Sleeve Shirt 
+                        new PedComponent(7, 0, 0, 0), // 0 - Vest Tie | 1 - Long Tie | 2 - Bow Tie | 3 - No Tie
+                        new PedComponent(8, 3, 0, 0), // 0 - Shirt + Closed Vest | 1 - Vest Shirt - 2 Plain Shirt | 3 - Vest Shirt
+                        new PedComponent(10, 1, 0, 0), // DC Badge Location
+                        new PedComponent(11, 1, 1, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+            },
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 5",
+                GroupName = "FloorWorkers",
+                AllowRandomizeBeforeVariationApplied = true,
+                OptionalPropChance = 25,
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 0, 0, 0), // Earpiece On
+                        new PedComponent(2, 0, 0, 0), 
+                        new PedComponent(3, 0, 4, 0), 
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(6, 0, 0, 0),
+                        new PedComponent(7, 0, 0, 0), // 0 - Vest Tie | 1 - Long Tie | 2 - Bow Tie | 3 - No Tie
+                        new PedComponent(8, 0, 0, 0), // 0 - Shirt + Closed Vest | 1 - Vest Shirt - 2 Plain Shirt | 3 - Vest Shirt
+                        new PedComponent(10, 0, 0, 0), // DC Badge Location
+                        new PedComponent(11, 0, 0, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+            },
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 6",
+                GroupName = "FloorWorkers",
+                AllowRandomizeBeforeVariationApplied = true,
+                OptionalPropChance = 25,
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 1, 0, 0), // Earpiece Off
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(7, 1, 0, 0),
+                        new PedComponent(8, 2, 0, 0),
+                        new PedComponent(10, 2, 0, 0), // DC Badge Location
+                        new PedComponent(11, 2, 0, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+            },
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 7",
+                GroupName = "FloorWorkers",
+                AllowRandomizeBeforeVariationApplied = true,
+                OptionalPropChance = 25,
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 1, 0, 0), // Earpiece Off
+                        new PedComponent(4, 0, 0, 0),
+                        new PedComponent(7, 1, 0, 0),
+                        new PedComponent(8, 2, 0, 0),
+                        new PedComponent(10, 0, 0, 0), // DC Badge Location
+                        new PedComponent(11, 0, 0, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+
+            },
+
+            new DispatchablePerson("IG_TomCasino",100,100)
+            {
+                DebugName = "Male Floor Staff, Tom Casino",
+                GroupName = "Floor man"
+            },
+        };
+
+        HighSecurityPeds = new List<DispatchablePerson>()  // The Men In Black style security guards, for high security venues like the Casino, etc.
+        {
+            new DispatchablePerson("S_M_M_HighSec_01",100,100){DebugName = "Male Security 1", GroupName = "HighSecurity",AllowRandomizeBeforeVariationApplied = true },
+            new DispatchablePerson("S_M_M_HighSec_02",100,100){DebugName = "Male Security 2", GroupName = "HighSecurity",AllowRandomizeBeforeVariationApplied = true },
+            new DispatchablePerson("S_M_M_HighSec_03",100,100){DebugName = "Male Security 3", GroupName = "HighSecurity",AllowRandomizeBeforeVariationApplied = true },
+            new DispatchablePerson("S_M_M_HighSec_04",100,100){DebugName = "Male Security 4", GroupName = "HighSecurity",AllowRandomizeBeforeVariationApplied = true },
+            new DispatchablePerson("S_M_M_HighSec_05",100,100){DebugName = "Male Security 5", GroupName = "HighSecurity",AllowRandomizeBeforeVariationApplied = true },
+            new DispatchablePerson("S_M_M_HighSec_06",100,100){DebugName = "Male Security 6", GroupName = "HighSecurity",AllowRandomizeBeforeVariationApplied = true },
+        };
+
+        HomelessPeds = new List<DispatchablePerson>()
+        {
+            new DispatchablePerson("A_M_M_Tramp_01",100,100),
+            new DispatchablePerson("A_M_O_Tramp_01",100,100),
+            new DispatchablePerson("U_M_O_Tramp_01",100,100),
+        }; // Trap House Filler
+
         IllicitMarketplacePeds = new List<DispatchablePerson>()
         {
             new DispatchablePerson("IG_DrugDealer",100,100),
@@ -2125,7 +3143,7 @@ public class DispatchablePeople : IDispatchablePeople
 
 
         PeopleGroupLookup.Add(new DispatchablePersonGroup("RegularPeds", RegularPeds));
-
+        PeopleGroupLookup.Add(new DispatchablePersonGroup("HomelessPeds", HomelessPeds));
 
         PeopleGroupLookup.Add(new DispatchablePersonGroup("VehicleRacePeds", VehicleRacePeds));
         PeopleGroupLookup.Add(new DispatchablePersonGroup("FightClubPeds", FightClubPeds));
@@ -2141,6 +3159,11 @@ public class DispatchablePeople : IDispatchablePeople
         PeopleGroupLookup.Add(new DispatchablePersonGroup("BobMuletPeds", BobMuletPeds));
         PeopleGroupLookup.Add(new DispatchablePersonGroup("WeazelPeds", WeazelPeds));
 
+
+        PeopleGroupLookup.Add(new DispatchablePersonGroup("DrugFacilityPeds", DrugFacilityPeds));
+        PeopleGroupLookup.Add(new DispatchablePersonGroup("OfficeFacilityPeds", OfficeFacilityPeds));
+        PeopleGroupLookup.Add(new DispatchablePersonGroup("CasinoPeds", CasinoPeds));
+        PeopleGroupLookup.Add(new DispatchablePersonGroup("HighSecurityPeds", HighSecurityPeds));
 
         PeopleGroupLookup.Add(new DispatchablePersonGroup("BurgerShotPeds", BurgerShotPeds));
         PeopleGroupLookup.Add(new DispatchablePersonGroup("CluckinBellPeds", CluckinBellPeds));
