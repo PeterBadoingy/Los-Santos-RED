@@ -329,6 +329,415 @@ public class Interiors : IInteriors
             new Interior(48130,"Ammunation Pillbox Hill") { IsTrespassingWhenClosed = true,IsWeaponRestricted = true, },
             new Interior(35586,"Ammunation") { IsTrespassingWhenClosed = true,IsWeaponRestricted = true, },
 
+            // Custom Underground Gun Shop
+            new Interior(29465701, "Cypress Flats - Guns Shop 1") // Original Interior id 294657 +01 - m23_2_dlc_int_warehouse2
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(1009.792f, -2199.354f, -48.99992f), // 1000 -2200 -50
+                InteriorEgressHeading = 81.78152f,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("ba_prop_batle_crates_mule", new SpawnPlace(new Vector3(993.45f, -2201.35f, -49.9999046f), -179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_crates_weapon_mix_01a", new SpawnPlace(new Vector3(999.971558f, -2202.54224f, -49.9999046f), -179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_pistols_01a", new SpawnPlace(new Vector3(994.6761f, -2202.87329f, -49.9999046f), 91.99948f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_01a", new SpawnPlace(new Vector3(997.2035f, -2194.23315f, -49.9999046f), -90.99974f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_01a", new SpawnPlace(new Vector3(998.8f, -2199.35f, -49.9999046f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_02a", new SpawnPlace(new Vector3(1009.6f, -2196.5f, -49.99f), 179.0002f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_02a", new SpawnPlace(new Vector3(1009.2f, -2202.7f, -49.99f), 90.00041f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_03a", new SpawnPlace(new Vector3(1006.47742f, -2202.54468f, -49.9999046f), -91.999855f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_sam_01a", new SpawnPlace(new Vector3(997.05f, -2192.49f, -49.99f), -177.999f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_ch_crate_full_01a", new SpawnPlace(new Vector3(997.515564f, -2196.32715f, -49.9999046f), -1.00107741f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_ammo_sc", new SpawnPlace(new Vector3(1005.41f, -2199.45947f, -49.9999046f), 89.99853f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01a", new SpawnPlace(new Vector3(997.2069f, -2195.26929f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_crate_ammo_01a", new SpawnPlace(new Vector3(1007.45f, -2196.60864f, -49.9999046f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("tr_prop_tr_mil_crate_02", new SpawnPlace(new Vector3(993.462036f, -2195.61646f, -49.9999046f), 0.00000005960464f)) { PlaceOnGround = true },
+                    new PropSpawn("h4_prop_h4_crates_full_01a", new SpawnPlace(new Vector3(1005.4574f, -2196.72461f, -49.9999046f), -93.99968f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_expl_sc", new SpawnPlace(new Vector3(1002.07513f, -2202.64453f, -49.85f), -179.999481f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_ammo_bc", new SpawnPlace(new Vector3(993.439148f, -2197.36523f, -49.86f), 89.9995f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_01a", new SpawnPlace(new Vector3(993.380432f, -2191.52f, -49.9999046f), 87.99909f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_02a", new SpawnPlace(new Vector3(993.21f, -2194.02075f, -49.9999046f), -179.999985f)) { PlaceOnGround = true },
+
+                    new PropSpawn("gr_prop_gr_bulletscrate_01a", new SpawnPlace(new Vector3(1000.108f, -2195.689f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_bench_01b", new SpawnPlace(new Vector3(1001.5661f, -2195.613f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_barstool_04", new SpawnPlace(new Vector3(1001.18408f, -2196.81836f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_crate_mag_01a", new SpawnPlace(new Vector3(1000.09766f, -2195.78564f, -49.197403f), 89.99916f)) { PlaceOnGround = true },
+
+
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(999.05f, -2195.7f, -49.9999046f), -0.0001888275f)) { PlaceOnGround = true },
+                    new PropSpawn("m25_1_prop_m51_molotov_crate_01a", new SpawnPlace(new Vector3(999.015442f, -2195.70923f, -49.2479019f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m24_2_prop_m42_scubacrate_01a", new SpawnPlace(new Vector3(998.411743f, -2202.497f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_2_prop_m42_armorcrate_01a", new SpawnPlace(new Vector3(1003.00079f, -2198.29346f, -49.9999046f), -0.999464f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_armorcrate_01a", new SpawnPlace(new Vector3(1003.92023f, -2198.30981f, -49.9999046f), 0.0009040236f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_ff_counter_03", new SpawnPlace(new Vector3(1003.3f, -2198.94556f, -49.9999046f), -179.999451f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ff_counter_03", new SpawnPlace(new Vector3(1003.3f, -2199.76f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ff_counter_03", new SpawnPlace(new Vector3(1000.8f, -2198.94043f, -49.9999046f), -179.999359f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ff_counter_03", new SpawnPlace(new Vector3(1000.8f, -2199.76221f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns03", new SpawnPlace(new Vector3(1002.12f, -2198.38f, -49.56f), -179.999985f)) { PlaceOnGround = true },
+                    //On Table
+                    new PropSpawn("m23_2_prop_m32_maskcrate", new SpawnPlace(new Vector3(1003.91083f, -2198.91187f, -49.08576f), 178.000259f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_bag_weapons_01a", new SpawnPlace(new Vector3(1003.05945f, -2198.87524f, -49.08576f), -39.00091f)) { PlaceOnGround = false },
+                    new PropSpawn("m25_1_prop_m51_molotov_crate_01a", new SpawnPlace(new Vector3(1000.02704f, -2198.89551f, -49.08576f), -0.00000202655769f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01b", new SpawnPlace(new Vector3(1000.8f, -2199.79f, -49.08576f), -0.0006987452f)) { PlaceOnGround = false },
+                    new PropSpawn("ex_office_swag_guns01", new SpawnPlace(new Vector3(1003.79f, -2200.14f, -49.17f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("ex_office_swag_guns02", new SpawnPlace(new Vector3(1003.90393f, -2199.64819f, -49.08576f), -0.9996312f)) { PlaceOnGround = false },
+                    new PropSpawn("reh_prop_reh_deskflag_us_01a", new SpawnPlace(new Vector3(1004.38367f, -2199.724f, -49.08576f), 9.999996f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_h4_box_ammo_01a", new SpawnPlace(new Vector3(1003.34784f, -2199.58228f, -49.08576f), 85.00006f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_h4_box_ammo_01b", new SpawnPlace(new Vector3(1002.93829f, -2199.68774f, -49.08576f), -2.00005627f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_ammo01a", new SpawnPlace(new Vector3(1003.28558f, -2199.8103f, -49.08576f), -95.9997253f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_ammo07a", new SpawnPlace(new Vector3(1000.6795f, -2199.06348f, -49.08576f), -12.9999943f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_ammo07a", new SpawnPlace(new Vector3(1001.007f, -2199.0813f, -49.08576f), 3.00001335f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_ammo07a", new SpawnPlace(new Vector3(1000.66046f, -2198.7312f, -49.08576f), -0.9999864f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_ammo07b", new SpawnPlace(new Vector3(1000.98279f, -2198.774f, -49.08576f), 152.999985f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_ld_ammo_pack_01", new SpawnPlace(new Vector3(1001.84222f, -2199.142f, -49.04f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_ld_ammo_pack_02", new SpawnPlace(new Vector3(1002.44836f, -2198.84229f, -49.03f), 20.9999847f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_ld_ammo_pack_02", new SpawnPlace(new Vector3(1002.21289f, -2198.7854f, -49.03f), 100.999161f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_gc_ammo1", new SpawnPlace(new Vector3(1002.70984f, -2199.69482f, -48.99f), -89.00027f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_gc_ammo2", new SpawnPlace(new Vector3(1002.50775f, -2199.725f, -49f), 88.99972f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_gc_ammostack", new SpawnPlace(new Vector3(1002.47308f, -2199.13525f, -49f), 155.00032f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_crate_mag_01a", new SpawnPlace(new Vector3(1001.49023f, -2198.3042f, -49.9999046f), 90.99976f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_magspile_01a", new SpawnPlace(new Vector3(1001.43842f, -2198.797f, -49.08576f), 48.99991f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_magspile_01a", new SpawnPlace(new Vector3(1001.85492f, -2198.8418f, -49.08576f), -24.0001488f)) { PlaceOnGround = false },
+                    new PropSpawn("w_ar_specialcarbine_boxmag_luxe", new SpawnPlace(new Vector3(1001.48596f, -2199.13452f, -49f), -84.9996643f)) { PlaceOnGround =  false },
+
+
+                    new PropSpawn("m24_1_prop_m41_desktop_01a", new SpawnPlace(new Vector3(996.65f, -2203f, -49.99f), 179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("v_corp_cd_chair", new SpawnPlace(new Vector3(996.9988f, -2202.001f, -49.9999046f), -9.99994f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_pallettruck_01", new SpawnPlace(new Vector3(994.9701f, -2199.74121f, -49.9999046f), 15.999876f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_barrel_pile_04", new SpawnPlace(new Vector3(1004.35596f, -2202.348f, -49.9999046f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_barrel_01a", new SpawnPlace(new Vector3(1003.65375f, -2202.93628f, -49.9999046f), 97.99923f)) { PlaceOnGround = true },
+
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("JamesGunShopExit1",new Vector3(1009.792f, -2199.354f, -48.99992f), 274.9501f,"Exit"),
+                }
+
+            },
+            new Interior(23577701, "Strawberry - Guns Shop 2") // Original Interior id 235777 +01 - ex_int_warehouse_s_dlc
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(1087.76f, -3099.443f, -38.99995f), // 1095, -3100, -40
+                InteriorEgressHeading = 267.9056f,
+                PropSpawns = new List<PropSpawn>()
+                {
+
+                    new PropSpawn("ba_prop_battle_crates_rifles_01a", new SpawnPlace(new Vector3(1091.516f, -3102.83813f, -39.99993f), 89.9989f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_03a", new SpawnPlace(new Vector3(1094.75f, -3102.55f, -39.99993f), -89.99966f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_04a", new SpawnPlace(new Vector3(1096.95f, -3102.6f, -39.99993f), 91.9998f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_sam_01a", new SpawnPlace(new Vector3(1097.7f, -3096.71f, -39.99993f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_wpn_mix_01a", new SpawnPlace(new Vector3(1101.26892f, -3096.51855f, -39.99993f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(1088.80518f, -3103.01343f, -39.99993f), 88.00022f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_ammo_sc", new SpawnPlace(new Vector3(1095.07f, -3096.66968f, -39.85f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_minig", new SpawnPlace(new Vector3(1089.98242f, -3102.62842f, -39.99993f), 179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_pistols_01a", new SpawnPlace(new Vector3(1092.74133f, -3102.207f, -39.99993f), -179.000656f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_pallet_pile_03", new SpawnPlace(new Vector3(1088.69409f, -3096.6062f, -39.99993f), -88.99984f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_pallettruck_01", new SpawnPlace(new Vector3(1093.18286f, -3097.208f, -39.99993f), 178.9994f)) { PlaceOnGround = true },
+                    new PropSpawn("xm3_prop_xm3_crate_ammo_01a", new SpawnPlace(new Vector3(1104f, -3096.73f, -39.99993f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_cratelspd_02a", new SpawnPlace(new Vector3(1098.57239f, -3102.283f, -39.99993f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns03", new SpawnPlace(new Vector3(1099.57f, -3102.98f, -39.56f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns02", new SpawnPlace(new Vector3(1104.70911f, -3096.76343f, -39.99993f), -178.999481f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns02", new SpawnPlace(new Vector3(1104.72949f, -3097.20459f, -39.99993f), 3.00083447f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_2_prop_m42_armorcrate_01a", new SpawnPlace(new Vector3(1103.346f, -3097.41113f, -39.99993f), 168.999069f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_2_prop_m42_armorcrate_01a", new SpawnPlace(new Vector3(1103.30627f, -3096.64526f, -39.99993f), -1.00059593f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns01", new SpawnPlace(new Vector3(1087.6593f, -3102.185f, -39.28115f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_pallettruck_02", new SpawnPlace(new Vector3(1100.54419f, -3101.022f, -39.99993f), -13.9993067f)) { PlaceOnGround = true },
+
+                    // Large Shelfs
+                    new PropSpawn("m24_1_prop_m41_palletcrates_01a", new SpawnPlace(new Vector3(1088.8f, -3096.71f, -37.7914238f), 88.99925f)) { PlaceOnGround = false },
+                    new PropSpawn("m24_2_prop_m42_supplycrate_01a", new SpawnPlace(new Vector3(1103.85f, -3096.6f, -37.7914238f), 90f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_02a", new SpawnPlace(new Vector3(1097.6f, -3096.5f, -37.7914238f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_03a", new SpawnPlace(new Vector3(1095.05f, -3096.6f, -37.7914238f), 0f)) { PlaceOnGround = false },
+
+                    // Small Shelfs - Props jump up a shelf
+                    new PropSpawn("m25_1_prop_m51_molotov_crate_01a", new SpawnPlace(new Vector3(1100.3855f, -3102.968f, -39.2575378f), -177.00061f)) { PlaceOnGround = true },
+                    new PropSpawn("m25_1_prop_m51_crate_heli_01b", new SpawnPlace(new Vector3(1101.4834f, -3102.862f, -39.2575378f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01b", new SpawnPlace(new Vector3(1102.653f, -3102.10132f, -39.99993f), 177.99942f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_maskcrate", new SpawnPlace(new Vector3(1102.03455f, -3102.89136f, -38.6805725f), 87.99967f)) { PlaceOnGround = true },
+                    //new PropSpawn("h4_prop_h4_mb_crate_01a", new SpawnPlace(new Vector3(1101.68848f, -3103.07617f, -38.13803f), 0f)) { PlaceOnGround = true },
+                    //new PropSpawn("h4_prop_h4_mb_crate_01a", new SpawnPlace(new Vector3(1100.485f, -3102.98828f, -38.13803f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01a", new SpawnPlace(new Vector3(1100.98157f, -3102.93018f, -38.6805725f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_2_prop_m42_scubacrate_01a", new SpawnPlace(new Vector3(1104.2771f, -3102.10938f, -39.99993f), -92.9998f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_2_prop_m42_armycrate_01a", new SpawnPlace(new Vector3(1103.96533f, -3102.81f, -38.6805725f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("h4_prop_h4_crates_full_01a", new SpawnPlace(new Vector3(1090.81409f, -3096.84229f, -39.99993f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("h4_prop_h4_crates_full_01a", new SpawnPlace(new Vector3(1091.76392f, -3096.88257f, -39.99993f), 0f)) { PlaceOnGround = true },
+
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("StrawGunShopExit1",new Vector3(1087.76f, -3099.443f, -38.99995f), 86.21534f,"Exit"),
+                }
+
+            },
+
+            new Interior(29926530, "Jameston - Guns Shop 3") // Original Interior id 299265 +30 - Mid apt Interior
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(64.01186f, -91.76822f, -74.19619f),
+                InteriorEgressHeading = 0.9475109f,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    // Entry Room
+                    new PropSpawn("v_res_vacuum", new SpawnPlace(new Vector3(66.9897842f, -89.86577f, -75.19622f), -79.99977f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_fh_shelf_04", new SpawnPlace(new Vector3(65.56064f, -88.2118454f, -75.19622f), -89.99971f)) { PlaceOnGround = true },
+
+                    // Main Room
+
+                    new PropSpawn("gr_prop_gr_crates_pistols_01a", new SpawnPlace(new Vector3(55.65f, -76.65f, -75.19622f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_crates_rifles_01a", new SpawnPlace(new Vector3(55.9798927f, -87.1f, -75.19622f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_pistols_01a", new SpawnPlace(new Vector3(55.3f, -77.8f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_01a", new SpawnPlace(new Vector3(57.65f, -87.1f, -75.19622f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_ch_crate_full_01a", new SpawnPlace(new Vector3(55.45f, -85.4f, -75.19622f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(55.13802f, -84.01018f, -75.19622f), -90.00047f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(55.64073f, -83.9903641f, -75.19622f), -90.00047f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(55.37f, -78.75f, -75.19622f), 178.000259f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_ammo_sc", new SpawnPlace(new Vector3(58.12f, -84.72f, -75.19622f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_1_prop_m31_crate_tech_01a", new SpawnPlace(new Vector3(60.08738f, -84.84167f, -75.19622f), -88.99981f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_armycrate_01a", new SpawnPlace(new Vector3(62.46392f, -83.4634552f, -75.19622f), 179.9991f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01b", new SpawnPlace(new Vector3(60.2759f, -76.59013f, -75.19622f), 0.9992991f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01b", new SpawnPlace(new Vector3(64.9f, -81.65f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("hei_heist_stn_benchshort", new SpawnPlace(new Vector3(65.6f, -85.1f, -75.19622f), 89.99982f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns02", new SpawnPlace(new Vector3(62.99611f, -80.89815f, -75.19622f), -90.9996262f)) { PlaceOnGround = true },
+
+                    // Weapon bench
+                    new PropSpawn("gr_prop_gr_bench_01a", new SpawnPlace(new Vector3(55.37f, -81.45f, -75.19622f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("v_ret_gc_ammostack", new SpawnPlace(new Vector3(55.47907f, -82.8476f, -74.32f), 61.9995575f)) { PlaceOnGround = false },
+
+                    // Desk
+                    new PropSpawn("m23_2_prop_m32_bag_weapons_01a", new SpawnPlace(new Vector3(62.7387428f, -79.46597f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("v_res_son_desk", new SpawnPlace(new Vector3(62.74f, -78.2385f, -75.19622f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("v_corp_offchair", new SpawnPlace(new Vector3(61.73664f, -77.69841f, -75.19622f), 73.9996262f)) { PlaceOnGround = true },
+                    new PropSpawn("as_prop_as_laptop_01a", new SpawnPlace(new Vector3(62.7193642f, -77.6505051f, -74.396225f), -70.9996f)) { PlaceOnGround = false },
+                    new PropSpawn("ch_prop_ch_trophy_gunner_01a", new SpawnPlace(new Vector3(63.0244064f, -77.90891f, -74.39f), -87.99964f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_guncase_01a", new SpawnPlace(new Vector3(62.6342735f, -78.9690552f, -74.39622f), -57.0000076f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_guncase_02a", new SpawnPlace(new Vector3(62.63038f, -78.4885941f, -74.396225f), -87.99902f)) { PlaceOnGround = false },
+
+
+
+                    // Under Tables
+                    new PropSpawn("gr_prop_gr_rsply_crate03a", new SpawnPlace(new Vector3(58.4824142f, -79.6839142f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_crate_pistol_02a", new SpawnPlace(new Vector3(59.31306f, -79.50716f, -75.19622f), 29.9999676f)) { PlaceOnGround = true },
+                    new PropSpawn("h4_prop_h4_mb_crate_01a", new SpawnPlace(new Vector3(58.15371f, -78.6775f, -75.19622f), -90.99976f)) { PlaceOnGround = true },
+                    //new PropSpawn("m23_2_prop_m32_armorcrate_01a", new SpawnPlace(new Vector3(58.24757f, -80.66802f, -75.19622f), 90f)) { PlaceOnGround = true },
+                    //new PropSpawn("m23_2_prop_m32_maskcrate", new SpawnPlace(new Vector3(58.9246941f, -80.75754f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    //new PropSpawn("m24_2_prop_m42_armorcrate_01a", new SpawnPlace(new Vector3(59.44f, -80.69954f, -75.19622f), 90f)) { PlaceOnGround = true },
+                    // Tables
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(58.75f, -78.54024f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(58.75f, -79.57f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_weed_table_01b", new SpawnPlace(new Vector3(58.75f, -80.61707f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    // On Top Of Tables
+                    new PropSpawn("gr_prop_gr_crate_mag_01a", new SpawnPlace(new Vector3(58.4893036f, -80.76909f, -74.35383f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_bulletscrate_01a", new SpawnPlace(new Vector3(57.9470978f, -80.70603f, -74.35383f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01a", new SpawnPlace(new Vector3(58.2404938f, -78.50027f, -74.32082f), 36.99992f)) { PlaceOnGround = false },
+                    new PropSpawn("m25_1_prop_m51_molotov_crate_01a", new SpawnPlace(new Vector3(59.42717f, -78.57376f, -74.35082f), 97.99976f)) { PlaceOnGround = false },
+                    new PropSpawn("m24_2_prop_m42_guncase_01a", new SpawnPlace(new Vector3(58.12014f, -79.32074f, -74.35082f), -74.99961f)) { PlaceOnGround = false },
+                    new PropSpawn("m24_2_prop_m42_empcase_01a", new SpawnPlace(new Vector3(59.53334f, -79.45093f, -74.35082f), 76.99941f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_teargascase_01a", new SpawnPlace(new Vector3(59.3999977f, -80.37134f, -74.35082f), 87.99866f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_guncase_01a", new SpawnPlace(new Vector3(58.13995f, -79.825f, -74.35082f), -91.99961f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_ammo07b", new SpawnPlace(new Vector3(59.0236626f, -80.8260345f, -74.35082f), -17.9999828f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_ammo07b", new SpawnPlace(new Vector3(59.3759727f, -80.87543f, -74.35082f), 0.0000268220883f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_magspile_01a", new SpawnPlace(new Vector3(58.70108f, -79.59007f, -74.34083f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("gr_prop_gr_magspile_01a", new SpawnPlace(new Vector3(58.99076f, -80.37538f, -74.34082f), 90.99976f)) { PlaceOnGround = false },
+                    new PropSpawn("ex_office_swag_guns01", new SpawnPlace(new Vector3(59.8326378f, -80.62187f, -74.4280447f), 90.99964f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_guncase_01a", new SpawnPlace(new Vector3(59.1084f, -79.8312149f, -74.35682f), 92.00012f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_gc_ammo2", new SpawnPlace(new Vector3(59.5707664f, -79.916f, -74.28f), 13.9999933f)) { PlaceOnGround = false },
+
+
+                    // Sideboard
+                    new PropSpawn("apa_mp_h_str_sideboardm_02", new SpawnPlace(new Vector3(57.70749f, -76.25166f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("vw_prop_casino_art_gun_02a", new SpawnPlace(new Vector3(57.40504f, -76.45935f, -74.1026154f), 179.999252f)) { PlaceOnGround = false },
+                    new PropSpawn("prop_box_guncase_02a", new SpawnPlace(new Vector3(58.6276741f, -76.49171f, -74.1026154f), 3.0006485f)) { PlaceOnGround = false },
+                    new PropSpawn("v_ret_gc_ammo1", new SpawnPlace(new Vector3(56.6121864f, -76.48205f, -74.02f), -103.999985f)) { PlaceOnGround = false },
+
+
+
+                    // Bedroom
+                    new PropSpawn("imp_prop_impexp_sofabed_01a", new SpawnPlace(new Vector3(67.11988f, -79.3f, -74.66f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_gunlocker_01a", new SpawnPlace(new Vector3(69.03581f, -83.4515839f, -75.19622f), -179.999268f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_biker_garage_locker_01", new SpawnPlace(new Vector3(70.14f, -83.25f, -75.19622f), -179.999008f)) { PlaceOnGround = true },
+                    new PropSpawn("m25_1_prop_m51_wardrobe_01a", new SpawnPlace(new Vector3(70.16f, -76.75f, -75.19622f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cs_tv_stand", new SpawnPlace(new Vector3(70.1f, -79.5f, -75.18f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_electronic", new SpawnPlace(new Vector3(68.55216f, -76.44821f, -75.19622f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_electronic3", new SpawnPlace(new Vector3(69.58098f, -76.76959f, -75.19622f), -90.99989f)) { PlaceOnGround = true },
+
+                    // Artwork
+                    new PropSpawn("vw_prop_vw_wallart_85a", new SpawnPlace(new Vector3(62.89159f, -90.25f, -73.9519f), 89.99971f)) { PlaceOnGround = false },
+                    new PropSpawn("vw_prop_vw_wallart_86a", new SpawnPlace(new Vector3(62.89159f, -91.58522f, -73.9487457f), 89.99971f)) { PlaceOnGround = false },
+                    new PropSpawn("vw_prop_vw_wallart_83a", new SpawnPlace(new Vector3(62.89159f, -88.9f, -73.95f), 90f)) { PlaceOnGround = false },
+                    new PropSpawn("vw_prop_vw_wallart_82a", new SpawnPlace(new Vector3(62.89159f, -87.5f, -73.95f), 89.99969f)) { PlaceOnGround = false },
+
+                    new PropSpawn("ch_prop_vault_painting_01j", new SpawnPlace(new Vector3(65.98668f, -85.13347f, -73.93029f), -90f)) { PlaceOnGround = false },
+                    new PropSpawn("vw_prop_vw_wallart_93a", new SpawnPlace(new Vector3(67.394165f, -76.0179138f, -74.1994858f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("vw_prop_vw_wallart_87a", new SpawnPlace(new Vector3(65.05903f, -81.24721f, -74.12644f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("vw_prop_vw_wallart_72a", new SpawnPlace(new Vector3(65.91107f, -79.45f, -73.85123f), 90f)) { PlaceOnGround = false },
+
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("JamesGunShopExit1",new Vector3(64.01186f, -91.76822f, -74.19619f), 172.8977f,"Exit"),
+                }
+
+            },
+            new Interior(24755301, "Paleto Bay - Guns Shop 4") // Original Interior 247553 +01, Cocaine Lockup interior
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(1088.689f, -3188.042f, -38.99347f),
+                InteriorEgressHeading = 177.589f,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    //Lights
+                    new PropSpawn("h4_prop_battle_lights_ceiling_l_f", new SpawnPlace(new Vector3(1101.05f, -3194.55f, -35.99694f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_battle_lights_ceiling_l_f", new SpawnPlace(new Vector3(1101.05f, -3197.2f, -35.99694f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_battle_lights_ceiling_l_f", new SpawnPlace(new Vector3(1094.46045f, -3194.57886f, -35.99694f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_battle_lights_ceiling_l_f", new SpawnPlace(new Vector3(1094.59253f, -3197.21216f, -35.99694f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_battle_lights_ceiling_l_f", new SpawnPlace(new Vector3(1088.63708f, -3194.53345f, -35.99694f), 0f)) { PlaceOnGround = false },
+                    new PropSpawn("h4_prop_battle_lights_ceiling_l_f", new SpawnPlace(new Vector3(1089.05774f, -3197.16846f, -35.99694f), 0f)) { PlaceOnGround = false },
+
+
+                    // Floor
+                    new PropSpawn("imp_prop_covered_vehicle_07a", new SpawnPlace(new Vector3(1100.4f, -3195.85f, -39.99345f), -89.99903f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_armorcrate_01a", new SpawnPlace(new Vector3(1098.70947f, -3195.831f, -38.13f), 86.99998f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_maskcrate", new SpawnPlace(new Vector3(1099.251f, -3195.69775f, -38.12f), 0f)) { PlaceOnGround = false },
+
+                    new PropSpawn("v_med_cor_medstool", new SpawnPlace(new Vector3(1087.59534f, -3195.75171f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_bulletscrate_01a", new SpawnPlace(new Vector3(1086.60559f, -3197.07886f, -39.99345f), 89.99936f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_bench_01a", new SpawnPlace(new Vector3(1086.35f, -3195.65f, -39.99345f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_crate_mag_01a", new SpawnPlace(new Vector3(1086.45435f, -3197.20313f, -39.19095f), 0.0005574226f)) { PlaceOnGround = false},
+                    new PropSpawn("gr_prop_gr_magspile_01a", new SpawnPlace(new Vector3(1086.50989f, -3196.604f, -39.19095f), -55.99988f)) { PlaceOnGround = false },
+
+                    new PropSpawn("gr_prop_gr_bench_02a", new SpawnPlace(new Vector3(1090.43567f, -3199.624f, -39.99345f), -179.000443f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_guncase_01a", new SpawnPlace(new Vector3(1090.90881f, -3199.40015f, -39.1896973f), -164.000824f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_2_prop_m42_guncase_01a", new SpawnPlace(new Vector3(1090.334f, -3199.46753f, -39.1896973f), -179.000488f)) { PlaceOnGround = false },
+
+                    new PropSpawn("m24_2_prop_m42_armorcrate_01a", new SpawnPlace(new Vector3(1097.05957f, -3193.03076f, -39.99345f), 1.99961329f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01a", new SpawnPlace(new Vector3(1089.08862f, -3199.692f, -39.99345f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_ch_box_ammo_06a", new SpawnPlace(new Vector3(1089.07739f, -3199.66284f, -39.65352f), 86.99965f)) { PlaceOnGround = false},
+
+                    new PropSpawn("ex_prop_crate_expl_bc", new SpawnPlace(new Vector3(1095.49451f, -3192.7f, -39.85f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_ammo_bc", new SpawnPlace(new Vector3(1095.5f, -3192.7f, -38.47f), 0f)) { PlaceOnGround = true },
+
+
+                    new PropSpawn("ba_prop_battle_crates_pistols_01a", new SpawnPlace(new Vector3(1101.38818f, -3192.639f, -39.99345f), -92.99953f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_02a", new SpawnPlace(new Vector3(1103.1f, -3199.25f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_03a", new SpawnPlace(new Vector3(1099.5f, -3199.25f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_04a", new SpawnPlace(new Vector3(1101.35f, -3199.25f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_wpn_mix_01a", new SpawnPlace(new Vector3(1096.459f, -3196.014f, -39.99345f), -90.99918f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_ammo_sc", new SpawnPlace(new Vector3(1086.6f, -3190.6f, -39.87f), 90f)) { PlaceOnGround = true },
+
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(1094.05f, -3192.1f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(1094.04871f, -3192.7f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_crate_stack_01a", new SpawnPlace(new Vector3(1094.05f, -3193.3f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_ch_crate_full_01a", new SpawnPlace(new Vector3(1094.05f, -3192.7f, -39.2414474f), -89.99958f)) { PlaceOnGround = false },
+
+                    new PropSpawn("ex_prop_crate_expl_sc", new SpawnPlace(new Vector3(1094.84961f, -3195.86865f, -39.99345f), -89.99969f)) { PlaceOnGround = true },
+
+
+                    new PropSpawn("h4_prop_h4_crates_full_01a", new SpawnPlace(new Vector3(1090.45f, -3191.4f, -39.99345f), -90f)) { PlaceOnGround = true },
+
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01b", new SpawnPlace(new Vector3(1092.45f, -3192.65f, -39.99345f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("ex_office_swag_guns03", new SpawnPlace(new Vector3(1085.91f, -3192.41f, -39.55101f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_lathe_01b", new SpawnPlace(new Vector3(1093.7f, -3199.6f, -39.99f), 179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_speeddrill_01a", new SpawnPlace(new Vector3(1096.88477f, -3199.63135f, -39.99345f), 179.99971f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_compressor_03", new SpawnPlace(new Vector3(1097.88989f, -3192.731f, -39.99345f), 102.000183f)) { PlaceOnGround = true },
+
+                    new PropSpawn("hei_prop_hei_warehousetrolly_02", new SpawnPlace(new Vector3(1091.16089f, -3195.91431f, -39.99345f), -139.998474f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_01a", new SpawnPlace(new Vector3(1091.09f, -3195.82f, -39.69f), -139.999847f)) { PlaceOnGround = false },
+
+                    new PropSpawn("prop_pallet_pile_01", new SpawnPlace(new Vector3(1086.71655f, -3188.506f, -39.99345f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_pallettruck_01", new SpawnPlace(new Vector3(1102.95068f, -3193.04346f, -39.99345f), 148.0015f)) { PlaceOnGround = true },
+
+                    new PropSpawn("ex_office_swag_guns02", new SpawnPlace(new Vector3(1086.53442f, -3191.99976f, -39.99345f), 92.00028f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_01a", new SpawnPlace(new Vector3(1090.45f, -3190.08325f, -39.99345f), -89.99939f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_02a", new SpawnPlace(new Vector3(1090.45f, -3188.4f, -39.99345f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_03a", new SpawnPlace(new Vector3(1086.8f, -3198.5f, -39.99345f), 90f)) { PlaceOnGround = true },
+
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("PaletoGunShopExit1",new Vector3(1088.689f, -3188.042f, -38.99347f), 358.1666f,"Exit"),
+                }
+
+            },
+
+            new Interior(24780901, "Grapeseed  - Guns Shop 5") // Original = 247809 +01 - Counterfeit Cash Interior
+            {
+                IsTeleportEntry = true,
+                InteriorEgressPosition = new Vector3(941.3074f, -2263.597f, -50.40947f),
+                InteriorEgressHeading =  223.5433f,
+                PropSpawns = new List<PropSpawn>()
+                {
+                    new PropSpawn("v_ind_rc_cage", new SpawnPlace(new Vector3(944.7335f, -2266.859f, -51.3944931f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_cs_gunrack", new SpawnPlace(new Vector3(941f, -2266.19f, -50.9956627f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("sf_prop_sf_art_guns_01a", new SpawnPlace(new Vector3(940.9014f, -2272.47632f, -51.3952675f), 179.00058f)) { PlaceOnGround = true },
+
+                    new PropSpawn("prop_ff_counter_02", new SpawnPlace(new Vector3(939.85f, -2267.33f, -51.39f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ff_counter_02", new SpawnPlace(new Vector3(939.85f, -2271.55f, -51.39f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_ff_counter_01", new SpawnPlace(new Vector3(939.85f, -2269.44f, -51.4f), -90f)) { PlaceOnGround = true },
+
+                    // Counter Props
+                    new PropSpawn("m23_2_prop_m32_bag_weapons_01a", new SpawnPlace(new Vector3(939.7354f, -2268.26318f, -50.4759979f), 90.99962f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01a", new SpawnPlace(new Vector3(939.8044f, -2272.15454f, -50.4759979f), 88.99951f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns02", new SpawnPlace(new Vector3(939.8329f, -2266.26367f, -50.4759979f), 0.999606f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_2_prop_m32_guncase_01a", new SpawnPlace(new Vector3(939.796753f, -2267.577f, -50.4759979f), -98.9995956f)) { PlaceOnGround = true },
+                    new PropSpawn("m24_2_prop_m42_guncase_01a", new SpawnPlace(new Vector3(939.770569f, -2266.94141f, -50.4759979f), -77.99965f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_guncase_01a", new SpawnPlace(new Vector3(939.638f, -2271.41748f, -50.4759979f), -96.99991f)) { PlaceOnGround = true },
+                    new PropSpawn("prop_box_guncase_02a", new SpawnPlace(new Vector3(939.965637f, -2271.429f, -50.4759979f), -95.9995041f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_office_swag_guns01", new SpawnPlace(new Vector3(939.459f, -2269.42432f, -50.5744934f), -90.9997f)) { PlaceOnGround = false },
+                    new PropSpawn("m23_2_prop_m32_maskcrate", new SpawnPlace(new Vector3(939.7798f, -2270.79834f, -50.4759979f), 0f)) { PlaceOnGround = true },
+
+                    // Floor Stuff
+                    new PropSpawn("m23_2_prop_m32_weaponcrate_01b", new SpawnPlace(new Vector3(938.8704f, -2267.34058f, -51.39861f), -92.99937f)) { PlaceOnGround = true },
+
+                    new PropSpawn("bkr_prop_gunlocker_01a", new SpawnPlace(new Vector3(938.88916f, -2272.43652f, -51.3954124f), -179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("bkr_prop_gunlocker_ammo_01a", new SpawnPlace(new Vector3(938.87f, -2272.5f, -49.85f), -179.999985f)) { PlaceOnGround = false},
+                    new PropSpawn("ch_prop_ch_trophy_gunner_01a", new SpawnPlace(new Vector3(938.9f, -2272.17f, -49.7018661f), 179.9997f)) { PlaceOnGround = false },
+
+                    new PropSpawn("ex_office_swag_guns04", new SpawnPlace(new Vector3(937.3662f, -2267.57544f, -51.3994637f), -0.000109434128f)) { PlaceOnGround = true },
+                    new PropSpawn("m23_1_prop_m31_metalcontainer_02a", new SpawnPlace(new Vector3(937.520264f, -2266.53564f, -51.3956833f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ch_prop_ch_crate_full_01a", new SpawnPlace(new Vector3(937.51f, -2266.48f, -50.53f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("ba_prop_battle_crates_pistols_01a", new SpawnPlace(new Vector3(921.108337f, -2266.90869f, -51.3970375f), 0f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_01a", new SpawnPlace(new Vector3(942.842163f, -2272.01416f, -51.39614f), 117.000381f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_02a", new SpawnPlace(new Vector3(944.58f, -2271.86f, -51.39f), 179.99939f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_rifles_03a", new SpawnPlace(new Vector3(924.06f, -2271.58f, -51.39f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("ba_prop_battle_crates_wpn_mix_01a", new SpawnPlace(new Vector3(926.2f, -2271.7f, -51.39f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("ex_prop_crate_expl_sc", new SpawnPlace(new Vector3(936.85f, -2269.51f, -51.4053764f), 89.99776f)) { PlaceOnGround = true },
+
+                    new PropSpawn("gr_prop_gr_crates_weapon_mix_01b", new SpawnPlace(new Vector3(944.5652f, -2269.91016f, -51.395134f), 1.00095415f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_01a", new SpawnPlace(new Vector3(935.65f, -2267f, -51.3974648f), 89.99898f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_02a", new SpawnPlace(new Vector3(928.2712f, -2271.68164f, -51.3981743f), -90f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_gunsmithsupl_03a", new SpawnPlace(new Vector3(930.6716f, -2267.06348f, -51.3976021f), 0f)) { PlaceOnGround = true },
+
+                    new PropSpawn("gr_prop_gr_bench_01b", new SpawnPlace(new Vector3(936.0772f, -2272.2854f, -51.39591f), -179.999985f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_bench_02b", new SpawnPlace(new Vector3(924.297f, -2267.25269f, -51.3982925f), -89.9992f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_bench_03b", new SpawnPlace(new Vector3(921.1f, -2269.58f, -51.4055367f), 90f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_bench_04b", new SpawnPlace(new Vector3(929.4f, -2267.1f, -51.39851f), -89.99957f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_bench_04b", new SpawnPlace(new Vector3(934.2187f, -2267.18237f, -51.398037f), -90f)) { PlaceOnGround = true },
+
+                    new PropSpawn("gr_prop_gr_bulletscrate_01a", new SpawnPlace(new Vector3(932.266357f, -2266.41553f, -51.3952446f), 87.99985f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_crate_mag_01a", new SpawnPlace(new Vector3(933.0255f, -2266.439f, -51.3953323f), -91.99844f)) { PlaceOnGround = true },
+
+                    new PropSpawn("xs_prop_x18_speeddrill_01c", new SpawnPlace(new Vector3(926.489746f, -2266.75757f, -51.39649f), -0.000250339479f)) { PlaceOnGround = true },
+                    new PropSpawn("gr_prop_gr_lathe_01c", new SpawnPlace(new Vector3(931.67f, -2272.15f, -51.39f), -179.999985f)) { PlaceOnGround = true },
+
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new ExitInteriorInteract("GrapeseedGunShopExit",new Vector3(941.3074f, -2263.597f, -50.40947f), 3.140162f,"Exit"),
+                }
+
+            },
+
+
+           
+
+
             //24/7
             new Interior(41474,"24/7 Route 68",
                 new List<string>() {  },
@@ -1446,6 +1855,19 @@ public class Interiors : IInteriors
                         OverrideDispatchablePersonGroupID = "RegularPeds",
                         TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
                     },
+                    // Table Workers
+                    new CivilianConditionalLocation(new Vector3(58.88145f, -80.52541f, -76.19618f), 178.5409f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "GambleDenWorkers",
+                        TaskRequirements = TaskRequirements.Guard
+                    },
+                    new CivilianConditionalLocation(new Vector3(57.81887f, -84.99232f, -76.19619f), 90.36766f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "GambleDenWorkers",
+                        TaskRequirements = TaskRequirements.Guard
+                    },
                 },
 
             },
@@ -2188,6 +2610,20 @@ public class Interiors : IInteriors
                     {
                         OverrideDispatchablePersonGroupID = "RegularPeds",
                         TaskRequirements = TaskRequirements.Guard | TaskRequirements.AnyScenario
+                    },
+
+                    // Table Workers
+                    new CivilianConditionalLocation(new Vector3(847.2988f, -3001.439f, -50.99985f), 270.8923f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "GambleDenWorkers",
+                        TaskRequirements = TaskRequirements.Guard
+                    },
+                    new CivilianConditionalLocation(new Vector3(852.7533f, -3000.352f, -50.99985f), 90.26416f, 100f)
+                    {
+                        OverrideDispatchablePersonGroupID = "CasinoPeds",
+                        RequiredPedGroup = "GambleDenWorkers",
+                        TaskRequirements = TaskRequirements.Guard
                     },
                 },
 
@@ -8921,7 +9357,7 @@ public class Interiors : IInteriors
                 Doors = new List<InteriorDoor>()
                 {
                     //Front Gates
-                    new InteriorDoor(546378757,new Vector3(540.4052f, 772.7877f, 202.3633f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false, NeedsDefaultUnlock = true },// Left Gate
+                    new InteriorDoor(546378757,new Vector3(540.4052f, 772.7877f, 202.3633f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },// Left Gate
                     new InteriorDoor(3045375478,new Vector3(537.0177f, 777.0928f, 202.3633f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },// Right Gate
                     //Front Main Door
                     new InteriorDoor(1214652241,new Vector3(537.6889f, 748.1211f, 202.7288f)) { LockWhenClosed = true, CanBeForcedOpenByPlayer = false },
@@ -11002,13 +11438,31 @@ public class Interiors : IInteriors
         PossibleInteriors.GeneralInteriors.AddRange(new List<Interior>()
         {
             new Interior(311818518,"USS Luxington",new List<string>() //3082.3117 -4717.1191 15.2622
-            { "hei_carrier","hei_carrier_lodlights",
-                "hei_carrier_int1", "hei_carrier_int2","hei_carrier_int3",
-                "hei_carrier_int4","hei_carrier_int5","hei_carrier_int6"})
+            { 
+                "hei_carrier",
+                "hei_carrier_lodlights",
+                "hei_carrier_int1", 
+                "hei_carrier_int2",
+                "hei_carrier_int3",
+                "hei_carrier_int4",
+                "hei_carrier_int5",
+                "hei_carrier_int6"}) // Ocean - Near Cayo Location
             {
 
             },
+            new Interior(311818519,"USS Luxington",new List<string>() //-3208.03, 3954.54, 14.0
+            { 
+                "m24_1_carrier",
+                "m24_1_carrier_int1",
+                "m24_1_carrier_int2",
+                "m24_1_carrier_int3",
+                "m24_1_carrier_int4",
+                "m24_1_carrier_int5",
+                "m24_1_carrier_int6",
+                "m24_1_carrier_ladders"}) // Zancudo
+            {
 
+            },
 
             new Interior(-3232,"Diamond Casino Exterior",new List<string>() {
                 "hei_dlc_windows_casino",
@@ -11834,7 +12288,6 @@ public class Interiors : IInteriors
                 },
                 PossiblePedSpawns = new List<ConditionalLocation>()
                 {
-                    //Sitting Pilot
                     new CivilianConditionalLocation(new Vector3(487.2758f, -2623.878f, -50.66407f), 91.12684f, 100f)
                     {
                         OverrideDispatchablePersonGroupID = "DrugFacilityPeds",
@@ -11926,7 +12379,7 @@ public class Interiors : IInteriors
 
             // Warehouse Type Test
             // 930.1 -2269.9 -50.4 - m23_2_int_counterfeit -  Interior id 293121
-            // 1000 -2200 -50 - m23_2_dlc_int_warehouse2 - Interior id 294657
+            // 1000 -2200 -50 - m23_2_dlc_int_warehouse2 - Interior id 294657  - Gun Store 29465701
             // 1200 -3250 -50 - m23_1_dlc_int_02_m23_1 - Interior id 291841
 
             // 29926520 Gambling Interior - reminder! replace clipboard with v_med_p_notebook
@@ -13060,6 +13513,9 @@ public class Interiors : IInteriors
 
         });
     }
+
+
+
 
     private ItemTheftInteract GenerateSafeDrillingInteract(string name, Vector3 position, float heading)
     {

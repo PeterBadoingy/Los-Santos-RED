@@ -1319,13 +1319,13 @@ public class PlacesOfInterest : IPlacesOfInterest
     }
     private void DefaultConfig_MilitaryBases()
     {
-                Vector2[] CarrierOceanRestrict = new Vector2[]
-                {
-                            new Vector2 { X = 3055.216f, Y = -4469.816f },
-                            new Vector2 { X = 2953.22f, Y = -4500.666f },
-                            new Vector2 { X = 3054.736f, Y = -4853.777f },
-                            new Vector2 { X = 3156.514f, Y = -4825.646f },
-                };
+                //Vector2[] CarrierOceanRestrict = new Vector2[] // near Cayo
+                //{
+                //            new Vector2 { X = 3055.216f, Y = -4469.816f },
+                //            new Vector2 { X = 2953.22f, Y = -4500.666f },
+                //            new Vector2 { X = 3054.736f, Y = -4853.777f },
+                //            new Vector2 { X = 3156.514f, Y = -4825.646f },
+                //};
 
         MilitaryBasePlaces = new List<MilitaryBase>()
         {
@@ -1378,35 +1378,43 @@ public class PlacesOfInterest : IPlacesOfInterest
                 },
 
             },
-            new MilitaryBase(new Vector3(3082.3117f, -4717.1191f, 15.2622f),180f,"USS Luxington","")
-            {
-                AssignedAssociationID = "ARMY",
-                ActivateCells = 14,
-                InteriorID = 311818518,
-                AssaultSpawnLocations = new List<SpawnPlace>()
-                {
-                    //new SpawnPlace(new Vector3(-1787.544f, 3143.728f, 33.06939f), 60.1537f),
-                    //new SpawnPlace(new Vector3(-1763.003f, 3172.671f, 32.82656f), 65.32996f),
-                    //new SpawnPlace(new Vector3(-1879.845f, 3240.712f, 32.84465f), 243.7359f),
-                    //new SpawnPlace(new Vector3(-2122.645f, 3231.769f, 32.81014f), 359.4727f),
-                    //new SpawnPlace(new Vector3(-2241.937f, 3322.318f, 33.25841f), 150.9899f),
-                    //new SpawnPlace(new Vector3(-2323.133f, 3259.009f, 33.08135f), 59.05438f),
-                    //new SpawnPlace(new Vector3(-2409.102f, 3267.377f, 33.14949f), 50.25306f),
-                    //new SpawnPlace(new Vector3(-2302.279f, 3386.413f, 31.25652f), 143.0586f),
-                    //new SpawnPlace(new Vector3(-1592.959f, 2798.034f, 17.07146f), 131.2532f),
-                    //new SpawnPlace(new Vector3(-1732.277f, 2962.13f, 32.80659f), 128.1796f),
-                },
-                RestrictedAreas = new RestrictedAreas()
-                {
-                    RestrictedAreasList = new List<RestrictedArea>()
-                    {
-                        new RestrictedArea("Carrier", CarrierOceanRestrict,new List<InteriorDoor>(), RestrictedAreaType.GovernmentFacility)
+            //new MilitaryBase(new Vector3(3082.3117f, -4717.1191f, 15.2622f),180f,"USS Luxington","Ocean")
+            //{
+            //    AssignedAssociationID = "ARMY",
+            //    ActivateCells = 14,
+            //    InteriorID = 311818518,
+            //    AssaultSpawnLocations = new List<SpawnPlace>()
+            //    {
 
-                    },
+            //    },
+            //    RestrictedAreas = new RestrictedAreas()
+            //    {
+            //        RestrictedAreasList = new List<RestrictedArea>()
+            //        {
+            //            new RestrictedArea("Carrier", CarrierOceanRestrict,new List<InteriorDoor>(), RestrictedAreaType.GovernmentFacility)
 
-                }
+            //        },
+            //    }
+            //},
+            //new MilitaryBase(new Vector3(-3208.03f, 3954.54f, 14.0f),180f,"USS Luxington","At Fort Zancudo")
+            //{
+            //    AssignedAssociationID = "ARMY",
+            //    ActivateCells = 14,
+            //    InteriorID = 311818519,
+            //    AssaultSpawnLocations = new List<SpawnPlace>()
+            //    {
 
-            },
+            //    },
+            //    RestrictedAreas = new RestrictedAreas()
+            //    {
+            //        RestrictedAreasList = new List<RestrictedArea>()
+            //        {
+            //            new RestrictedArea("Carrier", CarrierOceanRestrict,new List<InteriorDoor>(), RestrictedAreaType.GovernmentFacility)
+
+            //        },
+
+            //    }
+            //},
         };
     }
     private void DefaultConfig_TunnelSpawns()
@@ -3289,11 +3297,11 @@ new ConditionalLocation(, 75f),*/
             //new Bar(new Vector3(-1637.092f, 484.3326f, 118.3645f), 321.4084f, "Richman Bar", "","BarMenu") { OpenTime = 0, CloseTime = 24,VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(-1637.092f, 484.3326f, 118.1645f), 321.4084f) }, InteriorID = 302593, VendorPersonnelID = "BarPeds", ShowsOnDirectory = false, ShowsOnTaxi = false, IsOnSPMap = false, IsBlipEnabled = false},
             //new Bar(new Vector3(555.3027f, 724.0519f, 191.5045f), 251.9232f, "Vinewood Bar", "","BarMenu") { OpenTime = 0, CloseTime = 24,VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(555.3027f, 724.0519f, 191.3045f), 251.9232f) }, InteriorID = 304385, VendorPersonnelID = "BarPeds", ShowsOnDirectory = false, ShowsOnTaxi = false, IsOnSPMap = false, IsBlipEnabled = false},
 
-            // Gambling Den Basement Bar
-            new Bar(new Vector3(851.691f, -2996.033f, -48.99989f), 181.7143f , "Room 22 Basement Bar", "","BarMenu") { OpenTime = 0, CloseTime = 24,VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(851.691f, -2996.033f, -48.99989f), 181.7143f ) }, InteriorID = 28979330, VendorPersonnelID = "BarPeds", ShowsOnDirectory = false, ShowsOnTaxi = false, ActivateCells = 1, ActivateDistance = 50, IsOnSPMap = false, IsBlipEnabled = false},
+            // Gambling Den Basement Bar - Seem's to persist in other basement setups, leave it be for now.
+            new Bar(new Vector3(851.691f, -2996.033f, -48.99989f), 181.7143f , "Room 22 Basement Bar", "","BarMenu") { OpenTime = 18, CloseTime = 4, InteriorID = 28979330, VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(851.691f, -2996.033f, -48.99989f), 181.7143f ) }, VendorPersonnelID = "BarPeds", ShowsOnDirectory = false, ShowsOnTaxi = false, IsOnSPMap = false, IsBlipEnabled = false },
 
 
-            // Diamond Casino Penthouse Bar
+            // Diamond Casino Penthouse Bar 
             new Bar(new Vector3(946.87f, 15.16f, 116.16f), 67.24f, "Penthouse Bar", "","BarMenu") { OpenTime = 0, CloseTime = 24,VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(946.87f, 15.16f, 113.16f), 67.24f) }, InteriorID = 274689, VendorPersonnelID = "BarPeds", ShowsOnDirectory = false, ShowsOnTaxi = false, IsOnSPMap = false, IsBlipEnabled = false},
             // Diamond Casino Bar
             new Bar(new Vector3(1110.495f, 207.3008f, -49.44012f), 117.7151f , "Diamond Casino Bar", "","BarMenu")
@@ -6074,8 +6082,10 @@ new ConditionalLocation(, 75f),*/
     {
         GunStores = new List<GunStore>()
         {
+            // SP GS1
             new GunStore(new Vector3(1049.596f, -2428.15f, 30.30457f), 84.97017f, "Guns #1", "General shop","GunShop1") {
                 IsEnabled = true,
+                IsOnMPMap = false,
                 ContactName = StaticStrings.UndergroundGunsContactName,
                 ParkingSpaces = new List<SpawnPlace>() {
                     new SpawnPlace(new Vector3(1044.326f, -2404.086f, 29.69204f),352.682f),
@@ -6084,8 +6094,34 @@ new ConditionalLocation(, 75f),*/
                     new SpawnPlace(new Vector3(1061.272f, -2445.152f, 28.1964f), 89.23737f),
                     new SpawnPlace(new Vector3(1066.94f, -2463.334f, 27.96432f), 357.0727f),
                 } },
+            // MP GS1
+            new GunStore(new Vector3(1049.596f, -2428.15f, 30.30457f), 84.97017f, "Guns #1", "General shop","GunShop1") {
+                IsEnabled = true,
+                IsOnSPMap = false,
+                InteriorID = 29465701,
+                ContactName = StaticStrings.UndergroundGunsContactName,
+                VendorFightPercentage = 100,
+                VendorFightPolicePercentage = 100,
+                VendorCallPolicePercentage = 0,
+                VendorMoneyMin = 500,
+                VendorMoneyMax = 5000,
+                VendorSidearmPercent = 100,
+                VendorLongGunPercent = 100,
+                VendorLongGunWeaponsID = "AllLongGuns",
+                VendorSidearmWeaponsID ="AllSidearms",
+                VendorPersonnelID = "GunshopPeds",
+                VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(997.4385f, -2201.026f, -50.99989f), 269.0397f) },
+                ParkingSpaces = new List<SpawnPlace>() {
+                    new SpawnPlace(new Vector3(1044.326f, -2404.086f, 29.69204f),352.682f),
+                    new SpawnPlace(new Vector3(1044.763f, -2397.967f, 29.08815f), 355.825f),
+                    new SpawnPlace(new Vector3(1045.676f, -2389.352f, 29.35636f), 355.9221f),
+                    new SpawnPlace(new Vector3(1061.272f, -2445.152f, 28.1964f), 89.23737f),
+                    new SpawnPlace(new Vector3(1066.94f, -2463.334f, 27.96432f), 357.0727f),
+                } },
+            // SP GS2
             new GunStore(new Vector3(-232.552f, -1311.643f, 31.29598f), 3.180501f, "Guns #2", "Specializes in ~o~Pistols~s~","GunShop2") {
                 IsEnabled = true,
+                IsOnMPMap = false,
                 ContactName = StaticStrings.UndergroundGunsContactName,
                 ParkingSpaces = new List<SpawnPlace>() {
                     new SpawnPlace(new Vector3(-233.4157f, -1306.795f, 31.31846f),89.50895f),
@@ -6094,18 +6130,74 @@ new ConditionalLocation(, 75f),*/
                     new SpawnPlace(new Vector3(-198.912f, -1300.158f, 30.46804f), 260.0593f),
                     new SpawnPlace(new Vector3(-223.2236f, -1308.06f, 30.46892f), 89.06057f),
             } },
+            // MP GS2
+            new GunStore(new Vector3(-232.552f, -1311.643f, 31.29598f), 3.180501f, "Guns #2", "Specializes in ~o~Pistols~s~","GunShop2") {
+                IsEnabled = true,
+                IsOnSPMap = false,
+                InteriorID = 23577701,
+                ContactName = StaticStrings.UndergroundGunsContactName,
+                VendorFightPercentage = 100,
+                VendorFightPolicePercentage = 100,
+                VendorCallPolicePercentage = 0,
+                VendorMoneyMin = 500,
+                VendorMoneyMax = 5000,
+                VendorSidearmPercent = 100,
+                VendorLongGunPercent = 100,
+                VendorLongGunWeaponsID = "AllLongGuns",
+                VendorSidearmWeaponsID ="AllSidearms",
+                VendorPersonnelID = "GunshopPeds",
+                VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(1088.746f, -3101.636f, -40.99995f), 5.399706f) },
+                ParkingSpaces = new List<SpawnPlace>() {
+                    new SpawnPlace(new Vector3(-233.4157f, -1306.795f, 31.31846f),89.50895f),
+                    new SpawnPlace(new Vector3(-221.8178f, -1291.497f, 30.46753f), 38.83605f),
+                    new SpawnPlace(new Vector3(-215.6527f, -1306.28f, 30.48727f), 275.802f),
+                    new SpawnPlace(new Vector3(-198.912f, -1300.158f, 30.46804f), 260.0593f),
+                    new SpawnPlace(new Vector3(-223.2236f, -1308.06f, 30.46892f), 89.06057f),
+            } },
+            // SP GS3
             new GunStore(new Vector3(334.3036f, -1978.458f, 24.16728f), 49.9404f, "Guns #3", "Specializes in ~o~Sub-Machine Guns~s~","GunShop3") {
                 IsEnabled = false,
+                IsOnMPMap = false,
                 MoneyToUnlock = 10000,
                 ContactName = StaticStrings.UndergroundGunsContactName,
-                ParkingSpaces = new List<SpawnPlace>() {
+                ParkingSpaces = new List<SpawnPlace>() 
+                {
                     new SpawnPlace(new Vector3(322.9245f, -1981.151f, 23.22856f),305.8783f),
                     new SpawnPlace(new Vector3(317.3759f, -1986.411f, 21.63353f), 137.6388f),
                     new SpawnPlace(new Vector3(318.4567f, -2005.651f, 21.25648f), 205.8739f),
                     new SpawnPlace(new Vector3(308.2981f, -1978.542f, 21.6238f), 141.6945f),
-            } },
+                } 
+            },
+            // MP GS3
+            new GunStore(new Vector3(334.3036f, -1978.458f, 24.16728f), 49.9404f, "Guns #3", "Specializes in ~o~Sub-Machine Guns~s~","GunShop3") {
+                IsEnabled = false,
+                IsOnSPMap = false,
+                InteriorID = 29926530,
+                MoneyToUnlock = 10000,
+                ContactName = StaticStrings.UndergroundGunsContactName,
+                VendorFightPercentage = 100,
+                VendorFightPolicePercentage = 100,
+                VendorCallPolicePercentage = 0,
+                VendorMoneyMin = 500,
+                VendorMoneyMax = 5000,
+                VendorSidearmPercent = 100,
+                VendorLongGunPercent = 100,
+                VendorLongGunWeaponsID = "AllLongGuns",
+                VendorSidearmWeaponsID ="AllSidearms",
+                VendorPersonnelID = "GunshopPeds",
+                VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(60.95277f, -79.10422f, -76.19621f), 201.2242f) },
+                ParkingSpaces = new List<SpawnPlace>()
+                {
+                    new SpawnPlace(new Vector3(322.9245f, -1981.151f, 23.22856f),305.8783f),
+                    new SpawnPlace(new Vector3(317.3759f, -1986.411f, 21.63353f), 137.6388f),
+                    new SpawnPlace(new Vector3(318.4567f, -2005.651f, 21.25648f), 205.8739f),
+                    new SpawnPlace(new Vector3(308.2981f, -1978.542f, 21.6238f), 141.6945f),
+                }
+            },
+            // SP GS4
             new GunStore(new Vector3(-258.3577f, 6247.281f, 31.48922f), 314.4655f, "Guns #4", "Specializes in ~o~Assault Rifles~s~","GunShop4") {
                 IsEnabled = false,
+                IsOnMPMap = false,
                 MoneyToUnlock = 20000, ContactName = StaticStrings.UndergroundGunsContactName,
                 ParkingSpaces = new List<SpawnPlace>() {
                     new SpawnPlace(new Vector3(-258.1833f, 6250.695f, 31.48922f),25.17568f),
@@ -6113,10 +6205,60 @@ new ConditionalLocation(, 75f),*/
                     new SpawnPlace(new Vector3(-267.765f, 6251.046f, 30.61459f), 312.4225f),
                     new SpawnPlace(new Vector3(-269.5155f, 6274.559f, 30.46577f), 136.3388f),
                 } },
+            // MP GS4
+            new GunStore(new Vector3(-258.3577f, 6247.281f, 31.48922f), 314.4655f, "Guns #4", "Specializes in ~o~Assault Rifles~s~","GunShop4") {
+                IsEnabled = false,
+                IsOnSPMap = false,
+                InteriorID = 24755301,
+                MoneyToUnlock = 20000, ContactName = StaticStrings.UndergroundGunsContactName,
+                VendorFightPercentage = 100,
+                VendorFightPolicePercentage = 100,
+                VendorCallPolicePercentage = 0,
+                VendorMoneyMin = 500,
+                VendorMoneyMax = 5000,
+                VendorSidearmPercent = 100,
+                VendorLongGunPercent = 100,
+                VendorLongGunWeaponsID = "AllLongGuns",
+                VendorSidearmWeaponsID ="AllSidearms",
+                VendorPersonnelID = "GunshopPeds",
+                VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(1087.508f, -3194.527f, -40.99347f), 345.7893f) },
+                ParkingSpaces = new List<SpawnPlace>() {
+                    new SpawnPlace(new Vector3(-258.1833f, 6250.695f, 31.48922f),25.17568f),
+                    new SpawnPlace(new Vector3(-256.5694f, 6265.761f, 30.58578f), 317.2921f),
+                    new SpawnPlace(new Vector3(-267.765f, 6251.046f, 30.61459f), 312.4225f),
+                    new SpawnPlace(new Vector3(-269.5155f, 6274.559f, 30.46577f), 136.3388f),
+                } },
+            // SP GS5
             new GunStore(new Vector3(1673.425f, 4957.921f, 42.34893f), 227.3988f, "Guns #5", "Specializes in ~o~Heavy Weapons~s~","GunShop5") {
                 IsEnabled = false,
+                IsOnMPMap = false,
                 MoneyToUnlock = 35000,
                 ContactName = StaticStrings.UndergroundGunsContactName,
+                ParkingSpaces = new List<SpawnPlace>() {
+                    new SpawnPlace(new Vector3(1661.471f, 4951.514f, 42.07043f),217.9459f),
+                    new SpawnPlace(new Vector3(1659.542f, 4946.245f, 41.20879f), 224.609f),
+                    new SpawnPlace(new Vector3(1695.27f, 4973.078f, 42.8186f), 288.7947f),
+                    new SpawnPlace(new Vector3(1703.823f, 4947.335f, 41.68751f), 54.86424f),
+                } },
+            // MP GS5
+            new GunStore(new Vector3(1673.425f, 4957.921f, 42.34893f), 227.3988f, "Guns #5", "Specializes in ~o~Heavy Weapons~s~","GunShop5") {
+                IsEnabled = false,
+                IsOnSPMap = false,
+                IsWalkup = true,    
+                InteriorID = 24780901,
+                MoneyToUnlock = 35000,
+                ContactName = StaticStrings.UndergroundGunsContactName,
+                VendorFightPercentage = 100,
+                VendorFightPolicePercentage = 100,
+                VendorCallPolicePercentage = 0,
+                VendorMoneyMin = 500,
+                VendorMoneyMax = 5000,
+                VendorSidearmPercent = 100,
+                VendorLongGunPercent = 100,
+                VendorLongGunWeaponsID = "AllLongGuns",
+                VendorSidearmWeaponsID ="AllSidearms",
+                VendorPersonnelID = "GunshopPeds",
+                VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(938.9184f, -2269.421f, -52.40619f), 273.2929f) },
                 ParkingSpaces = new List<SpawnPlace>() {
                     new SpawnPlace(new Vector3(1661.471f, 4951.514f, 42.07043f),217.9459f),
                     new SpawnPlace(new Vector3(1659.542f, 4946.245f, 41.20879f), 224.609f),

@@ -2489,7 +2489,7 @@ public class DispatchablePeople : IDispatchablePeople
 
             new DispatchablePerson("S_M_M_DrugProcess_01",100,100)
             {
-                DebugName = "DrugProcesser Male 1",
+                DebugName = "DrugProcesser Male 5",
                 GroupName = "DrugProcess1",
                 RequiredVariation = new PedVariation
                  (
@@ -2884,6 +2884,32 @@ public class DispatchablePeople : IDispatchablePeople
                 DebugName = "Male Floor Staff, Tom Casino",
                 GroupName = "Floor man"
             },
+
+            // Gambling Den table
+            // very small Badge - hide attempt
+            new DispatchablePerson("S_M_Y_Casino_01",100,100)
+            {
+                DebugName = "Male Floor Staff 8 (SS Tie Black Vest)",
+                GroupName = "GambleDenWorkers",
+                RequiredVariation = new PedVariation(
+                    new List<PedComponent>()
+                    {
+                        new PedComponent(1, 1, 0, 0), // Earpiece Off
+                        new PedComponent(2, 1, 1, 0), 
+                        new PedComponent(3, 1, 4, 0), // Short Sleeve Shirt 
+                        new PedComponent(4, 1, 0, 0),
+                        new PedComponent(6, 1, 0, 0), 
+                        new PedComponent(7, 2, 0, 0), // 0 - Vest Tie | 1 - Long Tie | 2 - Bow Tie | 3 - No Tie
+                        new PedComponent(8, 3, 0, 0), // 0 - Shirt + Closed Vest | 1 - Vest Shirt - 2 Plain Shirt | 3 - Vest Shirt
+                        new PedComponent(10, 0, 0, 0), // DC Badge Location
+                        new PedComponent(11, 1, 0, 0), // 0 - Open 1 - Vest - 2 Buttoned Up
+                    }
+                ),
+            },
+
+
+
+
         };
 
         HighSecurityPeds = new List<DispatchablePerson>()  // The Men In Black style security guards, for high security venues like the Casino, etc.
