@@ -6119,19 +6119,18 @@ new ConditionalLocation(, 75f),*/
                     new SpawnPlace(new Vector3(1066.94f, -2463.334f, 27.96432f), 357.0727f),
                 } },
             // SP GS2
-            new GunStore(new Vector3(-232.552f, -1311.643f, 31.29598f), 3.180501f, "Guns #2", "Specializes in ~o~Pistols~s~","GunShop2") {
+            new GunStore(new Vector3(-298.0364f, -1407.181f, 31.29573f), 273.3838f, "Guns #2", "Specializes in ~o~Pistols~s~","GunShop2") {
                 IsEnabled = true,
                 IsOnMPMap = false,
                 ContactName = StaticStrings.UndergroundGunsContactName,
                 ParkingSpaces = new List<SpawnPlace>() {
-                    new SpawnPlace(new Vector3(-233.4157f, -1306.795f, 31.31846f),89.50895f),
-                    new SpawnPlace(new Vector3(-221.8178f, -1291.497f, 30.46753f), 38.83605f),
-                    new SpawnPlace(new Vector3(-215.6527f, -1306.28f, 30.48727f), 275.802f),
-                    new SpawnPlace(new Vector3(-198.912f, -1300.158f, 30.46804f), 260.0593f),
-                    new SpawnPlace(new Vector3(-223.2236f, -1308.06f, 30.46892f), 89.06057f),
+                    new SpawnPlace(new Vector3(-294.596252f, -1407.9834f, 31.034042f),-114.274956f),
+                    new SpawnPlace(new Vector3(-314.638672f, -1413.5625f, 30.819231f ), 178.67157f),
+                    new SpawnPlace(new Vector3(-318.259644f, -1407.58826f, 30.8381119f), 178.426468f),
+                    new SpawnPlace(new Vector3(-324.831635f, -1409.02539f, 30.544735f), -87.4573059f),
             } },
             // MP GS2
-            new GunStore(new Vector3(-232.552f, -1311.643f, 31.29598f), 3.180501f, "Guns #2", "Specializes in ~o~Pistols~s~","GunShop2") {
+            new GunStore(new Vector3(-298.0364f, -1407.181f, 31.29573f), 273.3838f, "Guns #2", "Specializes in ~o~Pistols~s~","GunShop2") {
                 IsEnabled = true,
                 IsOnSPMap = false,
                 InteriorID = 23577701,
@@ -6148,11 +6147,10 @@ new ConditionalLocation(, 75f),*/
                 VendorPersonnelID = "GunshopPeds",
                 VendorLocations = new List<SpawnPlace>() { new SpawnPlace(new Vector3(1088.746f, -3101.636f, -40.99995f), 5.399706f) },
                 ParkingSpaces = new List<SpawnPlace>() {
-                    new SpawnPlace(new Vector3(-233.4157f, -1306.795f, 31.31846f),89.50895f),
-                    new SpawnPlace(new Vector3(-221.8178f, -1291.497f, 30.46753f), 38.83605f),
-                    new SpawnPlace(new Vector3(-215.6527f, -1306.28f, 30.48727f), 275.802f),
-                    new SpawnPlace(new Vector3(-198.912f, -1300.158f, 30.46804f), 260.0593f),
-                    new SpawnPlace(new Vector3(-223.2236f, -1308.06f, 30.46892f), 89.06057f),
+                    new SpawnPlace(new Vector3(-294.596252f, -1407.9834f, 31.034042f),-114.274956f),
+                    new SpawnPlace(new Vector3(-314.638672f, -1413.5625f, 30.819231f ), 178.67157f),
+                    new SpawnPlace(new Vector3(-318.259644f, -1407.58826f, 30.8381119f), 178.426468f),
+                    new SpawnPlace(new Vector3(-324.831635f, -1409.02539f, 30.544735f), -87.4573059f),
             } },
             // SP GS3
             new GunStore(new Vector3(334.3036f, -1978.458f, 24.16728f), 49.9404f, "Guns #3", "Specializes in ~o~Sub-Machine Guns~s~","GunShop3") {

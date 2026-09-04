@@ -419,8 +419,8 @@ public class Interiors : IInteriors
             new Interior(23577701, "Strawberry - Guns Shop 2") // Original Interior id 235777 +01 - ex_int_warehouse_s_dlc
             {
                 IsTeleportEntry = true,
-                InteriorEgressPosition = new Vector3(1087.76f, -3099.443f, -38.99995f), // 1095, -3100, -40
-                InteriorEgressHeading = 267.9056f,
+                InteriorEgressPosition = new Vector3(1104.872f, -3099.55f, -38.99995f), // 1095, -3100, -40
+                InteriorEgressHeading = 87.54606f,
                 PropSpawns = new List<PropSpawn>()
                 {
 
@@ -469,7 +469,7 @@ public class Interiors : IInteriors
                 },
                 InteractPoints = new List<InteriorInteract>()
                 {
-                    new ExitInteriorInteract("StrawGunShopExit1",new Vector3(1087.76f, -3099.443f, -38.99995f), 86.21534f,"Exit"),
+                    new ExitInteriorInteract("StrawGunShopExit1",new Vector3(1104.872f, -3099.55f, -38.99995f), 274.2609f,"Exit"),
                 }
 
             },
