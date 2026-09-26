@@ -82,7 +82,7 @@ public class LockpickMiniGame
         NativeFunction.CallByName<bool>("REQUEST_AMBIENT_AUDIO_BANK", "SAFE_CRACK", true);
 
         //Game.RawFrameRender += OnRawFrameRender;
-        GameFiber.StartNew(MainLoop);
+        GameFiber.StartNew(MainLoop_new);
     }
 
 
@@ -125,21 +125,22 @@ public class LockpickMiniGame
                     if (Math.Abs(lx) > 0.1f || Math.Abs(ly) > 0.1f)
                         playerL = LerpAngle(playerL, (float)(Math.Atan2(ly, lx) * 180 / Math.PI) + 90f, 0.2f);
 
-                    // Mouse Right Side - Smooth rotational delta mapping
+                    // Mouse Right Side - Combined X and Y delta mapping
                     float mouseDeltaX = NativeFunction.CallByName<float>("GET_CONTROL_NORMAL", 0, 220); // LookLeftRight
+                    float mouseDeltaY = NativeFunction.CallByName<float>("GET_CONTROL_NORMAL", 0, 221); // LookUpDown
 
-                    if (Math.Abs(mouseDeltaX) > 0.01f)
+                    if (Math.Abs(mouseDeltaX) > 0.01f || Math.Abs(mouseDeltaY) > 0.01f)
                     {
-                        // Clamp the raw input so high DPI/sensitivity 
+                        // Clamp both inputs to prevent high-DPI hyperspeed spinning
                         mouseDeltaX = Math.Max(-0.3f, Math.Min(0.3f, mouseDeltaX));
+                        mouseDeltaY = Math.Max(-0.3f, Math.Min(0.3f, mouseDeltaY));
 
-                        // Scale the mouse movement into smooth degree changes 
-                        playerR -= mouseDeltaX * 80f;
+                        // Combine X and Y deltas 
+                        float combinedDelta = mouseDeltaX - mouseDeltaY;
+
+                        playerR += combinedDelta * 80f;
                         playerR = NormalizeAngle(playerR);
                     }
-
-
-
                 }
 
                 UpdateScaleforms();
