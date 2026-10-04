@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Windows.Interop;
 using System.Xml.Serialization;
@@ -112,6 +113,8 @@ public class Interior
 
 
 
+    
+
 
     [XmlIgnore]
     public virtual List<InteriorInteract> AllInteractPoints => InteractPoints;
@@ -141,9 +144,12 @@ public class Interior
         {
             interiorInteract.Setup(modItems, clothesNames, radioStations);
         }
-        foreach(InteriorDoor interiorDoor in Doors)
+        foreach (InteriorDoor interiorDoor in Doors)
         {
-            interiorDoor.AddPairedDoors(Doors.Where(x => x.DoorGroupName == interiorDoor.DoorGroupName && x.Position != interiorDoor.Position).ToList());
+            if (!string.IsNullOrEmpty(interiorDoor.DoorGroupName))
+            {
+                interiorDoor.AddPairedDoors(Doors.Where(x => !string.IsNullOrEmpty(x.DoorGroupName) && x.DoorGroupName == interiorDoor.DoorGroupName && x.Position != interiorDoor.Position).ToList());
+            }
         }
     }
     public virtual void Load(bool isOpen)
@@ -518,6 +524,13 @@ public class Interior
     protected virtual void LoadDoors(bool isOpen, bool reLockForcedEntry)
     {
         EntryPoint.WriteToConsole($"LOAD DOORS RAN {isOpen}");
+
+        foreach (InteriorDoor door in Doors)
+        {
+            door.Activate(); // Properly registers/re-evaluates default state
+        }
+
+
         if (isOpen)
         {
             foreach (InteriorDoor door in Doors)

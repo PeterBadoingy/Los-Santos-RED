@@ -5182,13 +5182,24 @@ public class Interiors : IInteriors
         PossibleInteriors.FightClubInteriors.AddRange(new List<FightClubInterior>()
         {
             new FightClubInterior(-2005,"Cartel Dogfights"){ 
-                FightClubInteracts = new List<FightClubInteract> { 
+                FightClubInteracts = new List<FightClubInteract> 
+                { 
                     new FightClubInteract("carteldogfightInteract1",new Vector3(1464.851f, 1046.678f, 114.3341f), 177.3881f,"Start Fight"),// new Vector3(1464.842f, 1047.021f, 114.334f), 0.1439041f,"Start Fight") ,
                 } },
+
             new FightClubInterior(-2006,"Construction Rumble"){
-                FightClubInteracts = new List<FightClubInteract> {
+                FightClubInteracts = new List<FightClubInteract> 
+                {
                     new FightClubInteract("rooffightInteract1",new Vector3(-145.1138f, -958.579f, 269.1349f), 125.4617f,"Start Fight") ,
-                } },
+                },
+                InteractPoints = new List<InteriorInteract>()
+                {
+                    new MultiTeleportInteract("Ground Floor",new Vector3(-161.6744f, -939.0033f, 29.40228f), 245.7258f,"Use Elevator") { GroupName = "constructionElevator1" },
+                    //new MultiTeleportInteract("Middle Floor",new Vector3(-156.7282f, -940.9328f, 114.3512f), 248.1967f,"Use Elevator") { GroupName = "constructionElevator1" },
+                    new MultiTeleportInteract("Top Floor",new Vector3(-155.5144f, -945.4285f, 269.1351f), 249.0574f,"Use Elevator") { GroupName = "constructionElevator1" },
+                },
+                MaxUpdateDistance = 300f,
+            },
         });
     }
     private void GamblingDens()

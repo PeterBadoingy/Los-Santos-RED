@@ -281,11 +281,13 @@
     <Compile Include="lsr\Locations\Interiors\FightClubInterior.cs" />
     <Compile Include="lsr\Locations\Interiors\GamblingDenInterior.cs" />
     <Compile Include="lsr\Locations\Interiors\Gambling\Blackjack\GamblingInteract.cs" />
+    <Compile Include="lsr\Locations\Interiors\MultiTeleportInteract.cs" />
     <Compile Include="lsr\Locations\Interiors\Residence\MoneyEntitySet.cs" />
     <Compile Include="lsr\Locations\Interiors\Residence\Trophy\CabinetData.cs" />
     <Compile Include="lsr\Locations\Interiors\Residence\MansionInterior.cs" />
     <Compile Include="lsr\Locations\Interiors\Residence\Trophy\DisplayPlacement.cs" />
     <Compile Include="lsr\Locations\Interiors\Residence\Trophy\DisplaySlot.cs" />
+    <Compile Include="lsr\Locations\Interiors\TeleportInteract.cs" />
     <Compile Include="lsr\Locations\Interiors\Theft\AnimationPreInteract.cs" />
     <Compile Include="lsr\Locations\Interiors\Residence\Trophy\DisplayInteract.cs" />
     <Compile Include="lsr\Locations\Other\GangTerritory.cs" />
