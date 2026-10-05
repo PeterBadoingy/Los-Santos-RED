@@ -163,10 +163,10 @@ public class GangTerritories : IGangTerritories
         {
             return false;
         }
-        if(zone.DisableGangTakeover)
-        {
-            return false;
-        }
+        //if(zone.DisableGangTakeover)
+        //{
+        //    return false;
+        //}
         zone.IsContestedTerritory = true;
         GangTerritoriesList.RemoveAll(x => x.ZoneInternalGameName.ToLower() == zone.InternalGameName.ToLower());
         GangTerritoriesList.Add(new GangTerritory(gangID, zone.InternalGameName, 0, 100) { HasChangedGang = true });

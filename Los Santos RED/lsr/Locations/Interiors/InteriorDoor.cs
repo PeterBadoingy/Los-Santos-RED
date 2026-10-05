@@ -182,7 +182,6 @@ public class InteriorDoor
         {
             RegisterDoorWithSystem();
         }
-        
     }
     public void Deactivate()
     {

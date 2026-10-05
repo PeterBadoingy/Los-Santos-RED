@@ -13,6 +13,8 @@ using System.Xml.Serialization;
 [XmlInclude(typeof(ExitInteriorInteract))]
 [XmlInclude(typeof(AnimationInteract))]
 [XmlInclude(typeof(ToiletInteract))]
+[XmlInclude(typeof(TeleportInteract))]
+[XmlInclude(typeof(MultiTeleportInteract))]
 [XmlInclude(typeof(SinkInteract))]
 
 
@@ -73,7 +75,7 @@ public class InteriorInteract
     public bool IsAutoInteract { get; set; } = false;
 
 
-
+    public string GroupName { get; set; }
     public virtual int MarkerType { get; set; } = 0;
     public virtual bool ShouldAddPrompt => !Interior.IsMenuInteracting && distanceTo <= InteractDistance && !Player.ActivityManager.IsInteracting && Player.ActivityManager.CanPerformActivitiesOnFoot;
     

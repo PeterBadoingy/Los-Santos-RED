@@ -3199,7 +3199,7 @@ public class PlacesOfInterest : IPlacesOfInterest
             //    CloseTime = 24,
             //    NonGangFightersGroup = "FightClubPeds",
             //},
-#if DEBUG
+
             new FightClub(new Vector3(-145.1138f, -958.579f, 269.1349f), 125.4617f, "Construction Rumble", "Fight at the top of a skyscraper","")
             {
                 FightClubArena = new FightClubArena(new Vector3(-149.5824f, -960.326f, 269.1349f),
@@ -3251,7 +3251,7 @@ public class PlacesOfInterest : IPlacesOfInterest
                 InteriorID = -2005,
                 NonGangFightersGroup = "DogFightPeds",
             },
-#endif
+
 
             /*
              * new ConditionalLocation(new Vector3(1451.354f, 1066.984f, 114.334f), 91.76149f, 75f),

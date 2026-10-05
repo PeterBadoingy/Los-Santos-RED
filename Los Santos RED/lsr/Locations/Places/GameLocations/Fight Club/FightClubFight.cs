@@ -164,7 +164,7 @@ public class FightClubFight
 
         if(IsFightActive)
         {
-            if (!IsShowingActiveFightMenu)
+            if ((ActiveFightMenu == null || !ActiveFightMenu.Visible))
             {
                 Player.ButtonPrompts.AttemptAddPrompt("FightMenu", "Fight Options", "FightMenu", Settings.SettingsManager.KeySettings.InteractNegativeOrNo, 999);
             }
@@ -172,7 +172,11 @@ public class FightClubFight
             {
                 Player.ButtonPrompts.RemovePrompt("FightMenu");
             }
-            if (Player.ButtonPrompts.IsPressed("FightMenu") && !IsShowingActiveFightMenu)
+
+
+
+
+            if (Player.ButtonPrompts.IsPressed("FightMenu") && (ActiveFightMenu == null || !ActiveFightMenu.Visible))
             {
                 ShowActiveFightMenu();
             }
@@ -189,10 +193,28 @@ public class FightClubFight
     private void ShowActiveFightMenu()
     {
         MenuPool.Clear();
+
+        
+
         ActiveFightMenu = new UIMenu("Fight Options", "Select fight options");
+        ActiveFightMenu.SetBannerType(EntryPoint.LSRedColor);
         MenuPool.Add(ActiveFightMenu);
+
+        UIMenuItem endFightMenu = new UIMenuItem("End Fight","Select to end the fight");
+        endFightMenu.Activated += (sender, e) =>
+        {
+            if(IsFightActive)
+            {
+                ActiveFightMenu.Visible = false;
+                OnFightEnded();              
+            }
+        };
+        ActiveFightMenu.AddItem(endFightMenu);
         ActiveFightMenu.Visible = true;
+        IsShowingActiveFightMenu = true;
     }
+
+
 
     public void BeginFirstFight()
     {
@@ -297,7 +319,7 @@ public class FightClubFight
 
         UIMenu ContinueMenu = new UIMenu("Continue Fighting", "Select an option");
         MenuPool.Add(ContinueMenu);
-
+        ContinueMenu.SetBannerType(EntryPoint.LSRedColor);
 
         if (IsPlayerFight)
         {
@@ -485,6 +507,10 @@ public class FightClubFight
 
 
         BetMenu = new UIMenu("Bet", "Bet on the fighter to win");
+
+
+        BetMenu.SetBannerType(EntryPoint.LSRedColor);
+
         MenuPool.Add(BetMenu);
         int MaxBet = FightClub == null ? 5000 : FightClub.MaxBet;
         int MinBet = FightClub == null ? 100 : FightClub.MinBet;
