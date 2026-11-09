@@ -1,6 +1,7 @@
 ﻿using LosSantosRED.lsr;
 using LosSantosRED.lsr.Helper;
 using LosSantosRED.lsr.Interface;
+using LosSantosRED.lsr.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,7 @@ public class GangTerritories : IGangTerritories
     private readonly string GangTurfConfigFileName = "Plugins\\LosSantosRED\\GangTerritories.xml";
     private List<GangTerritory> GangTerritoriesList = new List<GangTerritory>();
     private List<GangTerritory> OriginalGangTerritoriesList = new List<GangTerritory>();
+    private Dictionary<string, List<GangTerritory>> TerritoryOwnershipBeforeTakeover = new Dictionary<string, List<GangTerritory>>(StringComparer.OrdinalIgnoreCase);
     public GangTerritories(IGangs gangProvider)
     {
         GangProvider = gangProvider;
@@ -167,10 +169,43 @@ public class GangTerritories : IGangTerritories
         //{
         //    return false;
         //}
-        zone.IsContestedTerritory = true;
-        GangTerritoriesList.RemoveAll(x => x.ZoneInternalGameName.ToLower() == zone.InternalGameName.ToLower());
-        GangTerritoriesList.Add(new GangTerritory(gangID, zone.InternalGameName, 0, 100) { HasChangedGang = true });
+        string zoneName = zone.InternalGameName;
+        if (!TerritoryOwnershipBeforeTakeover.ContainsKey(zoneName))
+        {
+            TerritoryOwnershipBeforeTakeover[zoneName] = GangTerritoriesList
+                .Where(x => x.ZoneInternalGameName.Equals(zoneName, StringComparison.OrdinalIgnoreCase))
+                .Select(CloneTerritory)
+                .ToList();
+        }
+        // A successful takeover is the final ownership state, not an active contest.
+        zone.IsContestedTerritory = false;
+        GangTerritoriesList.RemoveAll(x => x.ZoneInternalGameName.Equals(zoneName, StringComparison.OrdinalIgnoreCase));
+        GangTerritoriesList.Add(new GangTerritory(gangID, zoneName, 0, 100) { HasChangedGang = true });
         return true;
+    }
+    private static GangTerritory CloneTerritory(GangTerritory territory) => new GangTerritory(territory.GangID, territory.ZoneInternalGameName, territory.Priority, territory.AmbientSpawnChance) { HasChangedGang = territory.HasChangedGang };
+    public List<GangTerritory> GetChangedTerritories() => GangTerritoriesList.Where(x => x.HasChangedGang).Select(CloneTerritory).ToList();
+    public List<GangTerritoryOwnershipSave> GetTerritoryOwnershipSaves() => TerritoryOwnershipBeforeTakeover
+        .Select(x => new GangTerritoryOwnershipSave { ZoneInternalGameName = x.Key, PreviousTerritories = x.Value.Select(CloneTerritory).ToList() })
+        .ToList();
+    public void ResetChangedTerritories()
+    {
+        GangTerritoriesList.RemoveAll(x => x.HasChangedGang);
+        GangTerritoriesList.AddRange(OriginalGangTerritoriesList.Where(original => !GangTerritoriesList.Any(current => current.ZoneInternalGameName.Equals(original.ZoneInternalGameName, StringComparison.OrdinalIgnoreCase))));
+        TerritoryOwnershipBeforeTakeover.Clear();
+    }
+    public void LoadChangedTerritories(IEnumerable<GangTerritory> territories, IEnumerable<GangTerritoryOwnershipSave> ownershipSaves)
+    {
+        ResetChangedTerritories();
+        foreach (GangTerritory territory in territories ?? Enumerable.Empty<GangTerritory>())
+        {
+            GangTerritoriesList.RemoveAll(x => x.ZoneInternalGameName.Equals(territory.ZoneInternalGameName, StringComparison.OrdinalIgnoreCase));
+            GangTerritoriesList.Add(new GangTerritory(territory.GangID, territory.ZoneInternalGameName, territory.Priority, territory.AmbientSpawnChance) { HasChangedGang = true });
+        }
+        foreach (GangTerritoryOwnershipSave ownershipSave in ownershipSaves ?? Enumerable.Empty<GangTerritoryOwnershipSave>())
+        {
+            TerritoryOwnershipBeforeTakeover[ownershipSave.ZoneInternalGameName] = (ownershipSave.PreviousTerritories ?? new List<GangTerritory>()).Select(CloneTerritory).ToList();
+        }
     }
     public bool RestoreTerritory(Zone zone)
     {
@@ -178,13 +213,19 @@ public class GangTerritories : IGangTerritories
         {
             return false;
         }
-        if (zone.DisableGangTakeover)
-        {
-            return false;
-        }
+        // DisableGangTakeover prevents initiating a takeover; it must not prevent
+        // restoring ownership after a successful capture is lost in retaliation.
         zone.IsContestedTerritory = false;
-        GangTerritoriesList.RemoveAll(x => x.ZoneInternalGameName.ToLower() == zone.InternalGameName.ToLower());
-        GangTerritoriesList.AddRange(OriginalGangTerritoriesList.Where(x => x.ZoneInternalGameName.ToLower() == zone.InternalGameName.ToLower()));
+        GangTerritoriesList.RemoveAll(x => x.ZoneInternalGameName.Equals(zone.InternalGameName, StringComparison.OrdinalIgnoreCase));
+        if (TerritoryOwnershipBeforeTakeover.TryGetValue(zone.InternalGameName, out List<GangTerritory> previousTerritories))
+        {
+            GangTerritoriesList.AddRange(previousTerritories.Select(CloneTerritory));
+            TerritoryOwnershipBeforeTakeover.Remove(zone.InternalGameName);
+        }
+        else
+        {
+            GangTerritoriesList.AddRange(OriginalGangTerritoriesList.Where(x => x.ZoneInternalGameName.Equals(zone.InternalGameName, StringComparison.OrdinalIgnoreCase)));
+        }
         return true;
     }
     private void DefaultConfig()

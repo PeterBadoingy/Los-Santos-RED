@@ -71,6 +71,18 @@ public class Pedestrians : ITaskerReportable
     public List<PedExt> DeadPeds { get; private set; } = new List<PedExt>();
     public List<PedExt> CivilianList => Civilians.Where(x => x.Pedestrian.Exists()).ToList();
     public List<GangMember> GangMemberList => GangMembers.Where(x => x.Pedestrian.Exists()).ToList();
+    public void RefreshGangTerritory(Zone zone)
+    {
+        if (zone == null)
+        {
+            return;
+        }
+        foreach (GangMember member in GangMembers.Where(x => x.WasModSpawned && x.Pedestrian.Exists() && Zones.GetZone(x.Pedestrian.Position)?.InternalGameName == zone.InternalGameName).ToList())
+        {
+            //Delete(member);
+            //GangMembers.Remove(member);
+        }
+    }
     public List<Zombie> ZombieList => Zombies.Where(x => x.Pedestrian.Exists()).ToList();
     public List<Cop> PoliceList => Police.Where(x => x.Pedestrian.Exists()).ToList();
     public List<CanineUnit> PoliceCanineList => PoliceCanines.Where(x => x.Pedestrian.Exists()).ToList();

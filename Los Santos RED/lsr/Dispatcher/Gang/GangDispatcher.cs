@@ -250,12 +250,22 @@ public class GangDispatcher
             EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns too many ang members spawned total:{World.Pedestrians.TotalSpawnedGangMembers} limit:{Settings.SettingsManager.GangSettings.TotalSpawnedMembersLimit}");
             return;
         }
-        GangDen closestDen = PlacesOfInterest.PossibleLocations.GangDens.Where(x => x.DistanceToPlayer <= 150f && x.IsEnabled && x.IsActivated && x.OriginalGang != null && x.OriginalGang.ID == attackingGang.ID).FirstOrDefault();
+        GangDen closestDen = PlacesOfInterest.PossibleLocations.GangDens
+            .Where(x => x.DistanceToPlayer <= 150f && x.IsEnabled && x.IsActivated && x.IsCorrectMap(World.IsMPMapLoaded) && x.OriginalGang != null && x.OriginalGang.ID == attackingGang.ID)
+            .OrderBy(x => x.DistanceToPlayer)
+            .FirstOrDefault();
         if(closestDen != null)
         {
-            DoDenAssaultSpawn(attackingGang, closestDen);
-            EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns den found to spawn for {attackingGang.ShortName}");
-            return;
+            if (DoDenAssaultSpawn(attackingGang, closestDen))
+            {
+                EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns den found to spawn for {attackingGang.ShortName}");
+                return;
+            }
+            EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns den spawn failed for {attackingGang.ShortName}, trying zone spawn");
+            if (DoZoneAssaultSpawn(attackingGang))
+            {
+                return;
+            }
         }
         List<Zone> currentDisputedZones = Player.GangTerritoryManager.GetCurrentWarfareZones(attackingGang);
         bool isPlayerWithinZone = Player.CurrentLocation.CurrentZone != null && currentDisputedZones.Contains(Player.CurrentLocation.CurrentZone);
@@ -275,43 +285,51 @@ public class GangDispatcher
         }
     }
 
-    private void DoDenAssaultSpawn(Gang attackingGang, GangDen closestDen)
+    private bool DoDenAssaultSpawn(Gang attackingGang, GangDen closestDen)
     {
         if (!GetAssaultSpawnTypes(attackingGang))
         {
             EntryPoint.WriteToConsole("Gang Dispatcher HandleGangWarfareSpawns failed type");
-            return;
+            return false;
         }
-        if (!GetAssaultSpawnLocation(closestDen))
+        if (!GetAssaultSpawnLocation(closestDen, true))
         {
             EntryPoint.WriteToConsole("Gang Dispatcher HandleGangWarfareSpawns failed location");
-            return;
+            return false;
         }
         EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns EXECUTED");
         GameFiber.Yield();
         int pedsSpawned = CallSpawnTask(true, true, true, false, TaskRequirements.None, true, false, 99, false);
         EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns PEDS SPAWNED THIS TIME {pedsSpawned}");
+        return pedsSpawned > 0;
     }
-    private void DoZoneAssaultSpawn(Gang attackingGang)
+    private bool DoZoneAssaultSpawn(Gang attackingGang)
     {
         if (!GetAssaultSpawnTypes(attackingGang))
         {
             EntryPoint.WriteToConsole("Gang Dispatcher HandleGangWarfareSpawns failed type");
-            return;
+            return false;
         }
         if (!GetAssaultSpawnLocation())
         {
             EntryPoint.WriteToConsole("Gang Dispatcher HandleGangWarfareSpawns failed location");
-            return;
+            return false;
         }
         EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns EXECUTED");
         GameFiber.Yield();
         int pedsSpawned = CallSpawnTask(true, true, true, false, TaskRequirements.None, true, false, 99, false);
         EntryPoint.WriteToConsole($"Gang Dispatcher HandleGangWarfareSpawns PEDS SPAWNED THIS TIME {pedsSpawned}");
+        return pedsSpawned > 0;
     }
 
     private void HandleAssaultSpawns()
     {
+        // Retaliation has its own attacker spawn path. Keep friendly gang members
+        // on their regular den scenario points instead of consuming den assault points.
+        if (Player.GangTerritoryManager.IsAnyGangRetaliating())
+        {
+            return;
+        }
         bool shouldAttempt = GameTimeLastAttemptedAssaultSpawn == 0 || Game.GameTime - GameTimeLastAttemptedAssaultSpawn >= 9000;
         if (!shouldAttempt)
         {
@@ -482,7 +500,7 @@ public class GangDispatcher
 
 
 
-    private bool GetAssaultSpawnLocation(IAssaultSpawnable ClosestStation)
+    private bool GetAssaultSpawnLocation(IAssaultSpawnable ClosestStation, bool assaultSpawnsOnly = false)
     {
         SpawnLocation = new SpawnLocation();
         if (ClosestStation == null || PersonType == null || string.IsNullOrEmpty(PersonType.ModelName))
@@ -506,7 +524,7 @@ public class GangDispatcher
             PossibleSpawnPlaces.AddRange(ClosestStation.AssaultSpawnLocations.Where(x => x.Position.DistanceTo2D(Game.LocalPlayer.Character) >= 20f).ToList());
             GameFiber.Yield();
         }
-        if (!ClosestStation.RestrictAssaultSpawningUsingPedSpawns && ClosestStation.PossiblePedSpawns != null && ClosestStation.PossiblePedSpawns.Any())
+        if (!assaultSpawnsOnly && !ClosestStation.RestrictAssaultSpawningUsingPedSpawns && ClosestStation.PossiblePedSpawns != null && ClosestStation.PossiblePedSpawns.Any())
         {
             foreach (ConditionalLocation cl in ClosestStation.PossiblePedSpawns.Where(x => x.Location.DistanceTo2D(Game.LocalPlayer.Character) >= 20f).ToList())
             {

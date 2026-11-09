@@ -45,6 +45,60 @@ public class GangTerritoryManager
     {
         
     }
+    public List<GangTerritory> GetChangedTerritories() => GangTerritories.GetChangedTerritories();
+    public List<LosSantosRED.lsr.Data.GangTerritoryOwnershipSave> GetTerritoryOwnershipSaves() => GangTerritories.GetTerritoryOwnershipSaves();
+    private void RefreshGangTerritorySpawns(Zone zone)
+    {
+        foreach (GameLocation location in PlacesOfInterest.PossibleLocations.InteractableLocations())
+        {
+            location.RefreshGangTerritorySpawns(zone, Zones);
+        }
+        World.Pedestrians.RefreshGangTerritory(zone);
+        World.Vehicles.RefreshGangTerritory(zone);
+    }
+    public void LoadChangedTerritories(IEnumerable<GangTerritory> territories, IEnumerable<LosSantosRED.lsr.Data.GangTerritoryOwnershipSave> ownershipSaves)
+    {
+        List<LosSantosRED.lsr.Data.GangTerritoryOwnershipSave> savedOwnerships = ownershipSaves?.ToList() ?? new List<LosSantosRED.lsr.Data.GangTerritoryOwnershipSave>();
+        GangTerritories.LoadChangedTerritories(territories, ownershipSaves);
+        ChangedZones.Clear();
+        foreach (GangTerritory territory in territories ?? Enumerable.Empty<GangTerritory>())
+        {
+            Zone zone = Zones.GetZone(territory.ZoneInternalGameName);
+            if (zone == null)
+            {
+                continue;
+            }
+            Gang newOwner = GangTerritories.GetMainGang(zone.InternalGameName);
+            if (newOwner == null)
+            {
+                continue;
+            }
+            zone.IsContestedTerritory = false;
+            zone.UpdateGangItems(GangTerritories);
+            RefreshGangTerritorySpawns(zone);
+            List<GameLocation> locations = PlacesOfInterest.PossibleLocations.InteractableLocations().Where(x => x.IsEnabled && x.ZoneID == zone.InternalGameName && x.IsCorrectMap(World.IsMPMapLoaded)).ToList();
+            Gang gangBeforeTakeover = GangWars.FirstOrDefault(x => x.ZonesToAttack.Any(z => z.InternalGameName.Equals(zone.InternalGameName, StringComparison.OrdinalIgnoreCase)))?.TargetGang
+                ?? Retaliations.FirstOrDefault(x => x.ZonesToAttack.Any(z => z.InternalGameName.Equals(zone.InternalGameName, StringComparison.OrdinalIgnoreCase)))?.TargetGang;
+            LosSantosRED.lsr.Data.GangTerritoryOwnershipSave ownershipSave = savedOwnerships.FirstOrDefault(x => x.ZoneInternalGameName.Equals(zone.InternalGameName, StringComparison.OrdinalIgnoreCase));
+            string originalOwnerID = ownershipSave?.PreviousTerritories?.OrderBy(x => x.Priority).Select(x => x.GangID).FirstOrDefault();
+            if (gangBeforeTakeover == null && !string.IsNullOrEmpty(originalOwnerID))
+            {
+                gangBeforeTakeover = locations.OfType<GangDen>().Select(x => x.OriginalGang).FirstOrDefault(x => x?.ID == originalOwnerID);
+            }
+            if (gangBeforeTakeover == null)
+            {
+                gangBeforeTakeover = locations.OfType<GangDen>().Select(x => x.OriginalGang).FirstOrDefault(x => x != null);
+            }
+            if (gangBeforeTakeover != null)
+            {
+                foreach (GameLocation location in locations)
+                {
+                    location.SetTakeoverGang(newOwner, gangBeforeTakeover);
+                }
+            }
+            ChangedZones.Add(zone);
+        }
+    }
     public void Update()
     {
         foreach(GangWar w in GangWars.ToList())
@@ -151,6 +205,7 @@ public class GangTerritoryManager
         if (updated)
         {
             zone.UpdateGangItems(GangTerritories);
+            RefreshGangTerritorySpawns(zone);
             List<GameLocation> gameLocationsToUpdate = PlacesOfInterest.PossibleLocations.InteractableLocations().Where(x => x.IsEnabled && x.ZoneID == zone.InternalGameName && x.IsCorrectMap(World.IsMPMapLoaded)).ToList();
             foreach (GameLocation gameLocation in gameLocationsToUpdate)
             {
@@ -186,6 +241,7 @@ public class GangTerritoryManager
         if(updated)
         {
             zone.UpdateGangItems(GangTerritories);
+            RefreshGangTerritorySpawns(zone);
             List<GameLocation> gameLocationsToUpdate = PlacesOfInterest.PossibleLocations.InteractableLocations().Where(x => x.IsEnabled && x.ZoneID == zone.InternalGameName && x.IsCorrectMap(World.IsMPMapLoaded)).ToList();
             foreach (GameLocation gameLocation in gameLocationsToUpdate)
             {
@@ -205,6 +261,7 @@ public class GangTerritoryManager
         if(restored)
         {
             zone.UpdateGangItems(GangTerritories);
+            RefreshGangTerritorySpawns(zone);
             List<GameLocation> gameLocationsToUpdate = PlacesOfInterest.PossibleLocations.InteractableLocations().Where(x => x.IsEnabled && x.ZoneID == zone.InternalGameName && x.IsCorrectMap(World.IsMPMapLoaded)).ToList();
             foreach (GameLocation gameLocation in gameLocationsToUpdate)
             {

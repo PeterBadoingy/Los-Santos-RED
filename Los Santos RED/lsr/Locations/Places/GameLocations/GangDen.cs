@@ -585,9 +585,15 @@ public class GangDen : GameLocation, IRestableLocation, IAssaultSpawnable
         {
             return;
         }
+        // Only replace the den that belongs to the gang being removed from this zone.
+        // Multiple gangs can have separate dens in the same zone.
+        if (OriginalAssignedAssociationID != gangToReplace.ID)
+        {
+            return;
+        }
         AssociatedGang = currentGang;
         AssignedAssociationID = currentGang.ID;
-        IsAvailableForPlayer = false;
+        IsAvailableForPlayer = Player?.RelationshipManager?.GangRelationships?.CurrentGang?.ID == currentGang.ID;
         DeactivateBlip();
         ActivateBlip(Time, World);
         base.SetTakeoverGang(currentGang, gangToReplace);

@@ -260,6 +260,9 @@ public class ConditionalLocation
     {
 
     }
+    public virtual void RefreshGangTerritory(Zone zone, IZones zones, bool useTerritoryOwner)
+    {
+    }
     public virtual void GenerateSpawnTypes()
     {
 
@@ -313,7 +316,10 @@ public class ConditionalLocation
 
     public void ResetAssociation()
     {
-        OriginalAssociationID = AssociationID;
+        if (!string.IsNullOrEmpty(OriginalAssociationID))
+        {
+            AssociationID = OriginalAssociationID;
+        }
     }
 }
 

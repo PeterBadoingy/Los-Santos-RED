@@ -524,6 +524,13 @@ public class GameLocation : ILocationDispatchable
         ILocationInteractable player, IModItems modItems, IWeapons weapons, ITimeControllable time, IPlacesOfInterest placesOfInterest, IIssuableWeapons issuableWeapons, IHeads heads, 
         IDispatchablePeople dispatchablePeople, ModDataFileManager modDataFileManager)
     {
+        // Association IDs are commonly assigned by object initializers or derived
+        // constructors after the GameLocation constructor has run. Capture the
+        // configured owner here, after the location is fully populated.
+        if (!HasBeenTakenOver)
+        {
+            OriginalAssignedAssociationID = AssignedAssociationID;
+        }
         ShopMenus = shopMenus;
         World = world;
         Crimes = crimes;
@@ -1629,6 +1636,28 @@ public class GameLocation : ILocationDispatchable
             conditionalLocation.ResetAssociation();
         }
         EntryPoint.WriteToConsole($"RESETGangTakeoverSetFor {Name} to {OriginalAssignedAssociationID} from {currentAssignedAssociationID}");
+    }
+
+    public void RefreshGangTerritorySpawns(Zone zone, IZones zones)
+    {
+        // Den spawns should refresh their cached gang too, but resolve it through
+        // the den association rather than the zone's main gang.
+        bool useTerritoryOwner = !(this is GangDen);
+        List<ConditionalLocation> conditionalLocations = new List<ConditionalLocation>();
+        if (PossiblePedSpawns != null) conditionalLocations.AddRange(PossiblePedSpawns);
+        if (PossibleVehicleSpawns != null) conditionalLocations.AddRange(PossibleVehicleSpawns);
+        if (PossibleGroupSpawns != null)
+        {
+            foreach (ConditionalGroup group in PossibleGroupSpawns)
+            {
+                if (group.PossiblePedSpawns != null) conditionalLocations.AddRange(group.PossiblePedSpawns);
+                if (group.PossibleVehicleSpawns != null) conditionalLocations.AddRange(group.PossibleVehicleSpawns);
+            }
+        }
+        foreach (ConditionalLocation conditionalLocation in conditionalLocations)
+        {
+            conditionalLocation.RefreshGangTerritory(zone, zones, useTerritoryOwner);
+        }
     }
 }
 

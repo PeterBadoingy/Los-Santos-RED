@@ -91,6 +91,8 @@ namespace LosSantosRED.lsr.Data
 
         public List<GangWarSave> GangWarSaves { get; set; } = new List<GangWarSave>();
         public List<GangRetaliationSave> GangRetaliationSaves { get; set; } = new List<GangRetaliationSave>();
+        public List<GangTerritory> SavedGangTerritories { get; set; } = new List<GangTerritory>();
+        public List<GangTerritoryOwnershipSave> SavedGangTerritoryOwnerships { get; set; } = new List<GangTerritoryOwnershipSave>();
 
 
         ////LEGACY TO BE REMOVED
@@ -156,7 +158,8 @@ namespace LosSantosRED.lsr.Data
                 grs.CenterPoint = gw.CenterPoint;
                 GangRetaliationSaves.Add(grs);
             }
-            
+            SavedGangTerritories = player.GangTerritoryManager.GetChangedTerritories();
+            SavedGangTerritoryOwnerships = player.GangTerritoryManager.GetTerritoryOwnershipSaves();
 
 
         }
@@ -407,6 +410,7 @@ namespace LosSantosRED.lsr.Data
                 LoadSavedClothingItems(player, shopMenus);
 
                 LoadGangWarfare(player, gangs, zones);
+                player.GangTerritoryManager.LoadChangedTerritories(SavedGangTerritories, SavedGangTerritoryOwnerships);
 
                 EntryPoint.WriteToConsole("Load 6");
                 GameFiber.Sleep(1000);

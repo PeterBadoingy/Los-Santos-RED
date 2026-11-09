@@ -53,6 +53,18 @@ public class Vehicles
     public List<EMSVehicleExt> EMSVehicles { get; private set; } = new List<EMSVehicleExt>();
     public List<FireVehicleExt> FireVehicles { get; private set; } = new List<FireVehicleExt>();
     public List<GangVehicleExt> GangVehicles { get; private set; } = new List<GangVehicleExt>();
+    public void RefreshGangTerritory(Zone zone)
+    {
+        if (zone == null)
+        {
+            return;
+        }
+        foreach (GangVehicleExt gangVehicle in GangVehicles.Where(x => x.WasModSpawned && x.Vehicle.Exists() && Zones.GetZone(x.Vehicle.Position)?.InternalGameName == zone.InternalGameName).ToList())
+        {
+            //gangVehicle.Vehicle.Delete();
+            //GangVehicles.Remove(gangVehicle);
+        }
+    }
     public List<VehicleExt> CivilianVehicles { get; private set; } = new List<VehicleExt>();
     public List<SecurityVehicleExt> SecurityVehicles { get; private set; } = new List<SecurityVehicleExt>();
     public List<TaxiVehicleExt> TaxiVehicles { get; private set; } = new List<TaxiVehicleExt>();

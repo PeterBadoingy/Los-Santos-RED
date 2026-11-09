@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 public class GangConditionalLocation : ConditionalLocation
 {
     private Gang Gang;
+    [XmlIgnore]
+    public bool UseTerritoryOwnerForSpawn { get; private set; }
     public bool TerritorySpawnsForceMainGang { get; set; } = false;
 
     public GangConditionalLocation(Vector3 location, float heading, float percentage) : base(location, heading, percentage)
@@ -75,6 +78,15 @@ public class GangConditionalLocation : ConditionalLocation
         {
             return;
         }
+        if (UseTerritoryOwnerForSpawn)
+        {
+            Zone territoryZone = Zones.GetZone(Location);
+            Gang = territoryZone == null ? null : GangTerritories.GetMainGang(territoryZone.InternalGameName);
+            if (Gang != null)
+            {
+                return;
+            }
+        }
         if (!string.IsNullOrEmpty(AssociationID))
         {
             Gang = Gangs.GetGang(AssociationID);
@@ -99,6 +111,17 @@ public class GangConditionalLocation : ConditionalLocation
                 Gang = GangTerritories.GetRandomGang(CurrentZone.InternalGameName, World.TotalWantedLevel);
             }
         }
+    }
+    public override void RefreshGangTerritory(Zone zone, IZones zones, bool useTerritoryOwner)
+    {
+        if (zone == null || zones.GetZone(Location)?.InternalGameName != zone.InternalGameName)
+        {
+            return;
+        }
+        UseTerritoryOwnerForSpawn = useTerritoryOwner;
+        Gang = null;
+        DispatchablePerson = null;
+        DispatchableVehicle = null;
     }
     public override void GenerateSpawnTypes()
     {

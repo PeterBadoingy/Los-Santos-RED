@@ -16,5 +16,8 @@ namespace LosSantosRED.lsr.Interface
         List<GangTerritory> GetGangTerritory(string iD);
         bool UpdateTerritory(string gangID, Zone zone);
         bool RestoreTerritory(Zone zone);
+        List<GangTerritory> GetChangedTerritories();
+        List<LosSantosRED.lsr.Data.GangTerritoryOwnershipSave> GetTerritoryOwnershipSaves();
+        void LoadChangedTerritories(IEnumerable<GangTerritory> territories, IEnumerable<LosSantosRED.lsr.Data.GangTerritoryOwnershipSave> ownershipSaves);
     }
 }
